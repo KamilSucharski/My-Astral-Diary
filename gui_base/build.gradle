@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+
+android {
+    def configuration = rootProject.ext
+
+    compileSdkVersion configuration["androidTargetSdkVersion"]
+    defaultConfig {
+        minSdkVersion configuration["androidMinSdkVersion"]
+        targetSdkVersion configuration["androidTargetSdkVersion"]
+        versionName configuration.getVersionName()
+        versionCode configuration.getVersionCode()
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles fileTree(dir: '../proguard', include: ['*.pro']).asList().toArray()
+        }
+
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    def libraries = rootProject.ext.libraries
+
+    implementation project(":domain_base")
+
+    implementation libraries.androidXAppCompat
+    implementation libraries.jetbrainsAnnotations
+}

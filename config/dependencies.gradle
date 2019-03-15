@@ -1,0 +1,26 @@
+ext {
+    versions = [
+            androidX                : "1.1.0-alpha01",
+            rxJava                  : "2.1.10",
+            rxAndroid               : "2.0.2",
+            dagger                  : "2.21",
+            ormLite                 : "5.1",
+            progressWheel           : "1.7",
+            jetbrainsAnnotations    : "16.0.1",
+    ]
+
+    libraries = [
+            androidXAppCompat       : "androidx.appcompat:appcompat:$versions.androidX",
+            rxJava                  : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
+            rxAndroid               : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
+            dagger                  : "com.google.dagger:dagger:$versions.dagger",
+            ormLiteCore             : "com.j256.ormlite:ormlite-core:$versions.ormLite",
+            ormLiteAndroid          : "com.j256.ormlite:ormlite-android:$versions.ormLite",
+            progressWheel           : "com.pnikosis:materialish-progress:$versions.progressWheel",
+            jetbrainsAnnotations    : "org.jetbrains:annotations:$versions.jetbrainsAnnotations",
+    ]
+
+    annotations = [
+            dagger                  : "com.google.dagger:dagger-compiler:$versions.dagger"
+    ]
+}

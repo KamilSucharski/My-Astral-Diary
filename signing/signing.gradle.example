@@ -1,0 +1,6 @@
+ext {
+    keystorePath = "../signing/keystore.jks"
+    keystorePassword = "password"
+    keystoreAlias = "application"
+    keystoreAliasPassword = "password"
+}

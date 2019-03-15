@@ -1,0 +1,13 @@
+apply plugin: 'java-library'
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+dependencies {
+    def libraries = rootProject.ext.libraries
+
+    implementation project(":domain_base")
+
+    implementation libraries.jetbrainsAnnotations
+    implementation libraries.ormLiteCore
+}

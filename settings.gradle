@@ -1,0 +1,1 @@
+include ':project', ':gui_base', ':domain_base', ':data_base', ':domain_main', ':gui_main', ':data_main', ':di_base', ':di_main'

@@ -1,0 +1,17 @@
+ext {
+    androidApplicationId = "com.sengami.myastraldiary"
+    androidMinSdkVersion = 21
+    androidTargetSdkVersion = 28
+    versionMajor = 0
+    versionMinor = 0
+    versionPatch = 1
+    versionFormat = "%s.%s.%s"
+
+    getVersionName = {
+        return String.format(versionFormat, versionMajor, versionMinor, versionPatch)
+    }
+
+    getVersionCode = {
+        return versionMajor * 1000000 + versionMinor * 1000 + versionPatch
+    }
+}

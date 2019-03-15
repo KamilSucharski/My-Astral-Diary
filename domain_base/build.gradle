@@ -1,0 +1,11 @@
+apply plugin: 'java-library'
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+dependencies {
+    def libraries = rootProject.ext.libraries
+
+    implementation libraries.rxJava
+    implementation libraries.jetbrainsAnnotations
+}
