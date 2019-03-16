@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class BasePresenter<V> implements ReactivePresenter<V> {
 
     protected V view;
+
     protected abstract void onSubscribe(@NotNull final V view);
 
     @Override

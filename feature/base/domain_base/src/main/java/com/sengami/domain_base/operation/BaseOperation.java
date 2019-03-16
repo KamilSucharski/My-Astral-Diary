@@ -23,9 +23,9 @@ public abstract class BaseOperation<T> implements Operation<T> {
     @Override
     public Observable<T> execute() {
         return getObservable()
-                .onErrorResumeNext(this::handleError)
-                .observeOn(reactiveSchedulers.getObserveScheduler())
-                .subscribeOn(reactiveSchedulers.getSubscribeScheduler());
+            .onErrorResumeNext(this::handleError)
+            .observeOn(reactiveSchedulers.getObserveScheduler())
+            .subscribeOn(reactiveSchedulers.getSubscribeScheduler());
     }
 
     private Observable<T> handleError(@NotNull final Throwable throwable) {

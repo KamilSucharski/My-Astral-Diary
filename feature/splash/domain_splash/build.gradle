@@ -1,0 +1,8 @@
+apply from: '../../../config/java_module_shared_config.gradle'
+
+dependencies {
+    implementation project(":feature:base:domain_base")
+
+    implementation libraries.rxJava
+    implementation libraries.jetbrainsAnnotations
+}

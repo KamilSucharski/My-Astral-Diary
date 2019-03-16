@@ -16,7 +16,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 
-public class MainActivity extends BaseActivity<MainContract.Presenter, ActivityMainBinding> implements MainContract.View  {
+public class MainActivity extends BaseActivity<MainContract.Presenter, ActivityMainBinding> implements MainContract.View {
 
     private final BehaviorSubject<Boolean> helloButtonTrigger = BehaviorSubject.create();
 
@@ -34,10 +34,10 @@ public class MainActivity extends BaseActivity<MainContract.Presenter, ActivityM
     @Override
     protected void inject() {
         DaggerMainComponent.builder()
-                .contextModule(new ContextModule(this))
-                .errorHandlerModule(new ErrorHandlerModule(new ToastErrorHandler(this)))
-                .build()
-                .inject(this);
+            .contextModule(new ContextModule(this))
+            .errorHandlerModule(new ErrorHandlerModule(new ToastErrorHandler(this)))
+            .build()
+            .inject(this);
     }
 
     @Override

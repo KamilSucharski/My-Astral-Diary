@@ -16,5 +16,6 @@ public interface MainContract {
         void showHelloWorld(String text);
     }
 
-    interface Presenter extends ReactivePresenter<View> {}
+    interface Presenter extends ReactivePresenter<View> {
+    }
 }
