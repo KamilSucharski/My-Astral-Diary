@@ -14,8 +14,10 @@ dependencies {
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger
     implementation libraries.rxJava
+    implementation libraries.lightweightStream
     implementation libraries.androidXAppCompat
     implementation libraries.recyclerView
+    implementation libraries.viewPager
 
     annotationProcessor annotations.dagger
 }

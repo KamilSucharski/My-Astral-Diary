@@ -1,25 +1,31 @@
 package com.sengami.gui_main.view;
 
 import com.sengami.domain_main.contract.MainContract;
-import com.sengami.gui_base.di.module.ContextModule;
-import com.sengami.gui_base.di.module.ErrorHandlerModule;
-import com.sengami.gui_base.error.ToastErrorHandler;
 import com.sengami.gui_base.view.BaseActivity;
+import com.sengami.gui_base.view.list.BaseAdapter;
+import com.sengami.gui_base.view.list.ElementConverter;
 import com.sengami.gui_diary.view.DiaryEntryListFragment;
 import com.sengami.gui_main.R;
 import com.sengami.gui_main.databinding.ActivityMainBinding;
 import com.sengami.gui_main.di.component.DaggerMainComponent;
+import com.sengami.gui_main.view.list.MainViewPagerAdapter;
+import com.sengami.gui_main.view.list.MainViewPagerElement;
+import com.sengami.gui_main.view.list.MainViewPagerElementConverter;
+import com.sengami.gui_main.view.list.MainViewPagerElementType;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.inject.Inject;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import io.reactivex.Observable;
-import io.reactivex.subjects.BehaviorSubject;
+import androidx.fragment.app.Fragment;
 
 public class MainActivity extends BaseActivity<MainContract.Presenter, ActivityMainBinding> implements MainContract.View {
+
+    private final BaseAdapter<MainViewPagerElement, MainViewPagerElementType> adapter = new MainViewPagerAdapter(this, getSupportFragmentManager());
+    private final ElementConverter<List<Fragment>, List<MainViewPagerElement>> converter = new MainViewPagerElementConverter();
 
     @Inject
     @Override
@@ -42,9 +48,16 @@ public class MainActivity extends BaseActivity<MainContract.Presenter, ActivityM
     @Override
     protected void init() {
         super.init();
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, new DiaryEntryListFragment());
-        fragmentTransaction.commit();
+        setupViewPager();
+    }
+
+    private void setupViewPager() {
+        final List<MainViewPagerElement> elements = converter.convert(Arrays.asList(
+            new DiaryEntryListFragment(),
+            new DiaryEntryListFragment(),
+            new DiaryEntryListFragment()
+        ));
+        adapter.addAll(elements);
+        binding.viewPager.setAdapter(adapter);
     }
 }

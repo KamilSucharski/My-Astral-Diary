@@ -9,8 +9,10 @@ dependencies {
     implementation libraries.dagger
     implementation libraries.ormLiteCore
     implementation libraries.ormLiteAndroid
+    implementation libraries.lightweightStream
     implementation libraries.rxAndroid
     implementation libraries.androidXAppCompat
+    implementation libraries.recyclerView
 
     annotationProcessor annotations.dagger
 }
