@@ -1,1 +1,1 @@
-include ':project', ':gui_base', ':domain_base', ':data_base', ':domain_main', ':gui_main', ':data_main'
+include ':project', 'feature:base:gui_base', 'feature:base:domain_base', 'feature:base:data_base', 'feature:main:domain_main', 'feature:main:gui_main', 'feature:main:data_main'

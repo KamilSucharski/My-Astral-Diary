@@ -1,4 +1,4 @@
-apply from: '../config/java_module_shared_config.gradle'
+apply from: '../../../config/java_module_shared_config.gradle'
 
 dependencies {
     implementation libraries.rxJava

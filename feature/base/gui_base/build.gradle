@@ -1,8 +1,8 @@
-apply from: '../config/android_module_shared_config.gradle'
+apply from: '../../../config/android_module_shared_config.gradle'
 
 dependencies {
-    implementation project(":domain_base")
-    implementation project(":data_base")
+    implementation project(":feature:base:domain_base")
+    implementation project(":feature:base:data_base")
 
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger

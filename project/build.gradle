@@ -50,8 +50,8 @@ android {
 dependencies {
     def libraries = rootProject.ext.libraries
 
-    implementation project(":gui_base")
-    implementation project(":gui_main")
+    implementation project(":feature:base:gui_base")
+    implementation project(":feature:main:gui_main")
 
     implementation libraries.androidXAppCompat
     implementation libraries.jetbrainsAnnotations

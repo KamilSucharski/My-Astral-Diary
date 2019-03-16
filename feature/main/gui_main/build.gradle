@@ -1,0 +1,17 @@
+apply from: '../../../config/android_module_shared_config.gradle'
+
+dependencies {
+    implementation project(":feature:base:gui_base")
+    implementation project(":feature:base:data_base")
+    implementation project(":feature:base:domain_base")
+
+    implementation project(":feature:main:data_main")
+    implementation project(":feature:main:domain_main")
+
+    implementation libraries.jetbrainsAnnotations
+    implementation libraries.dagger
+    implementation libraries.rxJava
+    implementation libraries.androidXAppCompat
+
+    annotationProcessor annotations.dagger
+}
