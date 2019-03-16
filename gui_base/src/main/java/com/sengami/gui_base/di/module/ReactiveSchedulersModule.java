@@ -1,4 +1,4 @@
-package com.sengami.di_base.module;
+package com.sengami.gui_base.di.module;
 
 import com.sengami.domain_base.util.ReactiveSchedulers;
 

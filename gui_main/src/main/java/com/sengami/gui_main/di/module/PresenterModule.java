@@ -1,4 +1,4 @@
-package com.sengami.di_main.module;
+package com.sengami.gui_main.di.module;
 
 import com.sengami.domain_main.contract.MainContract;
 import com.sengami.domain_main.operation.GetHelloWorldOperation;

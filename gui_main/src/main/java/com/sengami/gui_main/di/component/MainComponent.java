@@ -1,10 +1,10 @@
-package com.sengami.gui_main.component;
+package com.sengami.gui_main.di.component;
 
-import com.sengami.di_base.module.ContextModule;
-import com.sengami.di_base.module.ErrorHandlerModule;
-import com.sengami.di_base.module.ReactiveSchedulersModule;
-import com.sengami.di_main.module.OperationModule;
-import com.sengami.di_main.module.PresenterModule;
+import com.sengami.gui_base.di.module.ContextModule;
+import com.sengami.gui_base.di.module.ErrorHandlerModule;
+import com.sengami.gui_base.di.module.ReactiveSchedulersModule;
+import com.sengami.gui_main.di.module.OperationModule;
+import com.sengami.gui_main.di.module.PresenterModule;
 import com.sengami.gui_main.view.MainActivity;
 
 import org.jetbrains.annotations.NotNull;

@@ -41,11 +41,9 @@ dependencies {
     def annotations = rootProject.ext.annotations
 
     implementation project(":gui_base")
-    implementation project(":di_base")
     implementation project(":data_base")
     implementation project(":domain_base")
 
-    implementation project(":di_main")
     implementation project(":data_main")
     implementation project(":domain_main")
 

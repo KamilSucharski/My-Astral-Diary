@@ -1,13 +1,13 @@
 package com.sengami.gui_main.view;
 
-import com.sengami.di_base.module.ContextModule;
-import com.sengami.di_base.module.ErrorHandlerModule;
 import com.sengami.domain_main.contract.MainContract;
+import com.sengami.gui_base.di.module.ContextModule;
+import com.sengami.gui_base.di.module.ErrorHandlerModule;
 import com.sengami.gui_base.error.ToastErrorHandler;
 import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_main.R;
-import com.sengami.gui_main.component.DaggerMainComponent;
 import com.sengami.gui_main.databinding.ActivityMainBinding;
+import com.sengami.gui_main.di.component.DaggerMainComponent;
 
 import org.jetbrains.annotations.NotNull;
 

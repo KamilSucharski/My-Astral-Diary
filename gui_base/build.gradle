@@ -38,9 +38,15 @@ android {
 
 dependencies {
     def libraries = rootProject.ext.libraries
+    def annotations = rootProject.ext.annotations
 
     implementation project(":domain_base")
+    implementation project(":data_base")
 
-    implementation libraries.androidXAppCompat
     implementation libraries.jetbrainsAnnotations
+    implementation libraries.dagger
+    implementation libraries.rxAndroid
+    implementation libraries.androidXAppCompat
+
+    annotationProcessor annotations.dagger
 }
