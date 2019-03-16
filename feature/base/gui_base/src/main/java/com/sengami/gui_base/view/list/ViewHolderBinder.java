@@ -4,7 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class ViewHolderBinder<ELEMENT extends Element, SPECIFIC_ELEMENT extends ELEMENT> {
 
-    protected abstract int getTypeOrdinal();
+    @NotNull
+    protected abstract ElementType getAllowedType();
 
     protected abstract void performBind(@NotNull final BaseViewHolder viewHolder,
                                         @NotNull final SPECIFIC_ELEMENT item);
@@ -18,6 +19,6 @@ public abstract class ViewHolderBinder<ELEMENT extends Element, SPECIFIC_ELEMENT
     }
 
     private boolean shouldBind(@NotNull final ELEMENT item) {
-        return item.getType().ordinal() == getTypeOrdinal();
+        return item.getType().ordinal() == getAllowedType().ordinal();
     }
 }

@@ -18,6 +18,7 @@ dependencies {
     implementation libraries.androidXAppCompat
     implementation libraries.recyclerView
     implementation libraries.viewPager
+    implementation libraries.materialDesign
 
     annotationProcessor annotations.dagger
 }

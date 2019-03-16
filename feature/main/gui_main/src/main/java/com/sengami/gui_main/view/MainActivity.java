@@ -2,30 +2,20 @@ package com.sengami.gui_main.view;
 
 import com.sengami.domain_main.contract.MainContract;
 import com.sengami.gui_base.view.BaseActivity;
-import com.sengami.gui_base.view.list.BaseAdapter;
-import com.sengami.gui_base.view.list.ElementConverter;
-import com.sengami.gui_diary.view.DiaryEntryListFragment;
 import com.sengami.gui_main.R;
 import com.sengami.gui_main.databinding.ActivityMainBinding;
 import com.sengami.gui_main.di.component.DaggerMainComponent;
-import com.sengami.gui_main.view.list.MainViewPagerAdapter;
-import com.sengami.gui_main.view.list.MainViewPagerElement;
-import com.sengami.gui_main.view.list.MainViewPagerElementConverter;
-import com.sengami.gui_main.view.list.MainViewPagerElementType;
+import com.sengami.gui_main.view.pager.MainViewPagerAdapter;
+import com.sengami.gui_main.view.pager.MainViewPagerElement;
+import com.sengami.gui_main.view.pager.MainViewPagerElementFactory;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.fragment.app.Fragment;
-
 public class MainActivity extends BaseActivity<MainContract.Presenter, ActivityMainBinding> implements MainContract.View {
-
-    private final BaseAdapter<MainViewPagerElement, MainViewPagerElementType> adapter = new MainViewPagerAdapter(this, getSupportFragmentManager());
-    private final ElementConverter<List<Fragment>, List<MainViewPagerElement>> converter = new MainViewPagerElementConverter();
 
     @Inject
     @Override
@@ -52,12 +42,10 @@ public class MainActivity extends BaseActivity<MainContract.Presenter, ActivityM
     }
 
     private void setupViewPager() {
-        final List<MainViewPagerElement> elements = converter.convert(Arrays.asList(
-            new DiaryEntryListFragment(),
-            new DiaryEntryListFragment(),
-            new DiaryEntryListFragment()
-        ));
-        adapter.addAll(elements);
+        final List<MainViewPagerElement> elements = new MainViewPagerElementFactory().create(this);
+        final MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager(), elements);
+        binding.viewPager.setOffscreenPageLimit(2);
         binding.viewPager.setAdapter(adapter);
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
     }
 }

@@ -1,4 +1,5 @@
 <resources>
-
-    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_diary">Diary</string>
+    <string name="tab_statistics">Statistics</string>
+    <string name="tab_settings">Settings</string>
 </resources>
