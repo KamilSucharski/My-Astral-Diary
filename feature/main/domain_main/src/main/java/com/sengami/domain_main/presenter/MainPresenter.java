@@ -16,10 +16,10 @@ public final class MainPresenter extends BasePresenter<MainContract.View> implem
 
     @Override
     protected void onSubscribe(@NotNull final MainContract.View view) {
-        disposables.add(
+//        disposables.add(
             view.getHelloButtonTrigger()
                 .flatMap(x -> getHelloWorldOperation.execute())
-                .subscribe(view::showHelloWorld)
-        );
+                .subscribe(view::showHelloWorld);
+//        );
     }
 }

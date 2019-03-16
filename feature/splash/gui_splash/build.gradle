@@ -8,6 +8,8 @@ dependencies {
     implementation project(":feature:splash:data_splash")
     implementation project(":feature:splash:domain_splash")
 
+    implementation project(":feature:main:gui_main")
+
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger
     implementation libraries.rxJava

@@ -7,6 +7,7 @@ import com.sengami.gui_base.di.module.ContextModule;
 import com.sengami.gui_base.di.module.ErrorHandlerModule;
 import com.sengami.gui_base.error.ToastErrorHandler;
 import com.sengami.gui_base.view.BaseActivity;
+import com.sengami.gui_main.view.MainActivity;
 import com.sengami.gui_splash.R;
 import com.sengami.gui_splash.databinding.ActivitySplashBinding;
 import com.sengami.gui_splash.di.component.DaggerSplashComponent;
@@ -32,14 +33,12 @@ public class SplashActivity extends BaseActivity<SplashContract.Presenter, Activ
     protected void inject() {
         DaggerSplashComponent.builder()
             .contextModule(new ContextModule(this))
-            .errorHandlerModule(new ErrorHandlerModule(new ToastErrorHandler(this)))
             .build()
             .inject(this);
     }
 
     @Override
     public void navigateToMainView() {
-        Toast.makeText(this, "navigate", Toast.LENGTH_SHORT).show();
-
+        changeActivity(MainActivity.class);
     }
 }

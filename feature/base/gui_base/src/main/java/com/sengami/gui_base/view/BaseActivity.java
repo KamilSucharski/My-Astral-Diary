@@ -77,8 +77,8 @@ public abstract class BaseActivity<P extends ReactivePresenter, DB extends ViewD
     }
 
     protected void changeActivity(@NotNull final Class<?> activity) {
-        startActivity(activity);
         finish();
+        startActivity(activity);
     }
 
     protected void changeActivity(@NotNull final Class<?> activity,

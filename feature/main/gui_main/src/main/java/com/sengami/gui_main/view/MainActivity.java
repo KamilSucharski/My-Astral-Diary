@@ -35,7 +35,6 @@ public class MainActivity extends BaseActivity<MainContract.Presenter, ActivityM
     protected void inject() {
         DaggerMainComponent.builder()
             .contextModule(new ContextModule(this))
-            .errorHandlerModule(new ErrorHandlerModule(new ToastErrorHandler(this)))
             .build()
             .inject(this);
     }
