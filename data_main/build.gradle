@@ -1,17 +1,12 @@
-apply plugin: 'java-library'
-
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
+apply from: '../config/java_module_shared_config.gradle'
 
 dependencies {
-    def libraries = rootProject.ext.libraries
-
     implementation project(":domain_base")
     implementation project(":data_base")
 
     implementation project(":domain_main")
 
-    implementation libraries.jetbrainsAnnotations
     implementation libraries.rxJava
+    implementation libraries.jetbrainsAnnotations
     implementation libraries.ormLiteCore
 }
