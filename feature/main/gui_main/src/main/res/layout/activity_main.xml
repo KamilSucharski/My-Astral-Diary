@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/color_primary">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
@@ -18,8 +19,10 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="#AAAAAA"
+            android:layout_height="@dimen/bottom_menu_height"
+            android:background="@color/color_primary_dark"
+            app:tabTextColor="@color/color_accent"
+            app:tabIndicatorGravity="top"
             app:tabMode="fixed" />
     </LinearLayout>
 </layout>
