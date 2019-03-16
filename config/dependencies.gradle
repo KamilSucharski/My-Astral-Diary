@@ -1,16 +1,19 @@
 ext {
     versions = [
-            androidX            : "1.1.0-alpha01",
+            androidXAppCompat   : "1.1.0-alpha01",
+            recyclerView        : "1.1.0-alpha03",
             rxJava              : "2.1.10",
             rxAndroid           : "2.0.2",
             dagger              : "2.21",
             ormLite             : "5.1",
             progressWheel       : "1.7",
             jetbrainsAnnotations: "16.0.1",
+            lightweightStream   : "1.2.1"
     ]
 
     libraries = [
-            androidXAppCompat   : "androidx.appcompat:appcompat:$versions.androidX",
+            androidXAppCompat   : "androidx.appcompat:appcompat:$versions.androidXAppCompat",
+            recyclerView        : "androidx.recyclerview:recyclerview:$versions.recyclerView",
             rxJava              : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
             rxAndroid           : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
             dagger              : "com.google.dagger:dagger:$versions.dagger",
@@ -18,6 +21,7 @@ ext {
             ormLiteAndroid      : "com.j256.ormlite:ormlite-android:$versions.ormLite",
             progressWheel       : "com.pnikosis:materialish-progress:$versions.progressWheel",
             jetbrainsAnnotations: "org.jetbrains:annotations:$versions.jetbrainsAnnotations",
+            lightweightStream   : "com.annimon:stream:$versions.lightweightStream",
     ]
 
     annotations = [

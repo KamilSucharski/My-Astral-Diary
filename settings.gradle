@@ -1,4 +1,17 @@
 include ':project',
-        ':feature:base:gui_base', ':feature:base:domain_base', ':feature:base:data_base',
-        ':feature:splash:gui_splash', ':feature:splash:domain_splash', ':feature:splash:data_splash',
-        ':feature:main:gui_main', ':feature:main:domain_main', ':feature:main:data_main'
+
+        ':feature:base:gui_base',
+        ':feature:base:domain_base',
+        ':feature:base:data_base',
+
+        ':feature:splash:gui_splash',
+        ':feature:splash:domain_splash',
+        ':feature:splash:data_splash',
+
+        ':feature:main:gui_main',
+        ':feature:main:domain_main',
+        ':feature:main:data_main',
+
+        ':feature:diary:gui_diary',
+        ':feature:diary:domain_diary',
+        ':feature:diary:data_diary'

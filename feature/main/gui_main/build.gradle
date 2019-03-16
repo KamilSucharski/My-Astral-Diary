@@ -1,3 +1,4 @@
+apply plugin: 'com.android.library'
 apply from: '../../../config/android_module_shared_config.gradle'
 
 dependencies {
@@ -8,10 +9,13 @@ dependencies {
     implementation project(":feature:main:data_main")
     implementation project(":feature:main:domain_main")
 
+    implementation project(":feature:diary:gui_diary")
+
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger
     implementation libraries.rxJava
     implementation libraries.androidXAppCompat
+    implementation libraries.recyclerView
 
     annotationProcessor annotations.dagger
 }

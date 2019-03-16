@@ -3,7 +3,7 @@ package com.sengami.data_splash.operation.local;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.sengami.data_base.util.ConnectionSourceProvider;
-import com.sengami.data_splash.dbo.DiaryEntryDBO;
+import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.domain_base.operation.BaseOperation;
 import com.sengami.domain_base.util.Constants;
 import com.sengami.domain_base.util.ErrorHandler;

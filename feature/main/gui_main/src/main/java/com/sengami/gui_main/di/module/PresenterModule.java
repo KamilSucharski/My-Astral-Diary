@@ -1,7 +1,6 @@
 package com.sengami.gui_main.di.module;
 
 import com.sengami.domain_main.contract.MainContract;
-import com.sengami.domain_main.operation.GetHelloWorldOperation;
 import com.sengami.domain_main.presenter.MainPresenter;
 
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +13,7 @@ public final class PresenterModule {
 
     @Provides
     @NotNull
-    MainContract.Presenter mainContractPresenter(@NotNull final GetHelloWorldOperation getHelloWorldOperation) {
-        return new MainPresenter(getHelloWorldOperation);
+    MainContract.Presenter mainContractPresenter() {
+        return new MainPresenter();
     }
 }

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 public final class SplashPresenter extends BasePresenter<SplashContract.View> implements SplashContract.Presenter {
 
     @NotNull
-    final PrepareDataOperation prepareDataOperation;
+    private final PrepareDataOperation prepareDataOperation;
 
     public SplashPresenter(@NotNull final PrepareDataOperation prepareDataOperation) {
         this.prepareDataOperation = prepareDataOperation;

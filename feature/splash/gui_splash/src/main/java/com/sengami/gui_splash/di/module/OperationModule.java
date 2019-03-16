@@ -16,9 +16,13 @@ public final class OperationModule {
 
     @Provides
     @NotNull
-    PrepareDataOperation getHelloWorldOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                                @NotNull final ErrorHandler errorHandler,
-                                                @NotNull final ConnectionSourceProvider connectionSourceProvider) {
-        return new PrepareDataOperationLocal(reactiveSchedulers, errorHandler, connectionSourceProvider);
+    PrepareDataOperation prepareDataOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
+                                              @NotNull final ErrorHandler errorHandler,
+                                              @NotNull final ConnectionSourceProvider connectionSourceProvider) {
+        return new PrepareDataOperationLocal(
+            reactiveSchedulers,
+            errorHandler,
+            connectionSourceProvider
+        );
     }
 }

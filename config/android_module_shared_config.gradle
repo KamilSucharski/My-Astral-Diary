@@ -1,10 +1,7 @@
-apply plugin: 'com.android.library'
-
 android {
-    def configuration = rootProject.ext
-
-    compileSdkVersion configuration["androidTargetSdkVersion"]
     defaultConfig {
+        def configuration = rootProject.ext
+        compileSdkVersion configuration["androidTargetSdkVersion"]
         minSdkVersion configuration["androidMinSdkVersion"]
         targetSdkVersion configuration["androidTargetSdkVersion"]
         versionName configuration.getVersionName()
@@ -14,7 +11,6 @@ android {
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles fileTree(dir: '../proguard', include: ['*.pro']).asList().toArray()
         }
 
         debug {

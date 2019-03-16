@@ -1,21 +1,14 @@
 apply plugin: 'com.android.application'
+apply from: '../config/android_module_shared_config.gradle'
 
 android {
-    def configuration = rootProject.ext
-
-    compileSdkVersion configuration["androidTargetSdkVersion"]
     defaultConfig {
-        applicationId configuration["androidApplicationId"]
-        minSdkVersion configuration["androidMinSdkVersion"]
-        targetSdkVersion configuration["androidTargetSdkVersion"]
-        versionName configuration.getVersionName()
-        versionCode configuration.getVersionCode()
-
         project.archivesBaseName = "my-astral-diary-${versionName}".toString()
     }
 
     signingConfigs {
         release {
+            def configuration = rootProject.ext
             storeFile file(configuration["keystorePath"])
             storePassword configuration["keystorePassword"]
             keyAlias configuration["keystoreAlias"]
@@ -25,34 +18,14 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
             shrinkResources true
-            signingConfig signingConfigs.release
             proguardFiles fileTree(dir: '../proguard', include: ['*.pro']).asList().toArray()
+            signingConfig signingConfigs.release
         }
-
-        debug {
-            minifyEnabled false
-            shrinkResources false
-        }
-    }
-
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
-
-    dataBinding {
-        enabled = true
     }
 }
 
 dependencies {
-    def libraries = rootProject.ext.libraries
-
     implementation project(":feature:splash:gui_splash")
     implementation project(":feature:main:gui_main")
-
-    implementation libraries.androidXAppCompat
-    implementation libraries.jetbrainsAnnotations
 }

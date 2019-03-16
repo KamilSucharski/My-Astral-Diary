@@ -6,6 +6,8 @@ dependencies {
 
     implementation project(":feature:splash:domain_splash")
 
+    implementation project(":feature:diary:data_diary")
+
     implementation libraries.rxJava
     implementation libraries.jetbrainsAnnotations
     implementation libraries.ormLiteCore

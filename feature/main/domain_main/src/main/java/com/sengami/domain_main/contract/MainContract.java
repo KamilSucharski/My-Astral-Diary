@@ -9,11 +9,6 @@ import io.reactivex.Observable;
 public interface MainContract {
 
     interface View {
-
-        @NotNull
-        Observable<Boolean> getHelloButtonTrigger();
-
-        void showHelloWorld(String text);
     }
 
     interface Presenter extends ReactivePresenter<View> {
