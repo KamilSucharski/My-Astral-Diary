@@ -3,6 +3,7 @@
     <dimen name="half_content_margin">8dp</dimen>
     <dimen name="bottom_menu_height">52dp</dimen>
 
-    <dimen name="text_header_size">20sp</dimen>
-    <dimen name="text_standard_size">16sp</dimen>
+    <dimen name="text_size_header">20sp</dimen>
+    <dimen name="text_size_standard">16sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
 </resources>

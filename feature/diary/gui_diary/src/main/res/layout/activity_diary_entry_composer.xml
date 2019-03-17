@@ -15,40 +15,56 @@
         android:background="@color/color_primary"
         android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/content_margin">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/title_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/composer_title_hint"
-                android:inputType="text"
-                android:theme="@style/Text.Standard"
-                android:text="@{diaryEntry.title}"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginStart="@dimen/content_margin"
-            android:layout_marginEnd="@dimen/content_margin">
+            android:fadeScrollbars="false">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/body_edit_text"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/composer_body_hint"
-                android:gravity="top"
-                android:inputType="text"
-                android:theme="@style/Text.Standard"
-                android:text="@{diaryEntry.body}" />
+                android:layout_height="wrap_content"
+                android:background="@color/color_primary"
+                android:orientation="vertical">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/content_margin"
+                    app:hintTextAppearance="@style/Text.Small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/title_edit_text"
+                        style="@style/Text.Standard"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/composer_title_hint"
+                        android:inputType="textCapSentences"
+                        android:text="@{diaryEntry.title}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/content_margin"
+                    android:layout_marginEnd="@dimen/content_margin"
+                    app:hintTextAppearance="@style/Text.Small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/body_edit_text"
+                        style="@style/Text.Standard"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="top"
+                        android:hint="@string/composer_body_hint"
+                        android:inputType="textCapSentences|textMultiLine"
+                        android:singleLine="false"
+                        android:text="@{diaryEntry.body}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </ScrollView>
 
         <include
             android:id="@+id/bottom_menu"

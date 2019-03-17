@@ -16,17 +16,22 @@
 
     <style name="Text.Header" parent="Text">
         <item name="android:fontFamily">@font/roboto_black</item>
-        <item name="android:textSize">@dimen/text_header_size</item>
+        <item name="android:textSize">@dimen/text_size_header</item>
     </style>
 
     <style name="Text.Standard" parent="Text">
         <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textSize">@dimen/text_standard_size</item>
+        <item name="android:textSize">@dimen/text_size_standard</item>
+    </style>
+
+    <style name="Text.Small" parent="Text">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
     <style name="Text.Tab" parent="Text">
         <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textSize">@dimen/text_standard_size</item>
+        <item name="android:textSize">@dimen/text_size_standard</item>
         <item name="android:textAllCaps">true</item>
     </style>
 </resources>
