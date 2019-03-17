@@ -23,6 +23,7 @@
             android:background="@color/color_primary_dark"
             app:tabIndicatorGravity="top"
             app:tabMode="fixed"
+            app:tabIconTint="@color/color_accent"
             app:tabTextColor="@color/color_primary"
             app:tabSelectedTextColor="@color/color_accent"/>
     </LinearLayout>

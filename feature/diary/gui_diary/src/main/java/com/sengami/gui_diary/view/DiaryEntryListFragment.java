@@ -9,11 +9,17 @@ import com.sengami.domain_diary.contract.DiaryEntryListContract;
 import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.gui_base.di.module.ContextModule;
 import com.sengami.gui_base.view.BaseFragment;
+import com.sengami.gui_base.view.list.adapter.BaseAdapter;
+import com.sengami.gui_base.view.list.element.ElementConverter;
 import com.sengami.gui_diary.R;
 import com.sengami.gui_diary.databinding.FragmentDiaryEntryListBinding;
 import com.sengami.gui_diary.di.component.DaggerDiaryComponent;
 import com.sengami.gui_diary.navigation.Extra;
 import com.sengami.gui_diary.navigation.RequestCode;
+import com.sengami.gui_diary.view.list.adapter.DiaryEntryListAdapter;
+import com.sengami.gui_diary.view.list.element.DiaryEntryListElement;
+import com.sengami.gui_diary.view.list.element.DiaryEntryListElementConverter;
+import com.sengami.gui_diary.view.list.element.DiaryEntryListElementType;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +28,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 
@@ -29,6 +37,8 @@ public class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.
 
     private final BehaviorSubject<DiaryEntry> diaryEntryClickedTrigger = BehaviorSubject.create();
     private final BehaviorSubject<Boolean> addNewDiaryEntryClickedTrigger = BehaviorSubject.create();
+    private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
+    private final ElementConverter<List<DiaryEntry>, List<DiaryEntryListElement>> converter = new DiaryEntryListElementConverter();
 
     @Inject
     @Override
@@ -53,6 +63,7 @@ public class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.
     protected void init(@NotNull final Context context) {
         super.init(context);
         setupListeners();
+        setupList(context);
     }
 
     @Override
@@ -69,7 +80,9 @@ public class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.
 
     @Override
     public void showDiaryEntryList(@NotNull final List<DiaryEntry> diaryEntryList) {
-        Toast.makeText(getContext(), "asd", Toast.LENGTH_SHORT).show();
+        final List<DiaryEntryListElement> items = converter.convert(diaryEntryList);
+        adapter.addAll(items);
+        binding.recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -90,5 +103,10 @@ public class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.
 
     private void setupListeners() {
         onClick(binding.addEntryButton, () -> addNewDiaryEntryClickedTrigger.onNext(true));
+    }
+
+    private void setupList(@NotNull final Context context) {
+        adapter = new DiaryEntryListAdapter(context);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
     }
 }

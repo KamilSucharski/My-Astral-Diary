@@ -44,7 +44,7 @@ public final class MainActivity extends BaseActivity<MainContract.Presenter, Act
     private void setupViewPager() {
         final List<MainViewPagerElement> elements = new MainViewPagerElementFactory().create(this);
         final MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager(), elements);
-        binding.viewPager.setOffscreenPageLimit(2);
+        binding.viewPager.setOffscreenPageLimit(elements.size() - 1);
         binding.viewPager.setAdapter(adapter);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
     }

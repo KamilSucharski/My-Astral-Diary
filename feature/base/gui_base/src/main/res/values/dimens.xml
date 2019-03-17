@@ -1,5 +1,6 @@
 <resources>
     <dimen name="content_margin">16dp</dimen>
+    <dimen name="half_content_margin">8dp</dimen>
     <dimen name="bottom_menu_height">52dp</dimen>
 
     <dimen name="text_header_size">20sp</dimen>

@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -26,7 +25,6 @@ public final class MainViewPagerAdapter extends FragmentStatePagerAdapter {
         return items.get(position).getFragment();
     }
 
-    @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
         return items.get(position).getPageTitle();

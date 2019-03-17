@@ -1,11 +1,13 @@
-package com.sengami.gui_base.view.list;
+package com.sengami.gui_base.view.list.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.annimon.stream.Stream;
+import com.sengami.gui_base.view.list.binder.ViewHolderBinder;
+import com.sengami.gui_base.view.list.element.Element;
+import com.sengami.gui_base.view.list.element.ElementType;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -13,6 +15,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class BaseAdapter<ELEMENT extends Element, TYPE extends ElementType> extends RecyclerView.Adapter<BaseViewHolder> {
@@ -20,11 +24,11 @@ public abstract class BaseAdapter<ELEMENT extends Element, TYPE extends ElementT
     private final Context context;
     private final List<ELEMENT> items = new LinkedList<>();
     private final TYPE[] possibleElementTypes;
-    private final List<ViewHolderBinder<ELEMENT, ? extends ELEMENT>> viewHolderBinders;
+    private final List<ViewHolderBinder<ELEMENT, ? extends ELEMENT, ? extends ViewDataBinding>> viewHolderBinders;
 
     public BaseAdapter(@NotNull final Context context,
                        @NotNull final TYPE[] possibleElementTypes,
-                       @NotNull final List<ViewHolderBinder<ELEMENT, ? extends ELEMENT>> viewHolderBinders) {
+                       @NotNull final List<ViewHolderBinder<ELEMENT, ? extends ELEMENT, ? extends ViewDataBinding>> viewHolderBinders) {
         this.context = context;
         this.possibleElementTypes = possibleElementTypes;
         this.viewHolderBinders = viewHolderBinders;
@@ -33,7 +37,7 @@ public abstract class BaseAdapter<ELEMENT extends Element, TYPE extends ElementT
     @NonNull
     @Override
     final public BaseViewHolder onCreateViewHolder(@NonNull final ViewGroup parent,
-                                             final int viewType) {
+                                                   final int viewType) {
         final int layoutRes = Stream
             .of(possibleElementTypes)
             .filter(type -> type.ordinal() == viewType)
@@ -41,16 +45,15 @@ public abstract class BaseAdapter<ELEMENT extends Element, TYPE extends ElementT
             .get()
             .getLayoutRes();
 
-        final View view = LayoutInflater
-            .from(context)
-            .inflate(layoutRes, parent, false);
+        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        final ViewDataBinding binding = DataBindingUtil.inflate(inflater, layoutRes, parent, false);
 
-        return new BaseViewHolder(view);
+        return new BaseViewHolder(binding);
     }
 
     @Override
     final public void onBindViewHolder(@NonNull final BaseViewHolder holder,
-                                 final int position) {
+                                       final int position) {
         final ELEMENT item = items.get(position);
         Stream
             .of(viewHolderBinders)
@@ -60,6 +63,12 @@ public abstract class BaseAdapter<ELEMENT extends Element, TYPE extends ElementT
     @Override
     final public int getItemCount() {
         return items.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        final ELEMENT item = items.get(position);
+        return item.getType().ordinal();
     }
 
     public void addAll(@NotNull final List<ELEMENT> data) {
