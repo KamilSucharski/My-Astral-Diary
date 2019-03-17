@@ -71,6 +71,12 @@ public abstract class BaseAdapter<ELEMENT extends Element, TYPE extends ElementT
         return item.getType().ordinal();
     }
 
+    public void replaceAll(@NotNull final List<ELEMENT> data) {
+        items.clear();
+        items.addAll(data);
+        notifyDataSetChanged();
+    }
+
     public void addAll(@NotNull final List<ELEMENT> data) {
         items.addAll(data);
         notifyDataSetChanged();

@@ -14,8 +14,9 @@ public interface DiaryEntryListContract {
     interface View {
 
         @NotNull
+        Observable<Boolean> getRefreshListTrigger();
+        @NotNull
         Observable<DiaryEntry> getDiaryEntryClickedTrigger();
-
         @NotNull
         Observable<Boolean> getAddNewDiaryClickedEntryTrigger();
 

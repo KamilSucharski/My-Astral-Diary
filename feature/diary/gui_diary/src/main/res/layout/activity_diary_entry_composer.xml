@@ -26,7 +26,8 @@
                 android:layout_height="match_parent"
                 android:hint="@string/composer_title_hint"
                 android:inputType="text"
-                android:theme="@style/Text.Standard" />
+                android:theme="@style/Text.Standard"
+                android:text="@{diaryEntry.title}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,8 +43,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/composer_body_hint"
+                android:gravity="top"
                 android:inputType="text"
-                android:theme="@style/Text.Standard" />
+                android:theme="@style/Text.Standard"
+                android:text="@{diaryEntry.body}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

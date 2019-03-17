@@ -2,7 +2,6 @@ package com.sengami.gui_base.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.sengami.domain_base.presenter.ReactivePresenter;
 
@@ -81,16 +80,6 @@ public abstract class BaseActivity<P extends ReactivePresenter, DB extends ViewD
                                   @NotNull final Bundle extras) {
         startActivity(activity, extras);
         finish();
-    }
-
-    protected void onClick(@NotNull final View view,
-                           @NotNull final Runnable runnable) {
-        view.setOnClickListener(v -> runnable.run());
-    }
-
-    protected void onClick(@NotNull final ViewDataBinding viewDataBinding,
-                           @NotNull final Runnable runnable) {
-        onClick(viewDataBinding.getRoot(), runnable);
     }
 
     private void bindLayout() {

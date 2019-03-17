@@ -3,7 +3,6 @@ package com.sengami.gui_diary.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.sengami.domain_diary.contract.DiaryEntryListContract;
 import com.sengami.domain_diary.model.DiaryEntry;
@@ -33,12 +32,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 
-public class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.Presenter, FragmentDiaryEntryListBinding> implements DiaryEntryListContract.View {
+import static com.sengami.gui_base.util.ClickUtil.onClick;
 
+public final class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.Presenter, FragmentDiaryEntryListBinding> implements DiaryEntryListContract.View {
+
+    private final BehaviorSubject<Boolean> refreshListTrigger = BehaviorSubject.create();
     private final BehaviorSubject<DiaryEntry> diaryEntryClickedTrigger = BehaviorSubject.create();
     private final BehaviorSubject<Boolean> addNewDiaryEntryClickedTrigger = BehaviorSubject.create();
-    private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
     private final ElementConverter<List<DiaryEntry>, List<DiaryEntryListElement>> converter = new DiaryEntryListElementConverter();
+    private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
 
     @Inject
     @Override
@@ -64,6 +66,13 @@ public class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.
         super.init(context);
         setupListeners();
         setupList(context);
+        refreshListTrigger.onNext(true);
+    }
+
+    @Override
+    @NotNull
+    public Observable<Boolean> getRefreshListTrigger() {
+        return refreshListTrigger;
     }
 
     @Override
@@ -81,7 +90,7 @@ public class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.
     @Override
     public void showDiaryEntryList(@NotNull final List<DiaryEntry> diaryEntryList) {
         final List<DiaryEntryListElement> items = converter.convert(diaryEntryList);
-        adapter.addAll(items);
+        adapter.replaceAll(items);
         binding.recyclerView.setAdapter(adapter);
     }
 
@@ -97,7 +106,7 @@ public class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.
                                  final int resultCode,
                                  @Nullable final Intent data) {
         if (requestCode == RequestCode.COMPOSE_DIARY_ENTRY.code() && resultCode == Activity.RESULT_OK) {
-            Toast.makeText(getContext(), "powrot ok", Toast.LENGTH_SHORT).show();
+            refreshListTrigger.onNext(true);
         }
     }
 
@@ -106,7 +115,7 @@ public class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.
     }
 
     private void setupList(@NotNull final Context context) {
-        adapter = new DiaryEntryListAdapter(context);
+        adapter = new DiaryEntryListAdapter(context, diaryEntryClickedTrigger);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
     }
 }

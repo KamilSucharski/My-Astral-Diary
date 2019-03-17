@@ -20,7 +20,9 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 
-public class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryComposerContract.Presenter, ActivityDiaryEntryComposerBinding> implements DiaryEntryComposerContract.View {
+import static com.sengami.gui_base.util.ClickUtil.onClick;
+
+public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryComposerContract.Presenter, ActivityDiaryEntryComposerBinding> implements DiaryEntryComposerContract.View {
 
     private final BehaviorSubject<DiaryEntry> saveDiaryEntryTrigger = BehaviorSubject.create();
     private final BehaviorSubject<DiaryEntry> deleteDiaryEntryTrigger = BehaviorSubject.create();
@@ -95,9 +97,15 @@ public class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryComposerC
     }
 
     private void setupListeners() {
-        onClick(binding.bottomMenu.saveButton, () -> saveDiaryEntryTrigger.onNext(diaryEntry));
+        onClick(binding.bottomMenu.saveButton, this::onSaveButtonClicked);
         onClick(binding.bottomMenu.deleteButton, () -> deleteDiaryEntryTrigger.onNext(diaryEntry));
         onClick(binding.bottomMenu.backButton, () -> returnTrigger.onNext(true));
+    }
+
+    private void onSaveButtonClicked() {
+        diaryEntry.setTitle(binding.titleEditText.getText().toString());
+        diaryEntry.setBody(binding.bodyEditText.getText().toString());
+        saveDiaryEntryTrigger.onNext(diaryEntry);
     }
 
     private void showDiaryEntryOnView() {

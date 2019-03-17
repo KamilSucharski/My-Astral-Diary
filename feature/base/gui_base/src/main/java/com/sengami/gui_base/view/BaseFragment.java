@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sengami.domain_base.presenter.ReactivePresenter;
-import com.sengami.gui_base.runnable.TypedRunnable;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -75,24 +74,5 @@ public abstract class BaseFragment<P extends ReactivePresenter, DB extends ViewD
     }
 
     protected void init(@NotNull final Context context) {
-    }
-
-    protected void onClick(@NotNull final View view,
-                           @NotNull final Runnable runnable) {
-        view.setOnClickListener(v -> runnable.run());
-    }
-
-    protected void onClick(@NotNull final ViewDataBinding viewDataBinding,
-                           @NotNull final Runnable runnable) {
-        onClick(viewDataBinding.getRoot(), runnable);
-    }
-
-    protected void withContext(@NotNull final TypedRunnable<Context> contextRunnable) {
-        final Context context = getActivity();
-        if (context == null) {
-            return;
-        }
-
-        contextRunnable.invoke(context);
     }
 }
