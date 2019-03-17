@@ -21,8 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_menu_height"
             android:background="@color/color_primary_dark"
-            app:tabTextColor="@color/color_accent"
             app:tabIndicatorGravity="top"
-            app:tabMode="fixed" />
+            app:tabMode="fixed"
+            app:tabTextColor="@color/color_primary"
+            app:tabSelectedTextColor="@color/color_accent"/>
     </LinearLayout>
 </layout>
