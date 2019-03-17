@@ -7,6 +7,7 @@
 
         <item name="android:supportsRtl">false</item>
         <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
     <style name="Text">
@@ -14,11 +15,18 @@
     </style>
 
     <style name="Text.Header" parent="Text">
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/roboto_black</item>
         <item name="android:textSize">@dimen/text_header_size</item>
     </style>
 
     <style name="Text.Standard" parent="Text">
+        <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">@dimen/text_standard_size</item>
+    </style>
+
+    <style name="Text.Tab" parent="Text">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/text_standard_size</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 </resources>
