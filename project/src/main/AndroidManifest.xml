@@ -20,5 +20,6 @@
 
         <activity android:name="com.sengami.gui_main.view.MainActivity" />
 
+        <activity android:name="com.sengami.gui_diary.view.DiaryEntryComposerActivity" />
     </application>
 </manifest>

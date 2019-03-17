@@ -15,7 +15,6 @@ public class DiaryEntryMapper implements Mapper<DiaryEntryDBO, DiaryEntry> {
         result.setDate(source.getDate());
         result.setTitle(source.getTitle());
         result.setBody(source.getBody());
-        result.setStatus(source.getStatus());
         return result;
     }
 
@@ -26,7 +25,6 @@ public class DiaryEntryMapper implements Mapper<DiaryEntryDBO, DiaryEntry> {
         result.setDate(source.getDate());
         result.setTitle(source.getTitle());
         result.setBody(source.getBody());
-        result.setStatus(source.getStatus());
         return result;
     }
 }

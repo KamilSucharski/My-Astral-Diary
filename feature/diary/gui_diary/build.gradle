@@ -13,6 +13,7 @@ dependencies {
     implementation libraries.dagger
     implementation libraries.rxJava
     implementation libraries.androidXAppCompat
+    implementation libraries.materialDesign
     implementation libraries.recyclerView
 
     annotationProcessor annotations.dagger

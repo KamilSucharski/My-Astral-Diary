@@ -31,12 +31,11 @@ public abstract class BaseActivity<P extends ReactivePresenter, DB extends ViewD
     }
 
     @Override
-    protected void onCreate(@Nullable final Bundle savedInstanceState) {
+    protected final void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         extractArguments(getIntent());
         bindLayout();
-        setupListeners();
         inject();
         init();
     }
@@ -56,9 +55,6 @@ public abstract class BaseActivity<P extends ReactivePresenter, DB extends ViewD
     }
 
     protected void extractArguments(@NotNull final Intent intent) {
-    }
-
-    protected void setupListeners() {
     }
 
     protected void init() {

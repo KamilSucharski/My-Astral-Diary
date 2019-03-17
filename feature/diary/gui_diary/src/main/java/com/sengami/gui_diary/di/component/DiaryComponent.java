@@ -7,9 +7,8 @@ import com.sengami.gui_base.di.module.ReactiveSchedulersModule;
 import com.sengami.gui_diary.di.module.MapperModule;
 import com.sengami.gui_diary.di.module.OperationModule;
 import com.sengami.gui_diary.di.module.PresenterModule;
+import com.sengami.gui_diary.view.DiaryEntryComposerActivity;
 import com.sengami.gui_diary.view.DiaryEntryListFragment;
-
-import org.jetbrains.annotations.NotNull;
 
 import dagger.Component;
 
@@ -24,5 +23,7 @@ import dagger.Component;
 })
 public interface DiaryComponent {
 
-    void inject(@NotNull final DiaryEntryListFragment fragment);
+    void inject(final DiaryEntryListFragment fragment);
+
+    void inject(final DiaryEntryComposerActivity activity);
 }

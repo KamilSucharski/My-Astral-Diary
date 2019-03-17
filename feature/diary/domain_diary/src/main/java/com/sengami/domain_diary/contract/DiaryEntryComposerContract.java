@@ -5,23 +5,24 @@ import com.sengami.domain_diary.model.DiaryEntry;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 
-public interface DiaryEntryListContract {
+public interface DiaryEntryComposerContract {
 
     interface View {
 
         @NotNull
-        Observable<DiaryEntry> getDiaryEntryClickedTrigger();
+        Observable<DiaryEntry> getSaveDiaryEntryTrigger();
 
         @NotNull
-        Observable<Boolean> getAddNewDiaryClickedEntryTrigger();
+        Observable<DiaryEntry> getDeleteDiaryEntryTrigger();
 
-        void showDiaryEntryList(@NotNull final List<DiaryEntry> diaryEntryList);
+        @NotNull
+        Observable<Boolean> getReturnTrigger();
 
-        void navigateToDiaryEntryComposerScreen(@NotNull final DiaryEntry diaryEntry);
+        void showOperationSuccessMessage();
+
+        void navigateBack();
     }
 
     interface Presenter extends ReactivePresenter<View> {

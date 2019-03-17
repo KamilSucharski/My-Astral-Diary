@@ -56,7 +56,6 @@ public abstract class BaseFragment<P extends ReactivePresenter, DB extends ViewD
                               @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final Context context = view.getContext();
-        setupListeners(context);
         init(context);
     }
 
@@ -73,9 +72,6 @@ public abstract class BaseFragment<P extends ReactivePresenter, DB extends ViewD
     protected abstract void inject(@NotNull final Context context);
 
     protected void extractArguments(@Nullable final Bundle arguments) {
-    }
-
-    protected void setupListeners(@NotNull final Context context) {
     }
 
     protected void init(@NotNull final Context context) {

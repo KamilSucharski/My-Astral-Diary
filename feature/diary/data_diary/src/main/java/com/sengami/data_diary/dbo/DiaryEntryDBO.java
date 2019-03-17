@@ -2,14 +2,15 @@ package com.sengami.data_diary.dbo;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import com.sengami.domain_diary.model.DiaryEntryStatus;
+import com.sengami.data_base.dbo.BaseDBO;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
 
 @DatabaseTable
-public class DiaryEntryDBO {
+public class DiaryEntryDBO extends BaseDBO {
 
     @DatabaseField(generatedId = true)
     private Integer id;
@@ -23,15 +24,12 @@ public class DiaryEntryDBO {
     @DatabaseField(canBeNull = false)
     private String body;
 
-    @DatabaseField(unknownEnumName = "UNKNOWN")
-    private DiaryEntryStatus status;
-
-    @NotNull
+    @Nullable
     public Integer getId() {
         return id;
     }
 
-    public void setId(@NotNull final Integer id) {
+    public void setId(@Nullable final Integer id) {
         this.id = id;
     }
 
@@ -60,14 +58,5 @@ public class DiaryEntryDBO {
 
     public void setBody(@NotNull final String body) {
         this.body = body;
-    }
-
-    @NotNull
-    public DiaryEntryStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(@NotNull final DiaryEntryStatus status) {
-        this.status = status;
     }
 }

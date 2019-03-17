@@ -2,6 +2,7 @@ package com.sengami.domain_diary.presenter;
 
 import com.sengami.domain_base.presenter.BasePresenter;
 import com.sengami.domain_diary.contract.DiaryEntryListContract;
+import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.domain_diary.operation.GetDiaryEntryListOperation;
 
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +20,7 @@ public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListC
     protected void onSubscribe(@NotNull final DiaryEntryListContract.View view) {
         subscribeGetDiaryEntryList(view);
         subscribeDiaryEntryClickedTrigger(view);
+        subscribeAddNewDiaryEntryClickedTrigger(view);
     }
 
     private void subscribeGetDiaryEntryList(@NotNull final DiaryEntryListContract.View view) {
@@ -30,6 +32,19 @@ public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListC
     }
 
     private void subscribeDiaryEntryClickedTrigger(@NotNull final DiaryEntryListContract.View view) {
-        //todo
+        disposables.add(
+            view
+                .getDiaryEntryClickedTrigger()
+                .subscribe(view::navigateToDiaryEntryComposerScreen)
+        );
+    }
+
+    private void subscribeAddNewDiaryEntryClickedTrigger(@NotNull final DiaryEntryListContract.View view) {
+        disposables.add(
+            view
+                .getAddNewDiaryClickedEntryTrigger()
+                .map(x -> new DiaryEntry())
+                .subscribe(view::navigateToDiaryEntryComposerScreen)
+        );
     }
 }

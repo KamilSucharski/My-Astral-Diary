@@ -7,7 +7,18 @@
 
         <item name="android:supportsRtl">false</item>
         <item name="android:screenOrientation">portrait</item>
+    </style>
 
+    <style name="Text">
         <item name="android:textColor">@color/color_accent</item>
+    </style>
+
+    <style name="Text.Header" parent="Text">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_header_size</item>
+    </style>
+
+    <style name="Text.Standard" parent="Text">
+        <item name="android:textSize">@dimen/text_standard_size</item>
     </style>
 </resources>

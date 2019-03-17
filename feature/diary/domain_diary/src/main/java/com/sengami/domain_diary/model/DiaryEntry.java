@@ -1,23 +1,27 @@
 package com.sengami.domain_diary.model;
 
+import com.sengami.domain_base.model.BaseModel;
+
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
 
-public class DiaryEntry {
+public class DiaryEntry extends BaseModel {
 
-    private Integer id;
-    private Date date;
-    private String title;
-    private String body;
-    private DiaryEntryStatus status;
+    @Nullable
+    private Integer id = null;
+    private Date date = new Date();
+    private String title = "";
+    private String body = "";
 
-    @NotNull
+    @Override
+    @Nullable
     public Integer getId() {
         return id;
     }
 
-    public void setId(@NotNull final Integer id) {
+    public void setId(@Nullable final Integer id) {
         this.id = id;
     }
 
@@ -46,14 +50,5 @@ public class DiaryEntry {
 
     public void setBody(@NotNull final String body) {
         this.body = body;
-    }
-
-    @NotNull
-    public DiaryEntryStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(@NotNull final DiaryEntryStatus status) {
-        this.status = status;
     }
 }
