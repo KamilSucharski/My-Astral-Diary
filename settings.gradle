@@ -14,4 +14,12 @@ include ':project',
 
         ':feature:diary:gui_diary',
         ':feature:diary:domain_diary',
-        ':feature:diary:data_diary'
+        ':feature:diary:data_diary',
+
+        ':feature:statistics:gui_statistics',
+        ':feature:statistics:domain_statistics',
+        ':feature:statistics:data_statistics',
+
+        ':feature:settings:domain_settings',
+        ':feature:settings:data_settings',
+        ':feature:settings:gui_settings'

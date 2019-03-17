@@ -15,7 +15,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class MainActivity extends BaseActivity<MainContract.Presenter, ActivityMainBinding> implements MainContract.View {
+public final class MainActivity extends BaseActivity<MainContract.Presenter, ActivityMainBinding> implements MainContract.View {
 
     @Inject
     @Override

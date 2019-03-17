@@ -6,21 +6,14 @@ dependencies {
     implementation project(":feature:base:data_base")
     implementation project(":feature:base:domain_base")
 
-    implementation project(":feature:main:data_main")
-    implementation project(":feature:main:domain_main")
-
-    implementation project(":feature:diary:gui_diary")
-    implementation project(":feature:statistics:gui_statistics")
-    implementation project(":feature:settings:gui_settings")
+    implementation project(":feature:statistics:data_statistics")
+    implementation project(":feature:statistics:domain_statistics")
 
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger
     implementation libraries.rxJava
-    implementation libraries.lightweightStream
     implementation libraries.androidXAppCompat
     implementation libraries.recyclerView
-    implementation libraries.viewPager
-    implementation libraries.materialDesign
 
     annotationProcessor annotations.dagger
 }
