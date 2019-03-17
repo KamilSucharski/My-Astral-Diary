@@ -22,4 +22,6 @@ include ':project',
 
         ':feature:settings:domain_settings',
         ':feature:settings:data_settings',
-        ':feature:settings:gui_settings'
+        ':feature:settings:gui_settings',
+
+        ':util:android:date_picker_dialog'

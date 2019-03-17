@@ -25,8 +25,7 @@ public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListC
 
     private void subscribeRefreshListTrigger(@NotNull final DiaryEntryListContract.View view) {
         disposables.add(
-            view
-                .getRefreshListTrigger()
+            view.getRefreshListTrigger()
                 .flatMap(x -> getDiaryEntryListOperation.execute())
                 .subscribe(view::showDiaryEntryList)
         );
@@ -34,16 +33,14 @@ public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListC
 
     private void subscribeDiaryEntryClickedTrigger(@NotNull final DiaryEntryListContract.View view) {
         disposables.add(
-            view
-                .getDiaryEntryClickedTrigger()
+            view.getDiaryEntryClickedTrigger()
                 .subscribe(view::navigateToDiaryEntryComposerScreen)
         );
     }
 
     private void subscribeAddNewDiaryEntryClickedTrigger(@NotNull final DiaryEntryListContract.View view) {
         disposables.add(
-            view
-                .getAddNewDiaryClickedEntryTrigger()
+            view.getAddNewDiaryClickedEntryTrigger()
                 .map(x -> new DiaryEntry())
                 .subscribe(view::navigateToDiaryEntryComposerScreen)
         );

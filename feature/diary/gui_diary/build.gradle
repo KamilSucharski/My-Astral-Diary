@@ -9,6 +9,8 @@ dependencies {
     implementation project(":feature:diary:data_diary")
     implementation project(":feature:diary:domain_diary")
 
+    implementation project(':util:android:date_picker_dialog')
+
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger
     implementation libraries.rxJava

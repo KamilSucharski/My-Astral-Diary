@@ -12,8 +12,11 @@ import com.sengami.gui_diary.R;
 import com.sengami.gui_diary.databinding.ActivityDiaryEntryComposerBinding;
 import com.sengami.gui_diary.di.component.DaggerDiaryComponent;
 import com.sengami.gui_diary.navigation.Extra;
+import com.sengami.util_date_picker_dialog.DatePickerDialog;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -26,6 +29,7 @@ public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryCom
 
     private final BehaviorSubject<DiaryEntry> saveDiaryEntryTrigger = BehaviorSubject.create();
     private final BehaviorSubject<DiaryEntry> deleteDiaryEntryTrigger = BehaviorSubject.create();
+    private final BehaviorSubject<Date> dateChangedTrigger = BehaviorSubject.create();
     private final BehaviorSubject<Boolean> returnTrigger = BehaviorSubject.create();
 
     private DiaryEntry diaryEntry;
@@ -59,7 +63,7 @@ public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryCom
     protected void init() {
         super.init();
         setupListeners();
-        showDiaryEntryOnView();
+        updateDiaryEntryOnView();
     }
 
     @Override
@@ -81,9 +85,21 @@ public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryCom
     }
 
     @Override
+    @NotNull
+    public Observable<Date> getDateChangedTrigger() {
+        return dateChangedTrigger;
+    }
+
+    @Override
     public void showOperationSuccessMessage() {
         Toast.makeText(this, R.string.operation_successful, Toast.LENGTH_SHORT).show();
         setResult(Activity.RESULT_OK);
+    }
+
+    @Override
+    public void changeDate(@NotNull final Date date) {
+        diaryEntry.setDate(date);
+        updateDiaryEntryOnView();
     }
 
     @Override
@@ -97,18 +113,23 @@ public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryCom
     }
 
     private void setupListeners() {
+        onClick(binding.dateTextView, this::onDateButtonClicked);
         onClick(binding.bottomMenu.saveButton, this::onSaveButtonClicked);
         onClick(binding.bottomMenu.deleteButton, () -> deleteDiaryEntryTrigger.onNext(diaryEntry));
         onClick(binding.bottomMenu.backButton, () -> returnTrigger.onNext(true));
     }
 
+    private void onDateButtonClicked() {
+        final Date longTimeAgo = new Date(0);
+        final Date today = new Date();
+        new DatePickerDialog(this, today, longTimeAgo, today, dateChangedTrigger).show();
+    }
+
     private void onSaveButtonClicked() {
-        diaryEntry.setTitle(binding.titleEditText.getText().toString());
-        diaryEntry.setBody(binding.bodyEditText.getText().toString());
         saveDiaryEntryTrigger.onNext(diaryEntry);
     }
 
-    private void showDiaryEntryOnView() {
+    private void updateDiaryEntryOnView() {
         binding.setDiaryEntry(diaryEntry);
     }
 }

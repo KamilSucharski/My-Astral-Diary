@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="diaryEntry"
-            type="com.sengami.domain_diary.model.DiaryEntry" />
+        <variable name="diaryEntry" type="com.sengami.domain_diary.model.DiaryEntry" />
     </data>
 
     <LinearLayout
@@ -33,13 +30,14 @@
                     android:layout_height="@dimen/content_margin" />
 
                 <TextView
+                    android:id="@+id/date_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/content_margin"
                     android:layout_marginEnd="@dimen/content_margin"
                     android:gravity="center"
                     android:theme="@style/Text.Header"
-                    android:text="@{diaryEntry.date.toString()}"
+                    android:text="@{diaryEntry.date.toString}"
                     tools:text="23rd of March, 2020"/>
 
                 <Space
@@ -60,7 +58,7 @@
                         android:layout_height="match_parent"
                         android:hint="@string/composer_title_hint"
                         android:inputType="textCapSentences"
-                        android:text="@{diaryEntry.title}" />
+                        android:text="@={diaryEntry.title}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +82,7 @@
                         android:hint="@string/composer_body_hint"
                         android:inputType="textCapSentences|textMultiLine"
                         android:singleLine="false"
-                        android:text="@{diaryEntry.body}" />
+                        android:text="@={diaryEntry.body}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>

@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:theme="@style/BottomMenuItem"
             android:src="@drawable/ic_arrow_left"
-            android:contentDescription="@string/content_descriptor_back_button"
+            android:contentDescription="@string/content_description_back_button"
             android:clickable="@{backButtonEnabled, default = true}"
             android:tint="@{backButtonEnabled ? @color/color_accent : @color/color_primary, default = @color/color_accent}"/>
 
@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:theme="@style/BottomMenuItem"
             android:src="@drawable/ic_trash"
-            android:contentDescription="@string/content_descriptor_delete_button"
+            android:contentDescription="@string/content_description_delete_button"
             android:clickable="@{deleteButtonEnabled, default = true}"
             android:tint="@{deleteButtonEnabled ? @color/color_accent : @color/color_primary, default = @color/color_accent}" />
 
@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:theme="@style/BottomMenuItem"
             android:src="@drawable/ic_save"
-            android:contentDescription="@string/content_descriptor_save_button"
+            android:contentDescription="@string/content_description_save_button"
             android:clickable="@{saveButtonEnabled, default = true}"
             android:tint="@{saveButtonEnabled ? @color/color_accent : @color/color_primary, default = @color/color_accent}" />
 

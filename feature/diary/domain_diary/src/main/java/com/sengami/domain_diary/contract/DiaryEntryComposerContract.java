@@ -5,6 +5,8 @@ import com.sengami.domain_diary.model.DiaryEntry;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Date;
+
 import io.reactivex.Observable;
 
 public interface DiaryEntryComposerContract {
@@ -13,12 +15,14 @@ public interface DiaryEntryComposerContract {
 
         @NotNull
         Observable<DiaryEntry> getSaveDiaryEntryTrigger();
-
         @NotNull
         Observable<DiaryEntry> getDeleteDiaryEntryTrigger();
-
+        @NotNull
+        Observable<Date> getDateChangedTrigger();
         @NotNull
         Observable<Boolean> getReturnTrigger();
+
+        void changeDate(@NotNull final Date date);
 
         void showOperationSuccessMessage();
 

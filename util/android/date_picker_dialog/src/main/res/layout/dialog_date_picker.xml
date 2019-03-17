@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_transparent_overlay">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardBackgroundColor="@color/color_primary_dark"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/content_margin"
+                    android:layout_marginStart="@dimen/content_margin"
+                    android:layout_marginEnd="@dimen/content_margin"
+                    android:theme="@style/Text.Header"
+                    android:text="@string/date_picker_dialog_choose_date" />
+
+                <DatePicker
+                    android:id="@+id/date_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/content_margin"
+                    android:layout_marginEnd="@dimen/content_margin"
+                    android:textColorPrimary="@color/color_accent"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner"
+                    android:spinnersShown="true" />
+
+                <include
+                    android:id="@+id/buttons"
+                    layout="@layout/layout_dialog_buttons" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+</layout>

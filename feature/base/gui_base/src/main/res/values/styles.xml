@@ -34,4 +34,9 @@
         <item name="android:textSize">@dimen/text_size_standard</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
+    <style name="BottomMenuItem">
+        <item name="android:padding">@dimen/bottom_menu_item_padding</item>
+        <item name="android:background">@drawable/background_ripple</item>
+    </style>
 </resources>

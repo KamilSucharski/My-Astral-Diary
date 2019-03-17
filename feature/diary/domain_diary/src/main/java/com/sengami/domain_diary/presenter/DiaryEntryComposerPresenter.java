@@ -26,13 +26,13 @@ public final class DiaryEntryComposerPresenter extends BasePresenter<DiaryEntryC
     protected void onSubscribe(@NotNull final DiaryEntryComposerContract.View view) {
         subscribeSaveDiaryEntryClickedTrigger(view);
         subscribeDeleteDiaryEntryClickedTrigger(view);
+        subscribeDateChangedBackTrigger(view);
         subscribeNavigateBackTrigger(view);
     }
 
     private void subscribeSaveDiaryEntryClickedTrigger(@NotNull final DiaryEntryComposerContract.View view) {
         disposables.add(
-            view
-                .getSaveDiaryEntryTrigger()
+            view.getSaveDiaryEntryTrigger()
                 .map(createOrUpdateDiaryEntryOperation::withDiaryEntry)
                 .flatMap(Operation::execute)
                 .subscribe(x -> {
@@ -44,8 +44,7 @@ public final class DiaryEntryComposerPresenter extends BasePresenter<DiaryEntryC
 
     private void subscribeDeleteDiaryEntryClickedTrigger(@NotNull final DiaryEntryComposerContract.View view) {
         disposables.add(
-            view
-                .getDeleteDiaryEntryTrigger()
+            view.getDeleteDiaryEntryTrigger()
                 .map(deleteDiaryEntryOperation::withDiaryEntry)
                 .flatMap(Operation::execute)
                 .subscribe(x -> {
@@ -55,10 +54,16 @@ public final class DiaryEntryComposerPresenter extends BasePresenter<DiaryEntryC
         );
     }
 
+    private void subscribeDateChangedBackTrigger(@NotNull final DiaryEntryComposerContract.View view) {
+        disposables.add(
+            view.getDateChangedTrigger()
+                .subscribe(view::changeDate)
+        );
+    }
+
     private void subscribeNavigateBackTrigger(@NotNull final DiaryEntryComposerContract.View view) {
         disposables.add(
-            view
-                .getReturnTrigger()
+            view.getReturnTrigger()
                 .subscribe(x -> view.navigateBack())
         );
     }

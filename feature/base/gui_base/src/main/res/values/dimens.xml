@@ -6,4 +6,8 @@
     <dimen name="text_size_header">20sp</dimen>
     <dimen name="text_size_standard">16sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
+
+    <dimen name="bottom_menu_item_padding">12dp</dimen>
+
+    <dimen name="card_corner_radius">4dp</dimen>
 </resources>
