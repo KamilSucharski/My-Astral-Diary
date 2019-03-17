@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -27,10 +28,29 @@
                 android:background="@color/color_primary"
                 android:orientation="vertical">
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/content_margin" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/content_margin"
+                    android:layout_marginEnd="@dimen/content_margin"
+                    android:gravity="center"
+                    android:theme="@style/Text.Header"
+                    android:text="@{diaryEntry.date.toString()}"
+                    tools:text="23rd of March, 2020"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/content_margin" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/content_margin"
+                    android:layout_marginStart="@dimen/content_margin"
+                    android:layout_marginEnd="@dimen/content_margin"
                     app:hintTextAppearance="@style/Text.Small">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -43,6 +63,10 @@
                         android:text="@{diaryEntry.title}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/content_margin" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
