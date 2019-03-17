@@ -15,6 +15,7 @@ dependencies {
     implementation libraries.dagger
     implementation libraries.rxJava
     implementation libraries.lightweightStream
+    implementation libraries.jodaTime
     implementation libraries.androidXAppCompat
     implementation libraries.materialDesign
     implementation libraries.recyclerView

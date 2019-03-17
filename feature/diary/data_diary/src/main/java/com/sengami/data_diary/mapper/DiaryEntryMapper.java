@@ -5,6 +5,7 @@ import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.domain_diary.model.DiaryEntry;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.LocalDate;
 
 public class DiaryEntryMapper implements Mapper<DiaryEntryDBO, DiaryEntry> {
 
@@ -12,7 +13,7 @@ public class DiaryEntryMapper implements Mapper<DiaryEntryDBO, DiaryEntry> {
     public DiaryEntryDBO toDBO(@NotNull final DiaryEntry source) {
         final DiaryEntryDBO result = new DiaryEntryDBO();
         result.setId(source.getId());
-        result.setDate(source.getDate());
+        result.setDate(source.getDate().toDate());
         result.setTitle(source.getTitle());
         result.setBody(source.getBody());
         return result;
@@ -22,7 +23,7 @@ public class DiaryEntryMapper implements Mapper<DiaryEntryDBO, DiaryEntry> {
     public DiaryEntry toModel(@NotNull final DiaryEntryDBO source) {
         final DiaryEntry result = new DiaryEntry();
         result.setId(source.getId());
-        result.setDate(source.getDate());
+        result.setDate(LocalDate.fromDateFields(source.getDate()));
         result.setTitle(source.getTitle());
         result.setBody(source.getBody());
         return result;

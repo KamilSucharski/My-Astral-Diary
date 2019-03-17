@@ -15,8 +15,7 @@ import com.sengami.gui_diary.navigation.Extra;
 import com.sengami.util_date_picker_dialog.DatePickerDialog;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 import javax.inject.Inject;
 
@@ -29,7 +28,7 @@ public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryCom
 
     private final BehaviorSubject<DiaryEntry> saveDiaryEntryTrigger = BehaviorSubject.create();
     private final BehaviorSubject<DiaryEntry> deleteDiaryEntryTrigger = BehaviorSubject.create();
-    private final BehaviorSubject<Date> dateChangedTrigger = BehaviorSubject.create();
+    private final BehaviorSubject<LocalDate> dateChangedTrigger = BehaviorSubject.create();
     private final BehaviorSubject<Boolean> returnTrigger = BehaviorSubject.create();
 
     private DiaryEntry diaryEntry;
@@ -86,7 +85,7 @@ public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryCom
 
     @Override
     @NotNull
-    public Observable<Date> getDateChangedTrigger() {
+    public Observable<LocalDate> getDateChangedTrigger() {
         return dateChangedTrigger;
     }
 
@@ -97,8 +96,8 @@ public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryCom
     }
 
     @Override
-    public void changeDate(@NotNull final Date date) {
-        diaryEntry.setDate(date);
+    public void changeDate(@NotNull final LocalDate localDate) {
+        diaryEntry.setDate(localDate);
         updateDiaryEntryOnView();
     }
 
@@ -120,9 +119,10 @@ public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryCom
     }
 
     private void onDateButtonClicked() {
-        final Date longTimeAgo = new Date(0);
-        final Date today = new Date();
-        new DatePickerDialog(this, today, longTimeAgo, today, dateChangedTrigger).show();
+        final LocalDate defaultDate = diaryEntry.getDate();
+        final LocalDate minDate = LocalDate.now().minusYears(100);
+        final LocalDate maxDate = LocalDate.now();
+        new DatePickerDialog(this, defaultDate, minDate, maxDate, dateChangedTrigger).show();
     }
 
     private void onSaveButtonClicked() {

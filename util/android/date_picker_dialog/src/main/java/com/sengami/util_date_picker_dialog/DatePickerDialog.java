@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import com.sengami.util_date_picker_dialog.databinding.DialogDatePickerBinding;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.LocalDate;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -21,21 +21,21 @@ import static com.sengami.gui_base.util.ClickUtil.onClick;
 public class DatePickerDialog extends Dialog {
 
     @NotNull
-    private final Date defaultDate;
+    private final LocalDate defaultDate;
     @NotNull
-    private final Date minDate;
+    private final LocalDate minDate;
     @NotNull
-    private final Date maxDate;
+    private final LocalDate maxDate;
     @NotNull
-    private final BehaviorSubject<Date> onDateEnteredTrigger;
+    private final BehaviorSubject<LocalDate> onDateEnteredTrigger;
 
     private DialogDatePickerBinding binding;
 
     public DatePickerDialog(@NonNull final Context context,
-                            @NotNull final Date defaultDate,
-                            @NotNull final Date minDate,
-                            @NotNull final Date maxDate,
-                            @NotNull final BehaviorSubject<Date> onDateEnteredTrigger) {
+                            @NotNull final LocalDate defaultDate,
+                            @NotNull final LocalDate minDate,
+                            @NotNull final LocalDate maxDate,
+                            @NotNull final BehaviorSubject<LocalDate> onDateEnteredTrigger) {
         super(context, R.style.OverlayDialog);
         this.defaultDate = defaultDate;
         this.minDate = minDate;
@@ -57,11 +57,11 @@ public class DatePickerDialog extends Dialog {
     }
 
     private void setupDatePicker() {
-        binding.datePicker.setMinDate(minDate.getTime());
-        binding.datePicker.setMaxDate(maxDate.getTime());
+        binding.datePicker.setMinDate(minDate.toDate().getTime());
+        binding.datePicker.setMaxDate(maxDate.toDate().getTime());
 
         final Calendar calendar = Calendar.getInstance();
-        calendar.setTime(defaultDate);
+        calendar.setTime(defaultDate.toDate());
 
         binding.datePicker.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
@@ -74,13 +74,13 @@ public class DatePickerDialog extends Dialog {
         });
     }
 
-    private Date getEnteredDate() {
+    private LocalDate getEnteredDate() {
         final int year = binding.datePicker.getYear();
         final int month = binding.datePicker.getMonth();
         final int day = binding.datePicker.getDayOfMonth();
 
         final Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
-        return calendar.getTime();
+        return LocalDate.fromCalendarFields(calendar);
     }
 }

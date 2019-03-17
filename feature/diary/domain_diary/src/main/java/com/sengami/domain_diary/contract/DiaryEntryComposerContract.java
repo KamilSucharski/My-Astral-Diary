@@ -4,8 +4,7 @@ import com.sengami.domain_base.presenter.ReactivePresenter;
 import com.sengami.domain_diary.model.DiaryEntry;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 import io.reactivex.Observable;
 
@@ -18,11 +17,11 @@ public interface DiaryEntryComposerContract {
         @NotNull
         Observable<DiaryEntry> getDeleteDiaryEntryTrigger();
         @NotNull
-        Observable<Date> getDateChangedTrigger();
+        Observable<LocalDate> getDateChangedTrigger();
         @NotNull
         Observable<Boolean> getReturnTrigger();
 
-        void changeDate(@NotNull final Date date);
+        void changeDate(@NotNull final LocalDate localDate);
 
         void showOperationSuccessMessage();
 

@@ -9,5 +9,6 @@ dependencies {
     implementation libraries.rxJava
     implementation libraries.jetbrainsAnnotations
     implementation libraries.lightweightStream
+    implementation libraries.jodaTime
     implementation libraries.ormLiteCore
 }

@@ -4,14 +4,13 @@ import com.sengami.domain_base.model.BaseModel;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 public class DiaryEntry extends BaseModel {
 
     @Nullable
     private Integer id = null;
-    private Date date = new Date();
+    private LocalDate date = LocalDate.now();
     private String title = "";
     private String body = "";
 
@@ -26,11 +25,11 @@ public class DiaryEntry extends BaseModel {
     }
 
     @NotNull
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(@NotNull final Date date) {
+    public void setDate(@NotNull final LocalDate date) {
         this.date = date;
     }
 

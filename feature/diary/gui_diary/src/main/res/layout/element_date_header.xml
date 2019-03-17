@@ -4,18 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="date" type="java.util.Date" />
+        <variable name="date" type="String" />
     </data>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/content_margin"
-        android:layout_marginTop="@dimen/half_content_margin"
-        android:layout_marginEnd="@dimen/content_margin"
-        android:layout_marginBottom="@dimen/half_content_margin"
+        android:layout_margin="@dimen/content_margin"
         android:gravity="center"
         android:theme="@style/Text.Header"
-        android:text="@{date.toString()}"
+        android:text="@{date}"
         tools:text="23rd of March, 2020"/>
 </layout>
