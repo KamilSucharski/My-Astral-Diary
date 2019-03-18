@@ -4,15 +4,23 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.sengami.domain_base.util.error.ErrorHandler;
+import com.sengami.domain_base.util.error.WithErrorHandler;
+import com.sengami.domain_base.util.loading.LoadingIndicator;
+import com.sengami.domain_base.util.loading.WithLoadingIndicator;
 import com.sengami.domain_diary.contract.DiaryEntryListContract;
 import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.gui_base.di.module.ContextModule;
+import com.sengami.gui_base.di.module.WithErrorHandlerModule;
+import com.sengami.gui_base.di.module.WithLoadingIndicatorModule;
+import com.sengami.gui_base.util.error.ToastErrorHandler;
+import com.sengami.gui_base.util.loading.ViewVisibilityLoadingIndicator;
 import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_base.view.list.adapter.BaseAdapter;
 import com.sengami.gui_base.view.list.element.ElementConverter;
 import com.sengami.gui_diary.R;
 import com.sengami.gui_diary.databinding.FragmentDiaryEntryListBinding;
-import com.sengami.gui_diary.di.component.DaggerDiaryComponent;
+import com.sengami.gui_diary.di.component.DaggerDiaryEntryListComponent;
 import com.sengami.gui_diary.navigation.Extra;
 import com.sengami.gui_diary.navigation.RequestCode;
 import com.sengami.gui_diary.view.list.adapter.DiaryEntryListAdapter;
@@ -34,7 +42,9 @@ import io.reactivex.subjects.BehaviorSubject;
 
 import static com.sengami.gui_base.util.ClickUtil.onClick;
 
-public final class DiaryEntryListFragment extends BaseFragment<DiaryEntryListContract.Presenter, FragmentDiaryEntryListBinding> implements DiaryEntryListContract.View {
+public final class DiaryEntryListFragment
+    extends BaseFragment<DiaryEntryListContract.Presenter, FragmentDiaryEntryListBinding>
+    implements DiaryEntryListContract.View, WithErrorHandler, WithLoadingIndicator {
 
     private final BehaviorSubject<Boolean> refreshListTrigger = BehaviorSubject.create();
     private final BehaviorSubject<DiaryEntry> diaryEntryClickedTrigger = BehaviorSubject.create();
@@ -55,8 +65,10 @@ public final class DiaryEntryListFragment extends BaseFragment<DiaryEntryListCon
 
     @Override
     protected void inject(@NotNull final Context context) {
-        DaggerDiaryComponent.builder()
+        DaggerDiaryEntryListComponent.builder()
             .contextModule(new ContextModule(context))
+            .withErrorHandlerModule(new WithErrorHandlerModule(this))
+            .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()
             .inject(this);
     }
@@ -99,6 +111,18 @@ public final class DiaryEntryListFragment extends BaseFragment<DiaryEntryListCon
         final Intent intent = new Intent(getContext(), DiaryEntryComposerActivity.class);
         intent.putExtra(Extra.DIARY_ENTRY.name(), diaryEntry);
         startActivityForResult(intent, RequestCode.COMPOSE_DIARY_ENTRY.code());
+    }
+
+    @Override
+    @NotNull
+    public ErrorHandler getErrorHandler() {
+        return new ToastErrorHandler(getContext());
+    }
+
+    @Override
+    @NotNull
+    public LoadingIndicator getLoadingIndicator() {
+        return new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
     }
 
     @Override

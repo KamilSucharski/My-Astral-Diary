@@ -4,99 +4,110 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.sengami.domain_base.util.DateUtils" />
 
-        <variable name="diaryEntry" type="com.sengami.domain_diary.model.DiaryEntry" />
+        <variable
+            name="diaryEntry"
+            type="com.sengami.domain_diary.model.DiaryEntry" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_primary"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fadeScrollbars="false">
+            android:layout_height="match_parent"
+            android:background="@color/color_primary"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/color_primary"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fadeScrollbars="false">
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/content_margin" />
-
-                <TextView
-                    android:id="@+id/date_text_view"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/content_margin"
-                    android:layout_marginEnd="@dimen/content_margin"
-                    android:gravity="center"
-                    android:theme="@style/Text.Header"
-                    android:text="@{DateUtils.format(diaryEntry.date)}"
-                    tools:text="23rd of March, 2020"/>
+                    android:background="@color/color_primary"
+                    android:orientation="vertical">
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/content_margin" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/content_margin"
-                    android:layout_marginEnd="@dimen/content_margin"
-                    app:hintTextAppearance="@style/Text.Small">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/title_edit_text"
-                        style="@style/Text.Standard"
+                    <Space
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/composer_title_hint"
-                        android:inputType="textCapSentences"
-                        android:text="@={diaryEntry.title}" />
+                        android:layout_height="@dimen/content_margin" />
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/content_margin" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/content_margin"
-                    android:layout_marginEnd="@dimen/content_margin"
-                    app:hintTextAppearance="@style/Text.Small">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/body_edit_text"
-                        style="@style/Text.Standard"
+                    <TextView
+                        android:id="@+id/date_text_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="top"
-                        android:hint="@string/composer_body_hint"
-                        android:inputType="textCapSentences|textMultiLine"
-                        android:singleLine="false"
-                        android:text="@={diaryEntry.body}" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/content_margin"
+                        android:layout_marginEnd="@dimen/content_margin"
+                        android:gravity="center"
+                        android:text="@{DateUtils.format(diaryEntry.date)}"
+                        android:theme="@style/Text.Header"
+                        tools:text="23rd of March, 2020" />
 
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-        </ScrollView>
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/content_margin" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/content_margin"
+                        android:layout_marginEnd="@dimen/content_margin"
+                        app:hintTextAppearance="@style/Text.Small">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/title_edit_text"
+                            style="@style/Text.Standard"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/composer_title_hint"
+                            android:inputType="textCapSentences"
+                            android:text="@={diaryEntry.title}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/content_margin" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/content_margin"
+                        android:layout_marginEnd="@dimen/content_margin"
+                        app:hintTextAppearance="@style/Text.Small">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/body_edit_text"
+                            style="@style/Text.Standard"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="top"
+                            android:hint="@string/composer_body_hint"
+                            android:inputType="textCapSentences|textMultiLine"
+                            android:singleLine="false"
+                            android:text="@={diaryEntry.body}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <include
+                android:id="@+id/bottom_menu"
+                layout="@layout/layout_composer_bottom_menu"
+                app:backButtonEnabled="@{true}"
+                app:deleteButtonEnabled="@{!diaryEntry.isNew()}"
+                app:saveButtonEnabled="@{true}" />
+
+        </LinearLayout>
 
         <include
-            android:id="@+id/bottom_menu"
-            layout="@layout/layout_composer_bottom_menu"
-            app:backButtonEnabled="@{true}"
-            app:deleteButtonEnabled="@{!diaryEntry.isNew()}"
-            app:saveButtonEnabled="@{true}" />
-
-    </LinearLayout>
-
+            android:id="@+id/loading_wheel_overlay"
+            layout="@layout/overlay_loading_wheel" />
+    </FrameLayout>
 </layout>

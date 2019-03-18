@@ -4,13 +4,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.sengami.domain_base.util.error.ErrorHandler;
+import com.sengami.domain_base.util.error.WithErrorHandler;
+import com.sengami.domain_base.util.loading.LoadingIndicator;
+import com.sengami.domain_base.util.loading.WithLoadingIndicator;
 import com.sengami.domain_diary.contract.DiaryEntryComposerContract;
 import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.gui_base.di.module.ContextModule;
+import com.sengami.gui_base.di.module.WithErrorHandlerModule;
+import com.sengami.gui_base.di.module.WithLoadingIndicatorModule;
+import com.sengami.gui_base.util.error.ToastErrorHandler;
+import com.sengami.gui_base.util.loading.ViewVisibilityLoadingIndicator;
 import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_diary.R;
 import com.sengami.gui_diary.databinding.ActivityDiaryEntryComposerBinding;
-import com.sengami.gui_diary.di.component.DaggerDiaryComponent;
+import com.sengami.gui_diary.di.component.DaggerDiaryEntryComposerComponent;
 import com.sengami.gui_diary.navigation.Extra;
 import com.sengami.util_date_picker_dialog.DatePickerDialog;
 
@@ -24,7 +32,9 @@ import io.reactivex.subjects.BehaviorSubject;
 
 import static com.sengami.gui_base.util.ClickUtil.onClick;
 
-public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryComposerContract.Presenter, ActivityDiaryEntryComposerBinding> implements DiaryEntryComposerContract.View {
+public final class DiaryEntryComposerActivity
+    extends BaseActivity<DiaryEntryComposerContract.Presenter, ActivityDiaryEntryComposerBinding>
+    implements DiaryEntryComposerContract.View, WithErrorHandler, WithLoadingIndicator {
 
     private final BehaviorSubject<DiaryEntry> saveDiaryEntryTrigger = BehaviorSubject.create();
     private final BehaviorSubject<DiaryEntry> deleteDiaryEntryTrigger = BehaviorSubject.create();
@@ -52,8 +62,10 @@ public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryCom
 
     @Override
     protected void inject() {
-        DaggerDiaryComponent.builder()
+        DaggerDiaryEntryComposerComponent.builder()
             .contextModule(new ContextModule(this))
+            .withErrorHandlerModule(new WithErrorHandlerModule(this))
+            .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()
             .inject(this);
     }
@@ -109,6 +121,18 @@ public final class DiaryEntryComposerActivity extends BaseActivity<DiaryEntryCom
     @Override
     public void onBackPressed() {
         returnTrigger.onNext(true);
+    }
+
+    @Override
+    @NotNull
+    public ErrorHandler getErrorHandler() {
+        return new ToastErrorHandler(this);
+    }
+
+    @Override
+    @NotNull
+    public LoadingIndicator getLoadingIndicator() {
+        return new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
     }
 
     private void setupListeners() {

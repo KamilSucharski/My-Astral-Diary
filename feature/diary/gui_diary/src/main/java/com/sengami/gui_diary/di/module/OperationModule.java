@@ -6,8 +6,9 @@ import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.data_diary.operation.local.CreateOrUpdateDiaryEntryOperationLocal;
 import com.sengami.data_diary.operation.local.DeleteDiaryEntryOperationLocal;
 import com.sengami.data_diary.operation.local.GetDiaryEntryListOperationLocal;
-import com.sengami.domain_base.util.ErrorHandler;
 import com.sengami.domain_base.util.ReactiveSchedulers;
+import com.sengami.domain_base.util.error.WithErrorHandler;
+import com.sengami.domain_base.util.loading.WithLoadingIndicator;
 import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.domain_diary.operation.CreateOrUpdateDiaryEntryOperation;
 import com.sengami.domain_diary.operation.DeleteDiaryEntryOperation;
@@ -24,12 +25,14 @@ public final class OperationModule {
     @Provides
     @NotNull
     GetDiaryEntryListOperation getHelloWorldOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                                      @NotNull final ErrorHandler errorHandler,
+                                                      @NotNull final WithErrorHandler withErrorHandler,
+                                                      @NotNull final WithLoadingIndicator withLoadingIndicator,
                                                       @NotNull final ConnectionSourceProvider connectionSourceProvider,
                                                       @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
         return new GetDiaryEntryListOperationLocal(
             reactiveSchedulers,
-            errorHandler,
+            withErrorHandler,
+            withLoadingIndicator,
             connectionSourceProvider,
             mapper
         );
@@ -38,12 +41,14 @@ public final class OperationModule {
     @Provides
     @NotNull
     CreateOrUpdateDiaryEntryOperation createOrUpdateDiaryEntryOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                                                        @NotNull final ErrorHandler errorHandler,
+                                                                        @NotNull final WithErrorHandler withErrorHandler,
+                                                                        @NotNull final WithLoadingIndicator withLoadingIndicator,
                                                                         @NotNull final ConnectionSourceProvider connectionSourceProvider,
                                                                         @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
         return new CreateOrUpdateDiaryEntryOperationLocal(
             reactiveSchedulers,
-            errorHandler,
+            withErrorHandler,
+            withLoadingIndicator,
             connectionSourceProvider,
             mapper
         );
@@ -52,11 +57,13 @@ public final class OperationModule {
     @Provides
     @NotNull
     DeleteDiaryEntryOperation deleteDiaryEntryOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                                        @NotNull final ErrorHandler errorHandler,
+                                                        @NotNull final WithErrorHandler withErrorHandler,
+                                                        @NotNull final WithLoadingIndicator withLoadingIndicator,
                                                         @NotNull final ConnectionSourceProvider connectionSourceProvider) {
         return new DeleteDiaryEntryOperationLocal(
             reactiveSchedulers,
-            errorHandler,
+            withErrorHandler,
+            withLoadingIndicator,
             connectionSourceProvider
         );
     }

@@ -9,8 +9,9 @@ import com.sengami.data_base.mapper.Mapper;
 import com.sengami.data_base.util.ConnectionSourceProvider;
 import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.domain_base.operation.BaseOperation;
-import com.sengami.domain_base.util.ErrorHandler;
 import com.sengami.domain_base.util.ReactiveSchedulers;
+import com.sengami.domain_base.util.error.WithErrorHandler;
+import com.sengami.domain_base.util.loading.WithLoadingIndicator;
 import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.domain_diary.operation.GetDiaryEntryListOperation;
 
@@ -20,7 +21,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public class GetDiaryEntryListOperationLocal extends BaseOperation<List<DiaryEntry>> implements GetDiaryEntryListOperation {
+public final class GetDiaryEntryListOperationLocal extends BaseOperation<List<DiaryEntry>> implements GetDiaryEntryListOperation {
 
     @NotNull
     private final ConnectionSourceProvider connectionSourceProvider;
@@ -28,10 +29,11 @@ public class GetDiaryEntryListOperationLocal extends BaseOperation<List<DiaryEnt
     private final Mapper<DiaryEntryDBO, DiaryEntry> mapper;
 
     public GetDiaryEntryListOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                           @NotNull final ErrorHandler errorHandler,
+                                           @NotNull final WithErrorHandler withErrorHandler,
+                                           @NotNull final WithLoadingIndicator withLoadingIndicator,
                                            @NotNull final ConnectionSourceProvider connectionSourceProvider,
                                            @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
-        super(reactiveSchedulers, errorHandler);
+        super(reactiveSchedulers, withErrorHandler, withLoadingIndicator);
         this.connectionSourceProvider = connectionSourceProvider;
         this.mapper = mapper;
     }

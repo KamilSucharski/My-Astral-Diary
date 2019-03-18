@@ -1,16 +1,16 @@
-package com.sengami.gui_base.error;
+package com.sengami.gui_base.util.error;
 
 import android.content.Context;
 import android.widget.Toast;
 
-import com.sengami.domain_base.util.ErrorHandler;
+import com.sengami.domain_base.util.error.ErrorHandler;
 
 import org.jetbrains.annotations.NotNull;
 
 public final class ToastErrorHandler implements ErrorHandler {
 
     @NotNull
-    final Context context;
+    private final Context context;
 
     public ToastErrorHandler(@NotNull final Context context) {
         this.context = context;

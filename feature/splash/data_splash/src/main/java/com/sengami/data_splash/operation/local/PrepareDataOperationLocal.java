@@ -6,8 +6,9 @@ import com.sengami.data_base.util.ConnectionSourceProvider;
 import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.domain_base.operation.BaseOperation;
 import com.sengami.domain_base.util.Constants;
-import com.sengami.domain_base.util.ErrorHandler;
 import com.sengami.domain_base.util.ReactiveSchedulers;
+import com.sengami.domain_base.util.error.WithErrorHandler;
+import com.sengami.domain_base.util.loading.WithLoadingIndicator;
 import com.sengami.domain_splash.operation.PrepareDataOperation;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,9 +23,10 @@ public class PrepareDataOperationLocal extends BaseOperation<Boolean> implements
     private final ConnectionSourceProvider connectionSourceProvider;
 
     public PrepareDataOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                     @NotNull final ErrorHandler errorHandler,
+                                     @NotNull final WithErrorHandler withErrorHandler,
+                                     @NotNull final WithLoadingIndicator withLoadingIndicator,
                                      @NotNull final ConnectionSourceProvider connectionSourceProvider) {
-        super(reactiveSchedulers, errorHandler);
+        super(reactiveSchedulers, withErrorHandler, withLoadingIndicator);
         this.connectionSourceProvider = connectionSourceProvider;
     }
 
