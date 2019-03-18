@@ -9,6 +9,7 @@ import com.sengami.gui_base.view.list.element.ElementConverter;
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.LocalDate;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,6 +20,10 @@ public final class DiaryEntryListElementConverter implements ElementConverter<Li
     @NotNull
     @Override
     public List<DiaryEntryListElement> convert(@NotNull final List<DiaryEntry> diaryEntryList) {
+        if (diaryEntryList.isEmpty()) {
+            return Collections.singletonList(new DiaryEntryListEmptyStateElement());
+        }
+
         return Stream
             .of(diaryEntryList)
             .groupBy(DiaryEntry::getDate)
