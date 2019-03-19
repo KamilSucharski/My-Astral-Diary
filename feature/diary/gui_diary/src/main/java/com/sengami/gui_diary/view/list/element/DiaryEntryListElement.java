@@ -1,6 +1,6 @@
 package com.sengami.gui_diary.view.list.element;
 
-import com.sengami.gui_base.view.list.element.Element;
+import com.sengami.recycler_view_adapter.element.Element;
 
 import org.jetbrains.annotations.NotNull;
 

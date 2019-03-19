@@ -1,11 +1,11 @@
 package com.sengami.gui_diary.view.list.binder;
 
-import com.sengami.gui_base.view.list.binder.ViewHolderBinder;
-import com.sengami.gui_base.view.list.element.ElementType;
 import com.sengami.gui_diary.databinding.ElementDateHeaderBinding;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListDateHeaderElement;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElement;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElementType;
+import com.sengami.recycler_view_adapter.binder.ViewHolderBinder;
+import com.sengami.recycler_view_adapter.element.ElementType;
 
 import org.jetbrains.annotations.NotNull;
 

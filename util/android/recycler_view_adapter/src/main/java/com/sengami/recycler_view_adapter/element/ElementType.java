@@ -1,4 +1,4 @@
-package com.sengami.gui_base.view.list.element;
+package com.sengami.recycler_view_adapter.element;
 
 import androidx.annotation.LayoutRes;
 

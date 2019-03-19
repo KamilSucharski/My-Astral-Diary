@@ -1,10 +1,14 @@
-package com.sengami.gui_diary.view.list.element;
+package com.sengami.gui_diary.view.list.converter;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.sengami.domain_base.util.DateUtils;
 import com.sengami.domain_diary.model.DiaryEntry;
-import com.sengami.gui_base.view.list.element.ElementConverter;
+import com.sengami.gui_diary.view.list.element.DiaryEntryListDateHeaderElement;
+import com.sengami.gui_diary.view.list.element.DiaryEntryListDiaryEntryElement;
+import com.sengami.gui_diary.view.list.element.DiaryEntryListElement;
+import com.sengami.gui_diary.view.list.element.DiaryEntryListEmptyStateElement;
+import com.sengami.recycler_view_adapter.converter.ElementConverter;
 
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.LocalDate;
@@ -15,7 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public final class DiaryEntryListElementConverter implements ElementConverter<List<DiaryEntry>, List<DiaryEntryListElement>> {
+public final class DiaryEntryListElementConverter implements ElementConverter<List<DiaryEntry>, DiaryEntryListElement> {
 
     @NotNull
     @Override

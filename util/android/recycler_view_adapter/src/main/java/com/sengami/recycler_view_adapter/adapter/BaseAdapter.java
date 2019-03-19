@@ -1,13 +1,13 @@
-package com.sengami.gui_base.view.list.adapter;
+package com.sengami.recycler_view_adapter.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.annimon.stream.Stream;
-import com.sengami.gui_base.view.list.binder.ViewHolderBinder;
-import com.sengami.gui_base.view.list.element.Element;
-import com.sengami.gui_base.view.list.element.ElementType;
+import com.sengami.recycler_view_adapter.binder.ViewHolderBinder;
+import com.sengami.recycler_view_adapter.element.Element;
+import com.sengami.recycler_view_adapter.element.ElementType;
 
 import org.jetbrains.annotations.NotNull;
 

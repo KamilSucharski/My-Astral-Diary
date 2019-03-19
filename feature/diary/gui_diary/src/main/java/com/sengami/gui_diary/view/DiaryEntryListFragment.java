@@ -14,17 +14,17 @@ import com.sengami.error_handler.di.module.WithErrorHandlerModule;
 import com.sengami.error_handler.implementation.ToastErrorHandler;
 import com.sengami.gui_base.di.module.ContextModule;
 import com.sengami.gui_base.view.BaseFragment;
-import com.sengami.gui_base.view.list.adapter.BaseAdapter;
-import com.sengami.gui_base.view.list.element.ElementConverter;
 import com.sengami.gui_diary.R;
 import com.sengami.gui_diary.databinding.FragmentDiaryEntryListBinding;
 import com.sengami.gui_diary.di.component.DaggerDiaryEntryListComponent;
 import com.sengami.gui_diary.navigation.Extra;
 import com.sengami.gui_diary.navigation.RequestCode;
 import com.sengami.gui_diary.view.list.adapter.DiaryEntryListAdapter;
+import com.sengami.gui_diary.view.list.converter.DiaryEntryListElementConverter;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElement;
-import com.sengami.gui_diary.view.list.element.DiaryEntryListElementConverter;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElementType;
+import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
+import com.sengami.recycler_view_adapter.converter.ElementConverter;
 import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
 import com.sengami.util_loading_indicator.implementation.ViewVisibilityLoadingIndicator;
 
@@ -49,7 +49,7 @@ public final class DiaryEntryListFragment
     private final BehaviorSubject<Boolean> refreshListTrigger = BehaviorSubject.create();
     private final BehaviorSubject<DiaryEntry> diaryEntryClickedTrigger = BehaviorSubject.create();
     private final BehaviorSubject<Boolean> addNewDiaryEntryClickedTrigger = BehaviorSubject.create();
-    private final ElementConverter<List<DiaryEntry>, List<DiaryEntryListElement>> converter = new DiaryEntryListElementConverter();
+    private final ElementConverter<List<DiaryEntry>, DiaryEntryListElement> converter = new DiaryEntryListElementConverter();
     private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
 
     @Inject

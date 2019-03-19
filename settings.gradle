@@ -28,4 +28,5 @@ include ':project',
         ':util:android:database_connection',
         ':util:android:loading_indicator',
         ':util:android:error_handler',
+        ':util:android:recycler_view_adapter',
         ':util:android:date_picker_dialog'

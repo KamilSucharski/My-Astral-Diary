@@ -1,8 +1,8 @@
-package com.sengami.gui_base.view.list.binder;
+package com.sengami.recycler_view_adapter.binder;
 
-import com.sengami.gui_base.view.list.adapter.BaseViewHolder;
-import com.sengami.gui_base.view.list.element.Element;
-import com.sengami.gui_base.view.list.element.ElementType;
+import com.sengami.recycler_view_adapter.adapter.BaseViewHolder;
+import com.sengami.recycler_view_adapter.element.Element;
+import com.sengami.recycler_view_adapter.element.ElementType;
 
 import org.jetbrains.annotations.NotNull;
 

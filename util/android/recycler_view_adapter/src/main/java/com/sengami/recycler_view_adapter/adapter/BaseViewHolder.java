@@ -1,4 +1,4 @@
-package com.sengami.gui_base.view.list.adapter;
+package com.sengami.recycler_view_adapter.adapter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -10,7 +10,7 @@ public final class BaseViewHolder extends RecyclerView.ViewHolder {
     @NotNull
     private final ViewDataBinding binding;
 
-    public BaseViewHolder(@NotNull final ViewDataBinding binding) {
+    protected BaseViewHolder(@NotNull final ViewDataBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
     }

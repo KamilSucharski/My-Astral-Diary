@@ -1,7 +1,7 @@
 package com.sengami.gui_diary.view.list.element;
 
-import com.sengami.gui_base.view.list.element.ElementType;
 import com.sengami.gui_diary.R;
+import com.sengami.recycler_view_adapter.element.ElementType;
 
 import androidx.annotation.LayoutRes;
 
