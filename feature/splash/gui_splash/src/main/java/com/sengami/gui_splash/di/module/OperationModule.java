@@ -1,6 +1,6 @@
 package com.sengami.gui_splash.di.module;
 
-import com.sengami.data_base.util.ConnectionSourceProvider;
+import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_splash.operation.local.PrepareDataOperationLocal;
 import com.sengami.domain_base.util.ReactiveSchedulers;
 import com.sengami.domain_base.util.error.WithErrorHandler;
@@ -20,12 +20,12 @@ public final class OperationModule {
     PrepareDataOperation prepareDataOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                               @NotNull final WithErrorHandler withErrorHandler,
                                               @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                              @NotNull final ConnectionSourceProvider connectionSourceProvider) {
+                                              @NotNull final DatabaseConnectionProvider databaseConnectionProvider) {
         return new PrepareDataOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
-            connectionSourceProvider
+            databaseConnectionProvider
         );
     }
 }

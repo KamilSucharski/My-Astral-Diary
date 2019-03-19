@@ -1,4 +1,4 @@
-package com.sengami.util_loading_indicator;
+package com.sengami.util_loading_indicator.implementation;
 
 import android.view.View;
 

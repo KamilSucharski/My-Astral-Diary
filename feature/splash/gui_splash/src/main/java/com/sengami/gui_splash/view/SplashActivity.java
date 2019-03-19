@@ -5,16 +5,16 @@ import com.sengami.domain_base.util.error.WithErrorHandler;
 import com.sengami.domain_base.util.loading.LoadingIndicator;
 import com.sengami.domain_base.util.loading.WithLoadingIndicator;
 import com.sengami.domain_splash.contract.SplashContract;
-import com.sengami.error_handler.ToastErrorHandler;
+import com.sengami.error_handler.di.module.WithErrorHandlerModule;
+import com.sengami.error_handler.implementation.ToastErrorHandler;
 import com.sengami.gui_base.di.module.ContextModule;
-import com.sengami.gui_base.di.module.WithErrorHandlerModule;
-import com.sengami.gui_base.di.module.WithLoadingIndicatorModule;
 import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_main.view.MainActivity;
 import com.sengami.gui_splash.R;
 import com.sengami.gui_splash.databinding.ActivitySplashBinding;
 import com.sengami.gui_splash.di.component.DaggerSplashComponent;
-import com.sengami.util_loading_indicator.EmptyLoadingIndicator;
+import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
+import com.sengami.util_loading_indicator.implementation.EmptyLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 

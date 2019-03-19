@@ -1,4 +1,4 @@
-package com.sengami.gui_base.di.module;
+package com.sengami.util_loading_indicator.di.module;
 
 import com.sengami.domain_base.util.loading.WithLoadingIndicator;
 

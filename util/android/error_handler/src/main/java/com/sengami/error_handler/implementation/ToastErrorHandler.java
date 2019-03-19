@@ -1,4 +1,4 @@
-package com.sengami.error_handler;
+package com.sengami.error_handler.implementation;
 
 import android.content.Context;
 import android.widget.Toast;

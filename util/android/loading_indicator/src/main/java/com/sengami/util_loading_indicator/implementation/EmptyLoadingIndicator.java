@@ -1,4 +1,4 @@
-package com.sengami.util_loading_indicator;
+package com.sengami.util_loading_indicator.implementation;
 
 import com.sengami.domain_base.util.loading.LoadingIndicator;
 

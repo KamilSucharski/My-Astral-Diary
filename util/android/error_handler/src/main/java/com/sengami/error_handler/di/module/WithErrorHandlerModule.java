@@ -1,4 +1,4 @@
-package com.sengami.gui_base.di.module;
+package com.sengami.error_handler.di.module;
 
 import com.sengami.domain_base.util.error.WithErrorHandler;
 

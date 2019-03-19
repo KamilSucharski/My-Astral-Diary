@@ -1,7 +1,7 @@
 package com.sengami.gui_diary.di.module;
 
 import com.sengami.data_base.mapper.Mapper;
-import com.sengami.data_base.util.ConnectionSourceProvider;
+import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.data_diary.operation.local.CreateOrUpdateDiaryEntryOperationLocal;
 import com.sengami.data_diary.operation.local.DeleteDiaryEntryOperationLocal;
@@ -27,13 +27,13 @@ public final class OperationModule {
     GetDiaryEntryListOperation getHelloWorldOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                       @NotNull final WithErrorHandler withErrorHandler,
                                                       @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                      @NotNull final ConnectionSourceProvider connectionSourceProvider,
+                                                      @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
                                                       @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
         return new GetDiaryEntryListOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
-            connectionSourceProvider,
+            databaseConnectionProvider,
             mapper
         );
     }
@@ -43,13 +43,13 @@ public final class OperationModule {
     CreateOrUpdateDiaryEntryOperation createOrUpdateDiaryEntryOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                                         @NotNull final WithErrorHandler withErrorHandler,
                                                                         @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                                        @NotNull final ConnectionSourceProvider connectionSourceProvider,
+                                                                        @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
                                                                         @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
         return new CreateOrUpdateDiaryEntryOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
-            connectionSourceProvider,
+            databaseConnectionProvider,
             mapper
         );
     }
@@ -59,12 +59,12 @@ public final class OperationModule {
     DeleteDiaryEntryOperation deleteDiaryEntryOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                         @NotNull final WithErrorHandler withErrorHandler,
                                                         @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                        @NotNull final ConnectionSourceProvider connectionSourceProvider) {
+                                                        @NotNull final DatabaseConnectionProvider databaseConnectionProvider) {
         return new DeleteDiaryEntryOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
-            connectionSourceProvider
+            databaseConnectionProvider
         );
     }
 }

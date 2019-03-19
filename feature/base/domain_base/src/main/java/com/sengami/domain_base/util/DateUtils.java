@@ -8,7 +8,8 @@ import java.util.Locale;
 
 public final class DateUtils {
 
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.getDefault());
+    private static final String DATE_FORMAT = "dd MMMM yyyy";
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.US);
 
     @NotNull
     public static String format(@NotNull final LocalDate localDate) {

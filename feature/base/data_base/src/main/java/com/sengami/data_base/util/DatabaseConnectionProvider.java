@@ -4,7 +4,7 @@ import com.j256.ormlite.support.ConnectionSource;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface ConnectionSourceProvider {
+public interface DatabaseConnectionProvider {
 
     @NotNull
     ConnectionSource provide();

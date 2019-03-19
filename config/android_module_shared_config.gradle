@@ -6,6 +6,11 @@ android {
         targetSdkVersion configuration["androidTargetSdkVersion"]
         versionName configuration.getVersionName()
         versionCode configuration.getVersionCode()
+
+        buildConfigField 'String', 'DATABASE_NAME', '"my_astral_diary.db"'
+        buildConfigField 'String', 'DATE_FORMAT', '"dd MMMM yyyy"'
+
+        buildConfigField 'Integer', 'MINIMAL_SPLASH_SCREEN_DURATION_MILLISECONDS', '1000'
     }
 
     buildTypes {

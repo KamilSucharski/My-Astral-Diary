@@ -3,7 +3,7 @@ package com.sengami.data_diary.operation.local;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
-import com.sengami.data_base.util.ConnectionSourceProvider;
+import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.domain_base.operation.BaseOperation;
 import com.sengami.domain_base.util.ReactiveSchedulers;
@@ -20,7 +20,7 @@ import io.reactivex.Observable;
 public class DeleteDiaryEntryOperationLocal extends BaseOperation<Boolean> implements DeleteDiaryEntryOperation {
 
     @NotNull
-    private final ConnectionSourceProvider connectionSourceProvider;
+    private final DatabaseConnectionProvider databaseConnectionProvider;
     @Nullable
     private DiaryEntry diaryEntry;
 
@@ -34,9 +34,9 @@ public class DeleteDiaryEntryOperationLocal extends BaseOperation<Boolean> imple
     public DeleteDiaryEntryOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                           @NotNull final WithErrorHandler withErrorHandler,
                                           @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                          @NotNull final ConnectionSourceProvider connectionSourceProvider) {
+                                          @NotNull final DatabaseConnectionProvider databaseConnectionProvider) {
         super(reactiveSchedulers, withErrorHandler, withLoadingIndicator);
-        this.connectionSourceProvider = connectionSourceProvider;
+        this.databaseConnectionProvider = databaseConnectionProvider;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class DeleteDiaryEntryOperationLocal extends BaseOperation<Boolean> imple
                 throw new IllegalArgumentException("DiaryEntry has not been set on CreateOrUpdateDiaryEntryOperationLocal");
             }
 
-            final ConnectionSource connectionSource = connectionSourceProvider.provide();
+            final ConnectionSource connectionSource = databaseConnectionProvider.provide();
             final Dao<DiaryEntryDBO, Integer> diaryEntryDao = DaoManager.createDao(connectionSource, DiaryEntryDBO.class);
             diaryEntryDao.deleteById(diaryEntry.getId());
             connectionSource.close();
