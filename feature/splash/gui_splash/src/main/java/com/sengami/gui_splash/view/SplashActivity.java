@@ -9,12 +9,12 @@ import com.sengami.gui_base.di.module.ContextModule;
 import com.sengami.gui_base.di.module.WithErrorHandlerModule;
 import com.sengami.gui_base.di.module.WithLoadingIndicatorModule;
 import com.sengami.gui_base.util.error.ToastErrorHandler;
-import com.sengami.gui_base.util.loading.EmptyLoadingIndicator;
 import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_main.view.MainActivity;
 import com.sengami.gui_splash.R;
 import com.sengami.gui_splash.databinding.ActivitySplashBinding;
 import com.sengami.gui_splash.di.component.DaggerSplashComponent;
+import com.sengami.util_loading_indicator.EmptyLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 

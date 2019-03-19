@@ -9,6 +9,8 @@ dependencies {
     implementation project(":feature:statistics:data_statistics")
     implementation project(":feature:statistics:domain_statistics")
 
+    implementation project(":util:android:loading_indicator")
+
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger
     implementation libraries.rxJava

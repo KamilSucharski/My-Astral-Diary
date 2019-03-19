@@ -14,7 +14,6 @@ import com.sengami.gui_base.di.module.ContextModule;
 import com.sengami.gui_base.di.module.WithErrorHandlerModule;
 import com.sengami.gui_base.di.module.WithLoadingIndicatorModule;
 import com.sengami.gui_base.util.error.ToastErrorHandler;
-import com.sengami.gui_base.util.loading.ViewVisibilityLoadingIndicator;
 import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_base.view.list.adapter.BaseAdapter;
 import com.sengami.gui_base.view.list.element.ElementConverter;
@@ -27,6 +26,7 @@ import com.sengami.gui_diary.view.list.adapter.DiaryEntryListAdapter;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElement;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElementConverter;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElementType;
+import com.sengami.util_loading_indicator.ViewVisibilityLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 

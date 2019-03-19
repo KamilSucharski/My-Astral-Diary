@@ -10,6 +10,7 @@ dependencies {
     implementation project(":feature:diary:domain_diary")
 
     implementation project(':util:android:date_picker_dialog')
+    implementation project(":util:android:loading_indicator")
 
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger

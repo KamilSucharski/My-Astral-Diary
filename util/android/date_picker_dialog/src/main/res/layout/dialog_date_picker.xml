@@ -8,7 +8,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_transparent_overlay">
+        android:background="@color/dialog_background_overlay">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"

@@ -11,6 +11,8 @@ dependencies {
 
     implementation project(":feature:main:gui_main")
 
+    implementation project(":util:android:loading_indicator")
+
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger
     implementation libraries.rxJava

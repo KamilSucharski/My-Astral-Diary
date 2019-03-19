@@ -14,13 +14,13 @@ import com.sengami.gui_base.di.module.ContextModule;
 import com.sengami.gui_base.di.module.WithErrorHandlerModule;
 import com.sengami.gui_base.di.module.WithLoadingIndicatorModule;
 import com.sengami.gui_base.util.error.ToastErrorHandler;
-import com.sengami.gui_base.util.loading.ViewVisibilityLoadingIndicator;
 import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_diary.R;
 import com.sengami.gui_diary.databinding.ActivityDiaryEntryComposerBinding;
 import com.sengami.gui_diary.di.component.DaggerDiaryEntryComposerComponent;
 import com.sengami.gui_diary.navigation.Extra;
 import com.sengami.util_date_picker_dialog.DatePickerDialog;
+import com.sengami.util_loading_indicator.ViewVisibilityLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.LocalDate;
