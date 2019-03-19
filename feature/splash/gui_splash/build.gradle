@@ -11,6 +11,7 @@ dependencies {
 
     implementation project(":feature:main:gui_main")
 
+    implementation project(":util:android:error_handler")
     implementation project(":util:android:loading_indicator")
 
     implementation libraries.jetbrainsAnnotations

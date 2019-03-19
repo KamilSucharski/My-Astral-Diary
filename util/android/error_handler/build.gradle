@@ -1,0 +1,8 @@
+apply plugin: 'com.android.library'
+apply from: '../../../config/android_module_shared_config.gradle'
+
+dependencies {
+    implementation project(":feature:base:domain_base")
+
+    implementation libraries.jetbrainsAnnotations
+}

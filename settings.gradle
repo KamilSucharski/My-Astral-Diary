@@ -25,4 +25,5 @@ include ':project',
         ':feature:settings:gui_settings',
 
         ':util:android:date_picker_dialog',
-        ':util:android:loading_indicator'
+        ':util:android:loading_indicator',
+        ':util:android:error_handler'

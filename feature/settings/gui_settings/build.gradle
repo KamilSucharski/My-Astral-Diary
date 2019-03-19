@@ -9,6 +9,7 @@ dependencies {
     implementation project(":feature:settings:data_settings")
     implementation project(":feature:settings:domain_settings")
 
+    implementation project(":util:android:error_handler")
     implementation project(":util:android:loading_indicator")
 
     implementation libraries.jetbrainsAnnotations
