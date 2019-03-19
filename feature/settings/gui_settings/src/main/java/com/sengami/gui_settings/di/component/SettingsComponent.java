@@ -1,8 +1,8 @@
 package com.sengami.gui_settings.di.component;
 
+import com.sengami.context.di.module.ContextModule;
 import com.sengami.database_connection.di.module.DatabaseConnectionProviderModule;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;
-import com.sengami.gui_base.di.module.ContextModule;
 import com.sengami.gui_settings.di.module.PresenterModule;
 import com.sengami.gui_settings.view.SettingsFragment;
 import com.sengami.reactive_schedulers.di.module.ReactiveSchedulersModule;

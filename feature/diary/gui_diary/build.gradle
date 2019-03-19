@@ -9,6 +9,7 @@ dependencies {
     implementation project(":feature:diary:data_diary")
     implementation project(":feature:diary:domain_diary")
 
+    implementation project(":util:android:context")
     implementation project(":util:android:reactive_schedulers")
     implementation project(":util:android:database_connection")
     implementation project(":util:android:error_handler")

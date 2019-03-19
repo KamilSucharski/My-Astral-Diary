@@ -1,5 +1,6 @@
 package com.sengami.gui_splash.view;
 
+import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_base.util.error.ErrorHandler;
 import com.sengami.domain_base.util.error.WithErrorHandler;
 import com.sengami.domain_base.util.loading.LoadingIndicator;
@@ -7,7 +8,6 @@ import com.sengami.domain_base.util.loading.WithLoadingIndicator;
 import com.sengami.domain_splash.contract.SplashContract;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;
 import com.sengami.error_handler.implementation.ToastErrorHandler;
-import com.sengami.gui_base.di.module.ContextModule;
 import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_main.view.MainActivity;
 import com.sengami.gui_splash.R;

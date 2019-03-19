@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_base.util.error.ErrorHandler;
 import com.sengami.domain_base.util.error.WithErrorHandler;
 import com.sengami.domain_base.util.loading.LoadingIndicator;
@@ -12,7 +13,6 @@ import com.sengami.domain_diary.contract.DiaryEntryComposerContract;
 import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;
 import com.sengami.error_handler.implementation.ToastErrorHandler;
-import com.sengami.gui_base.di.module.ContextModule;
 import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_diary.R;
 import com.sengami.gui_diary.databinding.ActivityDiaryEntryComposerBinding;

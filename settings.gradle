@@ -24,6 +24,7 @@ include ':project',
         ':feature:settings:data_settings',
         ':feature:settings:gui_settings',
 
+        ':util:android:context',
         ':util:android:reactive_schedulers',
         ':util:android:database_connection',
         ':util:android:loading_indicator',

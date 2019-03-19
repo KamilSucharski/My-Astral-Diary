@@ -9,6 +9,7 @@ dependencies {
     implementation project(":feature:statistics:data_statistics")
     implementation project(":feature:statistics:domain_statistics")
 
+    implementation project(":util:android:context")
     implementation project(":util:android:reactive_schedulers")
     implementation project(":util:android:database_connection")
     implementation project(":util:android:error_handler")

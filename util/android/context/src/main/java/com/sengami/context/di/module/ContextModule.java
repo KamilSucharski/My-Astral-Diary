@@ -1,4 +1,4 @@
-package com.sengami.gui_base.di.module;
+package com.sengami.context.di.module;
 
 import android.content.Context;
 

@@ -2,8 +2,8 @@ package com.sengami.gui_settings.view;
 
 import android.content.Context;
 
+import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_settings.contract.SettingsContract;
-import com.sengami.gui_base.di.module.ContextModule;
 import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_settings.R;
 import com.sengami.gui_settings.databinding.FragmentSettingsBinding;
