@@ -24,7 +24,8 @@ include ':project',
         ':feature:settings:data_settings',
         ':feature:settings:gui_settings',
 
+        ':util:android:reactive_schedulers',
+        ':util:android:database_connection',
         ':util:android:loading_indicator',
         ':util:android:error_handler',
-        ':util:android:database_connection',
         ':util:android:date_picker_dialog'

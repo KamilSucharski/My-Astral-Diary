@@ -1,13 +1,12 @@
-package com.sengami.gui_base.di.module;
+package com.sengami.reactive_schedulers.di.module;
 
 import com.sengami.domain_base.util.ReactiveSchedulers;
+import com.sengami.reactive_schedulers.implementation.AndroidReactiveSchedulers;
 
 import org.jetbrains.annotations.NotNull;
 
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 @Module
 public final class ReactiveSchedulersModule {
@@ -15,6 +14,6 @@ public final class ReactiveSchedulersModule {
     @Provides
     @NotNull
     ReactiveSchedulers reactiveSchedulers() {
-        return new ReactiveSchedulers(Schedulers.io(), AndroidSchedulers.mainThread());
+        return new AndroidReactiveSchedulers();
     }
 }
