@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_statistics.contract.StatisticsContract;
-import com.sengami.gui_base.view.BaseFragment;
+import com.sengami.gui_base.BaseFragment;
 import com.sengami.gui_statistics.R;
 import com.sengami.gui_statistics.databinding.FragmentStatisticsBinding;
 import com.sengami.gui_statistics.di.component.DaggerStatisticsComponent;

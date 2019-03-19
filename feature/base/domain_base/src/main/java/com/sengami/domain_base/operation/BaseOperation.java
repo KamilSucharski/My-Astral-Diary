@@ -1,8 +1,8 @@
 package com.sengami.domain_base.operation;
 
-import com.sengami.domain_base.util.ReactiveSchedulers;
-import com.sengami.domain_base.util.error.WithErrorHandler;
-import com.sengami.domain_base.util.loading.WithLoadingIndicator;
+import com.sengami.domain_base.error.WithErrorHandler;
+import com.sengami.domain_base.loading.WithLoadingIndicator;
+import com.sengami.domain_base.schedulers.ReactiveSchedulers;
 
 import org.jetbrains.annotations.NotNull;
 

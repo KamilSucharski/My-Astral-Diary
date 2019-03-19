@@ -1,4 +1,4 @@
-package com.sengami.domain_base.util;
+package com.sengami.domain_base.schedulers;
 
 import org.jetbrains.annotations.NotNull;
 

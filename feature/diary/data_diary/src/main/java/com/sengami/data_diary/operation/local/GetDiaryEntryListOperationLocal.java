@@ -8,10 +8,10 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.sengami.data_base.mapper.Mapper;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_diary.dbo.DiaryEntryDBO;
+import com.sengami.domain_base.error.WithErrorHandler;
+import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.operation.BaseOperation;
-import com.sengami.domain_base.util.ReactiveSchedulers;
-import com.sengami.domain_base.util.error.WithErrorHandler;
-import com.sengami.domain_base.util.loading.WithLoadingIndicator;
+import com.sengami.domain_base.schedulers.ReactiveSchedulers;
 import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.domain_diary.operation.GetDiaryEntryListOperation;
 

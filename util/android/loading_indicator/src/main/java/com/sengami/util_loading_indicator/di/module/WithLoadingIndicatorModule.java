@@ -1,6 +1,6 @@
 package com.sengami.util_loading_indicator.di.module;
 
-import com.sengami.domain_base.util.loading.WithLoadingIndicator;
+import com.sengami.domain_base.loading.WithLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -1,6 +1,6 @@
 package com.sengami.error_handler.di.module;
 
-import com.sengami.domain_base.util.error.WithErrorHandler;
+import com.sengami.domain_base.error.WithErrorHandler;
 
 import org.jetbrains.annotations.NotNull;
 

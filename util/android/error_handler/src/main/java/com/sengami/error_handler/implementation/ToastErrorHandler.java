@@ -3,7 +3,7 @@ package com.sengami.error_handler.implementation;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.sengami.domain_base.util.error.ErrorHandler;
+import com.sengami.domain_base.error.ErrorHandler;
 
 import org.jetbrains.annotations.NotNull;
 

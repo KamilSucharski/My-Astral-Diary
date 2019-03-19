@@ -2,7 +2,7 @@ package com.sengami.util_loading_indicator.implementation;
 
 import android.view.View;
 
-import com.sengami.domain_base.util.loading.LoadingIndicator;
+import com.sengami.domain_base.loading.LoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 

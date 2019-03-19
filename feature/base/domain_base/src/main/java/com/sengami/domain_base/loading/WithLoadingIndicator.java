@@ -1,4 +1,4 @@
-package com.sengami.domain_base.util.loading;
+package com.sengami.domain_base.loading;
 
 import org.jetbrains.annotations.NotNull;
 

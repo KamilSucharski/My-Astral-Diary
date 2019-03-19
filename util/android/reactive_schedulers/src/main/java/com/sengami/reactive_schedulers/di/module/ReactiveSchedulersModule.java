@@ -1,6 +1,6 @@
 package com.sengami.reactive_schedulers.di.module;
 
-import com.sengami.domain_base.util.ReactiveSchedulers;
+import com.sengami.domain_base.schedulers.ReactiveSchedulers;
 import com.sengami.reactive_schedulers.implementation.AndroidReactiveSchedulers;
 
 import org.jetbrains.annotations.NotNull;

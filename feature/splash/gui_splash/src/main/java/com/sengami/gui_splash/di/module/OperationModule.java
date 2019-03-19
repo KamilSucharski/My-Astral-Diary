@@ -2,9 +2,9 @@ package com.sengami.gui_splash.di.module;
 
 import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_splash.operation.local.PrepareDataOperationLocal;
-import com.sengami.domain_base.util.ReactiveSchedulers;
-import com.sengami.domain_base.util.error.WithErrorHandler;
-import com.sengami.domain_base.util.loading.WithLoadingIndicator;
+import com.sengami.domain_base.error.WithErrorHandler;
+import com.sengami.domain_base.loading.WithLoadingIndicator;
+import com.sengami.domain_base.schedulers.ReactiveSchedulers;
 import com.sengami.domain_splash.operation.PrepareDataOperation;
 
 import org.jetbrains.annotations.NotNull;
