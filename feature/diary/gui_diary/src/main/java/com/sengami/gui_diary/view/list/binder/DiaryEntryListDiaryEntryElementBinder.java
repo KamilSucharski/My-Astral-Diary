@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.subjects.BehaviorSubject;
 
-import static com.sengami.gui_base.util.ClickUtil.onClick;
+import static com.sengami.clicks.Clicks.onClick;
 
 public final class DiaryEntryListDiaryEntryElementBinder extends ViewHolderBinder<DiaryEntryListElement, DiaryEntryListDiaryEntryElement, ElementDiaryEntryBinding> {
 

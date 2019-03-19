@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import io.reactivex.subjects.BehaviorSubject;
 
-import static com.sengami.gui_base.util.ClickUtil.onClick;
+import static com.sengami.clicks.Clicks.onClick;
 
 public class DatePickerDialog extends Dialog {
 

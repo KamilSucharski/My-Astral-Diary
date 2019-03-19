@@ -40,7 +40,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 
-import static com.sengami.gui_base.util.ClickUtil.onClick;
+import static com.sengami.clicks.Clicks.onClick;
 
 public final class DiaryEntryListFragment
     extends BaseFragment<DiaryEntryListContract.Presenter, FragmentDiaryEntryListBinding>
