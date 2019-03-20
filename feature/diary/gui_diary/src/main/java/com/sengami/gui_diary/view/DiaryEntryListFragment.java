@@ -6,11 +6,10 @@ import android.content.Intent;
 
 import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_base.error.ErrorHandler;
-import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.LoadingIndicator;
-import com.sengami.domain_base.loading.WithLoadingIndicator;
-import com.sengami.domain_diary.contract.DiaryEntryListContract;
 import com.sengami.domain_diary.model.DiaryEntry;
+import com.sengami.domain_diary.presenter.DiaryEntryListPresenter;
+import com.sengami.domain_diary.view.DiaryEntryListView;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;
 import com.sengami.error_handler.implementation.ToastErrorHandler;
 import com.sengami.gui_base.BaseFragment;
@@ -43,8 +42,8 @@ import io.reactivex.subjects.BehaviorSubject;
 import static com.sengami.clicks.Clicks.onClick;
 
 public final class DiaryEntryListFragment
-    extends BaseFragment<DiaryEntryListContract.Presenter, FragmentDiaryEntryListBinding>
-    implements DiaryEntryListContract.View, WithErrorHandler, WithLoadingIndicator {
+    extends BaseFragment<DiaryEntryListPresenter, FragmentDiaryEntryListBinding>
+    implements DiaryEntryListView {
 
     private final BehaviorSubject<Boolean> refreshListTrigger = BehaviorSubject.create();
     private final BehaviorSubject<DiaryEntry> diaryEntryClickedTrigger = BehaviorSubject.create();
@@ -54,7 +53,7 @@ public final class DiaryEntryListFragment
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final DiaryEntryListContract.Presenter presenter) {
+    protected void injectPresenter(@NotNull final DiaryEntryListPresenter presenter) {
         super.injectPresenter(presenter);
     }
 

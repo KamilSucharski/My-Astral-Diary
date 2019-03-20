@@ -1,6 +1,5 @@
 package com.sengami.gui_settings.di.module;
 
-import com.sengami.domain_settings.contract.SettingsContract;
 import com.sengami.domain_settings.presenter.SettingsPresenter;
 
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +12,7 @@ public final class PresenterModule {
 
     @Provides
     @NotNull
-    SettingsContract.Presenter diaryEntryListContractPresenter() {
+    SettingsPresenter diaryEntryListContractPresenter() {
         return new SettingsPresenter();
     }
 }

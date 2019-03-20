@@ -1,6 +1,7 @@
 package com.sengami.gui_main.view;
 
-import com.sengami.domain_main.contract.MainContract;
+import com.sengami.domain_main.presenter.MainPresenter;
+import com.sengami.domain_main.view.MainView;
 import com.sengami.gui_base.BaseActivity;
 import com.sengami.gui_main.R;
 import com.sengami.gui_main.databinding.ActivityMainBinding;
@@ -16,12 +17,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 public final class MainActivity
-    extends BaseActivity<MainContract.Presenter, ActivityMainBinding>
-    implements MainContract.View {
+    extends BaseActivity<MainPresenter, ActivityMainBinding>
+    implements MainView {
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final MainContract.Presenter presenter) {
+    protected void injectPresenter(@NotNull final MainPresenter presenter) {
         super.injectPresenter(presenter);
     }
 

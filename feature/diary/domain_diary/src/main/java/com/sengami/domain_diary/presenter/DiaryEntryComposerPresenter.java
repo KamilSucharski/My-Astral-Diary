@@ -2,13 +2,13 @@ package com.sengami.domain_diary.presenter;
 
 import com.sengami.domain_base.operation.Operation;
 import com.sengami.domain_base.presenter.BasePresenter;
-import com.sengami.domain_diary.contract.DiaryEntryComposerContract;
 import com.sengami.domain_diary.operation.CreateOrUpdateDiaryEntryOperation;
 import com.sengami.domain_diary.operation.DeleteDiaryEntryOperation;
+import com.sengami.domain_diary.view.DiaryEntryComposerView;
 
 import org.jetbrains.annotations.NotNull;
 
-public final class DiaryEntryComposerPresenter extends BasePresenter<DiaryEntryComposerContract.View> implements DiaryEntryComposerContract.Presenter {
+public final class DiaryEntryComposerPresenter extends BasePresenter<DiaryEntryComposerView> {
 
     @NotNull
     private final CreateOrUpdateDiaryEntryOperation createOrUpdateDiaryEntryOperation;
@@ -23,14 +23,14 @@ public final class DiaryEntryComposerPresenter extends BasePresenter<DiaryEntryC
     }
 
     @Override
-    protected void onSubscribe(@NotNull final DiaryEntryComposerContract.View view) {
+    protected void onSubscribe(@NotNull final DiaryEntryComposerView view) {
         subscribeSaveDiaryEntryClickedTrigger(view);
         subscribeDeleteDiaryEntryClickedTrigger(view);
         subscribeDateChangedBackTrigger(view);
         subscribeNavigateBackTrigger(view);
     }
 
-    private void subscribeSaveDiaryEntryClickedTrigger(@NotNull final DiaryEntryComposerContract.View view) {
+    private void subscribeSaveDiaryEntryClickedTrigger(@NotNull final DiaryEntryComposerView view) {
         disposables.add(
             view.getSaveDiaryEntryTrigger()
                 .map(createOrUpdateDiaryEntryOperation::withDiaryEntry)
@@ -42,7 +42,7 @@ public final class DiaryEntryComposerPresenter extends BasePresenter<DiaryEntryC
         );
     }
 
-    private void subscribeDeleteDiaryEntryClickedTrigger(@NotNull final DiaryEntryComposerContract.View view) {
+    private void subscribeDeleteDiaryEntryClickedTrigger(@NotNull final DiaryEntryComposerView view) {
         disposables.add(
             view.getDeleteDiaryEntryTrigger()
                 .map(deleteDiaryEntryOperation::withDiaryEntry)
@@ -54,14 +54,14 @@ public final class DiaryEntryComposerPresenter extends BasePresenter<DiaryEntryC
         );
     }
 
-    private void subscribeDateChangedBackTrigger(@NotNull final DiaryEntryComposerContract.View view) {
+    private void subscribeDateChangedBackTrigger(@NotNull final DiaryEntryComposerView view) {
         disposables.add(
             view.getDateChangedTrigger()
                 .subscribe(view::changeDate)
         );
     }
 
-    private void subscribeNavigateBackTrigger(@NotNull final DiaryEntryComposerContract.View view) {
+    private void subscribeNavigateBackTrigger(@NotNull final DiaryEntryComposerView view) {
         disposables.add(
             view.getReturnTrigger()
                 .subscribe(x -> view.navigateBack())

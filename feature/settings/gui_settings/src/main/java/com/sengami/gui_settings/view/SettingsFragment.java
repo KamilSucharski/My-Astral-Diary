@@ -3,7 +3,8 @@ package com.sengami.gui_settings.view;
 import android.content.Context;
 
 import com.sengami.context.di.module.ContextModule;
-import com.sengami.domain_settings.contract.SettingsContract;
+import com.sengami.domain_settings.presenter.SettingsPresenter;
+import com.sengami.domain_settings.view.SettingsView;
 import com.sengami.gui_base.BaseFragment;
 import com.sengami.gui_settings.R;
 import com.sengami.gui_settings.databinding.FragmentSettingsBinding;
@@ -13,11 +14,13 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-public final class SettingsFragment extends BaseFragment<SettingsContract.Presenter, FragmentSettingsBinding> implements SettingsContract.View {
+public final class SettingsFragment
+    extends BaseFragment<SettingsPresenter, FragmentSettingsBinding>
+    implements SettingsView {
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final SettingsContract.Presenter presenter) {
+    protected void injectPresenter(@NotNull final SettingsPresenter presenter) {
         super.injectPresenter(presenter);
     }
 

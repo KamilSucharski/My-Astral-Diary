@@ -1,13 +1,13 @@
 package com.sengami.domain_diary.presenter;
 
 import com.sengami.domain_base.presenter.BasePresenter;
-import com.sengami.domain_diary.contract.DiaryEntryListContract;
 import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.domain_diary.operation.GetDiaryEntryListOperation;
+import com.sengami.domain_diary.view.DiaryEntryListView;
 
 import org.jetbrains.annotations.NotNull;
 
-public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListContract.View> implements DiaryEntryListContract.Presenter {
+public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListView> {
 
     @NotNull
     private final GetDiaryEntryListOperation getDiaryEntryListOperation;
@@ -17,13 +17,13 @@ public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListC
     }
 
     @Override
-    protected void onSubscribe(@NotNull final DiaryEntryListContract.View view) {
+    protected void onSubscribe(@NotNull final DiaryEntryListView view) {
         subscribeRefreshListTrigger(view);
         subscribeDiaryEntryClickedTrigger(view);
         subscribeAddNewDiaryEntryClickedTrigger(view);
     }
 
-    private void subscribeRefreshListTrigger(@NotNull final DiaryEntryListContract.View view) {
+    private void subscribeRefreshListTrigger(@NotNull final DiaryEntryListView view) {
         disposables.add(
             view.getRefreshListTrigger()
                 .flatMap(x -> getDiaryEntryListOperation.execute())
@@ -31,14 +31,14 @@ public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListC
         );
     }
 
-    private void subscribeDiaryEntryClickedTrigger(@NotNull final DiaryEntryListContract.View view) {
+    private void subscribeDiaryEntryClickedTrigger(@NotNull final DiaryEntryListView view) {
         disposables.add(
             view.getDiaryEntryClickedTrigger()
                 .subscribe(view::navigateToDiaryEntryComposerScreen)
         );
     }
 
-    private void subscribeAddNewDiaryEntryClickedTrigger(@NotNull final DiaryEntryListContract.View view) {
+    private void subscribeAddNewDiaryEntryClickedTrigger(@NotNull final DiaryEntryListView view) {
         disposables.add(
             view.getAddNewDiaryClickedEntryTrigger()
                 .map(x -> new DiaryEntry())

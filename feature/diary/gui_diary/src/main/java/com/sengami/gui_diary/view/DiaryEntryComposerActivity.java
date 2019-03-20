@@ -6,11 +6,10 @@ import android.widget.Toast;
 
 import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_base.error.ErrorHandler;
-import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.LoadingIndicator;
-import com.sengami.domain_base.loading.WithLoadingIndicator;
-import com.sengami.domain_diary.contract.DiaryEntryComposerContract;
 import com.sengami.domain_diary.model.DiaryEntry;
+import com.sengami.domain_diary.presenter.DiaryEntryComposerPresenter;
+import com.sengami.domain_diary.view.DiaryEntryComposerView;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;
 import com.sengami.error_handler.implementation.ToastErrorHandler;
 import com.sengami.gui_base.BaseActivity;
@@ -33,8 +32,8 @@ import io.reactivex.subjects.BehaviorSubject;
 import static com.sengami.clicks.Clicks.onClick;
 
 public final class DiaryEntryComposerActivity
-    extends BaseActivity<DiaryEntryComposerContract.Presenter, ActivityDiaryEntryComposerBinding>
-    implements DiaryEntryComposerContract.View, WithErrorHandler, WithLoadingIndicator {
+    extends BaseActivity<DiaryEntryComposerPresenter, ActivityDiaryEntryComposerBinding>
+    implements DiaryEntryComposerView {
 
     private final BehaviorSubject<DiaryEntry> saveDiaryEntryTrigger = BehaviorSubject.create();
     private final BehaviorSubject<DiaryEntry> deleteDiaryEntryTrigger = BehaviorSubject.create();
@@ -45,7 +44,7 @@ public final class DiaryEntryComposerActivity
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final DiaryEntryComposerContract.Presenter presenter) {
+    protected void injectPresenter(@NotNull final DiaryEntryComposerPresenter presenter) {
         super.injectPresenter(presenter);
     }
 

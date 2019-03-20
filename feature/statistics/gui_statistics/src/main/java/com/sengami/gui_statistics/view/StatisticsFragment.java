@@ -3,7 +3,8 @@ package com.sengami.gui_statistics.view;
 import android.content.Context;
 
 import com.sengami.context.di.module.ContextModule;
-import com.sengami.domain_statistics.contract.StatisticsContract;
+import com.sengami.domain_statistics.presenter.StatisticsPresenter;
+import com.sengami.domain_statistics.view.StatisticsView;
 import com.sengami.gui_base.BaseFragment;
 import com.sengami.gui_statistics.R;
 import com.sengami.gui_statistics.databinding.FragmentStatisticsBinding;
@@ -13,11 +14,13 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-public final class StatisticsFragment extends BaseFragment<StatisticsContract.Presenter, FragmentStatisticsBinding> implements StatisticsContract.View {
+public final class StatisticsFragment
+    extends BaseFragment<StatisticsPresenter, FragmentStatisticsBinding>
+    implements StatisticsView {
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final StatisticsContract.Presenter presenter) {
+    protected void injectPresenter(@NotNull final StatisticsPresenter presenter) {
         super.injectPresenter(presenter);
     }
 

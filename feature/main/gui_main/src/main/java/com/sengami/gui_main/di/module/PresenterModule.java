@@ -1,6 +1,5 @@
 package com.sengami.gui_main.di.module;
 
-import com.sengami.domain_main.contract.MainContract;
 import com.sengami.domain_main.presenter.MainPresenter;
 
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +12,7 @@ public final class PresenterModule {
 
     @Provides
     @NotNull
-    MainContract.Presenter mainContractPresenter() {
+    MainPresenter mainPresenter() {
         return new MainPresenter();
     }
 }

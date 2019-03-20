@@ -1,13 +1,13 @@
 package com.sengami.domain_main.presenter;
 
 import com.sengami.domain_base.presenter.BasePresenter;
-import com.sengami.domain_main.contract.MainContract;
+import com.sengami.domain_main.view.MainView;
 
 import org.jetbrains.annotations.NotNull;
 
-public final class MainPresenter extends BasePresenter<MainContract.View> implements MainContract.Presenter {
+public final class MainPresenter extends BasePresenter<MainView> {
 
     @Override
-    protected void onSubscribe(@NotNull final MainContract.View view) {
+    protected void onSubscribe(@NotNull final MainView view) {
     }
 }

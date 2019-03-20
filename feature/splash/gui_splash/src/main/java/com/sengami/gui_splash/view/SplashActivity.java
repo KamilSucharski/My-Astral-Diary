@@ -2,10 +2,9 @@ package com.sengami.gui_splash.view;
 
 import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_base.error.ErrorHandler;
-import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.LoadingIndicator;
-import com.sengami.domain_base.loading.WithLoadingIndicator;
-import com.sengami.domain_splash.contract.SplashContract;
+import com.sengami.domain_splash.presenter.SplashPresenter;
+import com.sengami.domain_splash.view.SplashView;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;
 import com.sengami.error_handler.implementation.ToastErrorHandler;
 import com.sengami.gui_base.BaseActivity;
@@ -21,12 +20,12 @@ import org.jetbrains.annotations.NotNull;
 import javax.inject.Inject;
 
 public class SplashActivity
-    extends BaseActivity<SplashContract.Presenter, ActivitySplashBinding>
-    implements SplashContract.View, WithErrorHandler, WithLoadingIndicator {
+    extends BaseActivity<SplashPresenter, ActivitySplashBinding>
+    implements SplashView {
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final SplashContract.Presenter presenter) {
+    protected void injectPresenter(@NotNull final SplashPresenter presenter) {
         super.injectPresenter(presenter);
     }
 
