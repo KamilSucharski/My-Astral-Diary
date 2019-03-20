@@ -13,12 +13,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.Observer;
 
 public final class DiaryEntryListAdapter extends BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> {
 
     public DiaryEntryListAdapter(@NotNull final Context context,
-                                 @NotNull final BehaviorSubject<DiaryEntry> diaryEntryClickedTrigger) {
+                                 @NotNull final Observer<DiaryEntry> diaryEntryClickedTrigger) {
         super(
             context,
             DiaryEntryListElementType.values(),

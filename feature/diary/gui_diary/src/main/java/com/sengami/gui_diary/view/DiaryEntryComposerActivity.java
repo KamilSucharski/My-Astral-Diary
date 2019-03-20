@@ -27,7 +27,8 @@ import org.joda.time.LocalDate;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
 
 import static com.sengami.clicks.Clicks.onClick;
 
@@ -35,10 +36,10 @@ public final class DiaryEntryComposerActivity
     extends BaseActivity<DiaryEntryComposerPresenter, ActivityDiaryEntryComposerBinding>
     implements DiaryEntryComposerView {
 
-    private final BehaviorSubject<DiaryEntry> saveDiaryEntryTrigger = BehaviorSubject.create();
-    private final BehaviorSubject<DiaryEntry> deleteDiaryEntryTrigger = BehaviorSubject.create();
-    private final BehaviorSubject<LocalDate> dateChangedTrigger = BehaviorSubject.create();
-    private final BehaviorSubject<Boolean> returnTrigger = BehaviorSubject.create();
+    private final Subject<DiaryEntry> saveDiaryEntryTrigger = PublishSubject.create();
+    private final Subject<DiaryEntry> deleteDiaryEntryTrigger = PublishSubject.create();
+    private final Subject<LocalDate> dateChangedTrigger = PublishSubject.create();
+    private final Subject<Boolean> returnTrigger = PublishSubject.create();
 
     private DiaryEntry diaryEntry;
 

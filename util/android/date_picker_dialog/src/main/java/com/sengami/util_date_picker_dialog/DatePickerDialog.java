@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.Observer;
 
 import static com.sengami.clicks.Clicks.onClick;
 
@@ -27,7 +27,7 @@ public class DatePickerDialog extends Dialog {
     @NotNull
     private final LocalDate maxDate;
     @NotNull
-    private final BehaviorSubject<LocalDate> onDateEnteredTrigger;
+    private final Observer<LocalDate> onDateEnteredTrigger;
 
     private DialogDatePickerBinding binding;
 
@@ -35,7 +35,7 @@ public class DatePickerDialog extends Dialog {
                             @NotNull final LocalDate defaultDate,
                             @NotNull final LocalDate minDate,
                             @NotNull final LocalDate maxDate,
-                            @NotNull final BehaviorSubject<LocalDate> onDateEnteredTrigger) {
+                            @NotNull final Observer<LocalDate> onDateEnteredTrigger) {
         super(context, R.style.OverlayDialog);
         this.defaultDate = defaultDate;
         this.minDate = minDate;

@@ -37,7 +37,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
-import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
 
 import static com.sengami.clicks.Clicks.onClick;
 
@@ -45,9 +46,9 @@ public final class DiaryEntryListFragment
     extends BaseFragment<DiaryEntryListPresenter, FragmentDiaryEntryListBinding>
     implements DiaryEntryListView {
 
-    private final BehaviorSubject<Boolean> refreshListTrigger = BehaviorSubject.create();
-    private final BehaviorSubject<DiaryEntry> diaryEntryClickedTrigger = BehaviorSubject.create();
-    private final BehaviorSubject<Boolean> addNewDiaryEntryClickedTrigger = BehaviorSubject.create();
+    private final Subject<Boolean> refreshListTrigger = PublishSubject.create();
+    private final Subject<DiaryEntry> diaryEntryClickedTrigger = PublishSubject.create();
+    private final Subject<Boolean> addNewDiaryEntryClickedTrigger = PublishSubject.create();
     private final ElementConverter<List<DiaryEntry>, DiaryEntryListElement> converter = new DiaryEntryListElementConverter();
     private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
 
