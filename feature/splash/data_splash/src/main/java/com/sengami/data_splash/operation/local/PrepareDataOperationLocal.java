@@ -16,9 +16,9 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 
-public class PrepareDataOperationLocal extends BaseOperation<Boolean> implements PrepareDataOperation {
+public final class PrepareDataOperationLocal extends BaseOperation<Boolean> implements PrepareDataOperation {
 
-    public static final int MINIMAL_SPLASH_SCREEN_DURATION_MILLISECONDS = 1000;
+    private static final int MINIMAL_SPLASH_SCREEN_DURATION_MILLISECONDS = 1000;
 
     @NotNull
     private final DatabaseConnectionProvider databaseConnectionProvider;

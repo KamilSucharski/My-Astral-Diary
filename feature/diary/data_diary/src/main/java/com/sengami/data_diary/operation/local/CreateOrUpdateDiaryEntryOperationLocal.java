@@ -48,7 +48,7 @@ public class CreateOrUpdateDiaryEntryOperationLocal extends BaseOperation<Boolea
     protected Observable<Boolean> getObservable() {
         return Observable.fromCallable(() -> {
             if (diaryEntry == null) {
-                throw new IllegalArgumentException("DiaryEntry has not been set on CreateOrUpdateDiaryEntryOperationLocal");
+                throw new IllegalArgumentException("[DiaryEntry diaryEntry] has not been set in CreateOrUpdateDiaryEntryOperationLocal");
             }
 
             final ConnectionSource connectionSource = databaseConnectionProvider.provide();

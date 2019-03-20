@@ -5,16 +5,22 @@ import com.sengami.domain_base.loading.WithLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.reactivex.subjects.Subject;
+import java.io.File;
+
+import io.reactivex.Observable;
 
 public interface SettingsView extends WithErrorHandler, WithLoadingIndicator {
 
     @NotNull
-    Subject<Boolean> getCreateBackupTrigger();
+    Observable<Boolean> getCreateBackupTrigger();
 
     @NotNull
-    Subject<Boolean> getRestoreBackupTrigger();
+    Observable<File> getRestoreFromBackupTrigger();
 
     @NotNull
-    Subject<Boolean> getExportToTextFileTrigger();
+    Observable<Boolean> getExportToTextFileTrigger();
+
+    void saveFile(@NotNull final File file);
+
+    void refreshApplication();
 }

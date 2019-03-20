@@ -32,6 +32,6 @@ public final class SettingsListItemElementBinder extends ViewHolderBinder<Settin
     protected final void performBind(@NotNull final ElementItemBinding binding,
                                      @NotNull final SettingsListItemElement item) {
         binding.setName(context.getString(item.getNameRes()));
-        onClick(binding, () -> item.getClickTrigger().onNext(true));
+        onClick(binding, () -> item.getOnClickRunnable().run());
     }
 }

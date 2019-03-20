@@ -6,6 +6,8 @@ dependencies {
 
     implementation project(":feature:settings:domain_settings")
 
+    implementation project(":feature:diary:data_diary")
+
     implementation libraries.rxJava
     implementation libraries.jetbrainsAnnotations
     implementation libraries.ormLiteCore

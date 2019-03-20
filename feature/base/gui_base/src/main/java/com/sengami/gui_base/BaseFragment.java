@@ -65,6 +65,12 @@ public abstract class BaseFragment<P extends ReactivePresenter, DB extends ViewD
         super.onDetach();
     }
 
+    @NotNull
+    @Override
+    public Context getContext() {
+        return binding.getRoot().getContext();
+    }
+
     @LayoutRes
     protected abstract int getLayoutResource();
 

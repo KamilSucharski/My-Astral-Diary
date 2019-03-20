@@ -29,4 +29,6 @@ dependencies {
     implementation project(":feature:splash:gui_splash")
     implementation project(":feature:main:gui_main")
     implementation project(":feature:diary:gui_diary")
+
+    implementation project(":util:android:permissions")
 }

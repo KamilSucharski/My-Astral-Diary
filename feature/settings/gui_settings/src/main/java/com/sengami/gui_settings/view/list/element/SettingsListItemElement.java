@@ -3,20 +3,19 @@ package com.sengami.gui_settings.view.list.element;
 import org.jetbrains.annotations.NotNull;
 
 import androidx.annotation.StringRes;
-import io.reactivex.subjects.Subject;
 
 public final class SettingsListItemElement extends SettingsListElement {
 
     @StringRes
     private final int nameRes;
     @NotNull
-    private final Subject<Boolean> clickTrigger;
+    private final Runnable onClickRunnable;
 
     public SettingsListItemElement(@StringRes final int nameRes,
-                                   @NotNull final Subject<Boolean> clickTrigger) {
+                                   @NotNull final Runnable onClickRunnable) {
         super(SettingsListElementType.ITEM);
         this.nameRes = nameRes;
-        this.clickTrigger = clickTrigger;
+        this.onClickRunnable = onClickRunnable;
     }
 
     @StringRes
@@ -25,7 +24,7 @@ public final class SettingsListItemElement extends SettingsListElement {
     }
 
     @NotNull
-    public Subject<Boolean> getClickTrigger() {
-        return clickTrigger;
+    public Runnable getOnClickRunnable() {
+        return onClickRunnable;
     }
 }

@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sengami.myastraldiary">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".MyAstralDiaryApplication"
         android:allowBackup="true"
@@ -21,5 +23,9 @@
         <activity android:name="com.sengami.gui_main.view.MainActivity" />
 
         <activity android:name="com.sengami.gui_diary.view.DiaryEntryComposerActivity" />
+
+        <activity
+            android:name="com.sengami.permissions.PermissionsActivity"
+            android:theme="@style/TransparentTheme"/>
     </application>
 </manifest>
