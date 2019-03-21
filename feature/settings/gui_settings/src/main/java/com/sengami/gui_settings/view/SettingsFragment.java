@@ -132,7 +132,7 @@ public final class SettingsFragment
     public void onRestoreFromBackupClicked() {
         Permissions.withPermission(
             getContext(),
-            STORAGE_PERMISSION, () -> restoreFromBackupTrigger.onNext(new File("/storage/emulated/0/my_astral_diary_20190321_0153.db"))
+            STORAGE_PERMISSION, () -> restoreFromBackupTrigger.onNext(new File("/storage/emulated/0/my_astral_diary_20190321_0231.db"))
         );
     }
 

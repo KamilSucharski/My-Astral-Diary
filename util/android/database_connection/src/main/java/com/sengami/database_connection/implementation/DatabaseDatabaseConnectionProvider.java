@@ -24,6 +24,12 @@ public final class DatabaseDatabaseConnectionProvider extends OrmLiteSqliteOpenH
     }
 
     @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.disableWriteAheadLogging();
+    }
+
+    @Override
     public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
     }
 
