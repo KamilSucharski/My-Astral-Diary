@@ -18,6 +18,7 @@ import com.sengami.gui_diary.databinding.ActivityDiaryEntryComposerBinding;
 import com.sengami.gui_diary.di.component.DaggerDiaryEntryComposerComponent;
 import com.sengami.gui_diary.navigation.Extra;
 import com.sengami.util_date_picker_dialog.DatePickerDialog;
+import com.sengami.util_date_picker_dialog.MessageDialog;
 import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
 import com.sengami.util_loading_indicator.implementation.ViewVisibilityLoadingIndicator;
 
@@ -138,19 +139,27 @@ public final class DiaryEntryComposerActivity
     private void setupListeners() {
         onClick(binding.dateTextView, this::onDateButtonClicked);
         onClick(binding.bottomMenu.saveButton, this::onSaveButtonClicked);
-        onClick(binding.bottomMenu.deleteButton, () -> deleteDiaryEntryTrigger.onNext(diaryEntry));
-        onClick(binding.bottomMenu.backButton, () -> returnTrigger.onNext(true));
+        onClick(binding.bottomMenu.deleteButton, this::onDeleteDiaryEntryClicked);
+        onClick(binding.bottomMenu.backButton, this::onBackPressed);
     }
 
     private void onDateButtonClicked() {
         final LocalDate defaultDate = diaryEntry.getDate();
         final LocalDate minDate = LocalDate.now().minusYears(100);
         final LocalDate maxDate = LocalDate.now();
-        new DatePickerDialog(this, defaultDate, minDate, maxDate, dateChangedTrigger).show();
+        new DatePickerDialog(this, defaultDate, minDate, maxDate, dateChangedTrigger::onNext).show();
     }
 
     private void onSaveButtonClicked() {
         saveDiaryEntryTrigger.onNext(diaryEntry);
+    }
+
+    private void onDeleteDiaryEntryClicked() {
+        new MessageDialog(
+            this,
+            getString(R.string.delete_diary_entry_warning),
+            () -> deleteDiaryEntryTrigger.onNext(diaryEntry)
+        ).show();
     }
 
     private void updateDiaryEntryOnView() {

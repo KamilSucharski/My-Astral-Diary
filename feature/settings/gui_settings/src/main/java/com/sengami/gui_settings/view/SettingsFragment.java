@@ -24,6 +24,7 @@ import com.sengami.gui_settings.view.list.element.SettingsListElementType;
 import com.sengami.permissions.Permissions;
 import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
 import com.sengami.recycler_view_adapter.converter.ElementConverter;
+import com.sengami.util_date_picker_dialog.MessageDialog;
 import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
 import com.sengami.util_loading_indicator.implementation.ViewVisibilityLoadingIndicator;
 
@@ -133,7 +134,7 @@ public final class SettingsFragment
     public void onRestoreFromBackupClicked() {
         Permissions.withPermission(
             getContext(),
-            STORAGE_PERMISSION, () -> restoreFromBackupTrigger.onNext(new File("/storage/emulated/0/my_astral_diary_20190321_0231.db"))
+            STORAGE_PERMISSION, this::showRestoreFromBackupFilePicker
         );
     }
 
@@ -152,5 +153,17 @@ public final class SettingsFragment
         adapter.addAll(elements);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
         binding.recyclerView.setAdapter(adapter);
+    }
+
+    private void showRestoreFromBackupFilePicker() {
+
+    }
+
+    private void showRestoreFromBackupConfirmationDialog(@NotNull final File file) {
+        new MessageDialog(
+            getContext(),
+            getContext().getString(R.string.restore_from_backup_warning),
+            () -> restoreFromBackupTrigger.onNext(file)
+        ).show();
     }
 }

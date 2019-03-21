@@ -3,7 +3,8 @@
 
     <string name="composer_title_hint">Title</string>
     <string name="composer_body_hint">Experience description</string>
-    <string name="operation_successful">Operation finished successfully.</string>
+    <string name="delete_diary_entry_warning">Deleting a diary entry is a permanent action. Proceed?</string>
+    <string name="operation_successful">Changes saved successfully.</string>
 
     <string name="content_description_back_button">Go back to diary entry list.</string>
     <string name="content_description_delete_button">Delete diary entry.</string>

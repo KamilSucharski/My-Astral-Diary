@@ -14,11 +14,15 @@ import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import io.reactivex.Observer;
 
 import static com.sengami.clicks.Clicks.onClick;
 
 public class DatePickerDialog extends Dialog {
+
+    @FunctionalInterface
+    public interface Listener {
+        void onDateEntered(@NotNull final LocalDate localDate);
+    }
 
     @NotNull
     private final LocalDate defaultDate;
@@ -27,7 +31,7 @@ public class DatePickerDialog extends Dialog {
     @NotNull
     private final LocalDate maxDate;
     @NotNull
-    private final Observer<LocalDate> onDateEnteredTrigger;
+    private final Listener listener;
 
     private DialogDatePickerBinding binding;
 
@@ -35,20 +39,20 @@ public class DatePickerDialog extends Dialog {
                             @NotNull final LocalDate defaultDate,
                             @NotNull final LocalDate minDate,
                             @NotNull final LocalDate maxDate,
-                            @NotNull final Observer<LocalDate> onDateEnteredTrigger) {
+                            @NotNull final Listener listener) {
         super(context, R.style.OverlayDialog);
         this.defaultDate = defaultDate;
         this.minDate = minDate;
         this.maxDate = maxDate;
-        this.onDateEnteredTrigger = onDateEnteredTrigger;
+        this.listener = listener;
     }
 
     @Override
     protected void onCreate(@NotNull final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupView();
-        setupButtons();
         setupDatePicker();
+        setupButtons();
     }
 
     private void setupView() {
@@ -69,7 +73,7 @@ public class DatePickerDialog extends Dialog {
     private void setupButtons() {
         onClick(binding.buttons.cancelButton, this::dismiss);
         onClick(binding.buttons.acceptButton, () -> {
-            onDateEnteredTrigger.onNext(getEnteredDate());
+            listener.onDateEntered(getEnteredDate());
             dismiss();
         });
     }

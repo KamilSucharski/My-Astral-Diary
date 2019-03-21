@@ -7,7 +7,6 @@ dependencies {
     implementation project(":util:android:clicks")
 
     implementation libraries.jetbrainsAnnotations
-    implementation libraries.rxJava
     implementation libraries.jodaTime
     implementation libraries.materialDesign
 }
