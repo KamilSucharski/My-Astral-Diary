@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import io.reactivex.Observable;
 
-public class CreateOrUpdateDiaryEntryOperationLocal extends BaseOperation<Boolean> implements CreateOrUpdateDiaryEntryOperation {
+public final class CreateOrUpdateDiaryEntryOperationLocal extends BaseOperation<Boolean> implements CreateOrUpdateDiaryEntryOperation {
 
     @NotNull
     private final DatabaseConnectionProvider databaseConnectionProvider;

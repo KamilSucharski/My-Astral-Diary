@@ -56,12 +56,13 @@ public final class OperationModule {
     ExportToTextFileOperation exportToTextFileOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                         @NotNull final WithErrorHandler withErrorHandler,
                                                         @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                        @NotNull final DatabaseConnectionProvider databaseConnectionProvider) {
+                                                        @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
+                                                        @NotNull final ExternalStoragePathProvider externalStoragePathProvider) {
         return new ExportToTextFileOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
-            databaseConnectionProvider
-        );
+            databaseConnectionProvider,
+            externalStoragePathProvider);
     }
 }

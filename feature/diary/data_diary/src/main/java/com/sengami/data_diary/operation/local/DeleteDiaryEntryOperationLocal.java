@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import io.reactivex.Observable;
 
-public class DeleteDiaryEntryOperationLocal extends BaseOperation<Boolean> implements DeleteDiaryEntryOperation {
+public final class DeleteDiaryEntryOperationLocal extends BaseOperation<Boolean> implements DeleteDiaryEntryOperation {
 
     @NotNull
     private final DatabaseConnectionProvider databaseConnectionProvider;
