@@ -47,14 +47,14 @@ public final class CreateBackupOperationLocal extends BaseOperation<File> implem
             final File database = new File(internalStoragePathProvider.provide() + Constants.DATABASE_PATH);
             final FileInputStream inputStream = new FileInputStream(database);
             final File backup = createBackupFile();
-            final OutputStream output = new FileOutputStream(backup);
-            byte[] buffer = new byte[1024];
+            final OutputStream outputStream = new FileOutputStream(backup);
+            final byte[] buffer = new byte[1024];
             int length;
             while ((length = inputStream.read(buffer)) > 0) {
-                output.write(buffer, 0, length);
+                outputStream.write(buffer, 0, length);
             }
-            output.flush();
-            output.close();
+            outputStream.flush();
+            outputStream.close();
             inputStream.close();
             return backup;
         });

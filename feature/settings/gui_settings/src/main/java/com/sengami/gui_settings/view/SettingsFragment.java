@@ -122,17 +122,26 @@ public final class SettingsFragment
 
     @Override
     public void onCreateBackupClicked() {
-        Permissions.withPermission(getContext(), STORAGE_PERMISSION, () -> createBackupTrigger.onNext(true));
+        Permissions.withPermission(
+            getContext(),
+            STORAGE_PERMISSION, () -> createBackupTrigger.onNext(true)
+        );
     }
 
     @Override
     public void onRestoreFromBackupClicked() {
-        Permissions.withPermission(getContext(), STORAGE_PERMISSION, () -> {});
+        Permissions.withPermission(
+            getContext(),
+            STORAGE_PERMISSION, () -> restoreFromBackupTrigger.onNext(new File("/storage/emulated/0/my_astral_diary_20190321_0153.db"))
+        );
     }
 
     @Override
     public void onExportToTextFileClicked() {
-        Permissions.withPermission(getContext(), STORAGE_PERMISSION, () -> exportToTextFileTrigger.onNext(true));
+        Permissions.withPermission(
+            getContext(),
+            STORAGE_PERMISSION, () -> exportToTextFileTrigger.onNext(true)
+        );
     }
 
     private void setupList(@NotNull final Context context) {
