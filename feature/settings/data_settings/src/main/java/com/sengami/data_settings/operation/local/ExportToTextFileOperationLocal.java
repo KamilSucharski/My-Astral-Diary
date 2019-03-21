@@ -7,6 +7,7 @@ import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_base.util.ExternalStoragePathProvider;
 import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.date.DateFormatter;
+import com.sengami.domain_base.Constants;
 import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.operation.BaseOperation;
@@ -26,9 +27,6 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public final class ExportToTextFileOperationLocal extends BaseOperation<File> implements ExportToTextFileOperation {
-
-    private static final String TEXT_EXPORT_NAME_FORMAT = "my_astral_diary_%1$s.txt";
-    private static final String TEXT_EXPORT_DATE_FORMAT = "yyyyMMdd_hhmm";
 
     @NotNull
     private final DatabaseConnectionProvider databaseConnectionProvider;
@@ -56,9 +54,12 @@ public final class ExportToTextFileOperationLocal extends BaseOperation<File> im
             final PrintWriter printWriter = new PrintWriter(fileWriter);
 
             for (final DiaryEntryDBO diaryEntryDBO : entries) {
-                printWriter.print(DateFormatter.format(diaryEntryDBO.getDate()));
+                printWriter.print(DateFormatter.format(diaryEntryDBO.getDate(), Constants.DISPLAYED_DATE_FORMAT));
+                printWriter.print("\n");
                 printWriter.print(diaryEntryDBO.getTitle());
+                printWriter.print("\n\n");
                 printWriter.print(diaryEntryDBO.getBody());
+                printWriter.print("\n\n==========\n\n");
             }
 
             printWriter.close();
@@ -70,8 +71,8 @@ public final class ExportToTextFileOperationLocal extends BaseOperation<File> im
     @NotNull
     private File createTextExportFile() throws IOException {
         final String fileName = String.format(
-            TEXT_EXPORT_NAME_FORMAT,
-            DateFormatter.format(new Date(), TEXT_EXPORT_DATE_FORMAT)
+            Constants.TEXT_EXPORT_NAME_FORMAT,
+            DateFormatter.format(new Date(), Constants.FILE_DATE_FORMAT)
         );
         final String filePath = externalStoragePathProvider.provide() + "/" + fileName;
         final File file = new File(filePath);

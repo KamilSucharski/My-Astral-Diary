@@ -23,9 +23,6 @@ import io.reactivex.Observable;
 
 public final class CreateBackupOperationLocal extends BaseOperation<File> implements CreateBackupOperation {
 
-    private static final String DATABASE_BACKUP_NAME_FORMAT = "my_astral_diary_%1$s.db";
-    private static final String DATABASE_BACKUP_DATE_FORMAT = "yyyyMMdd_hhmm";
-
     @NotNull
     private final InternalStoragePathProvider internalStoragePathProvider;
     @NotNull
@@ -63,8 +60,8 @@ public final class CreateBackupOperationLocal extends BaseOperation<File> implem
     @NotNull
     private File createBackupFile() throws IOException {
         final String fileName = String.format(
-            DATABASE_BACKUP_NAME_FORMAT,
-            DateFormatter.format(new Date(), DATABASE_BACKUP_DATE_FORMAT)
+            Constants.DATABASE_BACKUP_NAME_FORMAT,
+            DateFormatter.format(new Date(), Constants.FILE_DATE_FORMAT)
         );
         final String filePath = externalStoragePathProvider.provide() + "/" + fileName;
         final File file = new File(filePath);

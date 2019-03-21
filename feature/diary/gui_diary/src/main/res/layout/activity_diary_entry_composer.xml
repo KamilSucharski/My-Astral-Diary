@@ -6,6 +6,7 @@
     <data>
 
         <import type="com.sengami.date.DateFormatter" />
+        <import type="com.sengami.domain_base.Constants" />
 
         <variable
             name="diaryEntry"
@@ -45,7 +46,7 @@
                         android:layout_marginStart="@dimen/content_margin"
                         android:layout_marginEnd="@dimen/content_margin"
                         android:gravity="center"
-                        android:text="@{DateFormatter.format(diaryEntry.date.toDate())}"
+                        android:text="@{DateFormatter.format(diaryEntry.date.toDate(), Constants.DISPLAYED_DATE_FORMAT)}"
                         android:theme="@style/Text.Header"
                         tools:text="23rd of March, 2020" />
 

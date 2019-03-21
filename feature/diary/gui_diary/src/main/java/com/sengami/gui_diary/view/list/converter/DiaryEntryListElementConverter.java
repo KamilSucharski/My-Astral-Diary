@@ -3,6 +3,7 @@ package com.sengami.gui_diary.view.list.converter;
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.sengami.date.DateFormatter;
+import com.sengami.domain_base.Constants;
 import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListDateHeaderElement;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListDiaryEntryElement;
@@ -50,7 +51,7 @@ public final class DiaryEntryListElementConverter implements ElementConverter<Li
             .map(DiaryEntryListDiaryEntryElement::new)
             .collect(Collectors.toList());
 
-        elements.add(new DiaryEntryListDateHeaderElement(DateFormatter.format(dateGroup.getKey().toDate())));
+        elements.add(new DiaryEntryListDateHeaderElement(DateFormatter.format(dateGroup.getKey().toDate(), Constants.DISPLAYED_DATE_FORMAT)));
         elements.addAll(diaryEntryElements);
         return elements;
     }
