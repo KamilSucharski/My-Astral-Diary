@@ -1,11 +1,11 @@
-package com.sengami.util_date_picker_dialog;
+package com.sengami.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
-import com.sengami.util_date_picker_dialog.databinding.DialogDatePickerBinding;
+import com.sengami.dialogs.databinding.DialogDatePickerBinding;
 
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.LocalDate;
@@ -20,7 +20,7 @@ import static com.sengami.clicks.Clicks.onClick;
 public class DatePickerDialog extends Dialog {
 
     @FunctionalInterface
-    public interface Listener {
+    public interface Callback {
         void onDateEntered(@NotNull final LocalDate localDate);
     }
 
@@ -31,7 +31,7 @@ public class DatePickerDialog extends Dialog {
     @NotNull
     private final LocalDate maxDate;
     @NotNull
-    private final Listener listener;
+    private final DatePickerDialog.Callback callback;
 
     private DialogDatePickerBinding binding;
 
@@ -39,12 +39,12 @@ public class DatePickerDialog extends Dialog {
                             @NotNull final LocalDate defaultDate,
                             @NotNull final LocalDate minDate,
                             @NotNull final LocalDate maxDate,
-                            @NotNull final Listener listener) {
+                            @NotNull final DatePickerDialog.Callback callback) {
         super(context, R.style.OverlayDialog);
         this.defaultDate = defaultDate;
         this.minDate = minDate;
         this.maxDate = maxDate;
-        this.listener = listener;
+        this.callback = callback;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class DatePickerDialog extends Dialog {
     private void setupButtons() {
         onClick(binding.buttons.cancelButton, this::dismiss);
         onClick(binding.buttons.acceptButton, () -> {
-            listener.onDateEntered(getEnteredDate());
+            callback.onDateEntered(getEnteredDate());
             dismiss();
         });
     }

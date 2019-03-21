@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.sengami.context.di.module.ContextModule;
+import com.sengami.dialogs.DatePickerDialog;
+import com.sengami.dialogs.MessageDialog;
 import com.sengami.domain_base.error.ErrorHandler;
 import com.sengami.domain_base.loading.LoadingIndicator;
 import com.sengami.domain_diary.model.DiaryEntry;
@@ -17,8 +19,6 @@ import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_diary.R;
 import com.sengami.gui_diary.databinding.ActivityDiaryEntryComposerBinding;
 import com.sengami.gui_diary.di.component.DaggerDiaryEntryComposerComponent;
-import com.sengami.util_date_picker_dialog.DatePickerDialog;
-import com.sengami.util_date_picker_dialog.MessageDialog;
 import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
 import com.sengami.util_loading_indicator.implementation.ViewVisibilityLoadingIndicator;
 
