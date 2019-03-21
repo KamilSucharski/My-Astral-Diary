@@ -10,3 +10,4 @@ build/
 captures/
 .externalNativeBuild
 signing/signing.gradle
+signing/keystore.jks

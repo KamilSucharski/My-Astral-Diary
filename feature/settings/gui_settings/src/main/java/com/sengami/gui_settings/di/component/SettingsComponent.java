@@ -10,12 +10,12 @@ import com.sengami.reactive_schedulers.di.module.ReactiveSchedulersModule;
 import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
 
 import dagger.Component;
-import pl.apzumi.internal_storage.di.module.InternalStoragePathProviderModule;
+import pl.apzumi.internal_storage.di.module.StoragePathProviderModule;
 
 @Component(modules = {
     ContextModule.class,
     DatabaseConnectionProviderModule.class,
-    InternalStoragePathProviderModule.class,
+    StoragePathProviderModule.class,
     OperationModule.class,
     PresenterModule.class,
     ReactiveSchedulersModule.class,

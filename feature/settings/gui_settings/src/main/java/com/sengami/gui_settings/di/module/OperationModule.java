@@ -1,6 +1,7 @@
 package com.sengami.gui_settings.di.module;
 
 import com.sengami.data_base.util.DatabaseConnectionProvider;
+import com.sengami.data_base.util.ExternalStoragePathProvider;
 import com.sengami.data_base.util.InternalStoragePathProvider;
 import com.sengami.data_settings.operation.local.CreateBackupOperationLocal;
 import com.sengami.data_settings.operation.local.ExportToTextFileOperationLocal;
@@ -25,12 +26,14 @@ public final class OperationModule {
     CreateBackupOperation createBackupOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                 @NotNull final WithErrorHandler withErrorHandler,
                                                 @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                @NotNull final InternalStoragePathProvider internalStoragePathProvider) {
+                                                @NotNull final InternalStoragePathProvider internalStoragePathProvider,
+                                                @NotNull final ExternalStoragePathProvider externalStoragePathProvider) {
         return new CreateBackupOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
-            internalStoragePathProvider
+            internalStoragePathProvider,
+            externalStoragePathProvider
         );
     }
 
