@@ -36,7 +36,7 @@ public final class SettingsPresenter extends BasePresenter<SettingsView> {
         disposables.add(
             view.getCreateBackupTrigger()
                 .flatMap(x -> createBackupOperation.execute())
-                .subscribe(view::saveFile)
+                .subscribe(view::showSavedFile)
         );
     }
 
@@ -52,7 +52,7 @@ public final class SettingsPresenter extends BasePresenter<SettingsView> {
         disposables.add(
             view.getExportToTextFileTrigger()
                 .flatMap(x -> exportToTextFileOperation.execute())
-                .subscribe(view::saveFile)
+                .subscribe(view::showSavedFile)
         );
     }
 }

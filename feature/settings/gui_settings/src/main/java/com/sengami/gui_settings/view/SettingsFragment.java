@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.jakewharton.processphoenix.ProcessPhoenix;
 import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_base.error.ErrorHandler;
 import com.sengami.domain_base.loading.LoadingIndicator;
@@ -99,13 +100,13 @@ public final class SettingsFragment
     }
 
     @Override
-    public void saveFile(@NotNull final File file) {
-        Toast.makeText(getContext(), "Created file", Toast.LENGTH_SHORT).show();
+    public void showSavedFile(@NotNull final File file) {
+        Toast.makeText(getContext(), getString(R.string.saved_file, file.getName()), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void refreshApplication() {
-        Toast.makeText(getContext(), "Refresh app", Toast.LENGTH_SHORT).show();
+        ProcessPhoenix.triggerRebirth(getContext());
     }
 
     @Override

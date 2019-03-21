@@ -20,7 +20,7 @@ public interface SettingsView extends WithErrorHandler, WithLoadingIndicator {
     @NotNull
     Observable<Boolean> getExportToTextFileTrigger();
 
-    void saveFile(@NotNull final File file);
+    void showSavedFile(@NotNull final File file);
 
     void refreshApplication();
 }

@@ -8,10 +8,10 @@ ext {
             rxAndroid           : "2.0.2",
             dagger              : "2.21",
             ormLite             : "5.1",
-            progressWheel       : "1.7",
             jetbrainsAnnotations: "16.0.1",
             lightweightStream   : "1.2.1",
-            jodaTime            : "2.10.1"
+            jodaTime            : "2.10.1",
+            processPheonix      : "2.0.0"
     ]
 
     libraries = [
@@ -24,10 +24,10 @@ ext {
             dagger              : "com.google.dagger:dagger:$versions.dagger",
             ormLiteCore         : "com.j256.ormlite:ormlite-core:$versions.ormLite",
             ormLiteAndroid      : "com.j256.ormlite:ormlite-android:$versions.ormLite",
-            progressWheel       : "com.pnikosis:materialish-progress:$versions.progressWheel",
             jetbrainsAnnotations: "org.jetbrains:annotations:$versions.jetbrainsAnnotations",
             lightweightStream   : "com.annimon:stream:$versions.lightweightStream",
-            jodaTime            : "joda-time:joda-time:$versions.jodaTime"
+            jodaTime            : "joda-time:joda-time:$versions.jodaTime",
+            processPheonix      : "com.jakewharton:process-phoenix:$versions.processPheonix"
     ]
 
     annotations = [
