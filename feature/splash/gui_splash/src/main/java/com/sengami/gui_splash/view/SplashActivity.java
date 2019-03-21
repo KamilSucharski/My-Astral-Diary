@@ -7,7 +7,7 @@ import com.sengami.domain_splash.presenter.SplashPresenter;
 import com.sengami.domain_splash.view.SplashView;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;
 import com.sengami.error_handler.implementation.ToastErrorHandler;
-import com.sengami.gui_base.BaseActivity;
+import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_main.view.MainActivity;
 import com.sengami.gui_splash.R;
 import com.sengami.gui_splash.databinding.ActivitySplashBinding;

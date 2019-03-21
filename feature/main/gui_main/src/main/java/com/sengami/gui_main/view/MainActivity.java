@@ -2,7 +2,7 @@ package com.sengami.gui_main.view;
 
 import com.sengami.domain_main.presenter.MainPresenter;
 import com.sengami.domain_main.view.MainView;
-import com.sengami.gui_base.BaseActivity;
+import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_main.R;
 import com.sengami.gui_main.databinding.ActivityMainBinding;
 import com.sengami.gui_main.di.component.DaggerMainComponent;

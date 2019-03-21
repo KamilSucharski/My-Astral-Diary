@@ -11,7 +11,8 @@ ext {
             jetbrainsAnnotations: "16.0.1",
             lightweightStream   : "1.2.1",
             jodaTime            : "2.10.1",
-            processPheonix      : "2.0.0"
+            processPheonix      : "2.0.0",
+            filePicker          : "1.1.1"
     ]
 
     libraries = [
@@ -27,10 +28,11 @@ ext {
             jetbrainsAnnotations: "org.jetbrains:annotations:$versions.jetbrainsAnnotations",
             lightweightStream   : "com.annimon:stream:$versions.lightweightStream",
             jodaTime            : "joda-time:joda-time:$versions.jodaTime",
-            processPheonix      : "com.jakewharton:process-phoenix:$versions.processPheonix"
+            processPheonix      : "com.jakewharton:process-phoenix:$versions.processPheonix",
+            filePicker          : "com.github.angads25:filepicker:$versions.filePicker"
     ]
 
     annotations = [
-            dagger: "com.google.dagger:dagger-compiler:$versions.dagger"
+            dagger              : "com.google.dagger:dagger-compiler:$versions.dagger"
     ]
 }

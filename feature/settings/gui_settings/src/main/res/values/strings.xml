@@ -7,5 +7,6 @@
     <string name="settings_item_export_to_text_file">Export diary to text file</string>
 
     <string name="saved_file">Saved file %1$s in your external storage</string>
+    <string name="restore_from_backup_pick_file">Choose backup file</string>
     <string name="restore_from_backup_warning">This action will overwrite your current data and restart the application. Make sure you have a backup. Proceed?</string>
 </resources>

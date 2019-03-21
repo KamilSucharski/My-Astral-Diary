@@ -27,6 +27,7 @@ dependencies {
     implementation libraries.recyclerView
     implementation libraries.materialDesign
     implementation libraries.processPheonix
+    implementation libraries.filePicker
 
     annotationProcessor annotations.dagger
 }

@@ -9,19 +9,19 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
 
-@DatabaseTable
+@DatabaseTable(tableName = "diary_entry")
 public class DiaryEntryDBO extends BaseDBO {
 
-    @DatabaseField(generatedId = true)
+    @DatabaseField(columnName = "id", generatedId = true)
     private Integer id;
 
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(columnName = "date", canBeNull = false)
     private Date date;
 
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(columnName = "title", canBeNull = false)
     private String title;
 
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(columnName = "body", canBeNull = false)
     private String body;
 
     @Nullable

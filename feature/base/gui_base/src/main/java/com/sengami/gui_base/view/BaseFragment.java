@@ -1,4 +1,4 @@
-package com.sengami.gui_base;
+package com.sengami.gui_base.view;
 
 import android.content.Context;
 import android.os.Bundle;

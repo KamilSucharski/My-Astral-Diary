@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.github.angads25.filepicker.model.DialogProperties;
+import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.jakewharton.processphoenix.ProcessPhoenix;
 import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_base.error.ErrorHandler;
@@ -12,7 +14,7 @@ import com.sengami.domain_settings.presenter.SettingsPresenter;
 import com.sengami.domain_settings.view.SettingsView;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;
 import com.sengami.error_handler.implementation.ToastErrorHandler;
-import com.sengami.gui_base.BaseFragment;
+import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_settings.R;
 import com.sengami.gui_settings.databinding.FragmentSettingsBinding;
 import com.sengami.gui_settings.di.component.DaggerSettingsComponent;
@@ -156,7 +158,12 @@ public final class SettingsFragment
     }
 
     private void showRestoreFromBackupFilePicker() {
-
+        final DialogProperties properties = new DialogProperties();
+        properties.extensions = new String[]{"db"};
+        final FilePickerDialog dialog = new FilePickerDialog(getContext(), properties);
+        dialog.setTitle(R.string.restore_from_backup_pick_file);
+        dialog.setDialogSelectionListener(paths -> showRestoreFromBackupConfirmationDialog(new File(paths[0])));
+        dialog.show();
     }
 
     private void showRestoreFromBackupConfirmationDialog(@NotNull final File file) {
