@@ -42,7 +42,7 @@ public final class ViewVisibilityLoadingIndicator implements LoadingIndicator {
 
     private void hideWithAnimation() {
         view.animate()
-            .alpha(0f)
+            .alpha(0F)
             .setDuration(animationDuration)
             .setListener(new AnimatorListenerAdapter() {
                 @Override
