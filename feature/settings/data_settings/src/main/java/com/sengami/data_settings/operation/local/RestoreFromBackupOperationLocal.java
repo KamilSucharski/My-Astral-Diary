@@ -1,6 +1,7 @@
 package com.sengami.data_settings.operation.local;
 
 import com.sengami.data_base.util.DatabaseConnectionProvider;
+import com.sengami.data_base.util.InternalStoragePathProvider;
 import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.operation.BaseOperation;
@@ -18,15 +19,19 @@ public final class RestoreFromBackupOperationLocal extends BaseOperation<Boolean
 
     @NotNull
     private final DatabaseConnectionProvider databaseConnectionProvider;
+    @NotNull
+    private final InternalStoragePathProvider internalStoragePathProvider;
     @Nullable
     private File backup;
 
     public RestoreFromBackupOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                            @NotNull final WithErrorHandler withErrorHandler,
                                            @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                           @NotNull final DatabaseConnectionProvider databaseConnectionProvider) {
+                                           @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
+                                           @NotNull final InternalStoragePathProvider internalStoragePathProvider) {
         super(reactiveSchedulers, withErrorHandler, withLoadingIndicator);
         this.databaseConnectionProvider = databaseConnectionProvider;
+        this.internalStoragePathProvider = internalStoragePathProvider;
     }
 
     @Override

@@ -15,6 +15,7 @@ dependencies {
     implementation project(":util:android:error_handler")
     implementation project(":util:android:loading_indicator")
     implementation project(":util:android:clicks")
+    implementation project(":util:android:internal_storage")
     implementation project(":util:android:permissions")
     implementation project(':util:android:recycler_view_adapter')
 

@@ -4,6 +4,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_diary.dbo.DiaryEntryDBO;
+import com.sengami.domain_base.Constants;
 import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.operation.BaseOperation;
@@ -17,8 +18,6 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 
 public final class PrepareDataOperationLocal extends BaseOperation<Boolean> implements PrepareDataOperation {
-
-    private static final int MINIMAL_SPLASH_SCREEN_DURATION_MILLISECONDS = 1000;
 
     @NotNull
     private final DatabaseConnectionProvider databaseConnectionProvider;
@@ -52,6 +51,6 @@ public final class PrepareDataOperationLocal extends BaseOperation<Boolean> impl
     private Observable<Boolean> splashScreenDelay() {
         return Observable
             .just(true)
-            .delay(MINIMAL_SPLASH_SCREEN_DURATION_MILLISECONDS, TimeUnit.MILLISECONDS);
+            .delay(Constants.MINIMAL_SPLASH_SCREEN_DURATION_MILLISECONDS, TimeUnit.MILLISECONDS);
     }
 }

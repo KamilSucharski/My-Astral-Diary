@@ -1,6 +1,7 @@
 package com.sengami.gui_settings.di.module;
 
 import com.sengami.data_base.util.DatabaseConnectionProvider;
+import com.sengami.data_base.util.InternalStoragePathProvider;
 import com.sengami.data_settings.operation.local.CreateBackupOperationLocal;
 import com.sengami.data_settings.operation.local.ExportToTextFileOperationLocal;
 import com.sengami.data_settings.operation.local.RestoreFromBackupOperationLocal;
@@ -24,12 +25,14 @@ public final class OperationModule {
     CreateBackupOperation createBackupOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                 @NotNull final WithErrorHandler withErrorHandler,
                                                 @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                @NotNull final DatabaseConnectionProvider databaseConnectionProvider) {
+                                                @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
+                                                @NotNull final InternalStoragePathProvider internalStoragePathProvider) {
         return new CreateBackupOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
-            databaseConnectionProvider
+            databaseConnectionProvider,
+            internalStoragePathProvider
         );
     }
 
@@ -38,12 +41,14 @@ public final class OperationModule {
     RestoreFromBackupOperation restoreFromBackupOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                           @NotNull final WithErrorHandler withErrorHandler,
                                                           @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                          @NotNull final DatabaseConnectionProvider databaseConnectionProvider) {
+                                                          @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
+                                                          @NotNull final InternalStoragePathProvider internalStoragePathProvider) {
         return new RestoreFromBackupOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
-            databaseConnectionProvider
+            databaseConnectionProvider,
+            internalStoragePathProvider
         );
     }
 
