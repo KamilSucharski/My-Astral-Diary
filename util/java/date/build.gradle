@@ -4,5 +4,4 @@ dependencies {
     implementation project(":feature:base:domain_base")
 
     implementation libraries.jetbrainsAnnotations
-    implementation libraries.jodaTime
 }

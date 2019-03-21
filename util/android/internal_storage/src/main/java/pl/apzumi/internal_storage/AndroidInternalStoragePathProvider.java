@@ -22,6 +22,6 @@ public class AndroidInternalStoragePathProvider implements InternalStoragePathPr
     @Override
     @NotNull
     public String provide() {
-        return String.format(INTERNAL_STORAGE_PATH_FORMAT, context);
+        return String.format(INTERNAL_STORAGE_PATH_FORMAT, context.getPackageName());
     }
 }

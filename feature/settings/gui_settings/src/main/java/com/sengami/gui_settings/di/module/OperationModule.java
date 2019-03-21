@@ -25,13 +25,11 @@ public final class OperationModule {
     CreateBackupOperation createBackupOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                 @NotNull final WithErrorHandler withErrorHandler,
                                                 @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
                                                 @NotNull final InternalStoragePathProvider internalStoragePathProvider) {
         return new CreateBackupOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
-            databaseConnectionProvider,
             internalStoragePathProvider
         );
     }
@@ -41,13 +39,11 @@ public final class OperationModule {
     RestoreFromBackupOperation restoreFromBackupOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                           @NotNull final WithErrorHandler withErrorHandler,
                                                           @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                          @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
                                                           @NotNull final InternalStoragePathProvider internalStoragePathProvider) {
         return new RestoreFromBackupOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
-            databaseConnectionProvider,
             internalStoragePathProvider
         );
     }

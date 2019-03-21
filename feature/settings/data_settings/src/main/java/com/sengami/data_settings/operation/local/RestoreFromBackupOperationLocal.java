@@ -18,8 +18,6 @@ import io.reactivex.Observable;
 public final class RestoreFromBackupOperationLocal extends BaseOperation<Boolean> implements RestoreFromBackupOperation {
 
     @NotNull
-    private final DatabaseConnectionProvider databaseConnectionProvider;
-    @NotNull
     private final InternalStoragePathProvider internalStoragePathProvider;
     @Nullable
     private File backup;
@@ -27,10 +25,8 @@ public final class RestoreFromBackupOperationLocal extends BaseOperation<Boolean
     public RestoreFromBackupOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                            @NotNull final WithErrorHandler withErrorHandler,
                                            @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                           @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
                                            @NotNull final InternalStoragePathProvider internalStoragePathProvider) {
         super(reactiveSchedulers, withErrorHandler, withLoadingIndicator);
-        this.databaseConnectionProvider = databaseConnectionProvider;
         this.internalStoragePathProvider = internalStoragePathProvider;
     }
 

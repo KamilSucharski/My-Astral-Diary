@@ -8,6 +8,8 @@ dependencies {
 
     implementation project(":feature:diary:data_diary")
 
+    implementation project(":util:java:date")
+
     implementation libraries.rxJava
     implementation libraries.jetbrainsAnnotations
     implementation libraries.ormLiteCore

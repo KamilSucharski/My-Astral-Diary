@@ -50,7 +50,7 @@ public final class DiaryEntryListElementConverter implements ElementConverter<Li
             .map(DiaryEntryListDiaryEntryElement::new)
             .collect(Collectors.toList());
 
-        elements.add(new DiaryEntryListDateHeaderElement(DateFormatter.format(dateGroup.getKey())));
+        elements.add(new DiaryEntryListDateHeaderElement(DateFormatter.format(dateGroup.getKey().toDate())));
         elements.addAll(diaryEntryElements);
         return elements;
     }
