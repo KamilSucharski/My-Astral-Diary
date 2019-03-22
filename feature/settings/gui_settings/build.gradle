@@ -9,6 +9,9 @@ dependencies {
     implementation project(":feature:settings:data_settings")
     implementation project(":feature:settings:domain_settings")
 
+    implementation project(":feature:diary:data_diary")
+    implementation project(":feature:diary:domain_diary")
+
     implementation project(":util:android:context")
     implementation project(":util:android:reactive_schedulers")
     implementation project(":util:android:database_connection")

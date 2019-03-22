@@ -1,8 +1,11 @@
 package com.sengami.data_settings.operation.local;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
+import com.sengami.data_base.mapper.Mapper;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_base.util.ExternalStoragePathProvider;
 import com.sengami.data_diary.dbo.DiaryEntryDBO;
@@ -12,17 +15,20 @@ import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.operation.BaseOperation;
 import com.sengami.domain_base.schedulers.ReactiveSchedulers;
+import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.domain_settings.operation.ExportToTextFileOperation;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.LocalDate;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 
@@ -32,40 +38,63 @@ public final class ExportToTextFileOperationLocal extends BaseOperation<File> im
     private final DatabaseConnectionProvider databaseConnectionProvider;
     @NotNull
     private final ExternalStoragePathProvider externalStoragePathProvider;
+    @NotNull
+    private final Mapper<DiaryEntryDBO, DiaryEntry> mapper;
 
     public ExportToTextFileOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                           @NotNull final WithErrorHandler withErrorHandler,
                                           @NotNull final WithLoadingIndicator withLoadingIndicator,
                                           @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
-                                          @NotNull final ExternalStoragePathProvider externalStoragePathProvider) {
+                                          @NotNull final ExternalStoragePathProvider externalStoragePathProvider,
+                                          @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
         super(reactiveSchedulers, withErrorHandler, withLoadingIndicator);
         this.databaseConnectionProvider = databaseConnectionProvider;
         this.externalStoragePathProvider = externalStoragePathProvider;
+        this.mapper = mapper;
     }
 
     @Override
     protected Observable<File> getObservable() {
         return Observable.fromCallable(() -> {
-            final ConnectionSource connectionSource = databaseConnectionProvider.provide();
-            final Dao<DiaryEntryDBO, Integer> diaryEntryDao = DaoManager.createDao(connectionSource, DiaryEntryDBO.class);
-            final List<DiaryEntryDBO> entries = diaryEntryDao.queryForAll();
-            final File file = createTextExportFile();
-            final FileWriter fileWriter = new FileWriter(file);
-            final PrintWriter printWriter = new PrintWriter(fileWriter);
-
-            for (final DiaryEntryDBO diaryEntryDBO : entries) {
-                printWriter.print(DateFormatter.format(diaryEntryDBO.getDate(), Constants.DISPLAYED_DATE_FORMAT));
-                printWriter.print("\n");
-                printWriter.print(diaryEntryDBO.getTitle());
-                printWriter.print("\n\n");
-                printWriter.print(diaryEntryDBO.getBody());
-                printWriter.print("\n\n==========\n\n");
-            }
-
-            printWriter.close();
-            connectionSource.close();
-            return file;
+            final Map<LocalDate, List<DiaryEntry>> entries = getDiaryEntriesGroupedByDate();
+            return writeEntriesToTextFile(entries);
         });
+    }
+
+    @NotNull
+    private Map<LocalDate, List<DiaryEntry>> getDiaryEntriesGroupedByDate() throws IOException, SQLException {
+        final ConnectionSource connectionSource = databaseConnectionProvider.provide();
+        final Dao<DiaryEntryDBO, Integer> diaryEntryDao = DaoManager.createDao(connectionSource, DiaryEntryDBO.class);
+        final List<DiaryEntryDBO> entries = diaryEntryDao.queryForAll();
+        final Map<LocalDate, List<DiaryEntry>> result = Stream.of(entries)
+            .map(mapper::toModel)
+            .groupBy(DiaryEntry::getDate)
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        connectionSource.close();
+        return result;
+    }
+
+    @NotNull
+    private File writeEntriesToTextFile(@NotNull final Map<LocalDate, List<DiaryEntry>> entries) throws IOException {
+        final File file = createTextExportFile();
+        final FileWriter fileWriter = new FileWriter(file);
+        final PrintWriter printWriter = new PrintWriter(fileWriter);
+
+        for (final Map.Entry<LocalDate, List<DiaryEntry>> diaryEntryGroup : entries.entrySet()) {
+            printWriter.print("==========\n");
+            printWriter.print(DateFormatter.format(diaryEntryGroup.getKey().toDate(), Constants.DISPLAYED_DATE_FORMAT));
+            printWriter.print("\n\n");
+            for (final DiaryEntry diaryEntry : diaryEntryGroup.getValue()) {
+                printWriter.print("# ");
+                printWriter.print(diaryEntry.getTitle());
+                printWriter.print("\n");
+                printWriter.print(diaryEntry.getBody());
+                printWriter.print("\n\n");
+            }
+        }
+
+        printWriter.close();
+        return file;
     }
 
     @NotNull

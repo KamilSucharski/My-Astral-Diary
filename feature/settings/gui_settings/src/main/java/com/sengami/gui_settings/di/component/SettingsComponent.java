@@ -3,6 +3,7 @@ package com.sengami.gui_settings.di.component;
 import com.sengami.context.di.module.ContextModule;
 import com.sengami.database_connection.di.module.DatabaseConnectionProviderModule;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;
+import com.sengami.gui_settings.di.module.MapperModule;
 import com.sengami.gui_settings.di.module.OperationModule;
 import com.sengami.gui_settings.di.module.PresenterModule;
 import com.sengami.gui_settings.view.SettingsFragment;
@@ -16,6 +17,7 @@ import pl.apzumi.internal_storage.di.module.StoragePathProviderModule;
     ContextModule.class,
     DatabaseConnectionProviderModule.class,
     StoragePathProviderModule.class,
+    MapperModule.class,
     OperationModule.class,
     PresenterModule.class,
     ReactiveSchedulersModule.class,
