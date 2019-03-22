@@ -20,23 +20,23 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public final class DiaryEntryListElementConverter implements ElementConverter<List<DiaryEntry>, DiaryEntryListElement> {
+public final class DiaryEntryListElementConverter implements ElementConverter<Map<LocalDate, List<DiaryEntry>> , DiaryEntryListElement> {
 
     @NotNull
     @Override
-    public List<DiaryEntryListElement> convert(@NotNull final List<DiaryEntry> diaryEntryList) {
-        if (diaryEntryList.isEmpty()) {
+    public List<DiaryEntryListElement> convert(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntryListGroupedByDate) {
+        if (diaryEntryListGroupedByDate.isEmpty()) {
             return Collections.singletonList(new DiaryEntryListEmptyStateElement());
         }
 
         return Stream
-            .of(diaryEntryList)
-            .groupBy(DiaryEntry::getDate)
+            .of(diaryEntryListGroupedByDate)
             .sorted(newestToOldestComparator())
             .map(this::flattenGroupedListInDateOrder)
             .reduce(this::combineAllGroups)
             .get();
     }
+
 
     private Comparator<Map.Entry<LocalDate, List<DiaryEntry>>> newestToOldestComparator() {
         return (o1, o2) -> o2.getKey().compareTo(o1.getKey());

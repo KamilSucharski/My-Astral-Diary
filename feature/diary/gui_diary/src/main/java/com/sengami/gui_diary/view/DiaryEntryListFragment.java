@@ -28,8 +28,10 @@ import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
 import com.sengami.util_loading_indicator.implementation.ViewVisibilityLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.LocalDate;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -49,7 +51,7 @@ public final class DiaryEntryListFragment
     private final Subject<Boolean> refreshListTrigger = PublishSubject.create();
     private final Subject<DiaryEntry> diaryEntryClickedTrigger = PublishSubject.create();
     private final Subject<Boolean> addNewDiaryEntryClickedTrigger = PublishSubject.create();
-    private final ElementConverter<List<DiaryEntry>, DiaryEntryListElement> converter = new DiaryEntryListElementConverter();
+    private final ElementConverter<Map<LocalDate, List<DiaryEntry>> , DiaryEntryListElement> converter = new DiaryEntryListElementConverter();
     private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
 
     @Inject
@@ -100,8 +102,8 @@ public final class DiaryEntryListFragment
     }
 
     @Override
-    public void showDiaryEntryList(@NotNull final List<DiaryEntry> diaryEntryList) {
-        final List<DiaryEntryListElement> items = converter.convert(diaryEntryList);
+    public void showDiaryEntryListGroupedByDate(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntryListGroupedByDate) {
+        final List<DiaryEntryListElement> items = converter.convert(diaryEntryListGroupedByDate);
         adapter.replaceAll(items);
         binding.recyclerView.setAdapter(adapter);
     }

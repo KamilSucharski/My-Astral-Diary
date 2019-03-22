@@ -13,38 +13,45 @@ import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.operation.BaseOperation;
 import com.sengami.domain_base.schedulers.ReactiveSchedulers;
 import com.sengami.domain_diary.model.DiaryEntry;
-import com.sengami.domain_diary.operation.GetDiaryEntryListOperation;
+import com.sengami.domain_diary.operation.GetDiaryEntryListGroupedByDateOperation;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.LocalDate;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 
-public final class GetDiaryEntryListOperationLocal extends BaseOperation<List<DiaryEntry>> implements GetDiaryEntryListOperation {
+public final class GetDiaryEntryListGroupedByDateOperationLocal
+    extends BaseOperation<Map<LocalDate, List<DiaryEntry>>>
+    implements GetDiaryEntryListGroupedByDateOperation {
 
     @NotNull
     private final DatabaseConnectionProvider databaseConnectionProvider;
     @NotNull
     private final Mapper<DiaryEntryDBO, DiaryEntry> mapper;
 
-    public GetDiaryEntryListOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                           @NotNull final WithErrorHandler withErrorHandler,
-                                           @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                           @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
-                                           @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
+    public GetDiaryEntryListGroupedByDateOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
+                                                        @NotNull final WithErrorHandler withErrorHandler,
+                                                        @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                                        @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
+                                                        @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
         super(reactiveSchedulers, withErrorHandler, withLoadingIndicator);
         this.databaseConnectionProvider = databaseConnectionProvider;
         this.mapper = mapper;
     }
 
     @Override
-    protected Observable<List<DiaryEntry>> getObservable() {
+    protected Observable<Map<LocalDate, List<DiaryEntry>>> getObservable() {
         return Observable.fromCallable(() -> {
             final ConnectionSource connectionSource = databaseConnectionProvider.provide();
             final Dao<DiaryEntryDBO, Integer> diaryEntryDao = DaoManager.createDao(connectionSource, DiaryEntryDBO.class);
             final List<DiaryEntryDBO> entries = diaryEntryDao.queryForAll();
-            final List<DiaryEntry> result = Stream.of(entries).map(mapper::toModel).collect(Collectors.toList());
+            final Map<LocalDate, List<DiaryEntry>> result = Stream.of(entries)
+                .map(mapper::toModel)
+                .groupBy(DiaryEntry::getDate)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
             connectionSource.close();
             return result;
         });
