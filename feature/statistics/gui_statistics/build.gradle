@@ -22,7 +22,6 @@ dependencies {
     implementation libraries.androidXAppCompat
     implementation libraries.recyclerView
     implementation libraries.materialDesign
-    implementation libraries.mpAndroidChart
     implementation libraries.jodaTime
 
     annotationProcessor annotations.dagger

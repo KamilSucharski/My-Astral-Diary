@@ -2,7 +2,7 @@ package com.sengami.gui_statistics.view.list.adapter;
 
 import android.content.Context;
 
-import com.sengami.gui_statistics.view.list.binder.StatisticsListChartElementBinder;
+import com.sengami.gui_statistics.view.list.binder.StatisticsListEmptyStateElementBinder;
 import com.sengami.gui_statistics.view.list.binder.StatisticsListTextWithNumberElementBinder;
 import com.sengami.gui_statistics.view.list.element.StatisticsListElement;
 import com.sengami.gui_statistics.view.list.element.StatisticsListElementType;
@@ -19,8 +19,8 @@ public final class StatisticsListAdapter extends BaseAdapter<StatisticsListEleme
             context,
             StatisticsListElementType.values(),
             Arrays.asList(
-                new StatisticsListChartElementBinder(context),
-                new StatisticsListTextWithNumberElementBinder(context)
+                new StatisticsListTextWithNumberElementBinder(context),
+                new StatisticsListEmptyStateElementBinder()
             )
         );
     }

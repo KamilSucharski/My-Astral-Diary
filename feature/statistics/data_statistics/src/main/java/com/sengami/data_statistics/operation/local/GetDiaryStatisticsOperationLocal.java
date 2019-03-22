@@ -17,11 +17,11 @@ import com.sengami.domain_base.schedulers.ReactiveSchedulers;
 import com.sengami.domain_statistics.operation.GetDiaryStatisticsOperation;
 
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.LocalDate;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.AbstractMap;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
 
@@ -51,28 +51,34 @@ public final class GetDiaryStatisticsOperationLocal
             final Dao<DiaryEntryDBO, Integer> diaryEntryDao = DaoManager.createDao(connectionSource, DiaryEntryDBO.class);
             final List<DiaryEntryDBO> diaryEntryDBOList = diaryEntryDao.queryForAll();
             connectionSource.close();
+
             final List<DiaryEntry> entries = Stream
                 .of(diaryEntryDBOList)
                 .map(mapper::toModel)
                 .collect(Collectors.toList());
 
             final Statistics statistics = new Statistics();
-            statistics.setNumberOfEntriesByDate(getNumberOfEntriesByDate(entries));
-            statistics.setTotalEntries(entries.size());
-            statistics.setLongestEntryCharacterCount(getLongestCharacterCountInEntry(entries));
+            if (!entries.isEmpty()) {
+                statistics.setYearWithMostEntries(calculateYearWithMostEntries(entries));
+                statistics.setTotalEntries(entries.size());
+                statistics.setLongestEntryCharacterCount(calculateLongestCharacterCountInEntry(entries));
+                statistics.setAverageEntriesPerDay(calculateAverageEntriesPerDay(entries));
+            }
             return statistics;
         });
     }
 
-    @NotNull
-    private Map<LocalDate, Integer> getNumberOfEntriesByDate(@NotNull final List<DiaryEntry> entries) {
+    private int calculateYearWithMostEntries(@NotNull final List<DiaryEntry> entries) {
         return Stream.of(entries)
-            .groupBy(DiaryEntry::getDate)
-            .map(e -> new AbstractMap.SimpleEntry<>(e.getKey(), e.getValue().size()))
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+            .groupBy(diaryEntry -> diaryEntry.getDate().getYear())
+            .map(group -> new AbstractMap.SimpleEntry<>(group.getKey(), group.getValue().size()))
+            .sorted((o1, o2) -> o1.getValue().compareTo(o2.getValue()))
+            .findLast()
+            .map(AbstractMap.SimpleEntry::getKey)
+            .orElse(0);
     }
 
-    private int getLongestCharacterCountInEntry(@NotNull final List<DiaryEntry> entries) {
+    private int calculateLongestCharacterCountInEntry(@NotNull final List<DiaryEntry> entries) {
         int maxCharacterCount = 0;
         for (final DiaryEntry diaryEntry : entries) {
             final int characterCount = diaryEntry.getTitle().length() + diaryEntry.getBody().length();
@@ -81,5 +87,16 @@ public final class GetDiaryStatisticsOperationLocal
             }
         }
         return maxCharacterCount;
+    }
+
+    private double calculateAverageEntriesPerDay(@NotNull final List<DiaryEntry> entries) {
+        final double totalEntries = entries.size();
+        final double documentedDays = Stream.of(entries)
+            .map(DiaryEntry::getDate)
+            .collect(Collectors.toSet())
+            .size();
+        return new BigDecimal(totalEntries / documentedDays)
+            .setScale(2, RoundingMode.HALF_UP)
+            .doubleValue();
     }
 }

@@ -73,6 +73,11 @@ public final class StatisticsFragment
         errorHandler = new ToastErrorHandler(context);
         loadingIndicator = new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
         setupList(context);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         refreshStatisticsTrigger.onNext(true);
     }
 
@@ -85,7 +90,7 @@ public final class StatisticsFragment
     @Override
     public void showStatistics(@NotNull final Statistics statistics) {
         final List<StatisticsListElement> elements = converter.convert(statistics);
-        adapter.addAll(elements);
+        adapter.replaceAll(elements);
     }
 
     @Override

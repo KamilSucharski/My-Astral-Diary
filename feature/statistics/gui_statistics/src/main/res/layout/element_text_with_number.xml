@@ -5,14 +5,13 @@
 
     <data>
         <variable name="text" type="String" />
-        <variable name="number" type="int" />
+        <variable name="number" type="String" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/half_content_margin"
-        android:layout_marginBottom="@dimen/half_content_margin"
+        android:layout_marginTop="@dimen/content_margin"
         android:layout_marginStart="@dimen/content_margin"
         android:layout_marginEnd="@dimen/content_margin"
         app:cardBackgroundColor="@color/color_primary_dark"
@@ -38,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/content_margin"
                 android:theme="@style/Text.Standard"
-                android:text="@{String.valueOf(number)}"
+                android:text="@{number}"
                 tools:text="777"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

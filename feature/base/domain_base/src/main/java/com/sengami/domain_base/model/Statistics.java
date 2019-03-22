@@ -1,26 +1,11 @@
 package com.sengami.domain_base.model;
 
-import org.jetbrains.annotations.NotNull;
-import org.joda.time.LocalDate;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public final class Statistics {
 
-    @NotNull
-    private Map<LocalDate, Integer> numberOfEntriesByDate = new HashMap<>();
     private int totalEntries = 0;
+    private int yearWithMostEntries = 0;
     private int longestEntryCharacterCount = 0;
-
-    @NotNull
-    public Map<LocalDate, Integer> getNumberOfEntriesByDate() {
-        return numberOfEntriesByDate;
-    }
-
-    public void setNumberOfEntriesByDate(@NotNull final Map<LocalDate, Integer> numberOfEntriesByDate) {
-        this.numberOfEntriesByDate = numberOfEntriesByDate;
-    }
+    private double averageEntriesPerDay = 0D;
 
     public int getTotalEntries() {
         return totalEntries;
@@ -30,11 +15,27 @@ public final class Statistics {
         this.totalEntries = totalEntries;
     }
 
+    public int getYearWithMostEntries() {
+        return yearWithMostEntries;
+    }
+
+    public void setYearWithMostEntries(int yearWithMostEntries) {
+        this.yearWithMostEntries = yearWithMostEntries;
+    }
+
     public int getLongestEntryCharacterCount() {
         return longestEntryCharacterCount;
     }
 
     public void setLongestEntryCharacterCount(int longestEntryCharacterCount) {
         this.longestEntryCharacterCount = longestEntryCharacterCount;
+    }
+
+    public double getAverageEntriesPerDay() {
+        return averageEntriesPerDay;
+    }
+
+    public void setAverageEntriesPerDay(double averageEntriesPerDay) {
+        this.averageEntriesPerDay = averageEntriesPerDay;
     }
 }

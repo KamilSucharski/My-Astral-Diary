@@ -39,9 +39,4 @@
         <item name="android:padding">@dimen/bottom_menu_item_padding</item>
         <item name="android:background">@drawable/background_ripple</item>
     </style>
-
-    <style name="LoadingWheel">
-        <item name="android:indeterminateDrawable">@drawable/loading_wheel</item>
-        <item name="android:visibility">gone</item>
-    </style>
 </resources>

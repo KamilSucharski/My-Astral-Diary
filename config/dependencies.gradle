@@ -13,7 +13,6 @@ ext {
             jodaTime            : "2.10.1",
             processPheonix      : "2.0.0",
             filePicker          : "1.1.1",
-            mpAndroidChart      : "v3.1.0"
     ]
 
     libraries = [
@@ -31,7 +30,6 @@ ext {
             jodaTime            : "joda-time:joda-time:$versions.jodaTime",
             processPheonix      : "com.jakewharton:process-phoenix:$versions.processPheonix",
             filePicker          : "com.github.angads25:filepicker:$versions.filePicker",
-            mpAndroidChart      : "com.github.PhilJay:MPAndroidChart:$versions.mpAndroidChart"
     ]
 
     annotations = [

@@ -1,15 +1,18 @@
 package com.sengami.gui_statistics.view.list.element;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.annotation.StringRes;
 
 public final class StatisticsListTextWithNumberElement extends StatisticsListElement {
 
     @StringRes
     private final int textRes;
-    private final int number;
+    @NotNull
+    private final String number;
 
     public StatisticsListTextWithNumberElement(@StringRes final int textRes,
-                                               final int number) {
+                                               @NotNull final String number) {
         super(StatisticsListElementType.TEXT_WITH_NUMBER);
         this.textRes = textRes;
         this.number = number;
@@ -20,7 +23,8 @@ public final class StatisticsListTextWithNumberElement extends StatisticsListEle
         return textRes;
     }
 
-    public int getNumber() {
+    @NotNull
+    public String getNumber() {
         return number;
     }
 }
