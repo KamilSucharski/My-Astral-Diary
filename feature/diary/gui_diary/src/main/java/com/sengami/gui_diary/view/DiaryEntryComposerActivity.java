@@ -9,7 +9,7 @@ import com.sengami.dialogs.DatePickerDialog;
 import com.sengami.dialogs.MessageDialog;
 import com.sengami.domain_base.error.ErrorHandler;
 import com.sengami.domain_base.loading.LoadingIndicator;
-import com.sengami.domain_diary.model.DiaryEntry;
+import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.domain_diary.presenter.DiaryEntryComposerPresenter;
 import com.sengami.domain_diary.view.DiaryEntryComposerView;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;

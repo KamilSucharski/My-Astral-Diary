@@ -1,6 +1,6 @@
 package com.sengami.domain_base;
 
-public class Constants {
+public final class Constants {
     public static final String DATABASE_ALIAS = "my_astral_diary";
     public static final String DATABASE_EXTENSION = "db";
     public static final String TEXT_FILE_EXTENSION = "txt";

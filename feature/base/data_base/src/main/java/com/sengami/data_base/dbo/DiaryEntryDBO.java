@@ -1,8 +1,7 @@
-package com.sengami.data_diary.dbo;
+package com.sengami.data_base.dbo;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import com.sengami.data_base.dbo.BaseDBO;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Date;
 
 @DatabaseTable(tableName = "diary_entry")
-public class DiaryEntryDBO extends BaseDBO {
+public final class DiaryEntryDBO extends BaseDBO {
 
     @DatabaseField(columnName = "id", generatedId = true)
     private Integer id;

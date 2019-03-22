@@ -6,9 +6,6 @@ dependencies {
 
     implementation project(":feature:settings:domain_settings")
 
-    implementation project(":feature:diary:data_diary")
-    implementation project(":feature:diary:domain_diary")
-
     implementation project(":util:java:date")
 
     implementation libraries.rxJava

@@ -1,13 +1,12 @@
-package com.sengami.data_diary.mapper;
+package com.sengami.data_base.mapper;
 
-import com.sengami.data_base.mapper.Mapper;
-import com.sengami.data_diary.dbo.DiaryEntryDBO;
-import com.sengami.domain_diary.model.DiaryEntry;
+import com.sengami.data_base.dbo.DiaryEntryDBO;
+import com.sengami.domain_base.model.DiaryEntry;
 
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.LocalDate;
 
-public class DiaryEntryMapper implements Mapper<DiaryEntryDBO, DiaryEntry> {
+public final class DiaryEntryMapper implements Mapper<DiaryEntryDBO, DiaryEntry> {
 
     @Override
     public DiaryEntryDBO toDBO(@NotNull final DiaryEntry source) {

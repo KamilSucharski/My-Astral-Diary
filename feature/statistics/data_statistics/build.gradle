@@ -6,9 +6,6 @@ dependencies {
 
     implementation project(":feature:statistics:domain_statistics")
 
-    implementation project(":feature:diary:data_diary")
-    implementation project(":feature:diary:domain_diary")
-
     implementation libraries.rxJava
     implementation libraries.jetbrainsAnnotations
     implementation libraries.lightweightStream

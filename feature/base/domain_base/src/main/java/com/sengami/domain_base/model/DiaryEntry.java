@@ -1,12 +1,10 @@
-package com.sengami.domain_diary.model;
-
-import com.sengami.domain_base.model.BaseModel;
+package com.sengami.domain_base.model;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joda.time.LocalDate;
 
-public class DiaryEntry extends BaseModel {
+public final class DiaryEntry extends BaseModel {
 
     @Nullable
     private Integer id = null;

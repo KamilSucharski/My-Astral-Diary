@@ -3,14 +3,14 @@ package com.sengami.data_diary.operation.local;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
+import com.sengami.data_base.dbo.DiaryEntryDBO;
 import com.sengami.data_base.mapper.Mapper;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
-import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.WithLoadingIndicator;
+import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.domain_base.operation.BaseOperation;
 import com.sengami.domain_base.schedulers.ReactiveSchedulers;
-import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.domain_diary.operation.CreateOrUpdateDiaryEntryOperation;
 
 import org.jetbrains.annotations.NotNull;

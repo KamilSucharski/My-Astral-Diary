@@ -10,7 +10,7 @@
 
         <variable
             name="diaryEntry"
-            type="com.sengami.domain_diary.model.DiaryEntry" />
+            type="com.sengami.domain_base.model.DiaryEntry" />
     </data>
 
     <FrameLayout

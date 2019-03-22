@@ -1,7 +1,7 @@
 package com.sengami.domain_diary.presenter;
 
+import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.domain_base.presenter.BasePresenter;
-import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.domain_diary.operation.GetDiaryEntriesGroupedByDateOperation;
 import com.sengami.domain_diary.view.DiaryEntryListView;
 

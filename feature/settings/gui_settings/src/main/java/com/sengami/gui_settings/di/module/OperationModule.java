@@ -1,17 +1,17 @@
 package com.sengami.gui_settings.di.module;
 
+import com.sengami.data_base.dbo.DiaryEntryDBO;
 import com.sengami.data_base.mapper.Mapper;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_base.util.ExternalStoragePathProvider;
 import com.sengami.data_base.util.InternalStoragePathProvider;
-import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.data_settings.operation.local.CreateBackupOperationLocal;
 import com.sengami.data_settings.operation.local.ExportToTextFileOperationLocal;
 import com.sengami.data_settings.operation.local.RestoreFromBackupOperationLocal;
 import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.WithLoadingIndicator;
+import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.domain_base.schedulers.ReactiveSchedulers;
-import com.sengami.domain_diary.model.DiaryEntry;
 import com.sengami.domain_settings.operation.CreateBackupOperation;
 import com.sengami.domain_settings.operation.ExportToTextFileOperation;
 import com.sengami.domain_settings.operation.RestoreFromBackupOperation;

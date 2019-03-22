@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="diaryEntry" type="com.sengami.domain_diary.model.DiaryEntry" />
+        <variable name="diaryEntry" type="com.sengami.domain_base.model.DiaryEntry" />
     </data>
 
     <androidx.cardview.widget.CardView

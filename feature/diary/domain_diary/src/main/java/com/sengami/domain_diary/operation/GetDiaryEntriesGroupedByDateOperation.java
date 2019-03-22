@@ -1,7 +1,7 @@
 package com.sengami.domain_diary.operation;
 
+import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.domain_base.operation.Operation;
-import com.sengami.domain_diary.model.DiaryEntry;
 
 import org.joda.time.LocalDate;
 

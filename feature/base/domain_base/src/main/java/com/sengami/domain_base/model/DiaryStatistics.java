@@ -1,4 +1,4 @@
-package com.sengami.domain_statistics.model;
+package com.sengami.domain_base.model;
 
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.LocalDate;
@@ -6,7 +6,7 @@ import org.joda.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DiaryStatistics {
+public final class DiaryStatistics {
 
     @NotNull
     private Map<LocalDate, Integer> numberOfEntriesByDate = new HashMap<>();
@@ -18,7 +18,7 @@ public class DiaryStatistics {
         return numberOfEntriesByDate;
     }
 
-    public void setNumberOfEntriesByDate(Map<LocalDate, Integer> numberOfEntriesByDate) {
+    public void setNumberOfEntriesByDate(@NotNull final Map<LocalDate, Integer> numberOfEntriesByDate) {
         this.numberOfEntriesByDate = numberOfEntriesByDate;
     }
 

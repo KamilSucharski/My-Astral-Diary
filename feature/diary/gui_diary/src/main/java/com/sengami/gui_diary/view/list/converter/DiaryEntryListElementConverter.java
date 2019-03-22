@@ -4,7 +4,7 @@ import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.sengami.date.DateFormatter;
 import com.sengami.domain_base.Constants;
-import com.sengami.domain_diary.model.DiaryEntry;
+import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListDateHeaderElement;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListDiaryEntryElement;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElement;

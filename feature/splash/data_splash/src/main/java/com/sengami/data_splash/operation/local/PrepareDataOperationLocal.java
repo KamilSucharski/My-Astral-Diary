@@ -2,8 +2,8 @@ package com.sengami.data_splash.operation.local;
 
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.sengami.data_base.dbo.DiaryEntryDBO;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
-import com.sengami.data_diary.dbo.DiaryEntryDBO;
 import com.sengami.domain_base.Constants;
 import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.WithLoadingIndicator;

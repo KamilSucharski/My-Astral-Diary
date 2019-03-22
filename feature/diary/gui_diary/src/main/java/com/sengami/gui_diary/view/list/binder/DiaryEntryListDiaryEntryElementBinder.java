@@ -1,6 +1,6 @@
 package com.sengami.gui_diary.view.list.binder;
 
-import com.sengami.domain_diary.model.DiaryEntry;
+import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.gui_diary.databinding.ElementDiaryEntryBinding;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListDiaryEntryElement;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElement;

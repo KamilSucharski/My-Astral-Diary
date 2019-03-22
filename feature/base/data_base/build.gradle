@@ -6,4 +6,5 @@ dependencies {
     implementation libraries.rxJava
     implementation libraries.jetbrainsAnnotations
     implementation libraries.ormLiteCore
+    implementation libraries.jodaTime
 }
