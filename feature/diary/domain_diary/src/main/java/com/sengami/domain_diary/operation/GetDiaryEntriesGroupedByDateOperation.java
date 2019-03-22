@@ -8,5 +8,5 @@ import org.joda.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-public interface GetDiaryEntryListGroupedByDateOperation extends Operation<Map<LocalDate, List<DiaryEntry>>> {
+public interface GetDiaryEntriesGroupedByDateOperation extends Operation<Map<LocalDate, List<DiaryEntry>>> {
 }

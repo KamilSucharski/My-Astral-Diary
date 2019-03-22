@@ -2,7 +2,7 @@ package com.sengami.gui_diary.di.module;
 
 import com.sengami.domain_diary.operation.CreateOrUpdateDiaryEntryOperation;
 import com.sengami.domain_diary.operation.DeleteDiaryEntryOperation;
-import com.sengami.domain_diary.operation.GetDiaryEntryListGroupedByDateOperation;
+import com.sengami.domain_diary.operation.GetDiaryEntriesGroupedByDateOperation;
 import com.sengami.domain_diary.presenter.DiaryEntryComposerPresenter;
 import com.sengami.domain_diary.presenter.DiaryEntryListPresenter;
 
@@ -16,8 +16,8 @@ public final class PresenterModule {
 
     @Provides
     @NotNull
-    DiaryEntryListPresenter diaryEntryListPresenter(@NotNull final GetDiaryEntryListGroupedByDateOperation getDiaryEntryListGroupedByDateOperation) {
-        return new DiaryEntryListPresenter(getDiaryEntryListGroupedByDateOperation);
+    DiaryEntryListPresenter diaryEntryListPresenter(@NotNull final GetDiaryEntriesGroupedByDateOperation getDiaryEntriesGroupedByDateOperation) {
+        return new DiaryEntryListPresenter(getDiaryEntriesGroupedByDateOperation);
     }
 
     @Provides

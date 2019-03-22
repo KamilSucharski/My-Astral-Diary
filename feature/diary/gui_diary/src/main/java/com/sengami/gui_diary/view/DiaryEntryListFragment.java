@@ -102,8 +102,8 @@ public final class DiaryEntryListFragment
     }
 
     @Override
-    public void showDiaryEntryListGroupedByDate(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntryListGroupedByDate) {
-        final List<DiaryEntryListElement> items = converter.convert(diaryEntryListGroupedByDate);
+    public void showDiaryEntriesGroupedByDate(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntriesGroupedByDate) {
+        final List<DiaryEntryListElement> items = converter.convert(diaryEntriesGroupedByDate);
         adapter.replaceAll(items);
         binding.recyclerView.setAdapter(adapter);
     }

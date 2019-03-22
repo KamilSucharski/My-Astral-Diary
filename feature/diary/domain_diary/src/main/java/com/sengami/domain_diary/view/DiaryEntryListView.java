@@ -23,7 +23,7 @@ public interface DiaryEntryListView extends WithErrorHandler, WithLoadingIndicat
     @NotNull
     Observable<Boolean> getAddNewDiaryClickedEntryTrigger();
 
-    void showDiaryEntryListGroupedByDate(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntryListGroupedByDate);
+    void showDiaryEntriesGroupedByDate(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntriesGroupedByDate);
 
     void navigateToDiaryEntryComposerScreen(@NotNull final DiaryEntry diaryEntry);
 

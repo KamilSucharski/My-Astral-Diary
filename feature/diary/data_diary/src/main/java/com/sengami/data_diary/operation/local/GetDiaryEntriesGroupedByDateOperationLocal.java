@@ -13,7 +13,7 @@ import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.operation.BaseOperation;
 import com.sengami.domain_base.schedulers.ReactiveSchedulers;
 import com.sengami.domain_diary.model.DiaryEntry;
-import com.sengami.domain_diary.operation.GetDiaryEntryListGroupedByDateOperation;
+import com.sengami.domain_diary.operation.GetDiaryEntriesGroupedByDateOperation;
 
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.LocalDate;
@@ -23,20 +23,20 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 
-public final class GetDiaryEntryListGroupedByDateOperationLocal
+public final class GetDiaryEntriesGroupedByDateOperationLocal
     extends BaseOperation<Map<LocalDate, List<DiaryEntry>>>
-    implements GetDiaryEntryListGroupedByDateOperation {
+    implements GetDiaryEntriesGroupedByDateOperation {
 
     @NotNull
     private final DatabaseConnectionProvider databaseConnectionProvider;
     @NotNull
     private final Mapper<DiaryEntryDBO, DiaryEntry> mapper;
 
-    public GetDiaryEntryListGroupedByDateOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                                        @NotNull final WithErrorHandler withErrorHandler,
-                                                        @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                        @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
-                                                        @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
+    public GetDiaryEntriesGroupedByDateOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
+                                                      @NotNull final WithErrorHandler withErrorHandler,
+                                                      @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                                      @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
+                                                      @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
         super(reactiveSchedulers, withErrorHandler, withLoadingIndicator);
         this.databaseConnectionProvider = databaseConnectionProvider;
         this.mapper = mapper;

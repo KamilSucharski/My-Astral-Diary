@@ -2,7 +2,7 @@ package com.sengami.domain_diary.presenter;
 
 import com.sengami.domain_base.presenter.BasePresenter;
 import com.sengami.domain_diary.model.DiaryEntry;
-import com.sengami.domain_diary.operation.GetDiaryEntryListGroupedByDateOperation;
+import com.sengami.domain_diary.operation.GetDiaryEntriesGroupedByDateOperation;
 import com.sengami.domain_diary.view.DiaryEntryListView;
 
 import org.jetbrains.annotations.NotNull;
@@ -10,10 +10,10 @@ import org.jetbrains.annotations.NotNull;
 public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListView> {
 
     @NotNull
-    private final GetDiaryEntryListGroupedByDateOperation getDiaryEntryListGroupedByDateOperation;
+    private final GetDiaryEntriesGroupedByDateOperation getDiaryEntriesGroupedByDateOperation;
 
-    public DiaryEntryListPresenter(@NotNull final GetDiaryEntryListGroupedByDateOperation getDiaryEntryListGroupedByDateOperation) {
-        this.getDiaryEntryListGroupedByDateOperation = getDiaryEntryListGroupedByDateOperation;
+    public DiaryEntryListPresenter(@NotNull final GetDiaryEntriesGroupedByDateOperation getDiaryEntriesGroupedByDateOperation) {
+        this.getDiaryEntriesGroupedByDateOperation = getDiaryEntriesGroupedByDateOperation;
     }
 
     @Override
@@ -26,8 +26,8 @@ public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListV
     private void subscribeRefreshListTrigger(@NotNull final DiaryEntryListView view) {
         disposables.add(
             view.getRefreshListTrigger()
-                .flatMap(x -> getDiaryEntryListGroupedByDateOperation.execute())
-                .subscribe(view::showDiaryEntryListGroupedByDate)
+                .flatMap(x -> getDiaryEntriesGroupedByDateOperation.execute())
+                .subscribe(view::showDiaryEntriesGroupedByDate)
         );
     }
 
