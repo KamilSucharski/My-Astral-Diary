@@ -11,7 +11,7 @@ import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.domain_base.error.WithErrorHandler;
 import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.model.DiaryEntry;
-import com.sengami.domain_base.model.DiaryStatistics;
+import com.sengami.domain_base.model.Statistics;
 import com.sengami.domain_base.operation.BaseOperation;
 import com.sengami.domain_base.schedulers.ReactiveSchedulers;
 import com.sengami.domain_statistics.operation.GetDiaryStatisticsOperation;
@@ -26,7 +26,7 @@ import java.util.Map;
 import io.reactivex.Observable;
 
 public final class GetDiaryStatisticsOperationLocal
-    extends BaseOperation<DiaryStatistics>
+    extends BaseOperation<Statistics>
     implements GetDiaryStatisticsOperation {
 
     @NotNull
@@ -45,7 +45,7 @@ public final class GetDiaryStatisticsOperationLocal
     }
 
     @Override
-    protected Observable<DiaryStatistics> getObservable() {
+    protected Observable<Statistics> getObservable() {
         return Observable.fromCallable(() -> {
             final ConnectionSource connectionSource = databaseConnectionProvider.provide();
             final Dao<DiaryEntryDBO, Integer> diaryEntryDao = DaoManager.createDao(connectionSource, DiaryEntryDBO.class);
@@ -56,11 +56,11 @@ public final class GetDiaryStatisticsOperationLocal
                 .map(mapper::toModel)
                 .collect(Collectors.toList());
 
-            final DiaryStatistics diaryStatistics = new DiaryStatistics();
-            diaryStatistics.setNumberOfEntriesByDate(getNumberOfEntriesByDate(entries));
-            diaryStatistics.setTotalEntries(entries.size());
-            diaryStatistics.setLongestEntryCharacterCount(getLongestCharacterCountInEntry(entries));
-            return diaryStatistics;
+            final Statistics statistics = new Statistics();
+            statistics.setNumberOfEntriesByDate(getNumberOfEntriesByDate(entries));
+            statistics.setTotalEntries(entries.size());
+            statistics.setLongestEntryCharacterCount(getLongestCharacterCountInEntry(entries));
+            return statistics;
         });
     }
 

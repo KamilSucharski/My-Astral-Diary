@@ -1,10 +1,12 @@
 package com.sengami.gui_statistics.view;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_base.error.ErrorHandler;
 import com.sengami.domain_base.loading.LoadingIndicator;
+import com.sengami.domain_base.model.Statistics;
 import com.sengami.domain_statistics.presenter.StatisticsPresenter;
 import com.sengami.domain_statistics.view.StatisticsView;
 import com.sengami.error_handler.di.module.WithErrorHandlerModule;
@@ -20,10 +22,16 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
+
 public final class StatisticsFragment
     extends BaseFragment<StatisticsPresenter, FragmentStatisticsBinding>
     implements StatisticsView {
 
+    @NotNull
+    private final Subject<Boolean> refreshStatisticsTrigger = PublishSubject.create();
     private ErrorHandler errorHandler;
     private LoadingIndicator loadingIndicator;
 
@@ -53,6 +61,17 @@ public final class StatisticsFragment
         super.init(context);
         errorHandler = new ToastErrorHandler(context);
         loadingIndicator = new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
+    }
+
+    @Override
+    @NotNull
+    public Observable<Boolean> getRefreshStatisticsTrigger() {
+        return refreshStatisticsTrigger;
+    }
+
+    @Override
+    public void showStatistics(@NotNull final Statistics statistics) {
+        Toast.makeText(getContext(), "asd", Toast.LENGTH_SHORT).show();
     }
 
     @Override

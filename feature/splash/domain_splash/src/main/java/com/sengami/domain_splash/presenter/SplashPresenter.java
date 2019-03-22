@@ -6,6 +6,11 @@ import com.sengami.domain_splash.view.SplashView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+
 public final class SplashPresenter extends BasePresenter<SplashView> {
 
     @NotNull
@@ -16,15 +21,15 @@ public final class SplashPresenter extends BasePresenter<SplashView> {
     }
 
     @Override
-    protected void onSubscribe(@NotNull final SplashView view) {
-        subscribePrepareDataOperation(view);
+    protected List<Disposable> createSubscriptions(@NotNull final SplashView view) {
+        return Arrays.asList(
+            subscribePrepareDataOperation(view)
+        );
     }
 
-    private void subscribePrepareDataOperation(@NotNull final SplashView view) {
-        disposables.add(
-            prepareDataOperation
+    private Disposable subscribePrepareDataOperation(@NotNull final SplashView view) {
+            return prepareDataOperation
                 .execute()
-                .subscribe(result -> view.navigateToMainView())
-        );
+                .subscribe(result -> view.navigateToMainView());
     }
 }

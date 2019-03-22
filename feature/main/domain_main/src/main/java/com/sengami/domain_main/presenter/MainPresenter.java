@@ -5,9 +5,15 @@ import com.sengami.domain_main.view.MainView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+
 public final class MainPresenter extends BasePresenter<MainView> {
 
     @Override
-    protected void onSubscribe(@NotNull final MainView view) {
+    protected List<Disposable> createSubscriptions(@NotNull final MainView view) {
+        return Collections.emptyList();
     }
 }

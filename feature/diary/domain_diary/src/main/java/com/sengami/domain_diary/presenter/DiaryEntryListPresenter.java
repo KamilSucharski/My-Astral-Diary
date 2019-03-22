@@ -7,6 +7,11 @@ import com.sengami.domain_diary.view.DiaryEntryListView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+
 public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListView> {
 
     @NotNull
@@ -17,32 +22,31 @@ public final class DiaryEntryListPresenter extends BasePresenter<DiaryEntryListV
     }
 
     @Override
-    protected void onSubscribe(@NotNull final DiaryEntryListView view) {
-        subscribeRefreshListTrigger(view);
-        subscribeDiaryEntryClickedTrigger(view);
-        subscribeAddNewDiaryEntryClickedTrigger(view);
-    }
-
-    private void subscribeRefreshListTrigger(@NotNull final DiaryEntryListView view) {
-        disposables.add(
-            view.getRefreshListTrigger()
-                .flatMap(x -> getDiaryEntriesGroupedByDateOperation.execute())
-                .subscribe(view::showDiaryEntriesGroupedByDate)
+    protected List<Disposable> createSubscriptions(@NotNull final DiaryEntryListView view) {
+        return Arrays.asList(
+            subscribeRefreshListTrigger(view),
+            subscribeDiaryEntryClickedTrigger(view),
+            subscribeAddNewDiaryEntryClickedTrigger(view)
         );
     }
 
-    private void subscribeDiaryEntryClickedTrigger(@NotNull final DiaryEntryListView view) {
-        disposables.add(
-            view.getDiaryEntryClickedTrigger()
-                .subscribe(view::navigateToDiaryEntryComposerScreen)
-        );
+    private Disposable subscribeRefreshListTrigger(@NotNull final DiaryEntryListView view) {
+        return view
+            .getRefreshListTrigger()
+            .flatMap(x -> getDiaryEntriesGroupedByDateOperation.execute())
+            .subscribe(view::showDiaryEntriesGroupedByDate);
     }
 
-    private void subscribeAddNewDiaryEntryClickedTrigger(@NotNull final DiaryEntryListView view) {
-        disposables.add(
-            view.getAddNewDiaryClickedEntryTrigger()
-                .map(x -> new DiaryEntry())
-                .subscribe(view::navigateToDiaryEntryComposerScreen)
-        );
+    private Disposable subscribeDiaryEntryClickedTrigger(@NotNull final DiaryEntryListView view) {
+        return view
+            .getDiaryEntryClickedTrigger()
+            .subscribe(view::navigateToDiaryEntryComposerScreen);
+    }
+
+    private Disposable subscribeAddNewDiaryEntryClickedTrigger(@NotNull final DiaryEntryListView view) {
+        return view
+            .getAddNewDiaryClickedEntryTrigger()
+            .map(x -> new DiaryEntry())
+            .subscribe(view::navigateToDiaryEntryComposerScreen);
     }
 }

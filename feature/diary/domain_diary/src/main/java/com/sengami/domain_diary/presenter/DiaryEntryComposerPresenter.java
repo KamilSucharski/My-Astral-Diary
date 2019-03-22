@@ -8,6 +8,11 @@ import com.sengami.domain_diary.view.DiaryEntryComposerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+
 public final class DiaryEntryComposerPresenter extends BasePresenter<DiaryEntryComposerView> {
 
     @NotNull
@@ -23,48 +28,46 @@ public final class DiaryEntryComposerPresenter extends BasePresenter<DiaryEntryC
     }
 
     @Override
-    protected void onSubscribe(@NotNull final DiaryEntryComposerView view) {
-        subscribeSaveDiaryEntryClickedTrigger(view);
-        subscribeDeleteDiaryEntryClickedTrigger(view);
-        subscribeDateChangedBackTrigger(view);
-        subscribeNavigateBackTrigger(view);
-    }
-
-    private void subscribeSaveDiaryEntryClickedTrigger(@NotNull final DiaryEntryComposerView view) {
-        disposables.add(
-            view.getSaveDiaryEntryTrigger()
-                .map(createOrUpdateDiaryEntryOperation::withDiaryEntry)
-                .flatMap(Operation::execute)
-                .subscribe(x -> {
-                    view.showOperationSuccessMessage();
-                    view.navigateBack();
-                })
+    protected List<Disposable> createSubscriptions(@NotNull final DiaryEntryComposerView view) {
+        return Arrays.asList(
+            subscribeSaveDiaryEntryClickedTrigger(view),
+            subscribeDeleteDiaryEntryClickedTrigger(view),
+            subscribeDateChangedBackTrigger(view),
+            subscribeNavigateBackTrigger(view)
         );
     }
 
-    private void subscribeDeleteDiaryEntryClickedTrigger(@NotNull final DiaryEntryComposerView view) {
-        disposables.add(
-            view.getDeleteDiaryEntryTrigger()
-                .map(deleteDiaryEntryOperation::withDiaryEntry)
-                .flatMap(Operation::execute)
-                .subscribe(x -> {
-                    view.showOperationSuccessMessage();
-                    view.navigateBack();
-                })
-        );
+    private Disposable subscribeSaveDiaryEntryClickedTrigger(@NotNull final DiaryEntryComposerView view) {
+        return view
+            .getSaveDiaryEntryTrigger()
+            .map(createOrUpdateDiaryEntryOperation::withDiaryEntry)
+            .flatMap(Operation::execute)
+            .subscribe(x -> {
+                view.showOperationSuccessMessage();
+                view.navigateBack();
+            });
     }
 
-    private void subscribeDateChangedBackTrigger(@NotNull final DiaryEntryComposerView view) {
-        disposables.add(
-            view.getDateChangedTrigger()
-                .subscribe(view::changeDate)
-        );
+    private Disposable subscribeDeleteDiaryEntryClickedTrigger(@NotNull final DiaryEntryComposerView view) {
+        return view
+            .getDeleteDiaryEntryTrigger()
+            .map(deleteDiaryEntryOperation::withDiaryEntry)
+            .flatMap(Operation::execute)
+            .subscribe(x -> {
+                view.showOperationSuccessMessage();
+                view.navigateBack();
+            });
     }
 
-    private void subscribeNavigateBackTrigger(@NotNull final DiaryEntryComposerView view) {
-        disposables.add(
-            view.getReturnTrigger()
-                .subscribe(x -> view.navigateBack())
-        );
+    private Disposable subscribeDateChangedBackTrigger(@NotNull final DiaryEntryComposerView view) {
+        return view
+            .getDateChangedTrigger()
+            .subscribe(view::changeDate);
+    }
+
+    private Disposable subscribeNavigateBackTrigger(@NotNull final DiaryEntryComposerView view) {
+        return view
+            .getReturnTrigger()
+            .subscribe(x -> view.navigateBack());
     }
 }

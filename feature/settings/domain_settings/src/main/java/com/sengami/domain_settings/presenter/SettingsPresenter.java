@@ -8,6 +8,11 @@ import com.sengami.domain_settings.view.SettingsView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+
 public final class SettingsPresenter extends BasePresenter<SettingsView> {
 
     @NotNull
@@ -26,33 +31,32 @@ public final class SettingsPresenter extends BasePresenter<SettingsView> {
     }
 
     @Override
-    protected void onSubscribe(@NotNull final SettingsView view) {
-        subscribeCreateBackupTrigger(view);
-        subscribeRestoreFromBackupTrigger(view);
-        subscribeExportToTextFileTrigger(view);
-    }
-
-    private void subscribeCreateBackupTrigger(@NotNull final SettingsView view) {
-        disposables.add(
-            view.getCreateBackupTrigger()
-                .flatMap(x -> createBackupOperation.execute())
-                .subscribe(view::showSavedFile)
+    protected List<Disposable> createSubscriptions(@NotNull final SettingsView view) {
+        return Arrays.asList(
+            subscribeCreateBackupTrigger(view),
+            subscribeRestoreFromBackupTrigger(view),
+            subscribeExportToTextFileTrigger(view)
         );
     }
 
-    private void subscribeRestoreFromBackupTrigger(@NotNull final SettingsView view) {
-        disposables.add(
-            view.getRestoreFromBackupTrigger()
-                .flatMap(file -> restoreFromBackupOperation.withBackupFile(file).execute())
-                .subscribe(x -> view.refreshApplication())
-        );
+    private Disposable subscribeCreateBackupTrigger(@NotNull final SettingsView view) {
+        return view
+            .getCreateBackupTrigger()
+            .flatMap(x -> createBackupOperation.execute())
+            .subscribe(view::showSavedFile);
     }
 
-    private void subscribeExportToTextFileTrigger(@NotNull final SettingsView view) {
-        disposables.add(
-            view.getExportToTextFileTrigger()
-                .flatMap(x -> exportToTextFileOperation.execute())
-                .subscribe(view::showSavedFile)
-        );
+    private Disposable subscribeRestoreFromBackupTrigger(@NotNull final SettingsView view) {
+        return view
+            .getRestoreFromBackupTrigger()
+            .flatMap(file -> restoreFromBackupOperation.withBackupFile(file).execute())
+            .subscribe(x -> view.refreshApplication());
+    }
+
+    private Disposable subscribeExportToTextFileTrigger(@NotNull final SettingsView view) {
+        return view
+            .getExportToTextFileTrigger()
+            .flatMap(x -> exportToTextFileOperation.execute())
+            .subscribe(view::showSavedFile);
     }
 }

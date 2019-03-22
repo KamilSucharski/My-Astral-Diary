@@ -2,17 +2,20 @@ package com.sengami.domain_base.presenter;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 public abstract class BasePresenter<V> implements ReactivePresenter<V> {
 
-    protected CompositeDisposable disposables = new CompositeDisposable();
+    private CompositeDisposable disposables = new CompositeDisposable();
 
-    protected abstract void onSubscribe(@NotNull final V view);
+    protected abstract List<Disposable> createSubscriptions(@NotNull final V view);
 
     @Override
     final public void subscribe(@NotNull final V view) {
-        onSubscribe(view);
+        disposables.addAll(createSubscriptions(view).toArray(new Disposable[]{}));
     }
 
     @Override

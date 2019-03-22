@@ -6,7 +6,7 @@ import org.joda.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class DiaryStatistics {
+public final class Statistics {
 
     @NotNull
     private Map<LocalDate, Integer> numberOfEntriesByDate = new HashMap<>();
