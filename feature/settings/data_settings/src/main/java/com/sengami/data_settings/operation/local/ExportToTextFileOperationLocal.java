@@ -81,15 +81,17 @@ public final class ExportToTextFileOperationLocal extends BaseOperation<File> im
         final PrintWriter printWriter = new PrintWriter(fileWriter);
 
         for (final Map.Entry<LocalDate, List<DiaryEntry>> diaryEntryGroup : entries.entrySet()) {
-            printWriter.print("==========\n");
-            printWriter.print(DateFormatter.format(diaryEntryGroup.getKey().toDate(), Constants.DISPLAYED_DATE_FORMAT));
-            printWriter.print("\n\n");
+            printWriter.printf(
+                Constants.TEXT_EXPORT_DATE_FORMAT,
+                DateFormatter.format(diaryEntryGroup.getKey().toDate(), Constants.DISPLAYED_DATE_FORMAT)
+            );
+
             for (final DiaryEntry diaryEntry : diaryEntryGroup.getValue()) {
-                printWriter.print("# ");
-                printWriter.print(diaryEntry.getTitle());
-                printWriter.print("\n");
-                printWriter.print(diaryEntry.getBody());
-                printWriter.print("\n\n");
+                printWriter.printf(
+                    Constants.TEXT_EXPORT_ENTRY_FORMAT,
+                    diaryEntry.getTitle(),
+                    diaryEntry.getBody()
+                );
             }
         }
 

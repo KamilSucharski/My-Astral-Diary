@@ -8,6 +8,8 @@ public class Constants {
     public static final String DATABASE_PATH = "databases/" + DATABASE_NAME;
     public static final String DATABASE_BACKUP_NAME_FORMAT = DATABASE_ALIAS + "_%1$s." + DATABASE_EXTENSION;
     public static final String TEXT_EXPORT_NAME_FORMAT = DATABASE_ALIAS + "_%1$s." + TEXT_FILE_EXTENSION;
+    public static final String TEXT_EXPORT_DATE_FORMAT = "==========\n%1$s\n\n";
+    public static final String TEXT_EXPORT_ENTRY_FORMAT = "# %1$s\n%2$s\n\n";
 
     public static final String DISPLAYED_DATE_FORMAT = "dd MMMM yyyy";
     public static final String FILE_DATE_FORMAT = "yyyyMMdd_HHmm";
