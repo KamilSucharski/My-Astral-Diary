@@ -1,7 +1,6 @@
 package com.sengami.gui_statistics.view;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_base.error.ErrorHandler;
@@ -15,13 +14,23 @@ import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_statistics.R;
 import com.sengami.gui_statistics.databinding.FragmentStatisticsBinding;
 import com.sengami.gui_statistics.di.component.DaggerStatisticsComponent;
+import com.sengami.gui_statistics.view.list.adapter.StatisticsListAdapter;
+import com.sengami.gui_statistics.view.list.converter.StatisticsListElementConverter;
+import com.sengami.gui_statistics.view.list.element.StatisticsListElement;
+import com.sengami.gui_statistics.view.list.element.StatisticsListElementType;
+import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
+import com.sengami.recycler_view_adapter.converter.ElementConverter;
 import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
 import com.sengami.util_loading_indicator.implementation.ViewVisibilityLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
@@ -34,6 +43,8 @@ public final class StatisticsFragment
     private final Subject<Boolean> refreshStatisticsTrigger = PublishSubject.create();
     private ErrorHandler errorHandler;
     private LoadingIndicator loadingIndicator;
+    private BaseAdapter<StatisticsListElement, StatisticsListElementType> adapter;
+    private ElementConverter<Statistics, StatisticsListElement> converter;
 
     @Inject
     @Override
@@ -61,6 +72,8 @@ public final class StatisticsFragment
         super.init(context);
         errorHandler = new ToastErrorHandler(context);
         loadingIndicator = new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
+        setupList(context);
+        refreshStatisticsTrigger.onNext(true);
     }
 
     @Override
@@ -71,7 +84,8 @@ public final class StatisticsFragment
 
     @Override
     public void showStatistics(@NotNull final Statistics statistics) {
-        Toast.makeText(getContext(), "asd", Toast.LENGTH_SHORT).show();
+        final List<StatisticsListElement> elements = converter.convert(statistics);
+        adapter.addAll(elements);
     }
 
     @Override
@@ -84,5 +98,12 @@ public final class StatisticsFragment
     @NotNull
     public LoadingIndicator getLoadingIndicator() {
         return loadingIndicator;
+    }
+
+    private void setupList(@NotNull final Context context) {
+        adapter = new StatisticsListAdapter(context);
+        converter = new StatisticsListElementConverter();
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
+        binding.recyclerView.setAdapter(adapter);
     }
 }

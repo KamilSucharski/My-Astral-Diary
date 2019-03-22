@@ -79,9 +79,9 @@ public final class SettingsFragment
     @Override
     protected void init(@NotNull final Context context) {
         super.init(context);
-        setupList(context);
         errorHandler = new ToastErrorHandler(context);
         loadingIndicator = new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
+        setupList(context);
     }
 
     @Override

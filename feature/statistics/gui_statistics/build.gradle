@@ -14,13 +14,16 @@ dependencies {
     implementation project(":util:android:database_connection")
     implementation project(":util:android:error_handler")
     implementation project(":util:android:loading_indicator")
+    implementation project(':util:android:recycler_view_adapter')
 
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger
     implementation libraries.rxJava
     implementation libraries.androidXAppCompat
     implementation libraries.recyclerView
+    implementation libraries.materialDesign
     implementation libraries.mpAndroidChart
+    implementation libraries.jodaTime
 
     annotationProcessor annotations.dagger
 }

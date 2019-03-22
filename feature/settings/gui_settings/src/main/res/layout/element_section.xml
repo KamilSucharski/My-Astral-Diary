@@ -15,7 +15,6 @@
         android:layout_marginTop="@dimen/content_margin"
         android:layout_marginBottom="@dimen/half_content_margin"
         android:theme="@style/Text.Standard"
-        android:textColor="@color/color_accent"
         android:text="@{name}"
         tools:text="Backup"/>
 </layout>

@@ -1,2 +1,4 @@
 <resources>
+    <string name="statistic_total_entries">Total diary entries:</string>
+    <string name="statistic_longest_entry_character_count">Longest entry character count:</string>
 </resources>
