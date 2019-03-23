@@ -1,11 +1,5 @@
 ### My Astral Diary
-<img src="assets/store/screenshot_1.png" alt="screenshot 1" width="100" />
-&nbsp;
-<img src="assets/store/screenshot_2.png" alt="screenshot 2" width="100" />
-&nbsp;
-<img src="assets/store/screenshot_3.png" alt="screenshot 3" width="100" />
-&nbsp;
-<img src="assets/store/screenshot_4.png" alt="screenshot 4" width="100" />
+<img src="assets/store/screenshot_1.png" alt="screenshot 1" width="180" />&nbsp;<img src="assets/store/screenshot_2.png" alt="screenshot 2" width="180" />&nbsp;<img src="assets/store/screenshot_3.png" alt="screenshot 3" width="180" />&nbsp;<img src="assets/store/screenshot_4.png" alt="screenshot 4" width="180" />
 
 ##### Before building:
 
