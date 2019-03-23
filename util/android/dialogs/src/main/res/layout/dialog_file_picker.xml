@@ -18,7 +18,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_weight="5"
+            android:layout_weight="8"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:cardBackgroundColor="@color/color_primary_dark"
@@ -34,9 +34,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/content_margin"
-                    android:layout_marginStart="@dimen/content_margin"
-                    android:layout_marginEnd="@dimen/content_margin"
+                    android:layout_margin="@dimen/content_margin"
                     android:theme="@style/Text.Header"
                     android:text="@string/file_picker_dialog_choose_file" />
 

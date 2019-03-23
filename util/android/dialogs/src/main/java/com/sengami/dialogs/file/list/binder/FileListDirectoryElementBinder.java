@@ -1,6 +1,7 @@
 package com.sengami.dialogs.file.list.binder;
 
 import com.sengami.dialogs.databinding.DialogFilePickerElementDirectoryBinding;
+import com.sengami.dialogs.file.list.adapter.FileListCallbacks;
 import com.sengami.dialogs.file.list.element.FileListDirectoryElement;
 import com.sengami.dialogs.file.list.element.FileListElement;
 import com.sengami.dialogs.file.list.element.FileListElementType;
@@ -15,6 +16,13 @@ import static com.sengami.clicks.Clicks.onClick;
 
 public final class FileListDirectoryElementBinder extends ViewHolderBinder<FileListElement, FileListDirectoryElement, DialogFilePickerElementDirectoryBinding> {
 
+    @NotNull
+    private final FileListCallbacks callbacks;
+
+    public FileListDirectoryElementBinder(@NotNull final FileListCallbacks callbacks) {
+        this.callbacks = callbacks;
+    }
+
     @Override
     @NotNull
     protected final ElementType getAllowedType() {
@@ -26,6 +34,6 @@ public final class FileListDirectoryElementBinder extends ViewHolderBinder<FileL
                                      @NotNull final FileListDirectoryElement item) {
         final File directory = item.getDirectory();
         binding.setName(directory.getName());
-        onClick(binding, () -> item.getCallbacks().onDirectoryClicked(directory));
+        onClick(binding, () -> callbacks.onDirectoryClicked(directory));
     }
 }

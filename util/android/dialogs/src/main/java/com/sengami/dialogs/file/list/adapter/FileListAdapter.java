@@ -16,8 +16,8 @@ public final class FileListAdapter extends BaseAdapter<FileListElement, FileList
         super(
             FileListElementType.values(),
             Arrays.asList(
-                new FileListDirectoryElementBinder(),
-                new FileListFileElementBinder()
+                new FileListDirectoryElementBinder(callbacks),
+                new FileListFileElementBinder(callbacks)
             )
         );
     }

@@ -6,14 +6,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
 
+import com.annimon.stream.Stream;
 import com.sengami.dialogs.R;
 import com.sengami.dialogs.databinding.DialogFilePickerBinding;
 import com.sengami.dialogs.file.list.adapter.FileListAdapter;
 import com.sengami.dialogs.file.list.adapter.FileListCallbacks;
 import com.sengami.dialogs.file.list.converter.FileListElementConverter;
 import com.sengami.dialogs.file.list.element.FileListElement;
-import com.sengami.dialogs.file.list.element.FileListElementType;
-import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
+import com.sengami.dialogs.file.list.element.FileListFileElement;
 import com.sengami.recycler_view_adapter.converter.ElementConverter;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,8 +39,8 @@ public class FilePickerDialog extends Dialog implements FileListCallbacks {
 
     @NotNull
     private final Callback callback;
-    private BaseAdapter<FileListElement, FileListElementType> adapter;
-    private ElementConverter<List<File>, FileListElement> converter;
+    private final ElementConverter<List<File>, FileListElement> converter = new FileListElementConverter();
+    private FileListAdapter adapter;
 
     @Nullable
     private File selectedFile = null;
@@ -66,12 +66,18 @@ public class FilePickerDialog extends Dialog implements FileListCallbacks {
     public void onFileClicked(@NotNull final File file) {
         selectedFile = file;
         binding.buttons.setAcceptButtonDisabled(false);
+        Stream.of(adapter.getItems())
+            .filter(element -> element instanceof FileListFileElement)
+            .map(element -> (FileListFileElement) element)
+            .forEach(element -> element.setSelected(element.getFile().equals(selectedFile)));
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onDirectoryClicked(@NotNull final File file) {
-        updateList(Arrays.asList(file.listFiles()));
+        selectedFile = null;
         binding.buttons.setAcceptButtonDisabled(true);
+        updateList(Arrays.asList(file.listFiles()));
     }
 
     private void setupView() {
@@ -81,7 +87,6 @@ public class FilePickerDialog extends Dialog implements FileListCallbacks {
 
     private void setupList() {
         adapter = new FileListAdapter(this);
-        converter = new FileListElementConverter(this);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         binding.recyclerView.setAdapter(adapter);
     }

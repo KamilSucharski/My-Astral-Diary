@@ -18,7 +18,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_weight="5"
+            android:layout_weight="8"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:cardBackgroundColor="@color/color_primary_dark"

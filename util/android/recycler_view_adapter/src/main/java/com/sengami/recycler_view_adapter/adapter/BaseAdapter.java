@@ -82,4 +82,9 @@ public abstract class BaseAdapter<ELEMENT extends Element, TYPE extends ElementT
         items.clear();
         notifyDataSetChanged();
     }
+
+    @NotNull
+    public List<ELEMENT> getItems() {
+        return items;
+    }
 }
