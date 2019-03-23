@@ -13,14 +13,23 @@ android {
             storePassword configuration["keystorePassword"]
             keyAlias configuration["keystoreAlias"]
             keyPassword configuration["keystoreAliasPassword"]
+            v1SigningEnabled = true
+            v2SigningEnabled = true
         }
     }
 
     buildTypes {
         release {
+            minifyEnabled true
             shrinkResources true
+            proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
             proguardFiles fileTree(dir: '../proguard', include: ['*.pro']).asList().toArray()
             signingConfig signingConfigs.release
+        }
+
+        debug {
+            minifyEnabled false
+            shrinkResources false
         }
     }
 }
