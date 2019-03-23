@@ -20,7 +20,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -37,9 +36,11 @@ public class FilePickerDialog extends Dialog implements FileListCallbacks {
         void onFilePicked(@NotNull final File file);
     }
 
+    public static final File ROOT = Environment.getExternalStorageDirectory();
+
     @NotNull
     private final Callback callback;
-    private final ElementConverter<List<File>, FileListElement> converter = new FileListElementConverter();
+    private final ElementConverter<File, FileListElement> converter = new FileListElementConverter();
     private FileListAdapter adapter;
 
     @Nullable
@@ -77,7 +78,7 @@ public class FilePickerDialog extends Dialog implements FileListCallbacks {
     public void onDirectoryClicked(@NotNull final File file) {
         selectedFile = null;
         binding.buttons.setAcceptButtonDisabled(true);
-        updateList(Arrays.asList(file.listFiles()));
+        updateList(file);
     }
 
     private void setupView() {
@@ -86,7 +87,7 @@ public class FilePickerDialog extends Dialog implements FileListCallbacks {
     }
 
     private void setupList() {
-        adapter = new FileListAdapter(this);
+        adapter = new FileListAdapter(getContext(), this);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         binding.recyclerView.setAdapter(adapter);
     }
@@ -102,11 +103,11 @@ public class FilePickerDialog extends Dialog implements FileListCallbacks {
     }
 
     private void loadInitialListData() {
-        onDirectoryClicked(Environment.getExternalStorageDirectory());
+        onDirectoryClicked(ROOT);
     }
 
-    private void updateList(@NotNull final List<File> fileList) {
-        final List<FileListElement> elements = converter.convert(fileList);
+    private void updateList(@NotNull final File rootFile) {
+        final List<FileListElement> elements = converter.convert(rootFile);
         adapter.replaceAll(elements);
     }
 }
