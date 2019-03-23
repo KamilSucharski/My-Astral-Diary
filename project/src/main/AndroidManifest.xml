@@ -11,7 +11,8 @@
         android:label="@string/application_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        android:supportsRtl="true"
+        tools:ignore="GoogleAppIndexingWarning,FullBackupContent">
 
         <activity android:name="com.sengami.gui_splash.view.SplashActivity">
             <intent-filter>

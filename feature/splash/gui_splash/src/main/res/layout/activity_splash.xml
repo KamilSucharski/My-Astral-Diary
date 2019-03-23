@@ -12,7 +12,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/my_astral_diary_logo" />
+            android:src="@drawable/my_astral_diary_logo"
+            android:contentDescription="@string/splash_logo_content_description"/>
 
     </FrameLayout>
 

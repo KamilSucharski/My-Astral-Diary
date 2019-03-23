@@ -10,7 +10,8 @@
     android:clickable="true"
     android:outlineProvider="none"
     android:elevation="16dp"
-    tools:visibility="visible">
+    tools:visibility="visible"
+    tools:ignore="Overdraw">
 
     <ProgressBar
         android:layout_width="wrap_content"

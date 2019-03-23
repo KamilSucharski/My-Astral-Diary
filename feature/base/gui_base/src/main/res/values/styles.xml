@@ -4,10 +4,6 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
-
-        <item name="android:supportsRtl">false</item>
-        <item name="android:screenOrientation">portrait</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
     <style name="Text">
