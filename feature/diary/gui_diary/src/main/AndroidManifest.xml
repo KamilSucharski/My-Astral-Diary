@@ -1,1 +1,3 @@
-<manifest package="com.sengami.gui_diary" />
+<manifest xmlns:tools="http://schemas.android.com/tools"
+    package="com.sengami.gui_diary"
+    tools:ignore="RtlEnabled" />
