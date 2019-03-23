@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sengami.domain_base.presenter.ReactivePresenter;
+import com.sengami.domain_base.presenter.Presenter;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
-public abstract class BaseFragment<P extends ReactivePresenter, DB extends ViewDataBinding> extends Fragment {
+public abstract class BaseFragment<P extends Presenter, DB extends ViewDataBinding> extends Fragment {
 
     private P presenter;
     protected DB binding;

@@ -6,7 +6,7 @@ import com.sengami.domain_splash.view.SplashView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -22,7 +22,7 @@ public final class SplashPresenter extends BasePresenter<SplashView> {
 
     @Override
     protected List<Disposable> createSubscriptions(@NotNull final SplashView view) {
-        return Arrays.asList(
+        return Collections.singletonList(
             subscribePrepareDataOperation(view)
         );
     }

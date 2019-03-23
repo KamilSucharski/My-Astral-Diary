@@ -1,7 +1,5 @@
 package com.sengami.gui_diary.view.list.adapter;
 
-import android.content.Context;
-
 import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.gui_diary.view.list.binder.DiaryEntryListDateHeaderElementBinder;
 import com.sengami.gui_diary.view.list.binder.DiaryEntryListDiaryEntryElementBinder;

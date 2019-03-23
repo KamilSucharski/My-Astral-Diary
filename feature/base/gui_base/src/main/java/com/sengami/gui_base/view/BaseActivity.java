@@ -3,7 +3,7 @@ package com.sengami.gui_base.view;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.sengami.domain_base.presenter.ReactivePresenter;
+import com.sengami.domain_base.presenter.Presenter;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
-public abstract class BaseActivity<P extends ReactivePresenter, DB extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseActivity<P extends Presenter, DB extends ViewDataBinding> extends AppCompatActivity {
 
     private P presenter;
     protected DB binding;

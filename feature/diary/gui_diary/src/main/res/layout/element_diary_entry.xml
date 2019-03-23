@@ -42,7 +42,7 @@
                 android:ellipsize="end"
                 android:textColor="@color/color_primary"
                 android:text="@{diaryEntry.body}"
-                tools:text="I had an intresting experience with pink elephants at the museum. They were holding people hostage and nothing could stop them."/>
+                tools:text="I had an interesting experience with pink elephants at the museum. They were holding people hostage and nothing could stop them."/>
 
         </LinearLayout>
 

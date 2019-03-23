@@ -141,7 +141,7 @@ public final class DiaryEntryListFragment
     }
 
     private void setupList(@NotNull final Context context) {
-        adapter = new DiaryEntryListAdapter(context, diaryEntryClickedTrigger);
+        adapter = new DiaryEntryListAdapter(diaryEntryClickedTrigger);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
     }
 }

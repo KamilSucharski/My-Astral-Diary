@@ -6,7 +6,7 @@ import com.sengami.domain_statistics.view.StatisticsView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -22,7 +22,7 @@ public final class StatisticsPresenter extends BasePresenter<StatisticsView> {
 
     @Override
     protected List<Disposable> createSubscriptions(@NotNull final StatisticsView view) {
-        return Arrays.asList(
+        return Collections.singletonList(
             subscribeRefreshStatisticsTrigger(view)
         );
     }

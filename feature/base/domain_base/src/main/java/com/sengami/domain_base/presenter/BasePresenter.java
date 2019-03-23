@@ -7,7 +7,7 @@ import java.util.List;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public abstract class BasePresenter<V> implements ReactivePresenter<V> {
+public abstract class BasePresenter<V> implements Presenter<V> {
 
     private final CompositeDisposable disposables = new CompositeDisposable();
 

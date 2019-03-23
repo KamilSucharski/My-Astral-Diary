@@ -6,14 +6,15 @@ import android.database.sqlite.SQLiteDatabase;
 import com.j256.ormlite.android.AndroidConnectionSource;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
+import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.database_connection.BuildConfig;
 import com.sengami.domain_base.Constants;
 
 import org.jetbrains.annotations.NotNull;
 
-public final class DatabaseDatabaseConnectionProvider extends OrmLiteSqliteOpenHelper implements com.sengami.data_base.util.DatabaseConnectionProvider {
+public final class AndroidDatabaseConnectionProvider extends OrmLiteSqliteOpenHelper implements DatabaseConnectionProvider {
 
-    public DatabaseDatabaseConnectionProvider(@NotNull final Context context) {
+    public AndroidDatabaseConnectionProvider(@NotNull final Context context) {
         super(context, Constants.DATABASE_NAME, null, BuildConfig.VERSION_CODE);
     }
 

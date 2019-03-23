@@ -29,4 +29,7 @@
 }
 
 # Javax
--dontwarn javax.**
+-keepattributes RuntimeVisibleAnnotations
+-keep @javax.persistence.* class * {
+   *;
+}
