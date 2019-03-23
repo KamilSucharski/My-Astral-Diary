@@ -1,26 +1,28 @@
 package com.sengami.gui_diary.di.component;
 
-import com.sengami.context.di.module.ContextModule;
+import com.sengami.android_operation.di.module.ContextModule;
+import com.sengami.android_operation.di.module.LoggerModule;
+import com.sengami.android_operation.di.module.ReactiveSchedulersModule;
+import com.sengami.android_operation.di.module.WithErrorHandlerModule;
+import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
 import com.sengami.database_connection.di.module.DatabaseConnectionProviderModule;
-import com.sengami.error_handler.di.module.WithErrorHandlerModule;
 import com.sengami.gui_diary.di.module.MapperModule;
 import com.sengami.gui_diary.di.module.OperationModule;
 import com.sengami.gui_diary.di.module.PresenterModule;
 import com.sengami.gui_diary.view.DiaryEntryComposerActivity;
-import com.sengami.reactive_schedulers.di.module.ReactiveSchedulersModule;
-import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
 
 import dagger.Component;
 
 @Component(modules = {
-    DatabaseConnectionProviderModule.class,
     ContextModule.class,
-    WithErrorHandlerModule.class,
-    WithLoadingIndicatorModule.class,
+    DatabaseConnectionProviderModule.class,
+    LoggerModule.class,
     MapperModule.class,
     OperationModule.class,
     PresenterModule.class,
-    ReactiveSchedulersModule.class
+    ReactiveSchedulersModule.class,
+    WithErrorHandlerModule.class,
+    WithLoadingIndicatorModule.class,
 })
 public interface DiaryEntryComposerComponent {
 

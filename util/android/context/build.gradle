@@ -1,9 +1,0 @@
-apply plugin: 'com.android.library'
-apply from: '../../../config/android_module_shared_config.gradle'
-
-dependencies {
-    implementation libraries.jetbrainsAnnotations
-    implementation libraries.dagger
-
-    annotationProcessor annotations.dagger
-}

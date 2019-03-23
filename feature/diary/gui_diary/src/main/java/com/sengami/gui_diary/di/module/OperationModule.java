@@ -6,10 +6,11 @@ import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_diary.operation.local.CreateOrUpdateDiaryEntryOperationLocal;
 import com.sengami.data_diary.operation.local.DeleteDiaryEntryOperationLocal;
 import com.sengami.data_diary.operation.local.GetDiaryEntriesGroupedByDateOperationLocal;
-import com.sengami.domain_base.error.WithErrorHandler;
-import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.model.DiaryEntry;
-import com.sengami.domain_base.schedulers.ReactiveSchedulers;
+import com.sengami.domain_base.operation.error.WithErrorHandler;
+import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
+import com.sengami.domain_base.operation.logger.Logger;
+import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
 import com.sengami.domain_diary.operation.CreateOrUpdateDiaryEntryOperation;
 import com.sengami.domain_diary.operation.DeleteDiaryEntryOperation;
 import com.sengami.domain_diary.operation.GetDiaryEntriesGroupedByDateOperation;
@@ -27,12 +28,14 @@ public final class OperationModule {
     GetDiaryEntriesGroupedByDateOperation getHelloWorldOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                                  @NotNull final WithErrorHandler withErrorHandler,
                                                                  @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                                                 @NotNull final Logger logger,
                                                                  @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
                                                                  @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
         return new GetDiaryEntriesGroupedByDateOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
+            logger,
             databaseConnectionProvider,
             mapper
         );
@@ -43,12 +46,14 @@ public final class OperationModule {
     CreateOrUpdateDiaryEntryOperation createOrUpdateDiaryEntryOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                                         @NotNull final WithErrorHandler withErrorHandler,
                                                                         @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                                                        @NotNull final Logger logger,
                                                                         @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
                                                                         @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
         return new CreateOrUpdateDiaryEntryOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
+            logger,
             databaseConnectionProvider,
             mapper
         );
@@ -59,11 +64,13 @@ public final class OperationModule {
     DeleteDiaryEntryOperation deleteDiaryEntryOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                         @NotNull final WithErrorHandler withErrorHandler,
                                                         @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                                        @NotNull final Logger logger,
                                                         @NotNull final DatabaseConnectionProvider databaseConnectionProvider) {
         return new DeleteDiaryEntryOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
+            logger,
             databaseConnectionProvider
         );
     }

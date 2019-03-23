@@ -27,9 +27,3 @@
     @com.j256.ormlite.field.ForeignCollectionField <fields>;
     <init>();
 }
-
-# Javax
--keepattributes RuntimeVisibleAnnotations
--keep @javax.persistence.* class * {
-   *;
-}

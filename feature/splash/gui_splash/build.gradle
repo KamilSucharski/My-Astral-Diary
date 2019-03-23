@@ -11,11 +11,8 @@ dependencies {
 
     implementation project(":feature:main:gui_main")
 
-    implementation project(":util:android:context")
-    implementation project(":util:android:reactive_schedulers")
+    implementation project(':util:android:android_operation')
     implementation project(":util:android:database_connection")
-    implementation project(":util:android:error_handler")
-    implementation project(":util:android:loading_indicator")
 
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger

@@ -1,13 +1,11 @@
 package com.sengami.domain_base.operation;
 
-import com.sengami.domain_base.error.WithErrorHandler;
-import com.sengami.domain_base.loading.WithLoadingIndicator;
-import com.sengami.domain_base.schedulers.ReactiveSchedulers;
+import com.sengami.domain_base.operation.error.WithErrorHandler;
+import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
+import com.sengami.domain_base.operation.logger.Logger;
+import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import io.reactivex.Observable;
 
@@ -18,13 +16,16 @@ public abstract class BaseOperation<T> implements Operation<T> {
     private final ReactiveSchedulers reactiveSchedulers;
     private final WithErrorHandler withErrorHandler;
     private final WithLoadingIndicator withLoadingIndicator;
+    private final Logger logger;
 
     protected BaseOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                             @NotNull final WithErrorHandler withErrorHandler,
-                            @NotNull final WithLoadingIndicator withLoadingIndicator) {
+                            @NotNull final WithLoadingIndicator withLoadingIndicator,
+                            @NotNull final Logger logger) {
         this.reactiveSchedulers = reactiveSchedulers;
         this.withErrorHandler = withErrorHandler;
         this.withLoadingIndicator = withLoadingIndicator;
+        this.logger = logger;
     }
 
     @Override
@@ -44,7 +45,7 @@ public abstract class BaseOperation<T> implements Operation<T> {
     private Observable<T> handleError(@NotNull final Throwable throwable) {
         return Observable.just(false)
             .map(x -> {
-                Logger.getLogger(getClass().getSimpleName()).log(Level.SEVERE, throwable.getMessage());
+                logger.error(throwable);
                 hideLoadingIndicator();
                 withErrorHandler.getErrorHandler().handleError(throwable);
                 return x;

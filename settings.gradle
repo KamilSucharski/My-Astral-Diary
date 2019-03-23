@@ -26,11 +26,8 @@ include ':project',
 
         ':util:java:date',
 
-        ':util:android:context',
-        ':util:android:reactive_schedulers',
+        ':util:android:android_operation',
         ':util:android:database_connection',
-        ':util:android:loading_indicator',
-        ':util:android:error_handler',
         ':util:android:storage',
         ':util:android:clicks',
         ':util:android:permissions',

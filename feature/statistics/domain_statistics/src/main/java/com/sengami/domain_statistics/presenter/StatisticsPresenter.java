@@ -1,7 +1,7 @@
 package com.sengami.domain_statistics.presenter;
 
 import com.sengami.domain_base.presenter.BasePresenter;
-import com.sengami.domain_statistics.operation.GetDiaryStatisticsOperation;
+import com.sengami.domain_statistics.operation.GetStatisticsOperation;
 import com.sengami.domain_statistics.view.StatisticsView;
 
 import org.jetbrains.annotations.NotNull;
@@ -14,10 +14,10 @@ import io.reactivex.disposables.Disposable;
 public final class StatisticsPresenter extends BasePresenter<StatisticsView> {
 
     @NotNull
-    private final GetDiaryStatisticsOperation getDiaryStatisticsOperation;
+    private final GetStatisticsOperation getStatisticsOperation;
 
-    public StatisticsPresenter(@NotNull final GetDiaryStatisticsOperation getDiaryStatisticsOperation) {
-        this.getDiaryStatisticsOperation = getDiaryStatisticsOperation;
+    public StatisticsPresenter(@NotNull final GetStatisticsOperation getStatisticsOperation) {
+        this.getStatisticsOperation = getStatisticsOperation;
     }
 
     @Override
@@ -30,7 +30,7 @@ public final class StatisticsPresenter extends BasePresenter<StatisticsView> {
     private Disposable subscribeRefreshStatisticsTrigger(@NotNull final StatisticsView view) {
         return view
             .getRefreshStatisticsTrigger()
-            .flatMap(x -> getDiaryStatisticsOperation.execute())
+            .flatMap(x -> getStatisticsOperation.execute())
             .subscribe(view::showStatistics);
     }
 }

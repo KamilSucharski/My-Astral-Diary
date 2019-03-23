@@ -2,14 +2,16 @@ package com.sengami.gui_statistics.view;
 
 import android.content.Context;
 
-import com.sengami.context.di.module.ContextModule;
-import com.sengami.domain_base.error.ErrorHandler;
-import com.sengami.domain_base.loading.LoadingIndicator;
+import com.sengami.android_operation.di.module.ContextModule;
+import com.sengami.android_operation.di.module.WithErrorHandlerModule;
+import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
+import com.sengami.android_operation.implementation.ToastErrorHandler;
+import com.sengami.android_operation.implementation.ViewVisibilityLoadingIndicator;
 import com.sengami.domain_base.model.Statistics;
+import com.sengami.domain_base.operation.error.ErrorHandler;
+import com.sengami.domain_base.operation.loading.LoadingIndicator;
 import com.sengami.domain_statistics.presenter.StatisticsPresenter;
 import com.sengami.domain_statistics.view.StatisticsView;
-import com.sengami.error_handler.di.module.WithErrorHandlerModule;
-import com.sengami.error_handler.implementation.ToastErrorHandler;
 import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_statistics.R;
 import com.sengami.gui_statistics.databinding.FragmentStatisticsBinding;
@@ -20,8 +22,6 @@ import com.sengami.gui_statistics.view.list.element.StatisticsListElement;
 import com.sengami.gui_statistics.view.list.element.StatisticsListElementType;
 import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
 import com.sengami.recycler_view_adapter.converter.ElementConverter;
-import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
-import com.sengami.util_loading_indicator.implementation.ViewVisibilityLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 

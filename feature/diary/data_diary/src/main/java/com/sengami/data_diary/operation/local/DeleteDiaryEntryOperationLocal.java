@@ -5,11 +5,12 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.sengami.data_base.dbo.DiaryEntryDBO;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
-import com.sengami.domain_base.error.WithErrorHandler;
-import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.domain_base.operation.BaseOperation;
-import com.sengami.domain_base.schedulers.ReactiveSchedulers;
+import com.sengami.domain_base.operation.error.WithErrorHandler;
+import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
+import com.sengami.domain_base.operation.logger.Logger;
+import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
 import com.sengami.domain_diary.operation.DeleteDiaryEntryOperation;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,8 +35,9 @@ public final class DeleteDiaryEntryOperationLocal extends BaseOperation<Boolean>
     public DeleteDiaryEntryOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                           @NotNull final WithErrorHandler withErrorHandler,
                                           @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                          @NotNull final Logger logger,
                                           @NotNull final DatabaseConnectionProvider databaseConnectionProvider) {
-        super(reactiveSchedulers, withErrorHandler, withLoadingIndicator);
+        super(reactiveSchedulers, withErrorHandler, withLoadingIndicator, logger);
         this.databaseConnectionProvider = databaseConnectionProvider;
     }
 

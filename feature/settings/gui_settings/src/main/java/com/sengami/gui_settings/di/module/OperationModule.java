@@ -8,10 +8,11 @@ import com.sengami.data_base.util.InternalStoragePathProvider;
 import com.sengami.data_settings.operation.local.CreateBackupOperationLocal;
 import com.sengami.data_settings.operation.local.ExportToTextFileOperationLocal;
 import com.sengami.data_settings.operation.local.RestoreFromBackupOperationLocal;
-import com.sengami.domain_base.error.WithErrorHandler;
-import com.sengami.domain_base.loading.WithLoadingIndicator;
 import com.sengami.domain_base.model.DiaryEntry;
-import com.sengami.domain_base.schedulers.ReactiveSchedulers;
+import com.sengami.domain_base.operation.error.WithErrorHandler;
+import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
+import com.sengami.domain_base.operation.logger.Logger;
+import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
 import com.sengami.domain_settings.operation.CreateBackupOperation;
 import com.sengami.domain_settings.operation.ExportToTextFileOperation;
 import com.sengami.domain_settings.operation.RestoreFromBackupOperation;
@@ -29,12 +30,14 @@ public final class OperationModule {
     CreateBackupOperation createBackupOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                 @NotNull final WithErrorHandler withErrorHandler,
                                                 @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                                @NotNull final Logger logger,
                                                 @NotNull final InternalStoragePathProvider internalStoragePathProvider,
                                                 @NotNull final ExternalStoragePathProvider externalStoragePathProvider) {
         return new CreateBackupOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
+            logger,
             internalStoragePathProvider,
             externalStoragePathProvider
         );
@@ -45,11 +48,13 @@ public final class OperationModule {
     RestoreFromBackupOperation restoreFromBackupOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                           @NotNull final WithErrorHandler withErrorHandler,
                                                           @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                                          @NotNull final Logger logger,
                                                           @NotNull final InternalStoragePathProvider internalStoragePathProvider) {
         return new RestoreFromBackupOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
+            logger,
             internalStoragePathProvider
         );
     }
@@ -59,6 +64,7 @@ public final class OperationModule {
     ExportToTextFileOperation exportToTextFileOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                                         @NotNull final WithErrorHandler withErrorHandler,
                                                         @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                                        @NotNull final Logger logger,
                                                         @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
                                                         @NotNull final ExternalStoragePathProvider externalStoragePathProvider,
                                                         @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> diaryEntryMapper) {
@@ -66,6 +72,7 @@ public final class OperationModule {
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
+            logger,
             databaseConnectionProvider,
             externalStoragePathProvider,
             diaryEntryMapper

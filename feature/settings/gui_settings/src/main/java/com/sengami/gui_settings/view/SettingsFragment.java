@@ -5,15 +5,17 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.jakewharton.processphoenix.ProcessPhoenix;
-import com.sengami.context.di.module.ContextModule;
+import com.sengami.android_operation.di.module.ContextModule;
+import com.sengami.android_operation.di.module.WithErrorHandlerModule;
+import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
+import com.sengami.android_operation.implementation.ToastErrorHandler;
+import com.sengami.android_operation.implementation.ViewVisibilityLoadingIndicator;
 import com.sengami.dialogs.MessageDialog;
 import com.sengami.domain_base.Constants;
-import com.sengami.domain_base.error.ErrorHandler;
-import com.sengami.domain_base.loading.LoadingIndicator;
+import com.sengami.domain_base.operation.error.ErrorHandler;
+import com.sengami.domain_base.operation.loading.LoadingIndicator;
 import com.sengami.domain_settings.presenter.SettingsPresenter;
 import com.sengami.domain_settings.view.SettingsView;
-import com.sengami.error_handler.di.module.WithErrorHandlerModule;
-import com.sengami.error_handler.implementation.ToastErrorHandler;
 import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_settings.R;
 import com.sengami.gui_settings.databinding.FragmentSettingsBinding;
@@ -27,8 +29,6 @@ import com.sengami.permissions.Permissions;
 import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
 import com.sengami.recycler_view_adapter.converter.ElementConverter;
 import com.sengami.storage_picker.StoragePickerDialog;
-import com.sengami.util_loading_indicator.di.module.WithLoadingIndicatorModule;
-import com.sengami.util_loading_indicator.implementation.ViewVisibilityLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 

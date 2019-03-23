@@ -1,7 +1,7 @@
 package com.sengami.domain_settings.view;
 
-import com.sengami.domain_base.error.WithErrorHandler;
-import com.sengami.domain_base.loading.WithLoadingIndicator;
+import com.sengami.domain_base.operation.error.WithErrorHandler;
+import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
 
