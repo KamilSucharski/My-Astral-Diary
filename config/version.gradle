@@ -2,9 +2,9 @@ ext {
     androidApplicationId = "com.sengami.myastraldiary"
     androidMinSdkVersion = 21
     androidTargetSdkVersion = 28
-    versionMajor = 0
+    versionMajor = 1
     versionMinor = 0
-    versionPatch = 1
+    versionPatch = 0
     versionFormat = "%s.%s.%s"
 
     getVersionName = {
