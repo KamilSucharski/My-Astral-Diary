@@ -1,10 +1,13 @@
 package com.sengami.gui_diary.di.module;
 
+import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_diary.operation.CreateOrUpdateDiaryEntryOperation;
 import com.sengami.domain_diary.operation.DeleteDiaryEntryOperation;
 import com.sengami.domain_diary.operation.GetDiaryEntriesGroupedByDateOperation;
 import com.sengami.domain_diary.presenter.DiaryEntryComposerPresenter;
 import com.sengami.domain_diary.presenter.DiaryEntryListPresenter;
+import com.sengami.domain_diary.view.DiaryEntryComposerView;
+import com.sengami.domain_diary.view.DiaryEntryListView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -16,14 +19,14 @@ public final class PresenterModule {
 
     @Provides
     @NotNull
-    DiaryEntryListPresenter diaryEntryListPresenter(@NotNull final GetDiaryEntriesGroupedByDateOperation getDiaryEntriesGroupedByDateOperation) {
+    Presenter<DiaryEntryListView> diaryEntryListPresenter(@NotNull final GetDiaryEntriesGroupedByDateOperation getDiaryEntriesGroupedByDateOperation) {
         return new DiaryEntryListPresenter(getDiaryEntriesGroupedByDateOperation);
     }
 
     @Provides
     @NotNull
-    DiaryEntryComposerPresenter diaryEntryComposerPresenter(@NotNull final CreateOrUpdateDiaryEntryOperation createOrUpdateDiaryEntryOperation,
-                                                                         @NotNull final DeleteDiaryEntryOperation deleteDiaryEntryOperation) {
+    Presenter<DiaryEntryComposerView> diaryEntryComposerPresenter(@NotNull final CreateOrUpdateDiaryEntryOperation createOrUpdateDiaryEntryOperation,
+                                                                  @NotNull final DeleteDiaryEntryOperation deleteDiaryEntryOperation) {
         return new DiaryEntryComposerPresenter(createOrUpdateDiaryEntryOperation, deleteDiaryEntryOperation);
     }
 }

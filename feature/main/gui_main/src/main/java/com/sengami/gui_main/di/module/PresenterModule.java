@@ -1,6 +1,8 @@
 package com.sengami.gui_main.di.module;
 
+import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_main.presenter.MainPresenter;
+import com.sengami.domain_main.view.MainView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +14,7 @@ public final class PresenterModule {
 
     @Provides
     @NotNull
-    MainPresenter mainPresenter() {
+    Presenter<MainView> mainPresenter() {
         return new MainPresenter();
     }
 }

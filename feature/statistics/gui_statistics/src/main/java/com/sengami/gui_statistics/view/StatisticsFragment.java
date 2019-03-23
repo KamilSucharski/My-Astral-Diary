@@ -10,7 +10,7 @@ import com.sengami.android_operation.implementation.ViewVisibilityLoadingIndicat
 import com.sengami.domain_base.model.Statistics;
 import com.sengami.domain_base.operation.error.ErrorHandler;
 import com.sengami.domain_base.operation.loading.LoadingIndicator;
-import com.sengami.domain_statistics.presenter.StatisticsPresenter;
+import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_statistics.view.StatisticsView;
 import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_statistics.R;
@@ -36,7 +36,7 @@ import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 
 public final class StatisticsFragment
-    extends BaseFragment<StatisticsPresenter, FragmentStatisticsBinding>
+    extends BaseFragment<Presenter<StatisticsView>, FragmentStatisticsBinding>
     implements StatisticsView {
 
     @NotNull
@@ -48,7 +48,7 @@ public final class StatisticsFragment
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final StatisticsPresenter presenter) {
+    protected void injectPresenter(@NotNull final Presenter<StatisticsView> presenter) {
         super.injectPresenter(presenter);
     }
 

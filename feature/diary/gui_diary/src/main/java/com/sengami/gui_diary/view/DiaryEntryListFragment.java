@@ -12,7 +12,7 @@ import com.sengami.android_operation.implementation.ViewVisibilityLoadingIndicat
 import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.domain_base.operation.error.ErrorHandler;
 import com.sengami.domain_base.operation.loading.LoadingIndicator;
-import com.sengami.domain_diary.presenter.DiaryEntryListPresenter;
+import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_diary.view.DiaryEntryListView;
 import com.sengami.gui_base.navigation.Extra;
 import com.sengami.gui_base.navigation.RequestCode;
@@ -45,7 +45,7 @@ import io.reactivex.subjects.Subject;
 import static com.sengami.clicks.Clicks.onClick;
 
 public final class DiaryEntryListFragment
-    extends BaseFragment<DiaryEntryListPresenter, FragmentDiaryEntryListBinding>
+    extends BaseFragment<Presenter<DiaryEntryListView>, FragmentDiaryEntryListBinding>
     implements DiaryEntryListView {
 
     private final Subject<Boolean> refreshListTrigger = PublishSubject.create();
@@ -56,7 +56,7 @@ public final class DiaryEntryListFragment
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final DiaryEntryListPresenter presenter) {
+    protected void injectPresenter(@NotNull final Presenter<DiaryEntryListView> presenter) {
         super.injectPresenter(presenter);
     }
 

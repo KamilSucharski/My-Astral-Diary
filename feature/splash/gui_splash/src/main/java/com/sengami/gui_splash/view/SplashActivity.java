@@ -9,7 +9,7 @@ import com.sengami.android_operation.implementation.EmptyLoadingIndicator;
 import com.sengami.android_operation.implementation.ToastErrorHandler;
 import com.sengami.domain_base.operation.error.ErrorHandler;
 import com.sengami.domain_base.operation.loading.LoadingIndicator;
-import com.sengami.domain_splash.presenter.SplashPresenter;
+import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_splash.view.SplashView;
 import com.sengami.gui_base.view.BaseActivity;
 import com.sengami.gui_main.view.MainActivity;
@@ -22,12 +22,12 @@ import org.jetbrains.annotations.NotNull;
 import javax.inject.Inject;
 
 public class SplashActivity
-    extends BaseActivity<SplashPresenter, ActivitySplashBinding>
+    extends BaseActivity<Presenter<SplashView>, ActivitySplashBinding>
     implements SplashView {
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final SplashPresenter presenter) {
+    protected void injectPresenter(@NotNull final Presenter<SplashView> presenter) {
         super.injectPresenter(presenter);
     }
 

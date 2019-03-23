@@ -14,7 +14,7 @@ import com.sengami.dialogs.message.MessageDialog;
 import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.domain_base.operation.error.ErrorHandler;
 import com.sengami.domain_base.operation.loading.LoadingIndicator;
-import com.sengami.domain_diary.presenter.DiaryEntryComposerPresenter;
+import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_diary.view.DiaryEntryComposerView;
 import com.sengami.gui_base.navigation.Extra;
 import com.sengami.gui_base.view.BaseActivity;
@@ -34,7 +34,7 @@ import io.reactivex.subjects.Subject;
 import static com.sengami.clicks.Clicks.onClick;
 
 public final class DiaryEntryComposerActivity
-    extends BaseActivity<DiaryEntryComposerPresenter, ActivityDiaryEntryComposerBinding>
+    extends BaseActivity<Presenter<DiaryEntryComposerView>, ActivityDiaryEntryComposerBinding>
     implements DiaryEntryComposerView {
 
     private final Subject<DiaryEntry> saveDiaryEntryTrigger = PublishSubject.create();
@@ -46,7 +46,7 @@ public final class DiaryEntryComposerActivity
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final DiaryEntryComposerPresenter presenter) {
+    protected void injectPresenter(@NotNull final Presenter<DiaryEntryComposerView> presenter) {
         super.injectPresenter(presenter);
     }
 

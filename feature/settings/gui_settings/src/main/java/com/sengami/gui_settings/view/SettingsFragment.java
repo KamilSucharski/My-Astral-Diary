@@ -15,7 +15,7 @@ import com.sengami.dialogs.message.MessageDialog;
 import com.sengami.domain_base.Constants;
 import com.sengami.domain_base.operation.error.ErrorHandler;
 import com.sengami.domain_base.operation.loading.LoadingIndicator;
-import com.sengami.domain_settings.presenter.SettingsPresenter;
+import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_settings.view.SettingsView;
 import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_settings.R;
@@ -44,7 +44,7 @@ import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 
 public final class SettingsFragment
-    extends BaseFragment<SettingsPresenter, FragmentSettingsBinding>
+    extends BaseFragment<Presenter<SettingsView>, FragmentSettingsBinding>
     implements SettingsView, SettingsListCallbacks {
 
     private static final String STORAGE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -57,7 +57,7 @@ public final class SettingsFragment
 
     @Inject
     @Override
-    protected void injectPresenter(@NotNull final SettingsPresenter presenter) {
+    protected void injectPresenter(@NotNull final Presenter<SettingsView> presenter) {
         super.injectPresenter(presenter);
     }
 

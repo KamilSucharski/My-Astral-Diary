@@ -9,7 +9,6 @@ import com.sengami.recycler_view_adapter.binder.ViewHolderBinder;
 import com.sengami.recycler_view_adapter.element.ElementType;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import io.reactivex.Observer;
 
@@ -17,7 +16,7 @@ import static com.sengami.clicks.Clicks.onClick;
 
 public final class DiaryEntryListDiaryEntryElementBinder extends ViewHolderBinder<DiaryEntryListElement, DiaryEntryListDiaryEntryElement, ElementDiaryEntryBinding> {
 
-    @Nullable
+    @NotNull
     private final Observer<DiaryEntry> diaryEntryClickedTrigger;
 
     public DiaryEntryListDiaryEntryElementBinder(@NotNull final Observer<DiaryEntry> diaryEntryClickedTrigger) {

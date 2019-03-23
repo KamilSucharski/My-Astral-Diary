@@ -26,5 +26,4 @@ public interface DiaryEntryListView extends WithErrorHandler, WithLoadingIndicat
     void showDiaryEntriesGroupedByDate(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntriesGroupedByDate);
 
     void navigateToDiaryEntryComposerScreen(@NotNull final DiaryEntry diaryEntry);
-
 }
