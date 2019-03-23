@@ -1,6 +1,6 @@
 <resources>
     <string name="statistic_list_empty_state">Here you will see some statistics regarding your diary, but right now your diary is empty!</string>
-    <string name="statistic_list_empty_state_content_description">Sad face image</string>
+    <string name="statistic_list_empty_state_content_description">Chart image</string>
 
     <string name="statistic_total_entries">Total diary entries:</string>
     <string name="statistic_year_with_most_entries">Year with most entries:</string>
