@@ -23,18 +23,22 @@ public class MessageDialog extends Dialog {
     }
 
     @NotNull
-    private final MessageDialog.Callback callback;
+    private final String title;
     @NotNull
     private final String message;
+    @NotNull
+    private final MessageDialog.Callback callback;
 
     private DialogMessageBinding binding;
 
     public MessageDialog(@NonNull final Context context,
+                         @NotNull final String title,
                          @NotNull final String message,
                          @NotNull final MessageDialog.Callback callback) {
         super(context, R.style.OverlayDialog);
-        this.callback = callback;
+        this.title = title;
         this.message = message;
+        this.callback = callback;
     }
 
     @Override
@@ -47,6 +51,7 @@ public class MessageDialog extends Dialog {
     private void setupView() {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_message, null, false);
         setContentView(binding.getRoot());
+        binding.setTitle(title);
         binding.setMessage(message);
     }
 

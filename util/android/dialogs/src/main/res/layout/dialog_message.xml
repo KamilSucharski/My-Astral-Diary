@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable name="title" type="String" />
         <variable name="message" type="String" />
     </data>
 
@@ -36,7 +37,14 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/double_content_margin"
+                    android:layout_margin="@dimen/content_margin"
+                    android:theme="@style/Text.Header"
+                    android:text="@{title}"
+                    tools:text="Warning!"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/double_content_margin"
                     android:layout_marginStart="@dimen/content_margin"
                     android:layout_marginEnd="@dimen/content_margin"

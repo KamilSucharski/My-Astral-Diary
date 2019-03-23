@@ -2,6 +2,5 @@
 <resources>
     <string name="application_name">My Astral Diary</string>
 
-    <string name="content_description_cancel_button">Cancel</string>
-    <string name="content_description_accept_button">Accept</string>
+    <string name="warning">Warning!</string>
 </resources>

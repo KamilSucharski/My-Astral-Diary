@@ -1,4 +1,7 @@
 <resources>
+    <string name="content_description_cancel_button">Cancel</string>
+    <string name="content_description_accept_button">Accept</string>
+
     <string name="date_picker_dialog_choose_date">Choose date…</string>
 
     <string name="file_picker_dialog_choose_file">Choose directory…</string>

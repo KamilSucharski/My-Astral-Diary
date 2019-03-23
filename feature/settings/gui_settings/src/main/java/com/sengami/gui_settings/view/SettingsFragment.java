@@ -168,6 +168,7 @@ public final class SettingsFragment
     private void showRestoreFromBackupConfirmationDialog(@NotNull final File file) {
         new MessageDialog(
             getContext(),
+            getContext().getString(R.string.warning),
             getContext().getString(R.string.restore_from_backup_warning),
             () -> restoreFromBackupTrigger.onNext(file)
         ).show();
