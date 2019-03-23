@@ -40,7 +40,7 @@ public class FilePickerDialog extends Dialog implements FileListCallbacks {
 
     @NotNull
     private final Callback callback;
-    private final ElementConverter<File, FileListElement> converter = new FileListElementConverter();
+    private final ElementConverter<File, FileListElement> converter;
     private FileListAdapter adapter;
 
     @Nullable
@@ -49,9 +49,10 @@ public class FilePickerDialog extends Dialog implements FileListCallbacks {
 
     public FilePickerDialog(@NonNull final Context context,
                             @NotNull final Callback callback,
-                            @NotNull final String allowedExtension) {
+                            @NotNull final String... allowedExtensions) {
         super(context, R.style.OverlayDialog);
         this.callback = callback;
+        this.converter = new FileListElementConverter(allowedExtensions);
     }
 
     @Override
