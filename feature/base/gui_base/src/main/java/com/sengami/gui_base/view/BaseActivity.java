@@ -16,7 +16,7 @@ import androidx.databinding.ViewDataBinding;
 
 public abstract class BaseActivity<P extends ReactivePresenter, DB extends ViewDataBinding> extends AppCompatActivity {
 
-    protected P presenter;
+    private P presenter;
     protected DB binding;
 
     @LayoutRes
@@ -57,29 +57,6 @@ public abstract class BaseActivity<P extends ReactivePresenter, DB extends ViewD
     }
 
     protected void init() {
-    }
-
-    protected void startActivity(@NotNull final Class<?> activity) {
-        final Intent intent = new Intent(this, activity);
-        startActivity(intent);
-    }
-
-    protected void startActivity(@NotNull final Class<?> activity,
-                                 @NotNull final Bundle extras) {
-        final Intent intent = new Intent(this, activity);
-        intent.putExtras(extras);
-        startActivity(intent);
-    }
-
-    protected void changeActivity(@NotNull final Class<?> activity) {
-        finish();
-        startActivity(activity);
-    }
-
-    protected void changeActivity(@NotNull final Class<?> activity,
-                                  @NotNull final Bundle extras) {
-        startActivity(activity, extras);
-        finish();
     }
 
     private void bindLayout() {

@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 public abstract class BaseFragment<P extends ReactivePresenter, DB extends ViewDataBinding> extends Fragment {
 
-    protected P presenter;
+    private P presenter;
     protected DB binding;
 
     @SuppressWarnings("unchecked")
@@ -30,7 +30,6 @@ public abstract class BaseFragment<P extends ReactivePresenter, DB extends ViewD
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        extractArguments(getArguments());
     }
 
     @Override
@@ -75,9 +74,6 @@ public abstract class BaseFragment<P extends ReactivePresenter, DB extends ViewD
     protected abstract int getLayoutResource();
 
     protected abstract void inject(@NotNull final Context context);
-
-    protected void extractArguments(@Nullable final Bundle arguments) {
-    }
 
     protected void init(@NotNull final Context context) {
     }

@@ -16,7 +16,6 @@ public final class StatisticsListAdapter extends BaseAdapter<StatisticsListEleme
 
     public StatisticsListAdapter(@NotNull final Context context) {
         super(
-            context,
             StatisticsListElementType.values(),
             Arrays.asList(
                 new StatisticsListTextWithNumberElementBinder(context),

@@ -1,5 +1,7 @@
 package com.sengami.gui_splash.view;
 
+import android.content.Intent;
+
 import com.sengami.context.di.module.ContextModule;
 import com.sengami.domain_base.error.ErrorHandler;
 import com.sengami.domain_base.loading.LoadingIndicator;
@@ -46,7 +48,9 @@ public class SplashActivity
 
     @Override
     public void navigateToMainView() {
-        changeActivity(MainActivity.class);
+        final Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

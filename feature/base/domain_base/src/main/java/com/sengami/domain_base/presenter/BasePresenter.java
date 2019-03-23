@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class BasePresenter<V> implements ReactivePresenter<V> {
 
-    private CompositeDisposable disposables = new CompositeDisposable();
+    private final CompositeDisposable disposables = new CompositeDisposable();
 
     protected abstract List<Disposable> createSubscriptions(@NotNull final V view);
 

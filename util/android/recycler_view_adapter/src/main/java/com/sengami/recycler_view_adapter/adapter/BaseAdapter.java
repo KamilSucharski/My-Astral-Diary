@@ -1,6 +1,5 @@
 package com.sengami.recycler_view_adapter.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -21,15 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class BaseAdapter<ELEMENT extends Element, TYPE extends ElementType> extends RecyclerView.Adapter<BaseViewHolder> {
 
-    private final Context context;
     private final List<ELEMENT> items = new LinkedList<>();
     private final TYPE[] possibleElementTypes;
     private final List<ViewHolderBinder<ELEMENT, ? extends ELEMENT, ? extends ViewDataBinding>> viewHolderBinders;
 
-    public BaseAdapter(@NotNull final Context context,
-                       @NotNull final TYPE[] possibleElementTypes,
-                       @NotNull final List<ViewHolderBinder<ELEMENT, ? extends ELEMENT, ? extends ViewDataBinding>> viewHolderBinders) {
-        this.context = context;
+    protected BaseAdapter(@NotNull final TYPE[] possibleElementTypes,
+                          @NotNull final List<ViewHolderBinder<ELEMENT, ? extends ELEMENT, ? extends ViewDataBinding>> viewHolderBinders) {
         this.possibleElementTypes = possibleElementTypes;
         this.viewHolderBinders = viewHolderBinders;
     }

@@ -17,10 +17,8 @@ import io.reactivex.Observer;
 
 public final class DiaryEntryListAdapter extends BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> {
 
-    public DiaryEntryListAdapter(@NotNull final Context context,
-                                 @NotNull final Observer<DiaryEntry> diaryEntryClickedTrigger) {
+    public DiaryEntryListAdapter(@NotNull final Observer<DiaryEntry> diaryEntryClickedTrigger) {
         super(
-            context,
             DiaryEntryListElementType.values(),
             Arrays.asList(
                 new DiaryEntryListDiaryEntryElementBinder(diaryEntryClickedTrigger),

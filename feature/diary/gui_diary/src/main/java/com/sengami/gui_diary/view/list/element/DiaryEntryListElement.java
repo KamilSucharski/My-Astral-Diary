@@ -9,7 +9,7 @@ public abstract class DiaryEntryListElement implements Element {
     @NotNull
     private final DiaryEntryListElementType type;
 
-    public DiaryEntryListElement(@NotNull final DiaryEntryListElementType type) {
+    protected DiaryEntryListElement(@NotNull final DiaryEntryListElementType type) {
         this.type = type;
     }
 

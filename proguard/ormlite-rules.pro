@@ -25,6 +25,8 @@
 -keep @com.j256.ormlite.table.DatabaseTable class * {
     @com.j256.ormlite.field.DatabaseField <fields>;
     @com.j256.ormlite.field.ForeignCollectionField <fields>;
-    # Add the ormlite field annotations that your model uses here
     <init>();
 }
+
+# Javax
+-dontwarn javax.**

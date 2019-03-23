@@ -16,7 +16,6 @@ public final class SettingsListAdapter extends BaseAdapter<SettingsListElement, 
 
     public SettingsListAdapter(@NotNull final Context context) {
         super(
-            context,
             SettingsListElementType.values(),
             Arrays.asList(
                 new SettingsListSectionElementBinder(context),

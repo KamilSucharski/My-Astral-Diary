@@ -9,7 +9,7 @@ public abstract class StatisticsListElement implements Element {
     @NotNull
     private final StatisticsListElementType type;
 
-    public StatisticsListElement(@NotNull final StatisticsListElementType type) {
+    protected StatisticsListElement(@NotNull final StatisticsListElementType type) {
         this.type = type;
     }
 

@@ -19,9 +19,9 @@ public abstract class BaseOperation<T> implements Operation<T> {
     private final WithErrorHandler withErrorHandler;
     private final WithLoadingIndicator withLoadingIndicator;
 
-    public BaseOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                         @NotNull final WithErrorHandler withErrorHandler,
-                         @NotNull final WithLoadingIndicator withLoadingIndicator) {
+    protected BaseOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
+                            @NotNull final WithErrorHandler withErrorHandler,
+                            @NotNull final WithLoadingIndicator withLoadingIndicator) {
         this.reactiveSchedulers = reactiveSchedulers;
         this.withErrorHandler = withErrorHandler;
         this.withLoadingIndicator = withLoadingIndicator;
