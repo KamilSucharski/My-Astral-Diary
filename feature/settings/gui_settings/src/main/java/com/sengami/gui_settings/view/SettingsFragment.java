@@ -10,7 +10,8 @@ import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
 import com.sengami.android_operation.implementation.ToastErrorHandler;
 import com.sengami.android_operation.implementation.ViewVisibilityLoadingIndicator;
-import com.sengami.dialogs.MessageDialog;
+import com.sengami.dialogs.file.FilePickerDialog;
+import com.sengami.dialogs.message.MessageDialog;
 import com.sengami.domain_base.Constants;
 import com.sengami.domain_base.operation.error.ErrorHandler;
 import com.sengami.domain_base.operation.loading.LoadingIndicator;
@@ -28,7 +29,6 @@ import com.sengami.gui_settings.view.list.element.SettingsListElementType;
 import com.sengami.permissions.Permissions;
 import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
 import com.sengami.recycler_view_adapter.converter.ElementConverter;
-import com.sengami.storage_picker.StoragePickerDialog;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -158,7 +158,7 @@ public final class SettingsFragment
     }
 
     private void showRestoreFromBackupFilePicker() {
-        new StoragePickerDialog(
+        new FilePickerDialog(
             getContext(),
             this::showRestoreFromBackupConfirmationDialog,
             Constants.DATABASE_EXTENSION

@@ -19,8 +19,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:theme="@style/BottomMenuItem"
-            android:src="@drawable/arrow_left"
-            android:autoMirrored="true"
+            android:src="@drawable/arrow_back"
             android:contentDescription="@string/content_description_back_button"
             android:clickable="@{backButtonEnabled, default = true}"
             android:tint="@{backButtonEnabled ? @color/color_accent : @color/color_primary, default = @color/color_accent}"/>

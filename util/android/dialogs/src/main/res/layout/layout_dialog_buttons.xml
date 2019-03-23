@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data />
+    <data>
+        <variable name="cancelButtonDisabled" type="boolean" />
+        <variable name="acceptButtonDisabled" type="boolean" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,6 +28,8 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/content_description_cancel_button"
                 android:src="@drawable/cross"
+                android:clickable="@{!cancelButtonDisabled}"
+                android:tint="@{cancelButtonDisabled ? @color/color_primary : @color/color_accent}"
                 android:theme="@style/BottomMenuItem" />
 
             <View
@@ -39,6 +44,8 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/content_description_accept_button"
                 android:src="@drawable/check"
+                android:clickable="@{!acceptButtonDisabled}"
+                android:tint="@{acceptButtonDisabled ? @color/color_primary : @color/color_accent}"
                 android:theme="@style/BottomMenuItem" />
 
         </LinearLayout>

@@ -1,10 +1,11 @@
-package com.sengami.dialogs;
+package com.sengami.dialogs.date;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import com.sengami.dialogs.R;
 import com.sengami.dialogs.databinding.DialogDatePickerBinding;
 
 import org.jetbrains.annotations.NotNull;

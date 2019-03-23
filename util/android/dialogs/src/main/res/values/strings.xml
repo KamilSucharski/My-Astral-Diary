@@ -1,3 +1,8 @@
 <resources>
     <string name="date_picker_dialog_choose_date">Choose date…</string>
+
+    <string name="file_picker_dialog_choose_file">Choose directory…</string>
+    <string name="file_picker_dialog_directory_parent">..</string>
+    <string name="file_picker_dialog_directory_content_description">Directory</string>
+    <string name="file_picker_dialog_file_content_description">File</string>
 </resources>

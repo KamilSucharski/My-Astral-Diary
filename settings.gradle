@@ -32,5 +32,4 @@ include ':project',
         ':util:android:clicks',
         ':util:android:permissions',
         ':util:android:recycler_view_adapter',
-        ':util:android:dialogs',
-        ':util:android:storage_picker'
+        ':util:android:dialogs'

@@ -16,7 +16,6 @@ dependencies {
     implementation project(":util:android:permissions")
     implementation project(':util:android:recycler_view_adapter')
     implementation project(':util:android:dialogs')
-    implementation project(':util:android:storage_picker')
 
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger
