@@ -35,9 +35,15 @@ android {
 }
 
 dependencies {
+    implementation project(":feature:base:gui_base")
     implementation project(":feature:splash:gui_splash")
     implementation project(":feature:main:gui_main")
     implementation project(":feature:diary:gui_diary")
+    implementation project(":feature:statistics:gui_statistics")
+    implementation project(":feature:settings:gui_settings")
 
     implementation project(":util:android:permissions")
+
+    implementation libraries.jetbrainsAnnotations
+    implementation libraries.androidXAppCompat
 }

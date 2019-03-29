@@ -11,8 +11,9 @@ import com.sengami.domain_base.operation.error.ErrorHandler;
 import com.sengami.domain_base.operation.loading.LoadingIndicator;
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_splash.view.SplashView;
+import com.sengami.gui_base.navigation.FlowCoordinator;
+import com.sengami.gui_base.navigation.FlowCoordinatorProvider;
 import com.sengami.gui_base.view.BaseActivity;
-import com.sengami.gui_main.view.MainActivity;
 import com.sengami.gui_splash.R;
 import com.sengami.gui_splash.databinding.ActivitySplashBinding;
 import com.sengami.gui_splash.di.component.DaggerSplashComponent;
@@ -21,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-public class SplashActivity
+public final class SplashActivity
     extends BaseActivity<Presenter<SplashView>, ActivitySplashBinding>
     implements SplashView {
 
@@ -48,7 +49,8 @@ public class SplashActivity
 
     @Override
     public void navigateToMainView() {
-        final Intent intent = new Intent(this, MainActivity.class);
+        final FlowCoordinator flowCoordinator = FlowCoordinatorProvider.provide();
+        final Intent intent = flowCoordinator.mainActivityIntent(this);
         startActivity(intent);
         finish();
     }
