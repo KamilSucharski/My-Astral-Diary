@@ -2,8 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sengami.myastraldiary">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <application
         android:name=".application.MyAstralDiaryApplication"
         android:allowBackup="true"

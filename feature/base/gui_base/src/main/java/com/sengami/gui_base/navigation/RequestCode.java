@@ -1,7 +1,10 @@
 package com.sengami.gui_base.navigation;
 
 public enum RequestCode {
-    COMPOSE_DIARY_ENTRY(9000);
+    SAVE_BACKUP_FILE(9001),
+    LOAD_BACKUP_FILE(9002),
+    SAVE_TEXT_FILE(9003),
+    COMPOSE_DIARY_ENTRY(9004);
 
     private final int code;
 
