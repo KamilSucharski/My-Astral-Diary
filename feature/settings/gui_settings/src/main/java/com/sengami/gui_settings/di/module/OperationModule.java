@@ -3,8 +3,8 @@ package com.sengami.gui_settings.di.module;
 import com.sengami.data_base.dbo.DiaryEntryDBO;
 import com.sengami.data_base.mapper.Mapper;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
+import com.sengami.data_base.util.DatabaseFileProvider;
 import com.sengami.data_base.util.ExternalStoragePathProvider;
-import com.sengami.data_base.util.InternalStoragePathProvider;
 import com.sengami.data_settings.operation.local.CreateBackupOperationLocal;
 import com.sengami.data_settings.operation.local.ExportToTextFileOperationLocal;
 import com.sengami.data_settings.operation.local.RestoreFromBackupOperationLocal;
@@ -31,14 +31,14 @@ public final class OperationModule {
                                                 @NotNull final WithErrorHandler withErrorHandler,
                                                 @NotNull final WithLoadingIndicator withLoadingIndicator,
                                                 @NotNull final Logger logger,
-                                                @NotNull final InternalStoragePathProvider internalStoragePathProvider,
+                                                @NotNull final DatabaseFileProvider databaseFileProvider,
                                                 @NotNull final ExternalStoragePathProvider externalStoragePathProvider) {
         return new CreateBackupOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
             logger,
-            internalStoragePathProvider,
+            databaseFileProvider,
             externalStoragePathProvider
         );
     }
@@ -49,13 +49,13 @@ public final class OperationModule {
                                                           @NotNull final WithErrorHandler withErrorHandler,
                                                           @NotNull final WithLoadingIndicator withLoadingIndicator,
                                                           @NotNull final Logger logger,
-                                                          @NotNull final InternalStoragePathProvider internalStoragePathProvider) {
+                                                          @NotNull final DatabaseFileProvider databaseFileProvider) {
         return new RestoreFromBackupOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,
             logger,
-            internalStoragePathProvider
+            databaseFileProvider
         );
     }
 

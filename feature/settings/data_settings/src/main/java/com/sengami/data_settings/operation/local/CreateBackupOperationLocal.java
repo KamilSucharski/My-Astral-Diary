@@ -1,7 +1,7 @@
 package com.sengami.data_settings.operation.local;
 
+import com.sengami.data_base.util.DatabaseFileProvider;
 import com.sengami.data_base.util.ExternalStoragePathProvider;
-import com.sengami.data_base.util.InternalStoragePathProvider;
 import com.sengami.date.DateFormatter;
 import com.sengami.domain_base.Constants;
 import com.sengami.domain_base.operation.BaseOperation;
@@ -25,7 +25,7 @@ import io.reactivex.Observable;
 public final class CreateBackupOperationLocal extends BaseOperation<File> implements CreateBackupOperation {
 
     @NotNull
-    private final InternalStoragePathProvider internalStoragePathProvider;
+    private final DatabaseFileProvider databaseFileProvider;
     @NotNull
     private final ExternalStoragePathProvider externalStoragePathProvider;
 
@@ -33,17 +33,17 @@ public final class CreateBackupOperationLocal extends BaseOperation<File> implem
                                       @NotNull final WithErrorHandler withErrorHandler,
                                       @NotNull final WithLoadingIndicator withLoadingIndicator,
                                       @NotNull final Logger logger,
-                                      @NotNull final InternalStoragePathProvider internalStoragePathProvider,
+                                      @NotNull final DatabaseFileProvider databaseFileProvider,
                                       @NotNull final ExternalStoragePathProvider externalStoragePathProvider) {
         super(reactiveSchedulers, withErrorHandler, withLoadingIndicator, logger);
-        this.internalStoragePathProvider = internalStoragePathProvider;
+        this.databaseFileProvider = databaseFileProvider;
         this.externalStoragePathProvider = externalStoragePathProvider;
     }
 
     @Override
     protected Observable<File> getObservable() {
         return Observable.fromCallable(() -> {
-            final File database = new File(internalStoragePathProvider.provide() + Constants.DATABASE_PATH);
+            final File database = databaseFileProvider.provide(Constants.DATABASE_NAME);
             final FileInputStream inputStream = new FileInputStream(database);
             final File backup = createBackupFile();
             final OutputStream outputStream = new FileOutputStream(backup);

@@ -1,6 +1,6 @@
 package com.sengami.data_settings.operation.local;
 
-import com.sengami.data_base.util.InternalStoragePathProvider;
+import com.sengami.data_base.util.DatabaseFileProvider;
 import com.sengami.domain_base.Constants;
 import com.sengami.domain_base.operation.BaseOperation;
 import com.sengami.domain_base.operation.error.WithErrorHandler;
@@ -25,7 +25,7 @@ import io.reactivex.Observable;
 public final class RestoreFromBackupOperationLocal extends BaseOperation<Boolean> implements RestoreFromBackupOperation {
 
     @NotNull
-    private final InternalStoragePathProvider internalStoragePathProvider;
+    private final DatabaseFileProvider databaseFileProvider;
     @Nullable
     private File backup;
 
@@ -33,9 +33,9 @@ public final class RestoreFromBackupOperationLocal extends BaseOperation<Boolean
                                            @NotNull final WithErrorHandler withErrorHandler,
                                            @NotNull final WithLoadingIndicator withLoadingIndicator,
                                            @NotNull final Logger logger,
-                                           @NotNull final InternalStoragePathProvider internalStoragePathProvider) {
+                                           @NotNull final DatabaseFileProvider databaseFileProvider) {
         super(reactiveSchedulers, withErrorHandler, withLoadingIndicator, logger);
-        this.internalStoragePathProvider = internalStoragePathProvider;
+        this.databaseFileProvider = databaseFileProvider;
     }
 
     @Override
@@ -52,7 +52,7 @@ public final class RestoreFromBackupOperationLocal extends BaseOperation<Boolean
                 throw new IllegalArgumentException("[File backup] has not been set in RestoreFromBackupOperationLocal");
             }
 
-            final File database = new File(internalStoragePathProvider.provide() + Constants.DATABASE_PATH);
+            final File database = databaseFileProvider.provide(Constants.DATABASE_NAME);
             final InputStream inputStream = new BufferedInputStream(new FileInputStream(backup));
             final OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(database));
             final byte[] buffer = new byte[1024];

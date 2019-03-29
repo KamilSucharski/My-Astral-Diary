@@ -27,7 +27,7 @@ include ':project',
         ':util:java:date',
 
         ':util:android:android_operation',
-        ':util:android:android_storage',
+        ':util:android:android_database',
         ':util:android:database_connection',
         ':util:android:clicks',
         ':util:android:permissions',

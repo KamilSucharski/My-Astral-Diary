@@ -1,4 +1,4 @@
-package com.sengami.android_storage;
+package com.sengami.android_database;
 
 import android.os.Environment;
 
