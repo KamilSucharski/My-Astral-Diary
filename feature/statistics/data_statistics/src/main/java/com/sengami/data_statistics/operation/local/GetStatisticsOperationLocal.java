@@ -83,7 +83,9 @@ public final class GetStatisticsOperationLocal
     private int calculateLongestCharacterCountInEntry(@NotNull final List<DiaryEntry> entries) {
         int maxCharacterCount = 0;
         for (final DiaryEntry diaryEntry : entries) {
-            final int characterCount = diaryEntry.getTitle().length() + diaryEntry.getBody().length();
+            final int titleCharacterCount = diaryEntry.getTitle().replaceAll("\n", "").length();
+            final int bodyCharacterCount = diaryEntry.getBody().replaceAll("\n", "").length();
+            final int characterCount = titleCharacterCount + bodyCharacterCount;
             if (characterCount > maxCharacterCount) {
                 maxCharacterCount = characterCount;
             }
