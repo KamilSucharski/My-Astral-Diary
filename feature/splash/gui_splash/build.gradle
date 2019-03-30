@@ -10,7 +10,6 @@ dependencies {
     implementation project(":feature:splash:domain_splash")
 
     implementation project(':util:android:android_operation')
-    implementation project(":util:android:database_connection")
 
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger

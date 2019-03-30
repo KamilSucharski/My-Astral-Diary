@@ -2,7 +2,6 @@ package com.sengami.gui_statistics.view;
 
 import android.content.Context;
 
-import com.sengami.android_operation.di.module.ContextModule;
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
 import com.sengami.android_operation.implementation.ToastErrorHandler;
@@ -60,7 +59,6 @@ public final class StatisticsFragment
     @Override
     protected void inject(@NotNull final Context context) {
         DaggerStatisticsComponent.builder()
-            .contextModule(new ContextModule(context))
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()

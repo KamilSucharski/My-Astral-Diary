@@ -13,9 +13,15 @@ import dagger.Provides;
 @Module
 public final class DatabaseFileProviderModule {
 
+    @NotNull final Context context;
+
+    public DatabaseFileProviderModule(@NotNull final Context context) {
+        this.context = context;
+    }
+
     @Provides
     @NotNull
-    DatabaseFileProvider databaseFileProvider(@NotNull final Context context) {
+    DatabaseFileProvider databaseFileProvider() {
         return new AndroidDatabaseFileProvider(context);
     }
 }

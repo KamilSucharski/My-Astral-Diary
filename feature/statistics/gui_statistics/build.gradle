@@ -10,7 +10,6 @@ dependencies {
     implementation project(":feature:statistics:domain_statistics")
 
     implementation project(':util:android:android_operation')
-    implementation project(":util:android:database_connection")
     implementation project(':util:android:recycler_view_adapter')
 
     implementation libraries.jetbrainsAnnotations

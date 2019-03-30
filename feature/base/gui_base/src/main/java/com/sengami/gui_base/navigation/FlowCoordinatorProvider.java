@@ -12,7 +12,7 @@ public final class FlowCoordinatorProvider {
 
     public static FlowCoordinator provide() {
         if (flowCoordinator == null) {
-            throw new RuntimeException("FlowCoordinator not set.");
+            throw new RuntimeException("[FlowCoordinator flowCoordinator] not set in FlowCoordinatorProvider");
         }
 
         return flowCoordinator;

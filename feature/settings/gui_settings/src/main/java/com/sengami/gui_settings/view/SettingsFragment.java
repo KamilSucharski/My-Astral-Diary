@@ -8,7 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.jakewharton.processphoenix.ProcessPhoenix;
-import com.sengami.android_operation.di.module.ContextModule;
+import com.sengami.android_database.di.module.DatabaseFileProviderModule;
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
 import com.sengami.android_operation.implementation.ToastErrorHandler;
@@ -74,7 +74,7 @@ public final class SettingsFragment
     @Override
     protected void inject(@NotNull final Context context) {
         DaggerSettingsComponent.builder()
-            .contextModule(new ContextModule(context))
+            .databaseFileProviderModule(new DatabaseFileProviderModule(context))
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()

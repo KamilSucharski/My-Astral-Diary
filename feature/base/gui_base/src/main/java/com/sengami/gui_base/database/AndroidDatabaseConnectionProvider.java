@@ -1,4 +1,4 @@
-package com.sengami.database_connection.implementation;
+package com.sengami.gui_base.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,8 +7,8 @@ import com.j256.ormlite.android.AndroidConnectionSource;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
-import com.sengami.database_connection.BuildConfig;
 import com.sengami.domain_base.Constants;
+import com.sengami.gui_base.BuildConfig;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +20,7 @@ public final class AndroidDatabaseConnectionProvider extends OrmLiteSqliteOpenHe
 
     @Override
     @NotNull
-    public final ConnectionSource provide() {
+    public ConnectionSource provide() {
         return new AndroidConnectionSource(this);
     }
 

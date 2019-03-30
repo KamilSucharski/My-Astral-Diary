@@ -2,7 +2,6 @@ package com.sengami.gui_splash.view;
 
 import android.content.Intent;
 
-import com.sengami.android_operation.di.module.ContextModule;
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
 import com.sengami.android_operation.implementation.EmptyLoadingIndicator;
@@ -40,7 +39,6 @@ public final class SplashActivity
     @Override
     protected void inject() {
         DaggerSplashComponent.builder()
-            .contextModule(new ContextModule(this))
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()
