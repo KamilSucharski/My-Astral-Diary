@@ -157,7 +157,6 @@ public final class DiaryEntryComposerActivity
     private void onDeleteDiaryEntryClicked() {
         new MessageDialog(
             this,
-            getString(R.string.warning),
             getString(R.string.delete_diary_entry_warning),
             () -> deleteDiaryEntryTrigger.onNext(diaryEntry)
         ).show();

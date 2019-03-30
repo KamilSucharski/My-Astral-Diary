@@ -204,7 +204,6 @@ public final class SettingsFragment
             final InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
             new MessageDialog(
                 getContext(),
-                getContext().getString(R.string.warning),
                 getContext().getString(R.string.restore_from_backup_warning),
                 () -> restoreFromBackupTrigger.onNext(inputStream)
             ).show();

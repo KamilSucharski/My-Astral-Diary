@@ -1,0 +1,13 @@
+<resources>
+    <string name="diary_entry_list_empty_state">Nic tu nie ma. Aby dodać wpis kliknij przycisk na dole ekranu.</string>
+    <string name="diary_entry_list_empty_state_image_content_description">Obrazek książki</string>
+
+    <string name="composer_title_hint">Tytuł</string>
+    <string name="composer_body_hint">Opis doświadczenia</string>
+    <string name="delete_diary_entry_warning">Usunięcie wpisu jest akcją bezpowrotną. Kontynuować?</string>
+    <string name="operation_successful">Zapisano zmiany.</string>
+
+    <string name="back_button_content_description">Wróć do listy wpisów</string>
+    <string name="delete_button_content_description">Usuń wpis</string>
+    <string name="save_button_content_description">Zapisz zmiany</string>
+</resources>

@@ -9,6 +9,7 @@ import com.sengami.dialogs.R;
 import com.sengami.dialogs.databinding.DialogMessageBinding;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -22,7 +23,7 @@ public class MessageDialog extends Dialog {
         void onAcceptClicked();
     }
 
-    @NotNull
+    @NonNull
     private final String title;
     @NotNull
     private final String message;
@@ -32,11 +33,17 @@ public class MessageDialog extends Dialog {
     private DialogMessageBinding binding;
 
     public MessageDialog(@NonNull final Context context,
-                         @NotNull final String title,
+                         @NotNull final String message,
+                         @NotNull final MessageDialog.Callback callback) {
+        this(context, null, message, callback);
+    }
+
+    public MessageDialog(@NonNull final Context context,
+                         @Nullable final String title,
                          @NotNull final String message,
                          @NotNull final MessageDialog.Callback callback) {
         super(context, R.style.OverlayDialog);
-        this.title = title;
+        this.title = title != null ? title : getContext().getString(R.string.message_dialog_default_title);
         this.message = message;
         this.callback = callback;
     }

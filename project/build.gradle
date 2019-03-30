@@ -3,6 +3,7 @@ apply from: '../config/android_module_shared_config.gradle'
 
 android {
     defaultConfig {
+        manifestPlaceholders.applicationName = "My Astral Diary"
         project.archivesBaseName = "my-astral-diary-${versionName}".toString()
     }
 
