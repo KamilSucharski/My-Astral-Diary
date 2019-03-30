@@ -1,0 +1,11 @@
+<resources>
+    <string name="settings_section_backup">Kopia zapasowa</string>
+    <string name="settings_section_export">Eksport</string>
+
+    <string name="settings_item_backup_create">Stwórz kopię zapasową</string>
+    <string name="settings_item_backup_restore">Przywróć z kopii zapasowej</string>
+    <string name="settings_item_export_to_text_file">Eksportuj dziennik do pliku tekstowego</string>
+
+    <string name="file_saved_successfully">Plik zapisany pomyślnie</string>
+    <string name="restore_from_backup_warning">Ta akcja nadpisze twoje obecne dane i zrestartuje aplikację. Upewnij się, że masz kopię zapasową. Kontynuować?</string>
+</resources>

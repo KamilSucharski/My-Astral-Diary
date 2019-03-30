@@ -1,0 +1,8 @@
+<resources>
+    <string name="cancel_button_content_description">Anuluj</string>
+    <string name="accept_button_content_description">Akceptuj</string>
+
+    <string name="message_dialog_default_title">Uwaga!</string>
+
+    <string name="date_picker_dialog_choose_date">Wybierz datę…</string>
+</resources>

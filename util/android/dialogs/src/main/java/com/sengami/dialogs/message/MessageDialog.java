@@ -22,7 +22,7 @@ public class MessageDialog extends Dialog {
         void onAcceptClicked();
     }
 
-    @NotNull
+    @NonNull
     private final String title;
     @NotNull
     private final String message;
@@ -30,6 +30,12 @@ public class MessageDialog extends Dialog {
     private final MessageDialog.Callback callback;
 
     private DialogMessageBinding binding;
+
+    public MessageDialog(@NonNull final Context context,
+                         @NotNull final String message,
+                         @NotNull final MessageDialog.Callback callback) {
+        this(context, context.getString(R.string.message_dialog_default_title), message, callback);
+    }
 
     public MessageDialog(@NonNull final Context context,
                          @NotNull final String title,

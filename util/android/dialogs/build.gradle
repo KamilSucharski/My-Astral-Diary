@@ -5,10 +5,8 @@ dependencies {
     implementation project(":feature:base:gui_base")
 
     implementation project(":util:android:clicks")
-    implementation project(":util:android:recycler_view_adapter")
 
     implementation libraries.jetbrainsAnnotations
     implementation libraries.jodaTime
-    implementation libraries.lightweightStream
     implementation libraries.materialDesign
 }

@@ -9,10 +9,6 @@ dependencies {
     implementation project(":feature:main:data_main")
     implementation project(":feature:main:domain_main")
 
-    implementation project(":feature:diary:gui_diary")
-    implementation project(":feature:statistics:gui_statistics")
-    implementation project(":feature:settings:gui_settings")
-
     implementation libraries.jetbrainsAnnotations
     implementation libraries.dagger
     implementation libraries.rxJava

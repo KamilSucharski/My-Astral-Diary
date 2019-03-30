@@ -4,10 +4,10 @@ import com.sengami.domain_base.operation.Operation;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
+import java.io.InputStream;
 
 public interface RestoreFromBackupOperation extends Operation<Boolean> {
 
     @NotNull
-    RestoreFromBackupOperation withBackupFile(@NotNull final File backup);
+    RestoreFromBackupOperation withBackupFileInputStream(@NotNull final InputStream backupFileInputStream);
 }

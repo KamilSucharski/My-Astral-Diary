@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import com.sengami.android_operation.di.module.ContextModule;
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
 import com.sengami.android_operation.implementation.ToastErrorHandler;
@@ -15,6 +14,8 @@ import com.sengami.domain_base.operation.loading.LoadingIndicator;
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_diary.view.DiaryEntryListView;
 import com.sengami.gui_base.navigation.Extra;
+import com.sengami.gui_base.navigation.FlowCoordinator;
+import com.sengami.gui_base.navigation.FlowCoordinatorProvider;
 import com.sengami.gui_base.navigation.RequestCode;
 import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_diary.R;
@@ -68,7 +69,6 @@ public final class DiaryEntryListFragment
     @Override
     protected void inject(@NotNull final Context context) {
         DaggerDiaryEntryListComponent.builder()
-            .contextModule(new ContextModule(context))
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()
@@ -110,7 +110,8 @@ public final class DiaryEntryListFragment
 
     @Override
     public void navigateToDiaryEntryComposerScreen(@NotNull final DiaryEntry diaryEntry) {
-        final Intent intent = new Intent(getContext(), DiaryEntryComposerActivity.class);
+        final FlowCoordinator flowCoordinator = FlowCoordinatorProvider.provide();
+        final Intent intent = flowCoordinator.diaryEntryComposerActivityIntent(getContext());
         intent.putExtra(Extra.DIARY_ENTRY.name(), diaryEntry);
         startActivityForResult(intent, RequestCode.COMPOSE_DIARY_ENTRY.code());
     }

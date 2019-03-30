@@ -1,22 +1,26 @@
 package com.sengami.gui_settings.view;
 
-import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.jakewharton.processphoenix.ProcessPhoenix;
-import com.sengami.android_operation.di.module.ContextModule;
+import com.sengami.android_database.di.module.DatabaseFileProviderModule;
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
 import com.sengami.android_operation.implementation.ToastErrorHandler;
 import com.sengami.android_operation.implementation.ViewVisibilityLoadingIndicator;
-import com.sengami.dialogs.file.FilePickerDialog;
+import com.sengami.date.DateFormatter;
 import com.sengami.dialogs.message.MessageDialog;
 import com.sengami.domain_base.Constants;
 import com.sengami.domain_base.operation.error.ErrorHandler;
 import com.sengami.domain_base.operation.loading.LoadingIndicator;
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_settings.view.SettingsView;
+import com.sengami.gui_base.navigation.RequestCode;
 import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_settings.R;
 import com.sengami.gui_settings.databinding.FragmentSettingsBinding;
@@ -26,13 +30,16 @@ import com.sengami.gui_settings.view.list.adapter.SettingsListCallbacks;
 import com.sengami.gui_settings.view.list.converter.SettingsListElementConverter;
 import com.sengami.gui_settings.view.list.element.SettingsListElement;
 import com.sengami.gui_settings.view.list.element.SettingsListElementType;
-import com.sengami.permissions.Permissions;
 import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
 import com.sengami.recycler_view_adapter.converter.ElementConverter;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -47,11 +54,9 @@ public final class SettingsFragment
     extends BaseFragment<Presenter<SettingsView>, FragmentSettingsBinding>
     implements SettingsView, SettingsListCallbacks {
 
-    private static final String STORAGE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-
-    private final Subject<Boolean> createBackupTrigger = PublishSubject.create();
-    private final Subject<File> restoreFromBackupTrigger = PublishSubject.create();
-    private final Subject<Boolean> exportToTextFileTrigger = PublishSubject.create();
+    private final Subject<OutputStream> createBackupTrigger = PublishSubject.create();
+    private final Subject<InputStream> restoreFromBackupTrigger = PublishSubject.create();
+    private final Subject<OutputStream> exportToTextFileTrigger = PublishSubject.create();
     private ErrorHandler errorHandler;
     private LoadingIndicator loadingIndicator;
 
@@ -69,7 +74,7 @@ public final class SettingsFragment
     @Override
     protected void inject(@NotNull final Context context) {
         DaggerSettingsComponent.builder()
-            .contextModule(new ContextModule(context))
+            .databaseFileProviderModule(new DatabaseFileProviderModule(context))
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()
@@ -86,25 +91,25 @@ public final class SettingsFragment
 
     @Override
     @NotNull
-    public Observable<Boolean> getCreateBackupTrigger() {
+    public Observable<OutputStream> getCreateBackupTrigger() {
         return createBackupTrigger;
     }
 
     @Override
     @NotNull
-    public Observable<File> getRestoreFromBackupTrigger() {
+    public Observable<InputStream> getRestoreFromBackupTrigger() {
         return restoreFromBackupTrigger;
     }
 
     @Override
     @NotNull
-    public Observable<Boolean> getExportToTextFileTrigger() {
+    public Observable<OutputStream> getExportToTextFileTrigger() {
         return exportToTextFileTrigger;
     }
 
     @Override
-    public void showSavedFile(@NotNull final File file) {
-        Toast.makeText(getContext(), getString(R.string.saved_file, file.getName()), Toast.LENGTH_SHORT).show();
+    public void onFileSaved() {
+        Toast.makeText(getContext(), R.string.file_saved_successfully, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -126,26 +131,54 @@ public final class SettingsFragment
 
     @Override
     public void onCreateBackupClicked() {
-        Permissions.withPermission(
-            getContext(),
-            STORAGE_PERMISSION, () -> createBackupTrigger.onNext(true)
+        final String fileName = String.format(
+            Constants.DATABASE_BACKUP_NAME,
+            DateFormatter.format(new Date(), Constants.FILE_DATE_FORMAT)
         );
+        final Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.setType(Constants.DATABASE_BACKUP_MIME_TYPE);
+        intent.putExtra(Intent.EXTRA_TITLE, fileName);
+        startActivityForResult(intent, RequestCode.SAVE_BACKUP_FILE.code());
     }
 
     @Override
     public void onRestoreFromBackupClicked() {
-        Permissions.withPermission(
-            getContext(),
-            STORAGE_PERMISSION, this::showRestoreFromBackupFilePicker
-        );
+        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType(Constants.DATABASE_BACKUP_MIME_TYPE);
+        startActivityForResult(intent, RequestCode.LOAD_BACKUP_FILE.code());
     }
 
     @Override
     public void onExportToTextFileClicked() {
-        Permissions.withPermission(
-            getContext(),
-            STORAGE_PERMISSION, () -> exportToTextFileTrigger.onNext(true)
+        final String fileName = String.format(
+            Constants.TEXT_EXPORT_NAME,
+            DateFormatter.format(new Date(), Constants.FILE_DATE_FORMAT)
         );
+        final Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.setType(Constants.TEXT_EXPORT_MIME_TYPE);
+        intent.putExtra(Intent.EXTRA_TITLE, fileName);
+        startActivityForResult(intent, RequestCode.SAVE_TEXT_FILE.code());
+    }
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
+        if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            if (requestCode == RequestCode.SAVE_BACKUP_FILE.code()) {
+                onBackupFileReadyToSave(data.getData());
+                return;
+            }
+
+            if (requestCode == RequestCode.LOAD_BACKUP_FILE.code()) {
+                onBackupFilePicked(data.getData());
+                return;
+            }
+
+            if (requestCode == RequestCode.SAVE_TEXT_FILE.code()) {
+                onTextExportFileReadyToSave(data.getData());
+                return;
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setupList(@NotNull final Context context) {
@@ -157,20 +190,34 @@ public final class SettingsFragment
         binding.recyclerView.setAdapter(adapter);
     }
 
-    private void showRestoreFromBackupFilePicker() {
-        new FilePickerDialog(
-            getContext(),
-            this::showRestoreFromBackupConfirmationDialog,
-            Constants.DATABASE_EXTENSION
-        ).show();
+    private void onBackupFileReadyToSave(@NotNull final Uri uri) {
+        try {
+            final OutputStream outputStream = getContext().getContentResolver().openOutputStream(uri);
+            createBackupTrigger.onNext(outputStream);
+        } catch (final FileNotFoundException e) {
+            Log.e(getClass().getSimpleName(), "Failed to create backup file", e);
+        }
     }
 
-    private void showRestoreFromBackupConfirmationDialog(@NotNull final File file) {
-        new MessageDialog(
-            getContext(),
-            getContext().getString(R.string.warning),
-            getContext().getString(R.string.restore_from_backup_warning),
-            () -> restoreFromBackupTrigger.onNext(file)
-        ).show();
+    private void onBackupFilePicked(@NotNull final Uri uri) {
+        try {
+            final InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
+            new MessageDialog(
+                getContext(),
+                getContext().getString(R.string.restore_from_backup_warning),
+                () -> restoreFromBackupTrigger.onNext(inputStream)
+            ).show();
+        } catch (final FileNotFoundException e) {
+            Log.e(getClass().getSimpleName(), "Failed to create text export file", e);
+        }
+    }
+
+    private void onTextExportFileReadyToSave(@NotNull final Uri uri) {
+        try {
+            final OutputStream outputStream = getContext().getContentResolver().openOutputStream(uri);
+            exportToTextFileTrigger.onNext(outputStream);
+        } catch (final FileNotFoundException e) {
+            Log.e(getClass().getSimpleName(), "Failed to create text export file", e);
+        }
     }
 }

@@ -2,7 +2,12 @@ package com.sengami.domain_settings.operation;
 
 import com.sengami.domain_base.operation.Operation;
 
-import java.io.File;
+import org.jetbrains.annotations.NotNull;
 
-public interface ExportToTextFileOperation extends Operation<File> {
+import java.io.OutputStream;
+
+public interface ExportToTextFileOperation extends Operation<Boolean> {
+
+    @NotNull
+    ExportToTextFileOperation withTextExportFileOutputStream(@NotNull final OutputStream textExportFileOutputStream);
 }

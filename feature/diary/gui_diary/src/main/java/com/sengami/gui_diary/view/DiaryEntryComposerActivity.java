@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.sengami.android_operation.di.module.ContextModule;
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
 import com.sengami.android_operation.implementation.ToastErrorHandler;
@@ -64,7 +63,6 @@ public final class DiaryEntryComposerActivity
     @Override
     protected void inject() {
         DaggerDiaryEntryComposerComponent.builder()
-            .contextModule(new ContextModule(this))
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()
@@ -157,7 +155,6 @@ public final class DiaryEntryComposerActivity
     private void onDeleteDiaryEntryClicked() {
         new MessageDialog(
             this,
-            getString(R.string.warning),
             getString(R.string.delete_diary_entry_warning),
             () -> deleteDiaryEntryTrigger.onNext(diaryEntry)
         ).show();

@@ -42,21 +42,21 @@ public final class SettingsPresenter extends BasePresenter<SettingsView> {
     private Disposable subscribeCreateBackupTrigger(@NotNull final SettingsView view) {
         return view
             .getCreateBackupTrigger()
-            .flatMap(x -> createBackupOperation.execute())
-            .subscribe(view::showSavedFile);
+            .flatMap(outputStream -> createBackupOperation.withBackupFileOutputStream(outputStream).execute())
+            .subscribe(x -> view.onFileSaved());
     }
 
     private Disposable subscribeRestoreFromBackupTrigger(@NotNull final SettingsView view) {
         return view
             .getRestoreFromBackupTrigger()
-            .flatMap(file -> restoreFromBackupOperation.withBackupFile(file).execute())
+            .flatMap(inputStream -> restoreFromBackupOperation.withBackupFileInputStream(inputStream).execute())
             .subscribe(x -> view.refreshApplication());
     }
 
     private Disposable subscribeExportToTextFileTrigger(@NotNull final SettingsView view) {
         return view
             .getExportToTextFileTrigger()
-            .flatMap(x -> exportToTextFileOperation.execute())
-            .subscribe(view::showSavedFile);
+            .flatMap(outputStream -> exportToTextFileOperation.withTextExportFileOutputStream(outputStream).execute())
+            .subscribe(x -> view.onFileSaved());
     }
 }

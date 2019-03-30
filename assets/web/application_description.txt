@@ -1,2 +1,2 @@
 A diary application with backup and export options. It features grouping entries by date, statistics which give you insight into your progress and a dark interface that goes easy on your eyes.
-No network connection is required, and we will only ask for your permission to access external storage when you wish to backup or export your diary!
+No network connection or suspicious permissions are required!

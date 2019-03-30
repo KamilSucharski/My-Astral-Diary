@@ -1,0 +1,13 @@
+# 1.0.0
+Hello world! My Astral Diary has just been published!
+
+# 1.1.0
+Improvements:
+1. Replaced custom file picker with the system storage access framework, which doesn't need permissions to external storage
+2. Added polish translations
+3. Lowered .apk file size
+4. Various code improvements
+
+Bug fixes:
+1. Fixed bug with backup sometimes being corrupted on Android 9+
+2. Line breaks are no longer counted in "longest entry character count" statistic

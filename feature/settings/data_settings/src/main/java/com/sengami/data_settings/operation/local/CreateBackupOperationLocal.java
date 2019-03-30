@@ -1,8 +1,6 @@
 package com.sengami.data_settings.operation.local;
 
-import com.sengami.data_base.util.ExternalStoragePathProvider;
-import com.sengami.data_base.util.InternalStoragePathProvider;
-import com.sengami.date.DateFormatter;
+import com.sengami.data_base.util.DatabaseFileProvider;
 import com.sengami.domain_base.Constants;
 import com.sengami.domain_base.operation.BaseOperation;
 import com.sengami.domain_base.operation.error.WithErrorHandler;
@@ -12,64 +10,55 @@ import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
 import com.sengami.domain_settings.operation.CreateBackupOperation;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Date;
 
 import io.reactivex.Observable;
 
-public final class CreateBackupOperationLocal extends BaseOperation<File> implements CreateBackupOperation {
+public final class CreateBackupOperationLocal extends BaseOperation<Boolean> implements CreateBackupOperation {
 
     @NotNull
-    private final InternalStoragePathProvider internalStoragePathProvider;
-    @NotNull
-    private final ExternalStoragePathProvider externalStoragePathProvider;
+    private final DatabaseFileProvider databaseFileProvider;
+    @Nullable
+    private OutputStream backupFileOutputStream;
 
     public CreateBackupOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
                                       @NotNull final WithErrorHandler withErrorHandler,
                                       @NotNull final WithLoadingIndicator withLoadingIndicator,
                                       @NotNull final Logger logger,
-                                      @NotNull final InternalStoragePathProvider internalStoragePathProvider,
-                                      @NotNull final ExternalStoragePathProvider externalStoragePathProvider) {
+                                      @NotNull final DatabaseFileProvider databaseFileProvider) {
         super(reactiveSchedulers, withErrorHandler, withLoadingIndicator, logger);
-        this.internalStoragePathProvider = internalStoragePathProvider;
-        this.externalStoragePathProvider = externalStoragePathProvider;
+        this.databaseFileProvider = databaseFileProvider;
     }
 
     @Override
-    protected Observable<File> getObservable() {
+    @NotNull
+    public CreateBackupOperation withBackupFileOutputStream(@NotNull final OutputStream backupFileOutputStream) {
+        this.backupFileOutputStream = backupFileOutputStream;
+        return this;
+    }
+
+    @Override
+    protected Observable<Boolean> getObservable() {
         return Observable.fromCallable(() -> {
-            final File database = new File(internalStoragePathProvider.provide() + Constants.DATABASE_PATH);
+            if (backupFileOutputStream == null) {
+                throw new IllegalArgumentException("[OutputStream backupFileOutputStream] has not been set in CreateBackupOperationLocal");
+            }
+
+            final File database = databaseFileProvider.provide(Constants.DATABASE_NAME);
             final FileInputStream inputStream = new FileInputStream(database);
-            final File backup = createBackupFile();
-            final OutputStream outputStream = new FileOutputStream(backup);
             final byte[] buffer = new byte[1024];
             int length;
             while ((length = inputStream.read(buffer)) > 0) {
-                outputStream.write(buffer, 0, length);
+                backupFileOutputStream.write(buffer, 0, length);
             }
-            outputStream.flush();
-            outputStream.close();
+            backupFileOutputStream.flush();
+            backupFileOutputStream.close();
             inputStream.close();
-            return backup;
+            return true;
         });
-    }
-
-    @NotNull
-    private File createBackupFile() throws IOException {
-        final String fileName = String.format(
-            Constants.DATABASE_BACKUP_NAME_FORMAT,
-            DateFormatter.format(new Date(), Constants.FILE_DATE_FORMAT)
-        );
-        final String filePath = externalStoragePathProvider.provide() + "/" + fileName;
-        final File file = new File(filePath);
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-        return file;
     }
 }
