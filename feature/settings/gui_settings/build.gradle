@@ -14,7 +14,6 @@ dependencies {
     implementation project(':util:android:android_operation')
     implementation project(":util:android:clicks")
     implementation project(':util:android:android_database')
-    implementation project(":util:android:permissions")
     implementation project(':util:android:recycler_view_adapter')
     implementation project(':util:android:dialogs')
 

@@ -13,7 +13,8 @@ import dagger.Provides;
 @Module
 public final class DatabaseFileProviderModule {
 
-    @NotNull final Context context;
+    @NotNull
+    private final Context context;
 
     public DatabaseFileProviderModule(@NotNull final Context context) {
         this.context = context;
