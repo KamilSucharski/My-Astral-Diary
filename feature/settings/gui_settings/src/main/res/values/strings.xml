@@ -14,72 +14,45 @@
     <string name="license_list_back_button_content_description">Go back to settings</string>
     <string name="license_list" translatable="false">
         <![CDATA[
-            My Astral Diary
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>My Astral Diary</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            Android AppCompat Library V7
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>Android AppCompat Library V7</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            Android Support RecyclerView V7
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>Android Support RecyclerView V7</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            Material Components For Android
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>Material Components For Android</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            RxJava
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>RxJava</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            RxAndroid
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>RxAndroid</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            Dagger
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>Dagger</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            Dagger Compiler
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>Dagger Compiler</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            JetBrains Java Annotations<br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a><br />
+            <b>JetBrains Java Annotations</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a><br />
             <br />
-            Lightweight Stream API
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>Lightweight Stream API</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            Joda Time
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>Joda Time</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            Process Phoenix
-            <br />
-            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <b>Process Phoenix</b> - <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a>
             <br />
             <br />
-            ORMLite Core
-            <br />
-            <a href="http://ormlite.com/docs/license">ISC License</a>
+            <b>ORMLite Core</b> - <a href="http://ormlite.com/docs/license">ISC License</a>
             <br />
             <br />
-            ORMLite Android
-            <br />
-            <a href="http://ormlite.com/docs/license">ISC License</a>
+            <b>ORMLite Android</b> - <a href="http://ormlite.com/docs/license">ISC License</a>
         ]]>
     </string>
 </resources>
