@@ -3,17 +3,17 @@ apply from: '../config/android_module_shared_config.gradle'
 
 android {
     defaultConfig {
+        applicationId = "com.sengami.myastraldiary"
         manifestPlaceholders.applicationName = "My Astral Diary"
         project.archivesBaseName = "my-astral-diary-${versionName}".toString()
     }
 
     signingConfigs {
         release {
-            def configuration = rootProject.ext
-            storeFile file(configuration["keystorePath"])
-            storePassword configuration["keystorePassword"]
-            keyAlias configuration["keystoreAlias"]
-            keyPassword configuration["keystoreAliasPassword"]
+            storeFile file(project.KEYSTORE_PATH)
+            storePassword project.KEYSTORE_PASSWORD
+            keyAlias project.KEYSTORE_ALIAS
+            keyPassword project.KEYSTORE_ALIAS_PASSWORD
             v1SigningEnabled = true
             v2SigningEnabled = true
         }

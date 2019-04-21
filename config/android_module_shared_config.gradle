@@ -1,11 +1,15 @@
 android {
     defaultConfig {
-        def configuration = rootProject.ext
-        compileSdkVersion configuration["androidTargetSdkVersion"]
-        minSdkVersion configuration["androidMinSdkVersion"]
-        targetSdkVersion configuration["androidTargetSdkVersion"]
-        versionName configuration.getVersionName()
-        versionCode configuration.getVersionCode()
+        minSdkVersion project.ANDROID_VERSION_MINIMAL.toInteger()
+        compileSdkVersion project.ANDROID_VERSION_TARGET.toInteger()
+        targetSdkVersion project.ANDROID_VERSION_TARGET.toInteger()
+
+        def version_major = project.VERSION_MAJOR.toInteger()
+        def version_minor = project.VERSION_MINOR.toInteger()
+        def version_patch = project.VERSION_PATCH.toInteger()
+
+        versionName String.format("%s.%s.%s", version_major, version_minor, version_patch)
+        versionCode version_major * 1000000 + version_minor * 1000 + version_patch
     }
 
     buildTypes {

@@ -11,8 +11,8 @@ No network connection or suspicious permissions are required!
 
 ##### Before building:
 
-1. Copy "signing/signing.gradle.example" as "signing/signing.gradle"
-2. (Only for release builds) Create a keystore in the "signing" directory and set correct values in the "signing/signing.gradle" file.
+1. Copy "gradle.properties.example" as "gradle.properties"
+2. (Only for release builds) Create a keystore file if you don't have one and set correct values in the "gradle.properties" file's "Signing" section.
 
 ##### Building release builds:
 
