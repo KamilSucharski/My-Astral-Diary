@@ -62,7 +62,8 @@ public final class DiaryEntryComposerActivity
 
     @Override
     protected void inject() {
-        DaggerDiaryEntryComposerComponent.builder()
+        DaggerDiaryEntryComposerComponent
+            .builder()
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()

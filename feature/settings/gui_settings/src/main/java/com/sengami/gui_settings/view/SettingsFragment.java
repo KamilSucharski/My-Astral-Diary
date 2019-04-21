@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.jakewharton.processphoenix.ProcessPhoenix;
 import com.sengami.android_database.di.module.DatabaseFileProviderModule;
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
@@ -44,8 +47,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
@@ -73,7 +74,8 @@ public final class SettingsFragment
 
     @Override
     protected void inject(@NotNull final Context context) {
-        DaggerSettingsComponent.builder()
+        DaggerSettingsComponent
+            .builder()
             .databaseFileProviderModule(new DatabaseFileProviderModule(context))
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
@@ -109,12 +111,12 @@ public final class SettingsFragment
 
     @Override
     public void onFileSaved() {
-        Toast.makeText(getContext(), R.string.file_saved_successfully, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getViewContext(), R.string.file_saved_successfully, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void refreshApplication() {
-        ProcessPhoenix.triggerRebirth(getContext());
+        ProcessPhoenix.triggerRebirth(getViewContext());
     }
 
     @Override
@@ -161,6 +163,11 @@ public final class SettingsFragment
     }
 
     @Override
+    public void onShowLicensesClicked() {
+        startActivity(new Intent(getViewContext(), LicensesActivity.class));
+    }
+
+    @Override
     public void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
         if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
             if (requestCode == RequestCode.SAVE_BACKUP_FILE.code()) {
@@ -192,7 +199,7 @@ public final class SettingsFragment
 
     private void onBackupFileReadyToSave(@NotNull final Uri uri) {
         try {
-            final OutputStream outputStream = getContext().getContentResolver().openOutputStream(uri);
+            final OutputStream outputStream = getViewContext().getContentResolver().openOutputStream(uri);
             createBackupTrigger.onNext(outputStream);
         } catch (final FileNotFoundException e) {
             Log.e(getClass().getSimpleName(), "Failed to create backup file", e);
@@ -201,10 +208,10 @@ public final class SettingsFragment
 
     private void onBackupFilePicked(@NotNull final Uri uri) {
         try {
-            final InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
+            final InputStream inputStream = getViewContext().getContentResolver().openInputStream(uri);
             new MessageDialog(
-                getContext(),
-                getContext().getString(R.string.restore_from_backup_warning),
+                getViewContext(),
+                getViewContext().getString(R.string.restore_from_backup_warning),
                 () -> restoreFromBackupTrigger.onNext(inputStream)
             ).show();
         } catch (final FileNotFoundException e) {
@@ -214,7 +221,7 @@ public final class SettingsFragment
 
     private void onTextExportFileReadyToSave(@NotNull final Uri uri) {
         try {
-            final OutputStream outputStream = getContext().getContentResolver().openOutputStream(uri);
+            final OutputStream outputStream = getViewContext().getContentResolver().openOutputStream(uri);
             exportToTextFileTrigger.onNext(outputStream);
         } catch (final FileNotFoundException e) {
             Log.e(getClass().getSimpleName(), "Failed to create text export file", e);

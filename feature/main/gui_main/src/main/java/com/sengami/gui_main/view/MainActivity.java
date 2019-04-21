@@ -33,7 +33,8 @@ public final class MainActivity
 
     @Override
     protected void inject() {
-        DaggerMainComponent.builder()
+        DaggerMainComponent
+            .builder()
             .build()
             .inject(this);
     }

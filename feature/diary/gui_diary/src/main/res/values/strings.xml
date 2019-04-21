@@ -7,7 +7,7 @@
     <string name="delete_diary_entry_warning">Deleting a diary entry is a permanent action. Proceed?</string>
     <string name="operation_successful">Changes saved successfully.</string>
 
-    <string name="back_button_content_description">Go back to diary entry list</string>
+    <string name="diary_composer_back_button_content_description">Go back to diary entry list</string>
     <string name="delete_button_content_description">Delete diary entry</string>
     <string name="save_button_content_description">Save changes</string>
 </resources>

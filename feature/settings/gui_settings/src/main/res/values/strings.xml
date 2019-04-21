@@ -1,11 +1,85 @@
 <resources>
     <string name="settings_section_backup">Backup</string>
     <string name="settings_section_export">Export</string>
+    <string name="settings_section_other">Other</string>
 
     <string name="settings_item_backup_create">Create backup</string>
     <string name="settings_item_backup_restore">Restore from backup</string>
     <string name="settings_item_export_to_text_file">Export diary to text file</string>
+    <string name="settings_item_licenses">Licenses</string>
 
     <string name="file_saved_successfully">File saved successfully</string>
     <string name="restore_from_backup_warning">This action will overwrite your current data and restart the application. Make sure you have a backup. Proceed?</string>
+
+    <string name="license_list_back_button_content_description">Go back to settings</string>
+    <string name="license_list" translatable="false">
+        <![CDATA[
+            My Astral Diary
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            Android AppCompat Library V7
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            Android Support RecyclerView V7
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            Material Components For Android
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            RxJava
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            RxAndroid
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            Dagger
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            Dagger Compiler
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            JetBrains Java Annotations<br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a><br />
+            <br />
+            Lightweight Stream API
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            Joda Time
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            Process Phoenix
+            <br />
+            <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License 2.0</a>
+            <br />
+            <br />
+            ORMLite Core
+            <br />
+            <a href="http://ormlite.com/docs/license">ISC License</a>
+            <br />
+            <br />
+            ORMLite Android
+            <br />
+            <a href="http://ormlite.com/docs/license">ISC License</a>
+        ]]>
+    </string>
 </resources>

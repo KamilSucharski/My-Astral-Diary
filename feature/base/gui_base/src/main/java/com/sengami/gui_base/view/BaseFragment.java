@@ -6,15 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sengami.domain_base.presenter.Presenter;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import androidx.annotation.LayoutRes;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+
+import com.sengami.domain_base.presenter.Presenter;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseFragment<P extends Presenter, DB extends ViewDataBinding> extends Fragment {
 
@@ -65,8 +65,7 @@ public abstract class BaseFragment<P extends Presenter, DB extends ViewDataBindi
     }
 
     @NotNull
-    @Override
-    public Context getContext() {
+    protected Context getViewContext() {
         return binding.getRoot().getContext();
     }
 

@@ -7,7 +7,7 @@
     <string name="delete_diary_entry_warning">Usunięcie wpisu jest akcją bezpowrotną. Kontynuować?</string>
     <string name="operation_successful">Zapisano zmiany.</string>
 
-    <string name="back_button_content_description">Wróć do listy wpisów</string>
+    <string name="diary_composer_back_button_content_description">Wróć do listy wpisów</string>
     <string name="delete_button_content_description">Usuń wpis</string>
     <string name="save_button_content_description">Zapisz zmiany</string>
 </resources>

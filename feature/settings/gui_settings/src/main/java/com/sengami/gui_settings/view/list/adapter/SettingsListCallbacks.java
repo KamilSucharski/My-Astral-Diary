@@ -7,4 +7,6 @@ public interface SettingsListCallbacks {
     void onRestoreFromBackupClicked();
 
     void onExportToTextFileClicked();
+
+    void onShowLicensesClicked();
 }

@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
 import com.sengami.android_operation.implementation.ToastErrorHandler;
@@ -36,9 +40,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
@@ -68,7 +69,8 @@ public final class DiaryEntryListFragment
 
     @Override
     protected void inject(@NotNull final Context context) {
-        DaggerDiaryEntryListComponent.builder()
+        DaggerDiaryEntryListComponent
+            .builder()
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()
@@ -111,7 +113,7 @@ public final class DiaryEntryListFragment
     @Override
     public void navigateToDiaryEntryComposerScreen(@NotNull final DiaryEntry diaryEntry) {
         final FlowCoordinator flowCoordinator = FlowCoordinatorProvider.provide();
-        final Intent intent = flowCoordinator.diaryEntryComposerActivityIntent(getContext());
+        final Intent intent = flowCoordinator.diaryEntryComposerActivityIntent(getViewContext());
         intent.putExtra(Extra.DIARY_ENTRY.name(), diaryEntry);
         startActivityForResult(intent, RequestCode.COMPOSE_DIARY_ENTRY.code());
     }
@@ -119,7 +121,7 @@ public final class DiaryEntryListFragment
     @Override
     @NotNull
     public ErrorHandler getErrorHandler() {
-        return new ToastErrorHandler(getContext());
+        return new ToastErrorHandler(getViewContext());
     }
 
     @Override

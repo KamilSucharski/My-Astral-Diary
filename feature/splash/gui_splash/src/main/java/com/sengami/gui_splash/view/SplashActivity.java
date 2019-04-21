@@ -38,7 +38,8 @@ public final class SplashActivity
 
     @Override
     protected void inject() {
-        DaggerSplashComponent.builder()
+        DaggerSplashComponent
+            .builder()
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()

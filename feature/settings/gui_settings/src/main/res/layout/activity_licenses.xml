@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="licenseList" type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_primary">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fadeScrollbars="false">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/content_margin"
+                android:theme="@style/Text.Standard"
+                app:html="@{licenseList}"/>
+
+        </ScrollView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_primary_dark">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_menu_height"
+                android:theme="@style/BottomMenuItem"
+                android:src="@drawable/arrow_back"
+                android:contentDescription="@string/license_list_back_button_content_description"/>
+
+        </FrameLayout>
+    </LinearLayout>
+</layout>

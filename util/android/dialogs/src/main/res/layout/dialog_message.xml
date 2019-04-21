@@ -49,7 +49,7 @@
                     android:layout_marginStart="@dimen/content_margin"
                     android:layout_marginEnd="@dimen/content_margin"
                     android:theme="@style/Text.Standard"
-                    android:text="@{message}"
+                    app:html="@{message}"
                     tools:text="This is a sample dialog message that could be shown to the user."/>
 
                 <include
