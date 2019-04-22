@@ -6,6 +6,6 @@
         android:id="@+id/day_progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="1dp"/>
+        android:layout_margin="2dp"/>
 
 </layout>

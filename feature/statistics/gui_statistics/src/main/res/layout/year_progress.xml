@@ -31,13 +31,11 @@
                 android:theme="@style/Text.Header"
                 tools:text="2019"/>
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="@dimen/half_content_margin" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_content_margin"
+                android:layout_marginBottom="@dimen/half_content_margin"
                 android:orientation="horizontal">
 
                 <TextView

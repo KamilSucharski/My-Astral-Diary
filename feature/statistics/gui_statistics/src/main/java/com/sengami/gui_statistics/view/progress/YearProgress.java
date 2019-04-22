@@ -75,13 +75,12 @@ public final class YearProgress
         for (int i = 1; i <= DAYS_PER_COLUMN; i++) {
             binding.daysLinearLayout.addView(createRow(i, year, context, highlightedDays), tableLayoutParams);
         }
-        binding.daysLinearLayout.requestLayout();
     }
 
     private LinearLayout createRow(final int rowNumber,
-                               final int year,
-                               @NotNull final Context context,
-                               @NotNull final Collection<LocalDate> highlightedDays) {
+                                   final int year,
+                                   @NotNull final Context context,
+                                   @NotNull final Collection<LocalDate> highlightedDays) {
         final LinearLayout tableRow = new LinearLayout(context);
         final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -114,7 +113,7 @@ public final class YearProgress
         final DayProgress dayProgress = new DayProgress(context);
         if (isValidDate(day, month, year)) {
             final Calendar calendar = Calendar.getInstance();
-            calendar.set(year, month, day);
+            calendar.set(year, month - 1, day);
             final LocalDate date = LocalDate.fromCalendarFields(calendar);
             dayProgress.setDay(date, highlightedDays.contains(date));
         }

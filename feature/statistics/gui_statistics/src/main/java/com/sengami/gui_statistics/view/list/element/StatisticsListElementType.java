@@ -7,7 +7,7 @@ import com.sengami.recycler_view_adapter.element.ElementType;
 
 public enum StatisticsListElementType implements ElementType {
     YEAR_PROGRESS(R.layout.element_year_progress),
-    TEXT_WITH_NUMBER(R.layout.element_text_with_number),
+    OTHER_STATISTICS(R.layout.element_other_statistics),
     EMPTY_STATE(R.layout.element_statistics_empty_state);
 
     @LayoutRes

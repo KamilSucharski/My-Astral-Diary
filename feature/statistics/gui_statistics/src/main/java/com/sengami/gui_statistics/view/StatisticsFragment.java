@@ -106,7 +106,7 @@ public final class StatisticsFragment
     }
 
     private void setupList(@NotNull final Context context) {
-        adapter = new StatisticsListAdapter(context);
+        adapter = new StatisticsListAdapter();
         converter = new StatisticsListElementConverter();
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
         binding.recyclerView.setAdapter(adapter);

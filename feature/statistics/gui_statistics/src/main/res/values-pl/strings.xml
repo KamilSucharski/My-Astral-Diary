@@ -2,10 +2,11 @@
     <string name="statistic_list_empty_state">Tutaj zobaczysz statystyki dotyczące twojego dziennika, ale na razie twój dziennik jest pusty!</string>
     <string name="statistic_list_empty_state_content_description">Obrazek wykresu</string>
 
-    <string name="statistic_total_entries">Łączna ilość wpisów:</string>
-    <string name="statistic_year_with_most_entries">Rok z najwyższą ilością wpisów:</string>
-    <string name="statistic_longest_entry_character_count">Ilość znaków w najdłuższym wpisie:</string>
-    <string name="statistic_average_entries_per_day">Średnia ilość wpisów na dzień:</string>
+    <string name="statistic_other_statistics">Pozostałe statystyki</string>
+    <string name="statistic_other_statistics_total_entries">Łączna ilość wpisów:</string>
+    <string name="statistic_other_statistics_year_with_most_entries">Rok z najwyższą ilością wpisów:</string>
+    <string name="statistic_other_statistics_longest_entry_character_count">Ilość znaków w najdłuższym wpisie:</string>
+    <string name="statistic_other_statistics_average_entries_per_day">Średnia ilość wpisów na dzień:</string>
 
     <string name="statistic_year_progress_month_january">Sty</string>
     <string name="statistic_year_progress_month_february">Lut</string>
