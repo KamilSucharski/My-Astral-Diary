@@ -1,7 +1,6 @@
 package com.sengami.domain_statistics.presenter;
 
 import com.sengami.domain_base.presenter.BasePresenter;
-import com.sengami.domain_statistics.view.DayProgressView;
 import com.sengami.domain_statistics.view.YearProgressView;
 
 import org.jetbrains.annotations.NotNull;

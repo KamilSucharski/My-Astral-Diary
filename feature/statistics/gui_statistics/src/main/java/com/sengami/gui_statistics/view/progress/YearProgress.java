@@ -5,8 +5,11 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
+
+import androidx.annotation.DrawableRes;
 
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_statistics.view.YearProgressView;
@@ -97,13 +100,13 @@ public final class YearProgress
 
         for (int month = 1; month <= MONTHS_IN_A_YEAR; month++) {
             for (int columnsBefore = 0; columnsBefore < COLUMNS_PER_MONTH; columnsBefore++) {
-                final DayProgress dayProgress = createDayProgress(
+                final View dayProgress = createDayView(
+                    context,
+                    highlightedDays,
                     rowNumber + (DAYS_PER_COLUMN * columnsBefore),
                     month,
                     year,
-                    dayWidth,
-                    context,
-                    highlightedDays
+                    dayWidth
                 );
 
                 tableRow.addView(dayProgress);
@@ -112,29 +115,30 @@ public final class YearProgress
         return tableRow;
     }
 
-    @SuppressWarnings("SuspiciousNameCombination")
     @NotNull
-    private DayProgress createDayProgress(final int day,
-                                          final int month,
-                                          final int year,
-                                          final int dayWidth,
-                                          @NotNull final Context context,
-                                          @NotNull final Collection<LocalDate> highlightedDays) {
-        final DayProgress dayProgress = new DayProgress(context);
-        if (isValidDate(day, month, year)) {
-            final Calendar calendar = Calendar.getInstance();
-            calendar.set(year, month - 1, day);
-            final LocalDate date = LocalDate.fromCalendarFields(calendar);
-            dayProgress.setDay(date, highlightedDays.contains(date));
-        }
-        final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
-            dayWidth,
-            dayWidth
-        );
-        dayProgress.setLayoutParams(layoutParams);
-        return dayProgress;
-    }
+    private View createDayView(@NotNull final Context context,
+                               @NotNull final Collection<LocalDate> highlightedDays,
+                               final int day,
+                               final int month,
+                               final int year,
+                               final int dayWidth) {
+        final View dayView = new View(context);
+        final int marginSize = dayWidth / 10;
+        final int iconSize = dayWidth - (2 * marginSize);
 
+        if (isValidDate(day, month, year)) {
+            setCorrectBackgroundOnDayView(dayView, highlightedDays, day, month, year);
+        }
+
+        final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+            iconSize,
+            iconSize
+        );
+        layoutParams.setMargins(marginSize, marginSize, marginSize, marginSize);
+        dayView.setLayoutParams(layoutParams);
+
+        return dayView;
+    }
 
     private boolean isValidDate(final int day,
                                 final int month,
@@ -161,5 +165,31 @@ public final class YearProgress
                                         final int year) {
         final int februaryDayCount = year % 4 == 0 ? 29 : 28;
         return month == 2 && day <= februaryDayCount;
+    }
+
+    private void setCorrectBackgroundOnDayView(@NotNull final View dayView,
+                                               @NotNull final Collection<LocalDate> highlightedDays,
+                                               final int day,
+                                               final int month,
+                                               final int year) {
+        final Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month - 1, day);
+        final LocalDate date = LocalDate.fromCalendarFields(calendar);
+        dayView.setBackgroundResource(getBackgroundDrawableResource(date, highlightedDays.contains(date)));
+    }
+
+    @DrawableRes
+    private int getBackgroundDrawableResource(@NotNull final LocalDate date,
+                                              final boolean highlighted) {
+        if (highlighted) {
+            return R.drawable.background_day_progress_highlighted;
+        }
+
+        final LocalDate today = LocalDate.now();
+        if (date.isAfter(today)) {
+            return R.drawable.background_day_progress_future;
+        } else {
+            return R.drawable.background_day_progress_past;
+        }
     }
 }

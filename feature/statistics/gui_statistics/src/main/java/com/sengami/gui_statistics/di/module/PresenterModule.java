@@ -2,10 +2,8 @@ package com.sengami.gui_statistics.di.module;
 
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_statistics.operation.GetStatisticsOperation;
-import com.sengami.domain_statistics.presenter.DayProgressPresenter;
 import com.sengami.domain_statistics.presenter.StatisticsPresenter;
 import com.sengami.domain_statistics.presenter.YearProgressPresenter;
-import com.sengami.domain_statistics.view.DayProgressView;
 import com.sengami.domain_statistics.view.StatisticsView;
 import com.sengami.domain_statistics.view.YearProgressView;
 
@@ -21,12 +19,6 @@ public final class PresenterModule {
     @NotNull
     Presenter<StatisticsView> statisticsPresenter(@NotNull final GetStatisticsOperation getStatisticsOperation) {
         return new StatisticsPresenter(getStatisticsOperation);
-    }
-
-    @Provides
-    @NotNull
-    Presenter<DayProgressView> dayProgressViewPresenter() {
-        return new DayProgressPresenter();
     }
 
     @Provides
