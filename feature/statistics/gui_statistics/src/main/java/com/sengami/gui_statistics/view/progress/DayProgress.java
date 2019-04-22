@@ -56,12 +56,6 @@ public final class DayProgress
         super.injectPresenter(presenter);
     }
 
-    @SuppressWarnings("SuspiciousNameCombination")
-    @Override
-    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
-    }
-
     public void setDay(@NotNull final LocalDate date,
                        final boolean highlighted) {
         binding.dayProgress.setBackgroundResource(getBackgroundDrawableResource(date, highlighted));

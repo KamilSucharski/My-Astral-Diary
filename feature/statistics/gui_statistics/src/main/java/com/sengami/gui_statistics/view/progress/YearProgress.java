@@ -2,6 +2,7 @@ package com.sengami.gui_statistics.view.progress;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -70,14 +71,18 @@ public final class YearProgress
                         @NotNull final Collection<LocalDate> highlightedDays) {
         final Context context = getContext();
         binding.setYear(year);
-        binding.daysLinearLayout.removeAllViews();
-        final TableLayout.LayoutParams tableLayoutParams = new TableLayout.LayoutParams();
-        for (int i = 1; i <= DAYS_PER_COLUMN; i++) {
-            binding.daysLinearLayout.addView(createRow(i, year, context, highlightedDays), tableLayoutParams);
-        }
+        binding.daysLinearLayout.post(() -> {
+            binding.daysLinearLayout.removeAllViews();
+            final int width = binding.daysLinearLayout.getWidth();
+            final TableLayout.LayoutParams tableLayoutParams = new TableLayout.LayoutParams();
+            for (int i = 1; i <= DAYS_PER_COLUMN; i++) {
+                binding.daysLinearLayout.addView(createRow(i, width, year, context, highlightedDays), tableLayoutParams);
+            }
+        });
     }
 
     private LinearLayout createRow(final int rowNumber,
+                                   final int rowWidth,
                                    final int year,
                                    @NotNull final Context context,
                                    @NotNull final Collection<LocalDate> highlightedDays) {
@@ -87,6 +92,8 @@ public final class YearProgress
             ViewGroup.LayoutParams.WRAP_CONTENT
         );
         tableRow.setLayoutParams(layoutParams);
+        tableRow.setHorizontalGravity(Gravity.CENTER);
+        final int dayWidth = rowWidth / (MONTHS_IN_A_YEAR * COLUMNS_PER_MONTH);
 
         for (int month = 1; month <= MONTHS_IN_A_YEAR; month++) {
             for (int columnsBefore = 0; columnsBefore < COLUMNS_PER_MONTH; columnsBefore++) {
@@ -94,6 +101,7 @@ public final class YearProgress
                     rowNumber + (DAYS_PER_COLUMN * columnsBefore),
                     month,
                     year,
+                    dayWidth,
                     context,
                     highlightedDays
                 );
@@ -104,10 +112,12 @@ public final class YearProgress
         return tableRow;
     }
 
+    @SuppressWarnings("SuspiciousNameCombination")
     @NotNull
     private DayProgress createDayProgress(final int day,
                                           final int month,
                                           final int year,
+                                          final int dayWidth,
                                           @NotNull final Context context,
                                           @NotNull final Collection<LocalDate> highlightedDays) {
         final DayProgress dayProgress = new DayProgress(context);
@@ -117,10 +127,9 @@ public final class YearProgress
             final LocalDate date = LocalDate.fromCalendarFields(calendar);
             dayProgress.setDay(date, highlightedDays.contains(date));
         }
-        final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            1f
+        final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+            dayWidth,
+            dayWidth
         );
         dayProgress.setLayoutParams(layoutParams);
         return dayProgress;
