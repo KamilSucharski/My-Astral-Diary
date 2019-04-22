@@ -6,4 +6,17 @@
     <string name="statistic_year_with_most_entries">Rok z najwyższą ilością wpisów:</string>
     <string name="statistic_longest_entry_character_count">Ilość znaków w najdłuższym wpisie:</string>
     <string name="statistic_average_entries_per_day">Średnia ilość wpisów na dzień:</string>
+
+    <string name="statistic_year_progress_month_january">Sty</string>
+    <string name="statistic_year_progress_month_february">Lut</string>
+    <string name="statistic_year_progress_month_march">Mar</string>
+    <string name="statistic_year_progress_month_april">Kwi</string>
+    <string name="statistic_year_progress_month_may">Maj</string>
+    <string name="statistic_year_progress_month_june">Cze</string>
+    <string name="statistic_year_progress_month_july">Lip</string>
+    <string name="statistic_year_progress_month_august">Sie</string>
+    <string name="statistic_year_progress_month_september">Wrz</string>
+    <string name="statistic_year_progress_month_october">Paź</string>
+    <string name="statistic_year_progress_month_november">Lis</string>
+    <string name="statistic_year_progress_month_december">Gru</string>
 </resources>

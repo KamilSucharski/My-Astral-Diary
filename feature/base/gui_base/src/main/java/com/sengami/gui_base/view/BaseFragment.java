@@ -36,7 +36,9 @@ public abstract class BaseFragment<P extends Presenter, DB extends ViewDataBindi
     @SuppressWarnings("unchecked")
     public void onAttach(@NotNull final Context context) {
         super.onAttach(context);
-        inject(context);
+        if (presenter == null) {
+            inject(context);
+        }
         presenter.subscribe(this);
     }
 

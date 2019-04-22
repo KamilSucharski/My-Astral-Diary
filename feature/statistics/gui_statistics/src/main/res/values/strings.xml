@@ -6,4 +6,17 @@
     <string name="statistic_year_with_most_entries">Year with most entries:</string>
     <string name="statistic_longest_entry_character_count">Longest entry character count:</string>
     <string name="statistic_average_entries_per_day">Average entries per day:</string>
+
+    <string name="statistic_year_progress_month_january">Jan</string>
+    <string name="statistic_year_progress_month_february">Feb</string>
+    <string name="statistic_year_progress_month_march">Mar</string>
+    <string name="statistic_year_progress_month_april">Apr</string>
+    <string name="statistic_year_progress_month_may">May</string>
+    <string name="statistic_year_progress_month_june">Jun</string>
+    <string name="statistic_year_progress_month_july">Jul</string>
+    <string name="statistic_year_progress_month_august">Aug</string>
+    <string name="statistic_year_progress_month_september">Sep</string>
+    <string name="statistic_year_progress_month_october">Oct</string>
+    <string name="statistic_year_progress_month_november">Nov</string>
+    <string name="statistic_year_progress_month_december">Dec</string>
 </resources>
