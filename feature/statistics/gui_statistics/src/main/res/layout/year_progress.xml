@@ -138,25 +138,11 @@
 
             </LinearLayout>
 
-            <TableLayout
-                android:id="@+id/days_table"
+            <LinearLayout
+                android:id="@+id/days_linear_layout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:background="@android:color/holo_red_dark">
-                    <Space
-                        android:layout_height="20dp"
-                        android:layout_width="5dp"/>
-
-                </TableRow>
-
-            </TableLayout>
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
 </layout>

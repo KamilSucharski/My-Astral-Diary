@@ -78,6 +78,7 @@ public final class GetStatisticsOperationLocal
         return Stream.of(entries)
             .map(DiaryEntry::getDate)
             .groupBy(LocalDate::getYear)
+            .sorted((o1, o2) -> o2.getKey().compareTo(o1.getKey()))
             .reduce(new LinkedHashMap<>(), ((accumulator, entry) -> {
                 accumulator.put(entry.getKey(), entry.getValue());
                 return accumulator;
