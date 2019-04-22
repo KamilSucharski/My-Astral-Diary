@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.sengami.gui_statistics.view.list.binder.StatisticsListEmptyStateElementBinder;
 import com.sengami.gui_statistics.view.list.binder.StatisticsListTextWithNumberElementBinder;
+import com.sengami.gui_statistics.view.list.binder.StatisticsListYearProgressElementBinder;
 import com.sengami.gui_statistics.view.list.element.StatisticsListElement;
 import com.sengami.gui_statistics.view.list.element.StatisticsListElementType;
 import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
@@ -18,6 +19,7 @@ public final class StatisticsListAdapter extends BaseAdapter<StatisticsListEleme
         super(
             StatisticsListElementType.values(),
             Arrays.asList(
+                new StatisticsListYearProgressElementBinder(),
                 new StatisticsListTextWithNumberElementBinder(context),
                 new StatisticsListEmptyStateElementBinder()
             )

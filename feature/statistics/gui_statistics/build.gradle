@@ -13,6 +13,7 @@ dependencies {
     implementation project(':util:android:recycler_view_adapter')
 
     implementation libraries.jetbrainsAnnotations
+    implementation libraries.lightweightStream
     implementation libraries.dagger
     implementation libraries.rxJava
     implementation libraries.androidXAppCompat

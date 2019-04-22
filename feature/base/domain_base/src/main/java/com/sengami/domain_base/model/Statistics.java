@@ -1,11 +1,25 @@
 package com.sengami.domain_base.model;
 
+import org.joda.time.LocalDate;
+
+import java.util.List;
+import java.util.Map;
+
 public final class Statistics {
 
+    private Map<Integer, List<LocalDate>> entryDatesGroupedByYears;
     private int totalEntries = 0;
     private int yearWithMostEntries = 0;
     private int longestEntryCharacterCount = 0;
     private double averageEntriesPerDay = 0D;
+
+    public Map<Integer, List<LocalDate>> getEntryDatesGroupedByYears() {
+        return entryDatesGroupedByYears;
+    }
+
+    public void setEntryDatesGroupedByYears(Map<Integer, List<LocalDate>> entryDatesGroupedByYears) {
+        this.entryDatesGroupedByYears = entryDatesGroupedByYears;
+    }
 
     public int getTotalEntries() {
         return totalEntries;

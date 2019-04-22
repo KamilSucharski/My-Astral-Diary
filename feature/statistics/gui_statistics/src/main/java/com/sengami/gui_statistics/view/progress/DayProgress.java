@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.DrawableRes;
+
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_statistics.view.DayProgressView;
 import com.sengami.gui_base.view.BaseView;
@@ -13,6 +15,9 @@ import com.sengami.gui_statistics.di.component.DaggerDayProgressComponent;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joda.time.LocalDate;
+
+import javax.inject.Inject;
 
 public final class DayProgress
     extends BaseView<Presenter<DayProgressView>, DayProgressBinding>
@@ -34,7 +39,7 @@ public final class DayProgress
 
     @Override
     protected View getLayoutBindingRoot() {
-        return findViewById(R.id.day_progress_layout);
+        return findViewById(R.id.day_progress);
     }
 
     @Override
@@ -45,17 +50,35 @@ public final class DayProgress
             .inject(this);
     }
 
+    @Inject
+    @Override
+    protected void injectPresenter(@NotNull final Presenter<DayProgressView> presenter) {
+        super.injectPresenter(presenter);
+    }
+
     @SuppressWarnings("SuspiciousNameCombination")
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 
-    public void setHasPassed(boolean hasPassed) {
-        binding.setHasPassed(hasPassed);
+    public void setDay(@NotNull final LocalDate date,
+                       final boolean highlighted) {
+        binding.dayProgress.setBackgroundResource(getBackgroundDrawableResource(date, highlighted));
     }
 
-    public void setHasEntry(boolean hasEntry) {
-        binding.setHasEntry(hasEntry);
+    @DrawableRes
+    private int getBackgroundDrawableResource(@NotNull final LocalDate date,
+                                              final boolean highlighted) {
+        if (highlighted) {
+            return R.drawable.background_day_progress_highlighted;
+        }
+
+        final LocalDate today = LocalDate.now();
+        if (date.isAfter(today)) {
+            return R.drawable.background_day_progress_future;
+        } else {
+            return R.drawable.background_day_progress_past;
+        }
     }
 }
