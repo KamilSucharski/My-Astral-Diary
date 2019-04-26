@@ -64,7 +64,7 @@ public final class GetStatisticsOperationLocal
 
             final Statistics statistics = new Statistics();
             if (!entries.isEmpty()) {
-                statistics.setEntryDatesGroupedByYears(createDatesWithEntriesGroupedByYear(entries));
+                statistics.setDaysWithEntryCount(createDatesWithEntryCount(entries));
                 statistics.setYearWithMostEntries(calculateYearWithMostEntries(entries));
                 statistics.setTotalEntries(entries.size());
                 statistics.setLongestEntryCharacterCount(calculateLongestCharacterCountInEntry(entries));
@@ -74,13 +74,13 @@ public final class GetStatisticsOperationLocal
         });
     }
 
-    private Map<Integer, List<LocalDate>> createDatesWithEntriesGroupedByYear(@NotNull final List<DiaryEntry> entries) {
+    private Map<LocalDate, Integer> createDatesWithEntryCount(@NotNull final List<DiaryEntry> entries) {
         return Stream.of(entries)
             .map(DiaryEntry::getDate)
-            .groupBy(LocalDate::getYear)
-            .sorted((o1, o2) -> o2.getKey().compareTo(o1.getKey()))
             .reduce(new LinkedHashMap<>(), ((accumulator, entry) -> {
-                accumulator.put(entry.getKey(), entry.getValue());
+                final Integer oldValue = accumulator.get(entry);
+                final int newValue = oldValue != null ? oldValue + 1 : 1;
+                accumulator.put(entry, newValue);
                 return accumulator;
             }));
     }

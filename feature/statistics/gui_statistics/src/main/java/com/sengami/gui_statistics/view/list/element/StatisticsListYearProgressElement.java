@@ -3,16 +3,16 @@ package com.sengami.gui_statistics.view.list.element;
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.LocalDate;
 
-import java.util.Collection;
+import java.util.Map;
 
 public final class StatisticsListYearProgressElement extends StatisticsListElement {
 
     private final int year;
     @NotNull
-    private final Collection<LocalDate> highlightedDays;
+    private final Map<LocalDate, Integer> highlightedDays;
 
     public StatisticsListYearProgressElement(final int year,
-                                             @NotNull final Collection<LocalDate> highlightedDays) {
+                                             @NotNull final Map<LocalDate, Integer> highlightedDays) {
         super(StatisticsListElementType.YEAR_PROGRESS);
         this.year = year;
         this.highlightedDays = highlightedDays;
@@ -23,7 +23,7 @@ public final class StatisticsListYearProgressElement extends StatisticsListEleme
     }
 
     @NotNull
-    public Collection<LocalDate> getHighlightedDays() {
+    public Map<LocalDate, Integer> getHighlightedDays() {
         return highlightedDays;
     }
 }
