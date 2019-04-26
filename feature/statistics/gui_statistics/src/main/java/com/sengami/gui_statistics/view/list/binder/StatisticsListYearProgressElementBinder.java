@@ -16,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
 
 public final class StatisticsListYearProgressElementBinder extends ViewHolderBinder<StatisticsListElement, StatisticsListYearProgressElement, ElementYearProgressBinding> {
 
+    private final TileDecorator tileDecorator = createTileDecorator();
+
     @Override
     @NotNull
     protected final ElementType getAllowedType() {
@@ -32,7 +34,6 @@ public final class StatisticsListYearProgressElementBinder extends ViewHolderBin
     }
 
     private TilesViewConfiguration createConfiguration(final int year) {
-        final TileDecorator tileDecorator = createTileDecorator();
         return new TilesViewConfiguration.Builder()
             .year(year)
             .tileDecorator(tileDecorator)
