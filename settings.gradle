@@ -1,33 +1,13 @@
-include ':project',
+include ':project'
 
-        ':feature:base:data_base',
-        ':feature:base:domain_base',
-        ':feature:base:gui_base',
+file('feature').eachDir { featureDir ->
+    featureDir.eachDir { architecturalModule ->
+        include String.format(':feature:%s:%s', featureDir.name, architecturalModule.name)
+    }
+}
 
-        ':feature:splash:data_splash',
-        ':feature:splash:domain_splash',
-        ':feature:splash:gui_splash',
-
-        ':feature:main:data_main',
-        ':feature:main:domain_main',
-        ':feature:main:gui_main',
-
-        ':feature:diary:data_diary',
-        ':feature:diary:domain_diary',
-        ':feature:diary:gui_diary',
-
-        ':feature:statistics:data_statistics',
-        ':feature:statistics:domain_statistics',
-        ':feature:statistics:gui_statistics',
-
-        ':feature:settings:data_settings',
-        ':feature:settings:domain_settings',
-        ':feature:settings:gui_settings',
-
-        ':util:java:date',
-
-        ':util:android:android_operation',
-        ':util:android:android_database',
-        ':util:android:clicks',
-        ':util:android:recycler_view_adapter',
-        ':util:android:dialogs'
+file('util').eachDir { utilDir ->
+    utilDir.eachDir { platformModule ->
+        include String.format(':util:%s:%s', utilDir.name, platformModule.name)
+    }
+}

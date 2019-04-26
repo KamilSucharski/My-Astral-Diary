@@ -11,9 +11,9 @@ android {
     signingConfigs {
         release {
             storeFile file(project.KEYSTORE_PATH)
-            storePassword project.KEYSTORE_PASSWORD
-            keyAlias project.KEYSTORE_ALIAS
-            keyPassword project.KEYSTORE_ALIAS_PASSWORD
+            storePassword readFile(project.KEYSTORE_PASSWORD_FILE_PATH)
+            keyAlias readFile(project.KEYSTORE_ALIAS_FILE_PATH)
+            keyPassword readFile(project.KEYSTORE_ALIAS_PASSWORD_FILE_PATH)
             v1SigningEnabled = true
             v2SigningEnabled = true
         }
@@ -47,4 +47,14 @@ dependencies {
 
     implementation libraries.jetbrainsAnnotations
     implementation libraries.androidXAppCompat
+}
+
+String readFile(String filePath) {
+    File file = file(filePath)
+    if (file.exists()) {
+        return file.getText('UTF-8')
+    } else {
+        println("FILE MISSING: " + filePath)
+        return ""
+    }
 }
