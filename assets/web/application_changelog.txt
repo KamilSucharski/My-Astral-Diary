@@ -11,3 +11,16 @@ Improvements:
 Bug fixes:
 1. Fixed bug with backup sometimes being corrupted on Android 9+
 2. Line breaks are no longer counted in "longest entry character count" statistic
+
+# 1.2.0
+EN:
+Improvements:
+1. Added new statistic type - tiles showing your yearly progress
+2. Added search function to diary entry list screen
+3. Added list of external libraries and their licenses in setting tab
+
+PL:
+Usprawnienia:
+1. Dodano nowy typ statystyki - kafelki pokazujące roczny postęp
+2. Dodano funkcję wyszukiwania na ekranie listy wpisów z dziennika
+3. Dodano listę zewnętrznych bibliotek i ich licencji na zakładce ustawień
