@@ -3,6 +3,12 @@ package com.sengami.gui_diary.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
@@ -26,19 +32,14 @@ import com.sengami.gui_diary.view.list.converter.DiaryEntryListElementConverter;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElement;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElementType;
 import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
-import com.sengami.recycler_view_adapter.converter.ElementConverter;
 
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.LocalDate;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
@@ -52,8 +53,11 @@ public final class DiaryEntryListFragment
     private final Subject<Boolean> refreshListTrigger = PublishSubject.create();
     private final Subject<DiaryEntry> diaryEntryClickedTrigger = PublishSubject.create();
     private final Subject<Boolean> addNewDiaryEntryClickedTrigger = PublishSubject.create();
-    private final ElementConverter<Map<LocalDate, List<DiaryEntry>> , DiaryEntryListElement> converter = new DiaryEntryListElementConverter();
+    private final DiaryEntryListElementConverter converter = new DiaryEntryListElementConverter();
     private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
+    private List<DiaryEntry> cachedDiaryEntryList = Collections.emptyList();
+    private ErrorHandler errorHandler;
+    private LoadingIndicator loadingIndicator;
 
     @Inject
     @Override
@@ -68,7 +72,8 @@ public final class DiaryEntryListFragment
 
     @Override
     protected void inject(@NotNull final Context context) {
-        DaggerDiaryEntryListComponent.builder()
+        DaggerDiaryEntryListComponent
+            .builder()
             .withErrorHandlerModule(new WithErrorHandlerModule(this))
             .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()
@@ -78,8 +83,10 @@ public final class DiaryEntryListFragment
     @Override
     protected void init(@NotNull final Context context) {
         super.init(context);
-        setupListeners();
+        errorHandler = new ToastErrorHandler(context);
+        loadingIndicator = new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
         setupList(context);
+        setupListeners();
         refreshListTrigger.onNext(true);
     }
 
@@ -102,16 +109,15 @@ public final class DiaryEntryListFragment
     }
 
     @Override
-    public void showDiaryEntriesGroupedByDate(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntriesGroupedByDate) {
-        final List<DiaryEntryListElement> items = converter.convert(diaryEntriesGroupedByDate);
-        adapter.replaceAll(items);
-        binding.recyclerView.setAdapter(adapter);
+    public void showDiaryEntries(@NotNull final List<DiaryEntry> diaryEntries) {
+        cachedDiaryEntryList = diaryEntries;
+        updateListWithCachedEntries();
     }
 
     @Override
     public void navigateToDiaryEntryComposerScreen(@NotNull final DiaryEntry diaryEntry) {
         final FlowCoordinator flowCoordinator = FlowCoordinatorProvider.provide();
-        final Intent intent = flowCoordinator.diaryEntryComposerActivityIntent(getContext());
+        final Intent intent = flowCoordinator.diaryEntryComposerActivityIntent(getViewContext());
         intent.putExtra(Extra.DIARY_ENTRY.name(), diaryEntry);
         startActivityForResult(intent, RequestCode.COMPOSE_DIARY_ENTRY.code());
     }
@@ -119,13 +125,13 @@ public final class DiaryEntryListFragment
     @Override
     @NotNull
     public ErrorHandler getErrorHandler() {
-        return new ToastErrorHandler(getContext());
+        return errorHandler;
     }
 
     @Override
     @NotNull
     public LoadingIndicator getLoadingIndicator() {
-        return new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
+        return loadingIndicator;
     }
 
     @Override
@@ -137,12 +143,43 @@ public final class DiaryEntryListFragment
         }
     }
 
-    private void setupListeners() {
-        onClick(binding.addEntryButton, () -> addNewDiaryEntryClickedTrigger.onNext(true));
-    }
-
     private void setupList(@NotNull final Context context) {
         adapter = new DiaryEntryListAdapter(diaryEntryClickedTrigger);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
+    }
+
+    private void setupListeners() {
+        onClick(binding.addEntryButton, () -> addNewDiaryEntryClickedTrigger.onNext(true));
+        binding.searchBar.searchEditText.addTextChangedListener(searchBarTextWatcher());
+    }
+
+    private TextWatcher searchBarTextWatcher() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(final CharSequence s,
+                                          final int start,
+                                          final int count,
+                                          final int after) {
+            }
+
+            @Override
+            public void onTextChanged(final CharSequence s,
+                                      final int start,
+                                      final int before,
+                                      final int count) {
+            }
+
+            @Override
+            public void afterTextChanged(final Editable s) {
+                converter.setDairyEntryTextFilter(s.toString().trim().toLowerCase());
+                updateListWithCachedEntries();
+            }
+        };
+    }
+
+    private void updateListWithCachedEntries() {
+        final List<DiaryEntryListElement> items = converter.convert(cachedDiaryEntryList);
+        adapter.replaceAll(items);
+        binding.recyclerView.setAdapter(adapter);
     }
 }

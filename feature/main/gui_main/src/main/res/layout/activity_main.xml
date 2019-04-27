@@ -19,7 +19,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_menu_height"
+            android:layout_height="@dimen/menu_height"
             android:background="@color/color_primary_dark"
             app:tabIndicatorGravity="top"
             app:tabMode="fixed"

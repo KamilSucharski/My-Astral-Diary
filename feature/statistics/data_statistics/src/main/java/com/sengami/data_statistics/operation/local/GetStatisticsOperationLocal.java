@@ -18,11 +18,14 @@ import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
 import com.sengami.domain_statistics.operation.GetStatisticsOperation;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.AbstractMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 
@@ -61,6 +64,7 @@ public final class GetStatisticsOperationLocal
 
             final Statistics statistics = new Statistics();
             if (!entries.isEmpty()) {
+                statistics.setDaysWithEntryCount(createDatesWithEntryCount(entries));
                 statistics.setYearWithMostEntries(calculateYearWithMostEntries(entries));
                 statistics.setTotalEntries(entries.size());
                 statistics.setLongestEntryCharacterCount(calculateLongestCharacterCountInEntry(entries));
@@ -70,9 +74,21 @@ public final class GetStatisticsOperationLocal
         });
     }
 
+    private Map<LocalDate, Integer> createDatesWithEntryCount(@NotNull final List<DiaryEntry> entries) {
+        return Stream.of(entries)
+            .map(DiaryEntry::getDate)
+            .reduce(new LinkedHashMap<>(), ((accumulator, entry) -> {
+                final Integer oldValue = accumulator.get(entry);
+                final int newValue = oldValue != null ? oldValue + 1 : 1;
+                accumulator.put(entry, newValue);
+                return accumulator;
+            }));
+    }
+
     private int calculateYearWithMostEntries(@NotNull final List<DiaryEntry> entries) {
         return Stream.of(entries)
-            .groupBy(diaryEntry -> diaryEntry.getDate().getYear())
+            .map(DiaryEntry::getDate)
+            .groupBy(LocalDate::getYear)
             .map(group -> new AbstractMap.SimpleEntry<>(group.getKey(), group.getValue().size()))
             .sorted((o1, o2) -> o1.getValue().compareTo(o2.getValue()))
             .findLast()

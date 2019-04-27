@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_menu_height"
+        android:layout_height="@dimen/menu_height"
         android:background="@color/color_primary_dark"
         android:orientation="horizontal">
 
@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:theme="@style/BottomMenuItem"
             android:src="@drawable/arrow_back"
-            android:contentDescription="@string/back_button_content_description"
+            android:contentDescription="@string/diary_composer_back_button_content_description"
             android:clickable="@{backButtonEnabled, default = true}"
             android:tint="@{backButtonEnabled ? @color/color_accent : @color/color_primary, default = @color/color_accent}"/>
 

@@ -3,11 +3,11 @@
 gradle/
 gradle.bat
 gradlew
+gradlew.bat
 local.properties
 .idea/
 .DS_Store/
 build/
 captures/
 .externalNativeBuild
-signing/signing.gradle
-signing/keystore.jks
+signing/

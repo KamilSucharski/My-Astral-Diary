@@ -22,7 +22,9 @@ public final class SettingsListElementConverter implements ElementConverter<Sett
             new SettingsListItemElement(R.string.settings_item_backup_create, callbacks::onCreateBackupClicked),
             new SettingsListItemElement(R.string.settings_item_backup_restore, callbacks::onRestoreFromBackupClicked),
             new SettingsListSectionElement(R.string.settings_section_export),
-            new SettingsListItemElement(R.string.settings_item_export_to_text_file, callbacks::onExportToTextFileClicked)
+            new SettingsListItemElement(R.string.settings_item_export_to_text_file, callbacks::onExportToTextFileClicked),
+            new SettingsListSectionElement(R.string.settings_section_other),
+            new SettingsListItemElement(R.string.settings_item_licenses, callbacks::onShowLicensesClicked)
         );
     }
 }

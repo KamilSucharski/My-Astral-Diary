@@ -2,13 +2,14 @@
     <dimen name="content_margin">16dp</dimen>
     <dimen name="double_content_margin">32dp</dimen>
     <dimen name="half_content_margin">8dp</dimen>
-    <dimen name="bottom_menu_height">52dp</dimen>
+    <dimen name="quarter_content_margin">4dp</dimen>
 
     <dimen name="text_size_header">20sp</dimen>
     <dimen name="text_size_standard">16sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
 
-    <dimen name="bottom_menu_item_padding">12dp</dimen>
+    <dimen name="menu_height">52dp</dimen>
+    <dimen name="menu_item_padding">12dp</dimen>
 
     <dimen name="card_corner_radius">4dp</dimen>
 </resources>

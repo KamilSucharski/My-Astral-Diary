@@ -1,11 +1,24 @@
 package com.sengami.domain_base.model;
 
+import org.joda.time.LocalDate;
+
+import java.util.Map;
+
 public final class Statistics {
 
+    private Map<LocalDate, Integer> daysWithEntryCount;
     private int totalEntries = 0;
     private int yearWithMostEntries = 0;
     private int longestEntryCharacterCount = 0;
     private double averageEntriesPerDay = 0D;
+
+    public Map<LocalDate, Integer> getDaysWithEntryCount() {
+        return daysWithEntryCount;
+    }
+
+    public void setDaysWithEntryCount(Map<LocalDate, Integer> daysWithEntryCount) {
+        this.daysWithEntryCount = daysWithEntryCount;
+    }
 
     public int getTotalEntries() {
         return totalEntries;

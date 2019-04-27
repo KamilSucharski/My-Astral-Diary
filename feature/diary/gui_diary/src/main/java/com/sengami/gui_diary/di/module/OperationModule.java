@@ -5,7 +5,7 @@ import com.sengami.data_base.mapper.Mapper;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.data_diary.operation.local.CreateOrUpdateDiaryEntryOperationLocal;
 import com.sengami.data_diary.operation.local.DeleteDiaryEntryOperationLocal;
-import com.sengami.data_diary.operation.local.GetDiaryEntriesGroupedByDateOperationLocal;
+import com.sengami.data_diary.operation.local.GetDiaryEntriesOperationLocal;
 import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.domain_base.operation.error.WithErrorHandler;
 import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
@@ -13,7 +13,7 @@ import com.sengami.domain_base.operation.logger.Logger;
 import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
 import com.sengami.domain_diary.operation.CreateOrUpdateDiaryEntryOperation;
 import com.sengami.domain_diary.operation.DeleteDiaryEntryOperation;
-import com.sengami.domain_diary.operation.GetDiaryEntriesGroupedByDateOperation;
+import com.sengami.domain_diary.operation.GetDiaryEntriesOperation;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,13 +25,13 @@ public final class OperationModule {
 
     @Provides
     @NotNull
-    GetDiaryEntriesGroupedByDateOperation getHelloWorldOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                                                 @NotNull final WithErrorHandler withErrorHandler,
-                                                                 @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                                 @NotNull final Logger logger,
-                                                                 @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
-                                                                 @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
-        return new GetDiaryEntriesGroupedByDateOperationLocal(
+    GetDiaryEntriesOperation getHelloWorldOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
+                                                    @NotNull final WithErrorHandler withErrorHandler,
+                                                    @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                                    @NotNull final Logger logger,
+                                                    @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
+                                                    @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
+        return new GetDiaryEntriesOperationLocal(
             reactiveSchedulers,
             withErrorHandler,
             withLoadingIndicator,

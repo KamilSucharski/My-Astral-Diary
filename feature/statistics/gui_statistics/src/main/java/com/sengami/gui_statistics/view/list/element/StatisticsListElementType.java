@@ -1,12 +1,13 @@
 package com.sengami.gui_statistics.view.list.element;
 
+import androidx.annotation.LayoutRes;
+
 import com.sengami.gui_statistics.R;
 import com.sengami.recycler_view_adapter.element.ElementType;
 
-import androidx.annotation.LayoutRes;
-
 public enum StatisticsListElementType implements ElementType {
-    TEXT_WITH_NUMBER(R.layout.element_text_with_number),
+    YEAR_PROGRESS(R.layout.element_year_progress),
+    OTHER_STATISTICS(R.layout.element_other_statistics),
     EMPTY_STATE(R.layout.element_statistics_empty_state);
 
     @LayoutRes

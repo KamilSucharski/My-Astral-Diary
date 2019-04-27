@@ -5,10 +5,8 @@ import com.sengami.domain_base.operation.error.WithErrorHandler;
 import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
 
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.LocalDate;
 
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
 
@@ -23,7 +21,7 @@ public interface DiaryEntryListView extends WithErrorHandler, WithLoadingIndicat
     @NotNull
     Observable<Boolean> getAddNewDiaryClickedEntryTrigger();
 
-    void showDiaryEntriesGroupedByDate(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntriesGroupedByDate);
+    void showDiaryEntries(@NotNull final List<DiaryEntry> diaryEntries);
 
     void navigateToDiaryEntryComposerScreen(@NotNull final DiaryEntry diaryEntry);
 }

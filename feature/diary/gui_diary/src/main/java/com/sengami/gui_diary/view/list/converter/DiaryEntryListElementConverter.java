@@ -20,26 +20,47 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public final class DiaryEntryListElementConverter implements ElementConverter<Map<LocalDate, List<DiaryEntry>> , DiaryEntryListElement> {
+public final class DiaryEntryListElementConverter implements ElementConverter<List<DiaryEntry>, DiaryEntryListElement> {
+
+    @NotNull
+    private String dairyEntryTextFilter = "";
 
     @NotNull
     @Override
-    public List<DiaryEntryListElement> convert(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntryListGroupedByDate) {
-        if (diaryEntryListGroupedByDate.isEmpty()) {
+    public List<DiaryEntryListElement> convert(@NotNull final List<DiaryEntry> diaryEntries) {
+        final List<DiaryEntry> filteredEntries = Stream
+            .of(diaryEntries)
+            .filter(this::filterDiaryEntryByTextFilterIfSet)
+            .toList();
+
+        if (filteredEntries.isEmpty()) {
             return Collections.singletonList(new DiaryEntryListEmptyStateElement());
         }
 
         return Stream
-            .of(diaryEntryListGroupedByDate)
+            .of(filteredEntries)
+            .groupBy(DiaryEntry::getDate)
             .sorted(newestToOldestComparator())
             .map(this::flattenGroupedListInDateOrder)
             .reduce(this::combineAllGroups)
             .get();
     }
 
-
     private Comparator<Map.Entry<LocalDate, List<DiaryEntry>>> newestToOldestComparator() {
         return (o1, o2) -> o2.getKey().compareTo(o1.getKey());
+    }
+
+    public void setDairyEntryTextFilter(@NotNull final String dairyEntryTextFilter) {
+        this.dairyEntryTextFilter = dairyEntryTextFilter;
+    }
+
+    private boolean filterDiaryEntryByTextFilterIfSet(@NotNull final DiaryEntry diaryEntry) {
+        if (!dairyEntryTextFilter.isEmpty()) {
+            return diaryEntry.getTitle().toLowerCase().contains(dairyEntryTextFilter)
+                || diaryEntry.getBody().toLowerCase().contains(dairyEntryTextFilter);
+        } else {
+            return true;
+        }
     }
 
     @NotNull
