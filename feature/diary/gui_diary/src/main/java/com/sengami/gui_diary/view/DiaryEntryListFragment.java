@@ -30,13 +30,10 @@ import com.sengami.gui_diary.view.list.converter.DiaryEntryListElementConverter;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElement;
 import com.sengami.gui_diary.view.list.element.DiaryEntryListElementType;
 import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
-import com.sengami.recycler_view_adapter.converter.ElementConverter;
 
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.LocalDate;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -53,7 +50,7 @@ public final class DiaryEntryListFragment
     private final Subject<Boolean> refreshListTrigger = PublishSubject.create();
     private final Subject<DiaryEntry> diaryEntryClickedTrigger = PublishSubject.create();
     private final Subject<Boolean> addNewDiaryEntryClickedTrigger = PublishSubject.create();
-    private final ElementConverter<Map<LocalDate, List<DiaryEntry>> , DiaryEntryListElement> converter = new DiaryEntryListElementConverter();
+    private final DiaryEntryListElementConverter converter = new DiaryEntryListElementConverter();
     private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
 
     @Inject
@@ -104,8 +101,8 @@ public final class DiaryEntryListFragment
     }
 
     @Override
-    public void showDiaryEntriesGroupedByDate(@NotNull final Map<LocalDate, List<DiaryEntry>> diaryEntriesGroupedByDate) {
-        final List<DiaryEntryListElement> items = converter.convert(diaryEntriesGroupedByDate);
+    public void showDiaryEntries(@NotNull final List<DiaryEntry> diaryEntries) {
+        final List<DiaryEntryListElement> items = converter.convert(diaryEntries);
         adapter.replaceAll(items);
         binding.recyclerView.setAdapter(adapter);
     }

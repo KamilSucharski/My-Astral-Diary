@@ -1,6 +1,5 @@
 package com.sengami.data_diary.operation.local;
 
-import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -14,46 +13,43 @@ import com.sengami.domain_base.operation.error.WithErrorHandler;
 import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
 import com.sengami.domain_base.operation.logger.Logger;
 import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
-import com.sengami.domain_diary.operation.GetDiaryEntriesGroupedByDateOperation;
+import com.sengami.domain_diary.operation.GetDiaryEntriesOperation;
 
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.LocalDate;
 
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
 
-public final class GetDiaryEntriesGroupedByDateOperationLocal
-    extends BaseOperation<Map<LocalDate, List<DiaryEntry>>>
-    implements GetDiaryEntriesGroupedByDateOperation {
+public final class GetDiaryEntriesOperationLocal
+    extends BaseOperation<List<DiaryEntry>>
+    implements GetDiaryEntriesOperation {
 
     @NotNull
     private final DatabaseConnectionProvider databaseConnectionProvider;
     @NotNull
     private final Mapper<DiaryEntryDBO, DiaryEntry> mapper;
 
-    public GetDiaryEntriesGroupedByDateOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                                      @NotNull final WithErrorHandler withErrorHandler,
-                                                      @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                                      @NotNull final Logger logger,
-                                                      @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
-                                                      @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
+    public GetDiaryEntriesOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
+                                         @NotNull final WithErrorHandler withErrorHandler,
+                                         @NotNull final WithLoadingIndicator withLoadingIndicator,
+                                         @NotNull final Logger logger,
+                                         @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
+                                         @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
         super(reactiveSchedulers, withErrorHandler, withLoadingIndicator, logger);
         this.databaseConnectionProvider = databaseConnectionProvider;
         this.mapper = mapper;
     }
 
     @Override
-    protected Observable<Map<LocalDate, List<DiaryEntry>>> getObservable() {
+    protected Observable<List<DiaryEntry>> getObservable() {
         return Observable.fromCallable(() -> {
             final ConnectionSource connectionSource = databaseConnectionProvider.provide();
             final Dao<DiaryEntryDBO, Integer> diaryEntryDao = DaoManager.createDao(connectionSource, DiaryEntryDBO.class);
             final List<DiaryEntryDBO> entries = diaryEntryDao.queryForAll();
-            final Map<LocalDate, List<DiaryEntry>> result = Stream.of(entries)
+            final List<DiaryEntry> result = Stream.of(entries)
                 .map(mapper::toModel)
-                .groupBy(DiaryEntry::getDate)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .toList();
             connectionSource.close();
             return result;
         });
