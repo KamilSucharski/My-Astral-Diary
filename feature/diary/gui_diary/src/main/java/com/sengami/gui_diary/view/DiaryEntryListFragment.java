@@ -56,6 +56,8 @@ public final class DiaryEntryListFragment
     private final DiaryEntryListElementConverter converter = new DiaryEntryListElementConverter();
     private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
     private List<DiaryEntry> cachedDiaryEntryList = Collections.emptyList();
+    private ErrorHandler errorHandler;
+    private LoadingIndicator loadingIndicator;
 
     @Inject
     @Override
@@ -81,6 +83,8 @@ public final class DiaryEntryListFragment
     @Override
     protected void init(@NotNull final Context context) {
         super.init(context);
+        errorHandler = new ToastErrorHandler(context);
+        loadingIndicator = new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
         setupList(context);
         setupListeners();
         refreshListTrigger.onNext(true);
@@ -121,13 +125,13 @@ public final class DiaryEntryListFragment
     @Override
     @NotNull
     public ErrorHandler getErrorHandler() {
-        return new ToastErrorHandler(getViewContext());
+        return errorHandler;
     }
 
     @Override
     @NotNull
     public LoadingIndicator getLoadingIndicator() {
-        return new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
+        return loadingIndicator;
     }
 
     @Override

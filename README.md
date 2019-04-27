@@ -9,10 +9,10 @@ No network connection or suspicious permissions are required!
 
 1. You need to have JDK installed and the JAVA_HOME system variable set.
 
-##### Before building:
+##### (Optional) For release builds:
 
-1. Copy "gradle.properties.example" as "gradle.properties"
-2. (Only for release builds) Create a keystore file and text files with alias and passwords according to the "gradle.properties" file's "Signing" section.
+1. Create a "signing" folder in projects root directory.
+2. Create a keystore file and text files with alias and passwords according to the "gradle.properties" file's "Signing" section.
 
 ##### Building release builds:
 
