@@ -1,4 +1,5 @@
 <resources>
+    <string name="diary_entry_list_search_hint">Search…</string>
     <string name="diary_entry_list_empty_state">Nothing here yet. To add an entry click the button at the bottom of this screen.</string>
     <string name="diary_entry_list_empty_state_image_content_description">Book image</string>
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menu_height"
+        android:background="@color/color_primary_dark"
+        android:paddingTop="@dimen/half_content_margin"
+        android:paddingBottom="@dimen/half_content_margin"
+        android:paddingStart="@dimen/content_margin"
+        android:paddingEnd="@dimen/content_margin"
+        android:elevation="@dimen/half_content_margin"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <EditText
+            android:id="@+id/search_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/half_content_margin"
+            android:paddingEnd="@dimen/half_content_margin"
+            android:background="@color/color_primary"
+            android:inputType="text"
+            android:lines="1"
+            android:hint="@string/diary_entry_list_search_hint"
+            android:importantForAutofill="no"
+            style="@style/Text.Standard" />
+
+    </FrameLayout>
+</layout>

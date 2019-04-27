@@ -3,6 +3,8 @@ package com.sengami.gui_diary.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +35,7 @@ import com.sengami.recycler_view_adapter.adapter.BaseAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,6 +55,7 @@ public final class DiaryEntryListFragment
     private final Subject<Boolean> addNewDiaryEntryClickedTrigger = PublishSubject.create();
     private final DiaryEntryListElementConverter converter = new DiaryEntryListElementConverter();
     private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
+    private List<DiaryEntry> cachedDiaryEntryList = Collections.emptyList();
 
     @Inject
     @Override
@@ -77,8 +81,8 @@ public final class DiaryEntryListFragment
     @Override
     protected void init(@NotNull final Context context) {
         super.init(context);
-        setupListeners();
         setupList(context);
+        setupListeners();
         refreshListTrigger.onNext(true);
     }
 
@@ -102,9 +106,8 @@ public final class DiaryEntryListFragment
 
     @Override
     public void showDiaryEntries(@NotNull final List<DiaryEntry> diaryEntries) {
-        final List<DiaryEntryListElement> items = converter.convert(diaryEntries);
-        adapter.replaceAll(items);
-        binding.recyclerView.setAdapter(adapter);
+        cachedDiaryEntryList = diaryEntries;
+        updateListWithCachedEntries();
     }
 
     @Override
@@ -136,12 +139,43 @@ public final class DiaryEntryListFragment
         }
     }
 
-    private void setupListeners() {
-        onClick(binding.addEntryButton, () -> addNewDiaryEntryClickedTrigger.onNext(true));
-    }
-
     private void setupList(@NotNull final Context context) {
         adapter = new DiaryEntryListAdapter(diaryEntryClickedTrigger);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
+    }
+
+    private void setupListeners() {
+        onClick(binding.addEntryButton, () -> addNewDiaryEntryClickedTrigger.onNext(true));
+        binding.searchBar.searchEditText.addTextChangedListener(searchBarTextWatcher());
+    }
+
+    private TextWatcher searchBarTextWatcher() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(final CharSequence s,
+                                          final int start,
+                                          final int count,
+                                          final int after) {
+            }
+
+            @Override
+            public void onTextChanged(final CharSequence s,
+                                      final int start,
+                                      final int before,
+                                      final int count) {
+            }
+
+            @Override
+            public void afterTextChanged(final Editable s) {
+                converter.setDairyEntryTextFilter(s.toString());
+                updateListWithCachedEntries();
+            }
+        };
+    }
+
+    private void updateListWithCachedEntries() {
+        final List<DiaryEntryListElement> items = converter.convert(cachedDiaryEntryList);
+        adapter.replaceAll(items);
+        binding.recyclerView.setAdapter(adapter);
     }
 }

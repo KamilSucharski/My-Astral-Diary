@@ -4,27 +4,40 @@
 
     <data />
 
-    <FrameLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_entry_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:src="@drawable/plus"
-            android:layout_margin="@dimen/content_margin"
-            app:backgroundTint="@color/color_accent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <include
-            android:id="@+id/loading_wheel_overlay"
-            layout="@layout/overlay_loading_wheel" />
-    </FrameLayout>
+            android:id="@+id/search_bar"
+            layout="@layout/layout_search_bar" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_entry_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="@dimen/content_margin"
+                android:src="@drawable/plus"
+                app:backgroundTint="@color/color_accent" />
+
+            <include
+                android:id="@+id/loading_wheel_overlay"
+                layout="@layout/overlay_loading_wheel" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 </layout>

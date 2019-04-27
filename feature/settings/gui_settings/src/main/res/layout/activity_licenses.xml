@@ -53,7 +53,7 @@
             <ImageView
                 android:id="@+id/back_button"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_menu_height"
+                android:layout_height="@dimen/menu_height"
                 android:theme="@style/BottomMenuItem"
                 android:src="@drawable/arrow_back"
                 android:contentDescription="@string/license_list_back_button_content_description"/>
