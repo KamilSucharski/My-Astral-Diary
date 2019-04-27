@@ -167,7 +167,7 @@ public final class DiaryEntryListFragment
 
             @Override
             public void afterTextChanged(final Editable s) {
-                converter.setDairyEntryTextFilter(s.toString());
+                converter.setDairyEntryTextFilter(s.toString().trim().toLowerCase());
                 updateListWithCachedEntries();
             }
         };

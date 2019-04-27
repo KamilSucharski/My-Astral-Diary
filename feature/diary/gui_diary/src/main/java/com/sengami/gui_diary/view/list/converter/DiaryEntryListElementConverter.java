@@ -56,8 +56,8 @@ public final class DiaryEntryListElementConverter implements ElementConverter<Li
 
     private boolean filterDiaryEntryByTextFilterIfSet(@NotNull final DiaryEntry diaryEntry) {
         if (!dairyEntryTextFilter.isEmpty()) {
-            return diaryEntry.getTitle().contains(dairyEntryTextFilter)
-                || diaryEntry.getBody().contains(dairyEntryTextFilter);
+            return diaryEntry.getTitle().toLowerCase().contains(dairyEntryTextFilter)
+                || diaryEntry.getBody().toLowerCase().contains(dairyEntryTextFilter);
         } else {
             return true;
         }
