@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.annimon.stream.Stream;
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
 import com.sengami.android_operation.implementation.ToastErrorHandler;
@@ -55,7 +56,7 @@ public final class DiaryEntryListFragment
     private final Subject<Boolean> addNewDiaryEntryClickedTrigger = PublishSubject.create();
     private final DiaryEntryListElementConverter converter = new DiaryEntryListElementConverter();
     private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
-    private List<DiaryEntry> cachedDiaryEntryList = Collections.emptyList();
+    private List<DiaryEntry> diaryEntries = Collections.emptyList();
     private ErrorHandler errorHandler;
     private LoadingIndicator loadingIndicator;
 
@@ -110,8 +111,8 @@ public final class DiaryEntryListFragment
 
     @Override
     public void showDiaryEntries(@NotNull final List<DiaryEntry> diaryEntries) {
-        cachedDiaryEntryList = diaryEntries;
-        updateListWithCachedEntries();
+        this.diaryEntries = diaryEntries;
+        updateListFilteredBySearchPhrase();
     }
 
     @Override
@@ -171,15 +172,27 @@ public final class DiaryEntryListFragment
 
             @Override
             public void afterTextChanged(final Editable s) {
-                converter.setDairyEntryTextFilter(s.toString().trim().toLowerCase());
-                updateListWithCachedEntries();
+                updateListFilteredBySearchPhrase();
             }
         };
     }
 
-    private void updateListWithCachedEntries() {
-        final List<DiaryEntryListElement> items = converter.convert(cachedDiaryEntryList);
+    private void updateListFilteredBySearchPhrase() {
+        final List<DiaryEntry> filteredEntries = getEntriesFilteredBySearchPhrase();
+        final List<DiaryEntryListElement> items = converter.convert(filteredEntries);
         adapter.replaceAll(items);
         binding.recyclerView.setAdapter(adapter);
+    }
+
+    private List<DiaryEntry> getEntriesFilteredBySearchPhrase() {
+        final String searchPhrase = binding.searchBar.searchEditText.getText().toString();
+        if (searchPhrase.isEmpty()) {
+            return diaryEntries;
+        }
+
+        return Stream
+            .of(diaryEntries)
+            .filter(entry -> entry.containsPhrase(searchPhrase))
+            .toList();
     }
 }
