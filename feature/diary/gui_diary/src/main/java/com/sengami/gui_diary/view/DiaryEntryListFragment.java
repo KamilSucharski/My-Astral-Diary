@@ -3,10 +3,12 @@ package com.sengami.gui_diary.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.content.res.ColorStateList;
+import android.text.InputType;
+import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +26,8 @@ import com.sengami.gui_base.navigation.Extra;
 import com.sengami.gui_base.navigation.FlowCoordinator;
 import com.sengami.gui_base.navigation.FlowCoordinatorProvider;
 import com.sengami.gui_base.navigation.RequestCode;
+import com.sengami.gui_base.util.KeyboardUtil;
+import com.sengami.gui_base.util.OnTextChangedListener;
 import com.sengami.gui_base.view.BaseFragment;
 import com.sengami.gui_diary.R;
 import com.sengami.gui_diary.databinding.FragmentDiaryEntryListBinding;
@@ -151,30 +155,13 @@ public final class DiaryEntryListFragment
 
     private void setupListeners() {
         onClick(binding.addEntryButton, () -> addNewDiaryEntryClickedTrigger.onNext(true));
-        binding.searchBar.searchEditText.addTextChangedListener(searchBarTextWatcher());
-    }
-
-    private TextWatcher searchBarTextWatcher() {
-        return new TextWatcher() {
+        binding.searchEditText.addTextChangedListener(new OnTextChangedListener() {
             @Override
-            public void beforeTextChanged(final CharSequence s,
-                                          final int start,
-                                          final int count,
-                                          final int after) {
-            }
-
-            @Override
-            public void onTextChanged(final CharSequence s,
-                                      final int start,
-                                      final int before,
-                                      final int count) {
-            }
-
-            @Override
-            public void afterTextChanged(final Editable s) {
+            protected void onTextChanged(@NotNull final String text) {
                 updateListFilteredBySearchPhrase();
             }
-        };
+        });
+        onClick(binding.searchButton, this::onSearchButtonClicked);
     }
 
     private void updateListFilteredBySearchPhrase() {
@@ -185,7 +172,7 @@ public final class DiaryEntryListFragment
     }
 
     private List<DiaryEntry> getEntriesFilteredBySearchPhrase() {
-        final String searchPhrase = binding.searchBar.searchEditText.getText().toString();
+        final String searchPhrase = binding.searchEditText.getText().toString();
         if (searchPhrase.isEmpty()) {
             return diaryEntries;
         }
@@ -194,5 +181,32 @@ public final class DiaryEntryListFragment
             .of(diaryEntries)
             .filter(entry -> entry.containsPhrase(searchPhrase))
             .toList();
+    }
+
+    private void onSearchButtonClicked() {
+        if (binding.searchBar.getVisibility() != View.VISIBLE) {
+            showSearchBar();
+        } else {
+            hideSearchBar();
+        }
+    }
+
+    private void showSearchBar() {
+        binding.searchButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getViewContext(), R.color.color_primary_dark)));
+        binding.searchButton.setColorFilter(ContextCompat.getColor(getViewContext(), R.color.color_accent));
+        binding.searchEditText.setEnabled(true);
+        binding.searchEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+        binding.searchBar.setVisibility(View.VISIBLE);
+        KeyboardUtil.showKeyboard(getViewContext(), binding.searchEditText);
+    }
+
+    private void hideSearchBar() {
+        binding.searchButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getViewContext(), R.color.color_accent)));
+        binding.searchButton.setColorFilter(ContextCompat.getColor(getViewContext(), R.color.color_primary_dark));
+        binding.searchEditText.setText("");
+        binding.searchEditText.setEnabled(false);
+        binding.searchEditText.setInputType(InputType.TYPE_NULL);
+        binding.searchBar.setVisibility(View.GONE);
+        KeyboardUtil.hideKeyboard(getViewContext(), binding.searchEditText);
     }
 }
