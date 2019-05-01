@@ -7,4 +7,6 @@ dependencies {
     implementation libraries.jetbrainsAnnotations
     implementation libraries.ormLiteCore
     implementation libraries.jodaTime
+
+    testImplementation testLibraries.junit
 }
