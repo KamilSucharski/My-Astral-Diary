@@ -8,13 +8,16 @@
         android:icon="@mipmap/ic_launcher"
         android:label="${applicationName}"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/AppTheme"
         android:supportsRtl="true"
+        android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,AllowBackup">
 
-        <activity android:name="com.sengami.gui_splash.view.SplashActivity">
+        <activity
+            android:name="com.sengami.gui_splash.view.SplashActivity"
+            android:theme="@style/TranslucentActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

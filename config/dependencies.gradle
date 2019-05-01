@@ -11,6 +11,7 @@ ext {
             lightweightStream   : "1.2.1",
             jodaTime            : "2.10.1",
             processPheonix      : "2.0.0",
+            circularReveal      : "2.0.1@aar"
     ]
 
     libraries = [
@@ -26,6 +27,15 @@ ext {
             lightweightStream   : "com.annimon:stream:$versions.lightweightStream",
             jodaTime            : "joda-time:joda-time:$versions.jodaTime",
             processPheonix      : "com.jakewharton:process-phoenix:$versions.processPheonix",
+            circularReveal      : "com.github.ozodrukh:CircularReveal:$versions.circularReveal"
+    ]
+
+    testVersions = [
+            junit               : "4.12"
+    ]
+
+    testLibraries = [
+            junit               : "junit:junit:$testVersions.junit"
     ]
 
     annotations = [

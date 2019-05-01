@@ -12,6 +12,12 @@ public final class DiaryEntry extends BaseModel {
     private String title = "";
     private String body = "";
 
+    public boolean containsPhrase(@NotNull final String phrase) {
+        final String phraseToCompare = phrase.trim().toLowerCase();
+        return getTitle().toLowerCase().contains(phraseToCompare)
+            || getBody().toLowerCase().contains(phraseToCompare);
+    }
+
     @Override
     @Nullable
     public Integer getId() {

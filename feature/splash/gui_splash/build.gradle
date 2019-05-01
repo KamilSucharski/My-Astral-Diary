@@ -15,6 +15,9 @@ dependencies {
     implementation libraries.dagger
     implementation libraries.rxJava
     implementation libraries.androidXAppCompat
+    implementation (libraries.circularReveal) {
+        transitive = true
+    }
 
     annotationProcessor annotations.dagger
 }

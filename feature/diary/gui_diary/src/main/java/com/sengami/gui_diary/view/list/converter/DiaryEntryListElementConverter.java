@@ -23,22 +23,14 @@ import java.util.Map;
 public final class DiaryEntryListElementConverter implements ElementConverter<List<DiaryEntry>, DiaryEntryListElement> {
 
     @NotNull
-    private String dairyEntryTextFilter = "";
-
-    @NotNull
     @Override
     public List<DiaryEntryListElement> convert(@NotNull final List<DiaryEntry> diaryEntries) {
-        final List<DiaryEntry> filteredEntries = Stream
-            .of(diaryEntries)
-            .filter(this::filterDiaryEntryByTextFilterIfSet)
-            .toList();
-
-        if (filteredEntries.isEmpty()) {
+        if (diaryEntries.isEmpty()) {
             return Collections.singletonList(new DiaryEntryListEmptyStateElement());
         }
 
         return Stream
-            .of(filteredEntries)
+            .of(diaryEntries)
             .groupBy(DiaryEntry::getDate)
             .sorted(newestToOldestComparator())
             .map(this::flattenGroupedListInDateOrder)
@@ -48,19 +40,6 @@ public final class DiaryEntryListElementConverter implements ElementConverter<Li
 
     private Comparator<Map.Entry<LocalDate, List<DiaryEntry>>> newestToOldestComparator() {
         return (o1, o2) -> o2.getKey().compareTo(o1.getKey());
-    }
-
-    public void setDairyEntryTextFilter(@NotNull final String dairyEntryTextFilter) {
-        this.dairyEntryTextFilter = dairyEntryTextFilter;
-    }
-
-    private boolean filterDiaryEntryByTextFilterIfSet(@NotNull final DiaryEntry diaryEntry) {
-        if (!dairyEntryTextFilter.isEmpty()) {
-            return diaryEntry.getTitle().toLowerCase().contains(dairyEntryTextFilter)
-                || diaryEntry.getBody().toLowerCase().contains(dairyEntryTextFilter);
-        } else {
-            return true;
-        }
     }
 
     @NotNull

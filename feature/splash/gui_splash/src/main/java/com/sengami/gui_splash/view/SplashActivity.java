@@ -1,6 +1,8 @@
 package com.sengami.gui_splash.view;
 
+import android.animation.Animator;
 import android.content.Intent;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.sengami.android_operation.di.module.WithErrorHandlerModule;
 import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
@@ -20,6 +22,8 @@ import com.sengami.gui_splash.di.component.DaggerSplashComponent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
+
+import io.codetail.animation.ViewAnimationUtils;
 
 public final class SplashActivity
     extends BaseActivity<Presenter<SplashView>, ActivitySplashBinding>
@@ -47,11 +51,18 @@ public final class SplashActivity
     }
 
     @Override
+    protected void init() {
+        super.init();
+        binding.layout.post(this::revealScreen);
+    }
+
+    @Override
     public void navigateToMainView() {
         final FlowCoordinator flowCoordinator = FlowCoordinatorProvider.provide();
         final Intent intent = flowCoordinator.mainActivityIntent(this);
         startActivity(intent);
         finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override
@@ -64,5 +75,22 @@ public final class SplashActivity
     @NotNull
     public LoadingIndicator getLoadingIndicator() {
         return new EmptyLoadingIndicator();
+    }
+
+    private void revealScreen() {
+        final int animationCenterX = binding.layout.getRight();
+        final int animationCenterY = binding.layout.getBottom();
+        final float startRadius = 0f;
+        final float endRadius = (float) Math.hypot(animationCenterX, animationCenterY);
+        final Animator animator = ViewAnimationUtils.createCircularReveal(
+            binding.layout,
+            animationCenterX,
+            animationCenterY,
+            startRadius,
+            endRadius
+        );
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.setDuration(750);
+        animator.start();
     }
 }

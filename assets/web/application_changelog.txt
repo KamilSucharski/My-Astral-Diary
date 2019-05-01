@@ -24,3 +24,14 @@ Usprawnienia:
 1. Dodano nowy typ statystyki - kafelki pokazujące roczny postęp
 2. Dodano funkcję wyszukiwania na ekranie listy wpisów z dziennika
 3. Dodano listę zewnętrznych bibliotek i ich licencji na zakładce ustawień
+
+# 1.2.1
+EN:
+Improvements:
+1. Search bar now can be hidden
+2. New animation on splash screen
+
+PL:
+Usprawnienia:
+1. Wyszukiwarka może być teraz ukryta
+2. Nowa animacja na ekranie startowym
