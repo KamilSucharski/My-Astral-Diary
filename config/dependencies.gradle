@@ -28,6 +28,14 @@ ext {
             processPheonix      : "com.jakewharton:process-phoenix:$versions.processPheonix",
     ]
 
+    testVersions = [
+            junit               : "4.12"
+    ]
+
+    testLibraries = [
+            junit               : "junit:junit:$testVersions.junit"
+    ]
+
     annotations = [
             dagger              : "com.google.dagger:dagger-compiler:$versions.dagger"
     ]

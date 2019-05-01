@@ -26,4 +26,6 @@ dependencies {
     implementation libraries.recyclerView
 
     annotationProcessor annotations.dagger
+
+    testImplementation testLibraries.junit
 }
