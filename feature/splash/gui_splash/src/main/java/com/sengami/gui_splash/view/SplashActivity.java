@@ -52,6 +52,7 @@ public final class SplashActivity
         final Intent intent = flowCoordinator.mainActivityIntent(this);
         startActivity(intent);
         finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override
