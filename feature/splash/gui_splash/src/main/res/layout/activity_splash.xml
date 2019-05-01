@@ -3,18 +3,25 @@
 
     <data />
 
-    <FrameLayout
+    <io.codetail.widget.RevealFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_primary">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/my_astral_diary_logo"
-            android:contentDescription="@string/splash_logo_content_description"/>
+        <FrameLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_primary">
 
-    </FrameLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/my_astral_diary_logo"
+                android:contentDescription="@string/splash_logo_content_description"/>
+
+        </FrameLayout>
+
+    </io.codetail.widget.RevealFrameLayout>
 
 </layout>
