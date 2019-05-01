@@ -1,6 +1,6 @@
 package com.sengami.gui_statistics.view.list.converter;
 
-import android.util.Pair;
+import androidx.core.util.Pair;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;

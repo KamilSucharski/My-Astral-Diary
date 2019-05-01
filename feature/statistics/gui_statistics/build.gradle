@@ -23,4 +23,6 @@ dependencies {
     implementation libraries.jodaTime
 
     annotationProcessor annotations.dagger
+
+    testImplementation testLibraries.junit
 }
