@@ -1,4 +1,4 @@
-package com.sengami.domain_base.operation.error;
+package com.sengami.domain_base.operation.configuration.error;
 
 import org.jetbrains.annotations.NotNull;
 

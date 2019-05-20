@@ -1,4 +1,4 @@
-package com.sengami.domain_base.operation.loading;
+package com.sengami.domain_base.operation.configuration.loading;
 
 public interface LoadingIndicator {
 

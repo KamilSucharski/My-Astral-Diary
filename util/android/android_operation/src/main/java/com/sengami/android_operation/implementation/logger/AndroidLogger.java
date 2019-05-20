@@ -1,8 +1,8 @@
-package com.sengami.android_operation.implementation;
+package com.sengami.android_operation.implementation.logger;
 
 import android.util.Log;
 
-import com.sengami.domain_base.operation.logger.Logger;
+import com.sengami.domain_base.operation.configuration.logger.Logger;
 
 import org.jetbrains.annotations.NotNull;
 

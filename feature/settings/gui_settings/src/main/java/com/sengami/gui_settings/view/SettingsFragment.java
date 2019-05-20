@@ -12,15 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.processphoenix.ProcessPhoenix;
 import com.sengami.android_database.di.module.DatabaseFileProviderModule;
-import com.sengami.android_operation.di.module.WithErrorHandlerModule;
-import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
-import com.sengami.android_operation.implementation.ToastErrorHandler;
-import com.sengami.android_operation.implementation.ViewVisibilityLoadingIndicator;
+import com.sengami.android_operation.di.module.OperationConfigurationModule;
+import com.sengami.android_operation.implementation.AndroidOperationConfiguration;
+import com.sengami.android_operation.implementation.error.ToastErrorHandler;
+import com.sengami.android_operation.implementation.loading.ViewVisibilityLoadingIndicator;
 import com.sengami.date.DateFormatter;
 import com.sengami.dialogs.message.MessageDialog;
 import com.sengami.domain_base.Constants;
-import com.sengami.domain_base.operation.error.ErrorHandler;
-import com.sengami.domain_base.operation.loading.LoadingIndicator;
+import com.sengami.domain_base.operation.configuration.OperationConfiguration;
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_settings.view.SettingsView;
 import com.sengami.gui_base.navigation.RequestCode;
@@ -58,8 +57,6 @@ public final class SettingsFragment
     private final Subject<OutputStream> createBackupTrigger = PublishSubject.create();
     private final Subject<InputStream> restoreFromBackupTrigger = PublishSubject.create();
     private final Subject<OutputStream> exportToTextFileTrigger = PublishSubject.create();
-    private ErrorHandler errorHandler;
-    private LoadingIndicator loadingIndicator;
 
     @Inject
     @Override
@@ -74,11 +71,15 @@ public final class SettingsFragment
 
     @Override
     protected void inject(@NotNull final Context context) {
+        final OperationConfiguration operationConfiguration = AndroidOperationConfiguration
+            .create()
+            .withErrorHandler(new ToastErrorHandler(context))
+            .withLoadingIndicator(new ViewVisibilityLoadingIndicator(() -> binding.loadingWheelOverlay));
+
         DaggerSettingsComponent
             .builder()
+            .operationConfigurationModule(new OperationConfigurationModule(operationConfiguration))
             .databaseFileProviderModule(new DatabaseFileProviderModule(context))
-            .withErrorHandlerModule(new WithErrorHandlerModule(this))
-            .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
             .build()
             .inject(this);
     }
@@ -86,8 +87,6 @@ public final class SettingsFragment
     @Override
     protected void init(@NotNull final Context context) {
         super.init(context);
-        errorHandler = new ToastErrorHandler(context);
-        loadingIndicator = new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
         setupList(context);
     }
 
@@ -117,18 +116,6 @@ public final class SettingsFragment
     @Override
     public void refreshApplication() {
         ProcessPhoenix.triggerRebirth(getViewContext());
-    }
-
-    @Override
-    @NotNull
-    public ErrorHandler getErrorHandler() {
-        return errorHandler;
-    }
-
-    @Override
-    @NotNull
-    public LoadingIndicator getLoadingIndicator() {
-        return loadingIndicator;
     }
 
     @Override

@@ -11,10 +11,7 @@ import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.domain_base.model.DiaryEntry;
 import com.sengami.domain_base.model.Statistics;
 import com.sengami.domain_base.operation.BaseOperation;
-import com.sengami.domain_base.operation.error.WithErrorHandler;
-import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
-import com.sengami.domain_base.operation.logger.Logger;
-import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
+import com.sengami.domain_base.operation.configuration.OperationConfiguration;
 import com.sengami.domain_statistics.operation.GetStatisticsOperation;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,13 +35,10 @@ public final class GetStatisticsOperationLocal
     @NotNull
     private final Mapper<DiaryEntryDBO, DiaryEntry> mapper;
 
-    public GetStatisticsOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                       @NotNull final WithErrorHandler withErrorHandler,
-                                       @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                       @NotNull final Logger logger,
+    public GetStatisticsOperationLocal(@NotNull final OperationConfiguration operationConfiguration,
                                        @NotNull final DatabaseConnectionProvider databaseConnectionProvider,
                                        @NotNull final Mapper<DiaryEntryDBO, DiaryEntry> mapper) {
-        super(reactiveSchedulers, withErrorHandler, withLoadingIndicator, logger);
+        super(operationConfiguration);
         this.databaseConnectionProvider = databaseConnectionProvider;
         this.mapper = mapper;
     }

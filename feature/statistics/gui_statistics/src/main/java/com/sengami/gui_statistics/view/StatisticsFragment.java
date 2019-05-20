@@ -5,13 +5,12 @@ import android.content.Context;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sengami.android_operation.di.module.WithErrorHandlerModule;
-import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
-import com.sengami.android_operation.implementation.ToastErrorHandler;
-import com.sengami.android_operation.implementation.ViewVisibilityLoadingIndicator;
+import com.sengami.android_operation.di.module.OperationConfigurationModule;
+import com.sengami.android_operation.implementation.AndroidOperationConfiguration;
+import com.sengami.android_operation.implementation.error.ToastErrorHandler;
+import com.sengami.android_operation.implementation.loading.ViewVisibilityLoadingIndicator;
 import com.sengami.domain_base.model.Statistics;
-import com.sengami.domain_base.operation.error.ErrorHandler;
-import com.sengami.domain_base.operation.loading.LoadingIndicator;
+import com.sengami.domain_base.operation.configuration.OperationConfiguration;
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_statistics.view.StatisticsView;
 import com.sengami.gui_base.view.BaseFragment;
@@ -41,8 +40,6 @@ public final class StatisticsFragment
 
     @NotNull
     private final Subject<Boolean> refreshStatisticsTrigger = PublishSubject.create();
-    private ErrorHandler errorHandler;
-    private LoadingIndicator loadingIndicator;
     private BaseAdapter<StatisticsListElement, StatisticsListElementType> adapter;
     private ElementConverter<Statistics, StatisticsListElement> converter;
 
@@ -59,10 +56,14 @@ public final class StatisticsFragment
 
     @Override
     protected void inject(@NotNull final Context context) {
+        final OperationConfiguration operationConfiguration = AndroidOperationConfiguration
+            .create()
+            .withErrorHandler(new ToastErrorHandler(context))
+            .withLoadingIndicator(new ViewVisibilityLoadingIndicator(() -> binding.loadingWheelOverlay));
+
         DaggerStatisticsComponent
             .builder()
-            .withErrorHandlerModule(new WithErrorHandlerModule(this))
-            .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
+            .operationConfigurationModule(new OperationConfigurationModule(operationConfiguration))
             .build()
             .inject(this);
     }
@@ -70,8 +71,6 @@ public final class StatisticsFragment
     @Override
     protected void init(@NotNull final Context context) {
         super.init(context);
-        errorHandler = new ToastErrorHandler(context);
-        loadingIndicator = new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
         setupList(context);
     }
 
@@ -91,18 +90,6 @@ public final class StatisticsFragment
     public void showStatistics(@NotNull final Statistics statistics) {
         final List<StatisticsListElement> elements = converter.convert(statistics);
         adapter.replaceAll(elements);
-    }
-
-    @Override
-    @NotNull
-    public ErrorHandler getErrorHandler() {
-        return errorHandler;
-    }
-
-    @Override
-    @NotNull
-    public LoadingIndicator getLoadingIndicator() {
-        return loadingIndicator;
     }
 
     private void setupList(@NotNull final Context context) {

@@ -4,12 +4,10 @@ import android.animation.Animator;
 import android.content.Intent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
-import com.sengami.android_operation.di.module.WithErrorHandlerModule;
-import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
-import com.sengami.android_operation.implementation.EmptyLoadingIndicator;
-import com.sengami.android_operation.implementation.ToastErrorHandler;
-import com.sengami.domain_base.operation.error.ErrorHandler;
-import com.sengami.domain_base.operation.loading.LoadingIndicator;
+import com.sengami.android_operation.di.module.OperationConfigurationModule;
+import com.sengami.android_operation.implementation.AndroidOperationConfiguration;
+import com.sengami.android_operation.implementation.error.ToastErrorHandler;
+import com.sengami.domain_base.operation.configuration.OperationConfiguration;
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_splash.view.SplashView;
 import com.sengami.gui_base.navigation.FlowCoordinator;
@@ -42,10 +40,13 @@ public final class SplashActivity
 
     @Override
     protected void inject() {
+        final OperationConfiguration operationConfiguration = AndroidOperationConfiguration
+            .create()
+            .withErrorHandler(new ToastErrorHandler(this));
+
         DaggerSplashComponent
             .builder()
-            .withErrorHandlerModule(new WithErrorHandlerModule(this))
-            .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
+            .operationConfigurationModule(new OperationConfigurationModule(operationConfiguration))
             .build()
             .inject(this);
     }
@@ -62,18 +63,6 @@ public final class SplashActivity
         final Intent intent = flowCoordinator.mainActivityIntent(this);
         startActivity(intent);
         finish();
-    }
-
-    @Override
-    @NotNull
-    public ErrorHandler getErrorHandler() {
-        return new ToastErrorHandler(this);
-    }
-
-    @Override
-    @NotNull
-    public LoadingIndicator getLoadingIndicator() {
-        return new EmptyLoadingIndicator();
     }
 
     private void revealScreen() {
