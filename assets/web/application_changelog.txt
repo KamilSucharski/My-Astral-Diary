@@ -50,5 +50,5 @@ Usprawnienia:
 1. Dodanie brakujących licencji na liście licencji
 
 Poprawki:
-1. Naprawa przejścia między ekranem startwoym, a głównym
+1. Naprawa przejścia między ekranem startowym, a głównym
 2. Skrócenie czasu budowania aplikacji
