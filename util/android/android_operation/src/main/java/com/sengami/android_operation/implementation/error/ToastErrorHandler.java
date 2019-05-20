@@ -1,9 +1,9 @@
-package com.sengami.android_operation.implementation;
+package com.sengami.android_operation.implementation.error;
 
 import android.content.Context;
 import android.widget.Toast;
 
-import com.sengami.domain_base.operation.error.ErrorHandler;
+import com.sengami.domain_base.operation.configuration.error.ErrorHandler;
 
 import org.jetbrains.annotations.NotNull;
 

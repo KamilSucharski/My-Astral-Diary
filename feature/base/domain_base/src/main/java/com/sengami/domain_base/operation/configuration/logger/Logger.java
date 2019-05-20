@@ -1,4 +1,4 @@
-package com.sengami.domain_base.operation.logger;
+package com.sengami.domain_base.operation.configuration.logger;
 
 import org.jetbrains.annotations.NotNull;
 

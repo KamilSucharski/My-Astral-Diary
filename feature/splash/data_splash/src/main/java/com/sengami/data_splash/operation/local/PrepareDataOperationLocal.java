@@ -6,10 +6,7 @@ import com.sengami.data_base.dbo.DiaryEntryDBO;
 import com.sengami.data_base.util.DatabaseConnectionProvider;
 import com.sengami.domain_base.Constants;
 import com.sengami.domain_base.operation.BaseOperation;
-import com.sengami.domain_base.operation.error.WithErrorHandler;
-import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
-import com.sengami.domain_base.operation.logger.Logger;
-import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
+import com.sengami.domain_base.operation.configuration.OperationConfiguration;
 import com.sengami.domain_splash.operation.PrepareDataOperation;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,12 +20,9 @@ public final class PrepareDataOperationLocal extends BaseOperation<Boolean> impl
     @NotNull
     private final DatabaseConnectionProvider databaseConnectionProvider;
 
-    public PrepareDataOperationLocal(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                                     @NotNull final WithErrorHandler withErrorHandler,
-                                     @NotNull final WithLoadingIndicator withLoadingIndicator,
-                                     @NotNull final Logger logger,
+    public PrepareDataOperationLocal(@NotNull final OperationConfiguration operationConfiguration,
                                      @NotNull final DatabaseConnectionProvider databaseConnectionProvider) {
-        super(reactiveSchedulers, withErrorHandler, withLoadingIndicator, logger);
+        super(operationConfiguration);
         this.databaseConnectionProvider = databaseConnectionProvider;
     }
 

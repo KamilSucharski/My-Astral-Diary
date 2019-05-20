@@ -4,15 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.sengami.android_operation.di.module.WithErrorHandlerModule;
-import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
-import com.sengami.android_operation.implementation.ToastErrorHandler;
-import com.sengami.android_operation.implementation.ViewVisibilityLoadingIndicator;
+import com.sengami.android_operation.di.module.OperationConfigurationModule;
+import com.sengami.android_operation.implementation.AndroidOperationConfiguration;
+import com.sengami.android_operation.implementation.error.ToastErrorHandler;
+import com.sengami.android_operation.implementation.loading.ViewVisibilityLoadingIndicator;
 import com.sengami.dialogs.date.DatePickerDialog;
 import com.sengami.dialogs.message.MessageDialog;
 import com.sengami.domain_base.model.DiaryEntry;
-import com.sengami.domain_base.operation.error.ErrorHandler;
-import com.sengami.domain_base.operation.loading.LoadingIndicator;
+import com.sengami.domain_base.operation.configuration.OperationConfiguration;
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_diary.view.DiaryEntryComposerView;
 import com.sengami.gui_base.navigation.Extra;
@@ -62,10 +61,14 @@ public final class DiaryEntryComposerActivity
 
     @Override
     protected void inject() {
+        final OperationConfiguration operationConfiguration = AndroidOperationConfiguration
+            .create()
+            .withErrorHandler(new ToastErrorHandler(this))
+            .withLoadingIndicator(new ViewVisibilityLoadingIndicator(() -> binding.loadingWheelOverlay));
+
         DaggerDiaryEntryComposerComponent
             .builder()
-            .withErrorHandlerModule(new WithErrorHandlerModule(this))
-            .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
+            .operationConfigurationModule(new OperationConfigurationModule(operationConfiguration))
             .build()
             .inject(this);
     }
@@ -121,18 +124,6 @@ public final class DiaryEntryComposerActivity
     @Override
     public void onBackPressed() {
         returnTrigger.onNext(true);
-    }
-
-    @Override
-    @NotNull
-    public ErrorHandler getErrorHandler() {
-        return new ToastErrorHandler(this);
-    }
-
-    @Override
-    @NotNull
-    public LoadingIndicator getLoadingIndicator() {
-        return new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
     }
 
     private void setupListeners() {

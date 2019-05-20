@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.annimon.stream.Stream;
-import com.sengami.android_operation.di.module.WithErrorHandlerModule;
-import com.sengami.android_operation.di.module.WithLoadingIndicatorModule;
-import com.sengami.android_operation.implementation.ToastErrorHandler;
-import com.sengami.android_operation.implementation.ViewVisibilityLoadingIndicator;
+import com.sengami.android_operation.di.module.OperationConfigurationModule;
+import com.sengami.android_operation.implementation.AndroidOperationConfiguration;
+import com.sengami.android_operation.implementation.error.ToastErrorHandler;
+import com.sengami.android_operation.implementation.loading.ViewVisibilityLoadingIndicator;
 import com.sengami.domain_base.model.DiaryEntry;
-import com.sengami.domain_base.operation.error.ErrorHandler;
-import com.sengami.domain_base.operation.loading.LoadingIndicator;
+import com.sengami.domain_base.operation.configuration.OperationConfiguration;
 import com.sengami.domain_base.presenter.Presenter;
 import com.sengami.domain_diary.view.DiaryEntryListView;
 import com.sengami.gui_base.navigation.Extra;
@@ -61,8 +60,6 @@ public final class DiaryEntryListFragment
     private final DiaryEntryListElementConverter converter = new DiaryEntryListElementConverter();
     private BaseAdapter<DiaryEntryListElement, DiaryEntryListElementType> adapter;
     private List<DiaryEntry> diaryEntries = Collections.emptyList();
-    private ErrorHandler errorHandler;
-    private LoadingIndicator loadingIndicator;
 
     @Inject
     @Override
@@ -77,10 +74,14 @@ public final class DiaryEntryListFragment
 
     @Override
     protected void inject(@NotNull final Context context) {
+        final OperationConfiguration operationConfiguration = AndroidOperationConfiguration
+            .create()
+            .withErrorHandler(new ToastErrorHandler(context))
+            .withLoadingIndicator(new ViewVisibilityLoadingIndicator(() -> binding.loadingWheelOverlay));
+
         DaggerDiaryEntryListComponent
             .builder()
-            .withErrorHandlerModule(new WithErrorHandlerModule(this))
-            .withLoadingIndicatorModule(new WithLoadingIndicatorModule(this))
+            .operationConfigurationModule(new OperationConfigurationModule(operationConfiguration))
             .build()
             .inject(this);
     }
@@ -88,8 +89,6 @@ public final class DiaryEntryListFragment
     @Override
     protected void init(@NotNull final Context context) {
         super.init(context);
-        errorHandler = new ToastErrorHandler(context);
-        loadingIndicator = new ViewVisibilityLoadingIndicator(binding.loadingWheelOverlay);
         setupList(context);
         setupListeners();
         refreshListTrigger.onNext(true);
@@ -125,18 +124,6 @@ public final class DiaryEntryListFragment
         final Intent intent = flowCoordinator.diaryEntryComposerActivityIntent(getViewContext());
         intent.putExtra(Extra.DIARY_ENTRY.name(), diaryEntry);
         startActivityForResult(intent, RequestCode.COMPOSE_DIARY_ENTRY.code());
-    }
-
-    @Override
-    @NotNull
-    public ErrorHandler getErrorHandler() {
-        return errorHandler;
-    }
-
-    @Override
-    @NotNull
-    public LoadingIndicator getLoadingIndicator() {
-        return loadingIndicator;
     }
 
     @Override

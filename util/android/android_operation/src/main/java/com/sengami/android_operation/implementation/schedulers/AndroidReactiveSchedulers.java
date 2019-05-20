@@ -1,6 +1,6 @@
-package com.sengami.android_operation.implementation;
+package com.sengami.android_operation.implementation.schedulers;
 
-import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
+import com.sengami.domain_base.operation.configuration.schedulers.ReactiveSchedulers;
 
 import org.jetbrains.annotations.NotNull;
 

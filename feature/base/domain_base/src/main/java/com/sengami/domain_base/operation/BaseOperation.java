@@ -1,9 +1,6 @@
 package com.sengami.domain_base.operation;
 
-import com.sengami.domain_base.operation.error.WithErrorHandler;
-import com.sengami.domain_base.operation.loading.WithLoadingIndicator;
-import com.sengami.domain_base.operation.logger.Logger;
-import com.sengami.domain_base.operation.schedulers.ReactiveSchedulers;
+import com.sengami.domain_base.operation.configuration.OperationConfiguration;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -13,51 +10,51 @@ public abstract class BaseOperation<T> implements Operation<T> {
 
     protected abstract Observable<T> getObservable();
 
-    private final ReactiveSchedulers reactiveSchedulers;
-    private final WithErrorHandler withErrorHandler;
-    private final WithLoadingIndicator withLoadingIndicator;
-    private final Logger logger;
+    @NotNull
+    private final OperationConfiguration operationConfiguration;
 
-    protected BaseOperation(@NotNull final ReactiveSchedulers reactiveSchedulers,
-                            @NotNull final WithErrorHandler withErrorHandler,
-                            @NotNull final WithLoadingIndicator withLoadingIndicator,
-                            @NotNull final Logger logger) {
-        this.reactiveSchedulers = reactiveSchedulers;
-        this.withErrorHandler = withErrorHandler;
-        this.withLoadingIndicator = withLoadingIndicator;
-        this.logger = logger;
+    protected BaseOperation(@NotNull final OperationConfiguration operationConfiguration) {
+        this.operationConfiguration = operationConfiguration;
     }
 
     @Override
     public Observable<T> execute() {
         showLoadingIndicator();
         return getObservable()
-            .subscribeOn(reactiveSchedulers.getSubscribeScheduler())
-            .observeOn(reactiveSchedulers.getObserveScheduler())
+            .subscribeOn(operationConfiguration.getReactiveSchedulers().getSubscribeScheduler())
+            .observeOn(operationConfiguration.getReactiveSchedulers().getObserveScheduler())
             .onErrorResumeNext(this::handleError)
             .map(result -> {
                 hideLoadingIndicator();
                 return result;
             })
-            .subscribeOn(reactiveSchedulers.getObserveScheduler());
+            .subscribeOn(operationConfiguration.getReactiveSchedulers().getObserveScheduler());
     }
 
     private Observable<T> handleError(@NotNull final Throwable throwable) {
         return Observable.just(false)
             .map(x -> {
-                logger.error(throwable);
+                operationConfiguration
+                    .getLogger()
+                    .error(throwable);
                 hideLoadingIndicator();
-                withErrorHandler.getErrorHandler().handleError(throwable);
+                operationConfiguration
+                    .getErrorHandler()
+                    .handleError(throwable);
                 return x;
             })
             .flatMap(x -> Observable.empty());
     }
 
     private void showLoadingIndicator() {
-        withLoadingIndicator.getLoadingIndicator().setLoading(true);
+        operationConfiguration
+            .getLoadingIndicator()
+            .setLoading(true);
     }
 
     private void hideLoadingIndicator() {
-        withLoadingIndicator.getLoadingIndicator().setLoading(false);
+        operationConfiguration
+            .getLoadingIndicator()
+            .setLoading(false);
     }
 }

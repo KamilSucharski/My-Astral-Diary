@@ -1,4 +1,4 @@
-package com.sengami.domain_base.operation.schedulers;
+package com.sengami.domain_base.operation.configuration.schedulers;
 
 import org.jetbrains.annotations.NotNull;
 
