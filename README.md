@@ -8,6 +8,7 @@ No network connection or suspicious permissions are required!
 ##### Prerequisites:
 
 1. You need to have JDK installed and the JAVA_HOME system variable set.
+2. You need to have Android SDK installed and ANDROID_SDK_ROOT system variable set.
 
 ##### (Optional) For release builds:
 

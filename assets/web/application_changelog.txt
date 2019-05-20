@@ -35,3 +35,20 @@ PL:
 Usprawnienia:
 1. Wyszukiwarka może być teraz ukryta
 2. Nowa animacja na ekranie startowym
+
+# 1.2.2
+EN:
+Improvements:
+1. Added missing licenses on license list
+
+Bug fixes:
+1. Fixed transition between splash screen and main screen
+2. Shortened application build time
+
+PL:
+Usprawnienia:
+1. Dodanie brakujących licencji na liście licencji
+
+Poprawki:
+1. Naprawa przejścia między ekranem startwoym, a głównym
+2. Skrócenie czasu budowania aplikacji
